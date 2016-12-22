@@ -35,8 +35,8 @@ public class CalculosVET extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("llego post");
 		Conexion consulta = new Conexion();
-		String texto=consulta.buscaridalimento("piña",200);
-		System.out.println("ID:"+texto);
+		//String texto=consulta.buscaridalimento("piña",200);
+		//System.out.println("ID:"+texto);
 	}
 
 }

@@ -68,7 +68,18 @@ public class Alimento extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		String accion = request.getParameter("a"); //accion
+		String alimen = request.getParameter("alimento"); //accion
+		String cal = request.getParameter("caloria"); //accion
+		String grupo = request.getParameter("grupo"); //accion
+		Conexion query = new Conexion();
+		String resultado = query.RegistrarIDAlimento(alimen,cal,grupo);
+		System.out.println(resultado);
+		
+		String result="{\"resultado\":\"OK\",\"alimento\":\""+alimen+"\",\"caloria\":\""+cal+"\"}";
+		out.println(result);
+		
 	}
 
 }

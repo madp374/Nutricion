@@ -829,7 +829,23 @@ function AñadirAlimentoBD(){
 	var cal=validar_numerovacio("NuevaCal");
 	var grupo=validad_vacio("NuevoGrupo");
 	
-	alert(alim+","+cal+","+grupo);
+	var action="agregar";
+	var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
+
+
+	$.ajax({
+        url: "../Alimento",
+        data: cadena,
+  	    type: 'post',
+        dataType: 'json',
+        success: function(data){
+        	alert(data.resultado);
+        	document.getElementById('alimento').value  = data.alimento;
+	        document.getElementById('calorias').value  = data.caloria;
+	        document.getElementById("cantidada").focus();	
+        	
+        }
+	});
 	
 }
 function validad_vacio(entrada){

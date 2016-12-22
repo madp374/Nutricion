@@ -385,27 +385,27 @@ public class Conexion extends HttpServlet{
 		
 	}
 	
-	public String buscaridalimento(String nombre,int calorias){
+	public String RegistrarIDAlimento(String nombre,String calorias,String grupo){
 		String resultado=null;
 		procedimientoAL="&noAccessToProcedureBodies=true";
 		try {
 			BDConnect();
 			//Class.forName("com.mysql.jdbc.Driver");
-			System.out.println("aqui1555:");
-			CallableStatement proc = conn.prepareCall(" CALL registrar_fruta(?,?,?) ");
-			//CallableStatement proc = conn.prepareCall(" CALL registrar_fruta('pika',209,?) ");
-			System.out.println("aqui144:");
+		
+			CallableStatement proc = conn.prepareCall(" CALL Registrar_fruta(?,?,?,?) ");
+			
             proc.setString(1, nombre);//Tipo String
-            proc.setInt(2, calorias);//Tipo entero
-            System.out.println("aqui31:");
-            proc.registerOutParameter(3, Types.VARCHAR);//Tipo String
+            proc.setInt(2, Integer.parseInt(calorias));//Tipo entero
+            proc.setInt(3, Integer.parseInt(grupo));
+         
+            proc.registerOutParameter(4, Types.VARCHAR);//Tipo String
             // Se ejecuta el procedimiento almacenado
-            System.out.println("aqui2:");
+         
             proc.execute();            
-            System.out.println("aqui3:");
+          
             // devuelve el valor del parametro de salida del procedimiento
-            resultado = proc.getString(3);
-            System.out.println("aqui14:");
+            resultado = proc.getString(4);
+            
 			
 		    BDClose();
 		    return resultado;
