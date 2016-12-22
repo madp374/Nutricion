@@ -188,7 +188,7 @@
         </div>
         <div class="panel-body">
         
- <form class="form-inline" role="form">
+ <form action="../ConsultaExterna" method="post" class="form-inline" role="form">
    <div class="container" >
   <ul class="nav nav-tabs" >
     <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
@@ -220,7 +220,8 @@
     <p>
 
 	<button class="btn btn-default btn-lg" onclick="BuscarPaciente(1);">
-     <img src="../imagenes/ver.png" width="50" height="40" title="Buscar" /></button>
+     <img src="../imagenes/ver.png" width="70" height="50" title="Buscar" />Buscar
+	</button>
 	</p>
 							
 	<script>
@@ -430,7 +431,6 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="fumafrec">
-  							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -449,7 +449,6 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="ejerciciofrec">
-							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -463,7 +462,6 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="bebidaalcfrec">
-							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -651,7 +649,7 @@ function BuscarPaciente(entero){
 			        <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Consumo de Agua(Vasos)</label>
-					  		<input class="form-control" name="agua" id="agua" type="number"  />
+					  		<input class="form-control" name="agua" id="agua" type="number"  required/>
 					                  
 					  	</div>
 					  	
@@ -805,9 +803,7 @@ function BuscarPaciente(entero){
 						</div>
 		      	</div>
 		      </div>
-		    </div>
-					  
-				    
+		    </div>	    
 						
 <script>
 var tiempoCom="Desayuno";
@@ -829,7 +825,11 @@ var contp=0;
 var habilitado=false;
 
 function AñadirAlimentoBD(){
-	alert("llega");
+	var alim=validad_vacio('NuevoAl');
+	var cal=validar_numerovacio("NuevaCal");
+	var grupo=validad_vacio("NuevoGrupo");
+	
+	alert(alim+","+cal+","+grupo);
 	
 }
 function validad_vacio(entrada){
@@ -1234,6 +1234,7 @@ function CalcularIMC(event) {
 }
 </script>
 
+
 <div class="panel panel-primary">
       <div class="panel-heading">Evaluacion Antropometrica</div>
       <div class="panel-body">
@@ -1241,7 +1242,7 @@ function CalcularIMC(event) {
       	<div class="row">
 				<div class="form-group">
 						<label>Talla(m)</label>
-						<input class="form-control" id="talla" name="talla" type="number" style="width: 65px;" />
+						<input class="form-control" id="talla" name="talla" type="number" style="width: 65px;" step="any"  />
 				</div>
 				<div class="form-group">
 						<label>Peso(Lbs)</label>
@@ -1332,7 +1333,7 @@ function CalcularIMC(event) {
       		<div class="row">
 			<div class="form-group">
 					<label>Planificacion del tratamiento -Metas-</label>
-					<textarea class="form-control" id="plan" name="plan" cols="60" rows="15" ></textarea>
+					<textarea class="form-control" id="plan" name="plan" cols="60" rows="15" required></textarea>
 			</div>
 		
 		</div>	
