@@ -171,6 +171,220 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
+	
+	public String UltimoIDAntecedenteMedico(String enfermedad,
+			String medicamento,
+			String suplemento,
+			String diarrea,
+			String flatulencia,
+			String acidez,
+			String estreñimiento){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarAntecedenteMedico(?,?,?,?,?,?,?,?) ");
+            proc.setString(1, enfermedad);//Tipo String
+            proc.setString(2, medicamento);//Tipo String
+            proc.setString(3, suplemento);//Tipo String
+            proc.setInt(4, Integer.parseInt(diarrea));//Tipo string
+            proc.setInt(5, Integer.parseInt(flatulencia));//Tipo string
+            proc.setInt(6, Integer.parseInt(acidez));//Tipo string
+            proc.setInt(7, Integer.parseInt(estreñimiento));//Tipo string
+            proc.registerOutParameter(8, Types.VARCHAR);//Tipo String
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();            
+            // devuelve el valor del parametro de salida del procedimiento
+            resultado = proc.getString(8);
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
+	public String UltimoIDEstiloVida(String fuma, String numero_cigarros, String frec_fuma,
+			String ejercicio, String tiempo_min,String frec_ejercicio,
+			String bebida, String frec_bebida){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		if(fuma.equals("0")){
+			numero_cigarros="0";
+			frec_fuma="null";
+		}
+		
+		if(ejercicio.equals("0")){
+			tiempo_min="0";
+			frec_ejercicio="null";
+		}
+		
+		if(bebida.equals("0")){
+			frec_bebida="null";
+		}
+		
+		
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarEstiloVida(?,?,?,?,?,?,?,?,?) ");
+			
+			proc.setInt(1, Integer.parseInt(fuma));//Tipo String
+			proc.setInt(2, Integer.parseInt(numero_cigarros));//Tipo String
+            proc.setString(3, frec_fuma);//Tipo String
+            proc.setInt(4, Integer.parseInt(ejercicio));//Tipo String
+			proc.setInt(5, Integer.parseInt(tiempo_min));//Tipo String
+            proc.setString(6, frec_ejercicio);//Tipo String
+            proc.setInt(7, Integer.parseInt(bebida));//Tipo String
+			proc.setString(8, frec_bebida);//Tipo String
+			
+            proc.registerOutParameter(9, Types.VARCHAR);//Tipo String
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();            
+            // devuelve el valor del parametro de salida del procedimiento
+            resultado = proc.getString(9);
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
+	
+	public String UltimoIDHabitoAlimentario(String TDesayuno,
+			String TRefaccion,
+			String TAlmuerzo,
+			String TCena,
+			String NoVasoAgua,
+			String AlimentoDaño,
+			String AlimentoNoGusta,
+			String AlimentoPreferido){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarHabitoAlimentario(?,?,?,?,?,?,?,?,?) ");
+            
+            proc.setInt(1, Integer.parseInt(TDesayuno));//Tipo string
+            proc.setInt(2, Integer.parseInt(TRefaccion));//Tipo string
+            proc.setInt(3, Integer.parseInt(TAlmuerzo));//Tipo string
+            proc.setInt(4, Integer.parseInt(TCena));//Tipo string
+            proc.setInt(5, Integer.parseInt(NoVasoAgua));//Tipo string
+            
+            proc.setString(6, AlimentoDaño);//Tipo String
+            proc.setString(7, AlimentoNoGusta);//Tipo String
+            proc.setString(8, AlimentoPreferido);//Tipo String
+            proc.registerOutParameter(9, Types.VARCHAR);//Tipo String
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();            
+            // devuelve el valor del parametro de salida del procedimiento
+            resultado = proc.getString(9);
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
+	
+	public String UltimoIDAntropometria(String DietaBaja,
+			String DietaAlta,
+			String talla,
+			String peso,
+			String CircunferenciaMuñeca,
+			String ConstitucionOsea ){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarAntropometria(?,?,?,?,?,?,?) ");
+			
+			proc.setString(1, DietaBaja);//Tipo String
+	        proc.setString(2, DietaAlta);//Tipo String
+	        
+	        proc.setFloat(3, Float.parseFloat(talla));
+	        proc.setFloat(4, Float.parseFloat(peso));
+	        proc.setFloat(5, Float.parseFloat(CircunferenciaMuñeca));
+            proc.setString(6, ConstitucionOsea);//Tipo String
+            
+            proc.registerOutParameter(7, Types.VARCHAR);//Tipo String
+            // Se ejecuta el procedimiento almacenado
+            proc.execute();            
+            // devuelve el valor del parametro de salida del procedimiento
+            resultado = proc.getString(7);
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
+	
+	public String UltimoIDRegistro(String PorGrasa,
+			String PorAgua,
+			String PorMasaMuscular,
+			String MasaOsea,
+			String GrasaVisceral,
+			String CinturaAbdominal,
+			String plan){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarRegistro(?,?,?,?,?,?,?,?) ");
+			
+			proc.setFloat(1, Float.parseFloat(PorGrasa));
+	        proc.setFloat(2, Float.parseFloat(PorAgua));
+	        proc.setFloat(3, Float.parseFloat(PorMasaMuscular));
+	        proc.setFloat(4, Float.parseFloat(MasaOsea));
+	        proc.setFloat(5, Float.parseFloat(GrasaVisceral));
+	        proc.setFloat(6, Float.parseFloat(CinturaAbdominal));
+			proc.setString(7, plan);//Tipo String
+            
+            proc.registerOutParameter(8, Types.VARCHAR);
+            proc.execute();            
+            resultado = proc.getString(8);
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
+	
 	public String buscaridalimento(String nombre,int calorias){
 		String resultado=null;
 		procedimientoAL="&noAccessToProcedureBodies=true";
@@ -224,9 +438,9 @@ public class Conexion extends HttpServlet{
 		    boolean primero=false;
 		    while (rs.next()) {
 		    	if(primero){
-		    		temp+=",{\"nombre\":\""+rs.getString("nombre")+"\",\"calorias\":\""+rs.getString("calorias")+"\"}";
+		    		temp+=",{\"nombre\":\""+rs.getString("nombre")+"\",\"calorias\":\""+rs.getString("caloria")+"\"}";
 		    	}else{
-		    		temp+="{\"nombre\":\""+rs.getString("nombre")+"\",\"calorias\":\""+rs.getString("calorias")+"\"}";
+		    		temp+="{\"nombre\":\""+rs.getString("nombre")+"\",\"calorias\":\""+rs.getString("caloria")+"\"}";
 		    		primero=true;
 		    	}  
 		    }

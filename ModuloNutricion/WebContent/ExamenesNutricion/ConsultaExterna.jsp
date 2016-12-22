@@ -188,7 +188,7 @@
         </div>
         <div class="panel-body">
         
- <form action="../ConsultaExterna" method="post" class="form-inline" role="form">
+ <form class="form-inline" role="form">
    <div class="container" >
   <ul class="nav nav-tabs" >
     <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
@@ -220,8 +220,7 @@
     <p>
 
 	<button class="btn btn-default btn-lg" onclick="BuscarPaciente(1);">
-     <img src="../imagenes/ver.png" width="70" height="50" title="Buscar" />Buscar
-	</button>
+     <img src="../imagenes/ver.png" width="50" height="40" title="Buscar" /></button>
 	</p>
 							
 	<script>
@@ -431,6 +430,7 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="fumafrec">
+  							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -449,6 +449,7 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="ejerciciofrec">
+							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -462,6 +463,7 @@ function BuscarPaciente(entero){
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="bebidaalcfrec">
+							<option></option>
 							<option>Frecuentemente</option>
 						</select>
   
@@ -649,7 +651,7 @@ function BuscarPaciente(entero){
 			        <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Consumo de Agua(Vasos)</label>
-					  		<input class="form-control" name="agua" id="agua" type="number"  required/>
+					  		<input class="form-control" name="agua" id="agua" type="number"  />
 					                  
 					  	</div>
 					  	
@@ -699,13 +701,12 @@ function BuscarPaciente(entero){
 				    <div class="col-sm-9" >
 				    
 			<div class="panel panel-primary">
-		      <div class="panel-heading">Recordatorios</div>
+		      <div class="panel-heading">Recordatorio de 24 horas</div>
 		      <div class="panel-body">
 		      	
-		      	<h2>Recordatorio de 24 horas</h2>
 					  <div class="row">
 					  		<div class="form-group">
-						    <label>Nuevo tiempo de comida</label>
+						    <label>Tiempo de comida</label>
 						    <select class="form-control" id="TiempoComida" name="TiempoComida">
 													<option>Desayuno</option>
 													<option>Almuerzo</option>
@@ -713,10 +714,10 @@ function BuscarPaciente(entero){
 												</select>
 						</div>
 						<div class="form-group">
-						    <p>				
+						     <label for="BNuevo">Agregar</label>			
 							<button class="btn btn-default btn-lg" onclick="AgregarTiempoComida()" >
-						     <img src="../imagenes/th.jpg" width="40" height="30" title="Tiempo" /></button>
-							</p>
+						     <img src="../imagenes/th.jpg" width="20" height="15" title="Tiempo" /></button>
+							
 						</div>
 					  </div>
 					  <br>
@@ -727,7 +728,7 @@ function BuscarPaciente(entero){
 					  <div class="row">
 					  	<div class="form-group">
 						    <label>Alimento</label>
-						    <input class="form-control autocomplete" id="alimento" name="alimento" placeholder="Ingresa alimento" />
+						    <input class="form-control autocomplete" id="alimento" name="alimento" placeholder="Ingresa alimento" readonly/>
 						</div>
 						<div class="form-group">
 						    <label>Calorias</label>
@@ -735,29 +736,74 @@ function BuscarPaciente(entero){
 						</div>
 						<div class="form-group">
 						    <label>Cantidad</label>
-						    <input class="form-control" id="cantidada" name="cantidada" type="number" style="width: 70px;" required />
+						    <input class="form-control" id="cantidada" name="cantidada" type="number" style="width: 70px;" readonly required />
 						</div>
 						<div class="form-group">
 						    <label for="Ntipo">Porcion</label>
-						    <select class="form-control" name="porcion" id="porcion">
+						    <select class="form-control" name="porcion" id="porcion" readonly>
 													<option value="1" >U</option>
 													<option value="2" >ml</option>
 												</select>
 						  </div>
 						  <div class="form-group">
-						    <p>				
-							<button class="btn btn-default btn-lg" onclick="AgregarAlimento()" >
-						     <img src="../imagenes/agregar.png" width="40" height="30" title="Agregar" /></button>
-							</p>
+						    <label for="BAgregar">Agregar</label>			
+							<button class="btn btn-default btn-lg" id="BAlAgregar" onclick="AgregarAlimento()" disabled>
+						     <img src="../imagenes/agregar.png" width="20" height="15" title="Agregar" /></button>
+							
 						  </div>
 						<div class="form-group">
-						    <p>				
-							<button class="btn btn-default btn-lg" onclick="NuevoAlimento()" >
-						     <img src="../imagenes/AgregarAlimento.jpg" width="40" height="30" title="Nuevo" /></button>
-							</p>
+						    <label for="BNuevo">Nuevo</label>				
+							<button class="btn btn-default btn-lg" id="BNAlimento" data-toggle="modal" data-target="#VentanaNuevoAlimento" disabled>
+						     <img src="../imagenes/AgregarAlimento.jpg" width="20" height="15" title="Nuevo alimento" /></button>
+							
+							<div class="modal fade" id="VentanaNuevoAlimento" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Nuevo Alimento</h4>
+							        </div>
+							        <div class="modal-body">
+							      
+							          	<div class="row">
+								      		<div class="form-group">
+												    <label>Alimento</label>
+												    <input class="form-control" id="NuevoAl"  type="text" style="width: 100px;"/>
+												</div>
+												<div class="form-group">
+												    <label>Calorias</label>
+												    <input class="form-control" id="NuevaCal"  type="number"  style="width: 70px;"/>
+												</div>
+												<div class="form-group">
+												    <label>Grupo</label>
+												     <select class="form-control" id="NuevoGrupo">
+													<option value="1" >Lacteo</option>
+													<option value="2" >Fruta</option>
+												</select>
+												</div>
+								      	</div>
+								    
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="AñadirAlimentoBD()">Guardar</button>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							
 						</div>
 					</div>
-		      	
+		      	<div class="row">
+		      		<div class="form-group">
+						    <label>Dieta Baja en</label>
+						    <input class="form-control" id="dbaja" name="dbaja" type="text" />
+						</div>
+						<div class="form-group">
+						    <label>Dieta Alta en</label>
+						    <input class="form-control" id="dalta" name="dalta" type="text"  />
+						</div>
+		      	</div>
 		      </div>
 		    </div>
 					  
@@ -780,92 +826,226 @@ var posicion=0;
 var contador=0;
 var contp=0;
 
-function Guardar(){
-	var carnet=document.getElementById('carnet').value;;
-	
-	var variable1=document.getElementById('enfermedad').value;
+var habilitado=false;
 
-	var variable2=document.getElementById("medicamento").value;
-	var variable3=document.getElementById("suplemento").value;
-	var variable4=document.getElementById("diarrea").value;
-	var variable5=document.getElementById("flatulencia").value;
-	var variable6=document.getElementById("acidez").value;
-	var variable7=document.getElementById("estreñimiento").value;
-	var variable8=document.getElementById("fuma").value;
-	var variable9=document.getElementById("ncigarro").value;
-	var variable10=document.getElementById("fumafrec").value;
+function AñadirAlimentoBD(){
+	alert("llega");
 	
-	var info="";
+}
+function validad_vacio(entrada){
+	var texto="";
+	texto=document.getElementById(entrada).value;
+	if(texto==""){
+		texto="null";
+	}
+	return texto;
+}
+function validar_numerovacio(entrada){
+	var texto="";
+	texto=document.getElementById(entrada).value;
+	if(texto==""){
+		texto="0";
+	}
+	return texto;
+}
+function validar_check(entrada){
+	var texto="";
+	var cond;
+	cond=document.getElementById(entrada).checked;
+	if(cond==true){
+		texto="1";
+	}else{
+		texto="0";
+	}
+	return texto;
+}
+
+function enviar_datos(datos){
+	var resultado="";
+
+	$.ajax({
+        url: "../ConsultaExterna",
+        data: datos,
+  	    type: 'post',
+        dataType: 'json',
+        success: function(data){
+        	alert(data.resultado);
+        	//data.resultado[i].id
+        	
+        }
+	});
+}
+function Guardar(){
+	var action="guardar";
+	var carnet=document.getElementById('carnet').value;
+	
+	var variable1=validad_vacio('enfermedad');
+	var variable2=validad_vacio("medicamento");
+	var variable3=validad_vacio("suplemento");
+	var variable4=validar_check("diarrea");
+	var variable5=validar_check("flatulencia");
+	var variable6=validar_check("acidez");
+	var variable7=validar_check("estreñimiento");
+	var variable8=validar_check("fuma"); 
+	var variable9=validar_numerovacio("ncigarro");
+	var variable10=validad_vacio("fumafrec");
+	
+	var variable11=validar_check("ejercicio"); 
+	var variable12=validar_numerovacio("ejerciciotiempo");
+	var variable13=validad_vacio("ejerciciofrec");
+	var variable14=validar_check("bebidaalc"); 
+	var variable15=validad_vacio("bebidaalcfrec");
+	var variable16=validar_check("tdesayuno"); 
+	var variable17=validad_vacio("horadesayuno");
+	var variable18=validar_check("refam"); 
+	var variable19=validad_vacio("refamhr");
+	var variable20=validar_check("talmu"); 
 	
 	
-	
-	var variable11=document.getElementById("ejercicio").value;
-	var variable12=document.getElementById("ejerciciotiempo").value;
-	var variable13=document.getElementById("ejerciciofrec").value;
-	var variable14=document.getElementById("bebidaalc").value;
-	var variable15=document.getElementById("bebidaalcfrec").value;
-	var variable16=document.getElementById("tdesayuno").value;
-	var variable17=document.getElementById("horadesayuno").value;
-	var variable18=document.getElementById("refam").value;
-	var variable19=document.getElementById("refamhr").value;
-	var variable20=document.getElementById("talmu").value;
-	
-	
-	
-	var variable21=document.getElementById("almh").value;
-	var variable22=document.getElementById("refpm").value;
-	var variable23=document.getElementById("refpmhr").value;
-	var variable24=document.getElementById("cenaa").value;
-	var variable25=document.getElementById("cenhr").value;
-	var variable26=document.getElementById("Lcasa").value;
-	var variable27=document.getElementById("Ltrabajo").value;
-	var variable28=document.getElementById("Lotro").value;
-	var variable29=document.getElementById("Ocasa").value;
-	var variable30=document.getElementById("Ocafeteria").value;
+	         	
+	var variable21=validad_vacio("almh");
+	var variable22=validar_check("refpm"); 
+	var variable23=validad_vacio("refpmhr");
+	var variable24=validar_check("cenaa"); 
+	var variable25=validad_vacio("cenhr");
+	var variable26=validar_check("Lcasa"); 
+	var variable27=validar_check("Ltrabajo");
+	var variable28=validar_check("Lotro"); 
+	var variable29=validar_check("Ocasa"); 
+	var variable30=validar_check("Ocafeteria"); 
 	
 	
+	var variable31=validar_check("Ocaseta"); 
+	var variable32=validar_check("Ochiclero"); 
+	var variable33=validar_numerovacio("tcdesayuno");
+	var variable34=validar_numerovacio("tcrefaccion");
+	var variable35=validar_numerovacio("tcalmuerzo");
+	var variable36=validar_numerovacio("tccena");
+	var variable37=validar_numerovacio("agua");
+	var variable38=validad_vacio("ald");
+	var variable39=validad_vacio("aln");
+	var variable40=validad_vacio("alp");
+
 	
-	var variable31=document.getElementById("Ocaseta").value;
-	var variable32=document.getElementById("Ochiclero").value;
-	var variable33=document.getElementById("tcdesayuno").value;
-	var variable34=document.getElementById("tcrefaccion").value;
-	var variable35=document.getElementById("tcalmuerzo").value;
-	var variable36=document.getElementById("tccena").value;
-	var variable37=document.getElementById("agua").value;
-	var variable38=document.getElementById("ald").value;
-	var variable39=document.getElementById("aln").value;
-	var variable40=document.getElementById("alp").value;
+	var variable41=validad_vacio("dbaja");
+	var variable42=validad_vacio("dalta");
+	var variable43=validad_vacio("talla");
+	var variable44=validad_vacio("pesousual");
+	var variable45=validad_vacio("circunferencia");
+	var variable46=validad_vacio("constitucion");
 	
-	info= variable31+","+variable32+","+variable33+","+variable34+","+variable35+","+
-	variable36+","+variable37+","+variable38+","+variable39+","+variable40;
-	alert(info);
+	var variable47=validad_vacio("grasa");
+	var variable48=validad_vacio("musculo");
+	var variable49=validad_vacio("pagua");
+	var variable50=validad_vacio("masa");
+	var variable51=validad_vacio("viscera");
+	var variable52=validad_vacio("abdomen");
+	var variable53=validad_vacio("plan");
 	
+	var variable54=validad_vacio("verdura");
+	var variable55=validad_vacio("fruta");
+	var variable56=validad_vacio("pollo");
+	var variable57=validad_vacio("lacteo");
+	var variable58=validad_vacio("hamburguesa");
+	var variable59=validad_vacio("snack");
+	var variable60=validad_vacio("refresco");
+	
+	
+	var variable61=validad_vacio("galleta");
+	var variable62=validad_vacio("dulce");
+	var variable63=validad_vacio("embutido");
+	var variable64=validad_vacio("sopa");
+	var variable65=validad_vacio("fritura");
+	var variable66=validad_vacio("tortilla");
+	var variable67=validad_vacio("papa");
+	var variable68=validad_vacio("pasta");
+	var variable69=validad_vacio("arroz");
+	var variable70=validad_vacio("frijol");
+	
+	
+	var variable71=validad_vacio("pan");
+	var variable72=validad_vacio("huevo");
+	
+	var cadena = [ 	'carnet='+ carnet,'a='+action
+		         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
+		         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
+		         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
+		         	  ,'p16='+variable16,'p17='+variable17,'p18='+variable18,'p19='+variable19,'p20='+variable20
+		         	  ,'p21='+variable21,'p22='+variable22,'p23='+variable23,'p24='+variable24,'p25='+variable25
+		         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
+		         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
+		         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
+		         	  ,'p41='+variable41,'p42='+variable42,'p43='+variable43,'p44='+variable44,'p45='+variable45
+		         	  ,'p46='+variable46,'p47='+variable47,'p48='+variable48,'p49='+variable49,'p50='+variable50
+		         	  ,'p51='+variable51,'p52='+variable52,'p53='+variable53,'p54='+variable54,'p55='+variable55
+		         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
+		         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
+		         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
+		         	  ,'p71='+variable71,'p72='+variable72].join('&');
+	
+		         	enviar_datos(cadena);
+		         	
+
 	alert("guardando");
 }
 function LimpiarElementos(){
 	document.getElementById('alimento').value="";
 	document.getElementById('cantidada').value="";
 	document.getElementById('calorias').value="";
+	document.getElementById("alimento").focus();
 }
 function AgregarAlimento(){
 	
-	ArrComida[contp]=document.getElementById("alimento").value;
-	var calorias=parseInt(document.getElementById("calorias").value);
-	var cant=parseInt(document.getElementById("cantidada").value);
+	var auxCaloria=document.getElementById("calorias").value;
+	var auxCantidad=document.getElementById("cantidada").value;
 	
-	var e = document.getElementById("porcion");
-	var porcion = e.options[e.selectedIndex].text;
+	if(auxCaloria!=""&&auxCantidad!=""){
+		ArrComida[contp]=document.getElementById("alimento").value;
+		var calorias=parseInt(auxCaloria);
+		var cant=parseInt(auxCantidad);
+		
+		var e = document.getElementById("porcion");
+		var porcion = e.options[e.selectedIndex].text;
+		
+		ArrCant[contp]=cant;
+		ArrUnidad[contp]=porcion;
+		
+		
+		ArrKcal[contp]=cant*calorias;
+		ArrpComida[contp]=posicion;
+		contp++;
+		ActualizarTabla();
+		LimpiarElementos();
+		
+	}else{
+		alert("Error: Faltan datos a ingresar");
+	}
 	
-	ArrCant[contp]=cant;
-	ArrUnidad[contp]=porcion;
 	
-	
-	ArrKcal[contp]=cant*calorias;
-	ArrpComida[contp]=posicion;
-	contp++;
-	ActualizarTabla();
-	LimpiarElementos();
 }
+function EditarAlimento(entrada){
+	var auxcant="auxcant"+entrada;
+	document.getElementById(auxcant).readOnly = false;	
+}
+
+function ConfirmarEdicion(event,valor) {
+    var char = event.which || event.keyCode;
+    if(char == 13){ 
+    	var auxcant="auxcant"+valor;
+    	var auxCantidad=document.getElementById(auxcant).value;
+    	if(auxCantidad!=""){
+    		var cantidadOriginal=ArrCant[valor];
+        	var caloriaOriginal= ArrKcal[valor]/cantidadOriginal;
+        	
+        	var cant=parseInt(auxCantidad);
+        	
+        	ArrCant[valor]=cant;
+        	ArrKcal[valor]=cant*caloriaOriginal;
+    	}
+    		
+    	ActualizarTabla();
+    	
+    }}
 function EliminarAlimento(entrada){
 	ArrpComida[entrada]=-100;
 	ActualizarTabla();
@@ -879,15 +1059,20 @@ function ActualizarTabla(){
 	var Metrica=0;
 	var info="";
 	for (i = 0; i < contador; i++) { 
-		encabCom += "<tr><th colspan=\"5\" bgcolor=\"#2D7C06\"><font color=\"white\">"+ArrTiempoCom[i]+"</font></th></tr>";
-		encabCom+="<tr><th>Alimento</th><th>Cantidad</th><th>Porcion</th><th>Kcal</th><th></th></tr>";
+		encabCom += "<tr><th colspan=\"6\" bgcolor=\"#2D7C06\"><font color=\"white\">"+ArrTiempoCom[i]+"</font></th></tr>";
+		encabCom+="<tr><th>Alimento</th><th>Cantidad</th><th>Porcion</th><th>Kcal</th><th></th><th></th></tr>";
 		
 		for (j = 0; j < ArrpComida.length; j++) { 
 			
 			
 		if((i==ArrpComida[j])&&(ArrpComida[j]!=-100)){
-			encabCom+="<tr><td>"+ArrComida[j]+"</td><td>"+ArrCant[j]+"</td><td>"+ArrUnidad[j]+"</td><td>"+ArrKcal[j]+"</td><td>"+
-			"<button class=\"btn btn-default btn-lg\" onclick=\"EliminarAlimento("+j+")\" >"
+			encabCom+="<tr><td>"+ArrComida[j]+"</td><td>"
+			+"<input class=\"form-control\" id=\"auxcant"+j+"\" type=\"number\" value=\""+ArrCant[j]+"\" style=\"width: 65px;\" readonly onkeypress=\"ConfirmarEdicion(event,"+j+")\" />"
+			+"</td><td>"+ArrUnidad[j]+"</td><td>"+ArrKcal[j]+"</td><td>"
+			+"<button class=\"btn btn-default btn-lg\" onclick=\"EditarAlimento("+j+")\" >"
+		    + "<img src=\"../imagenes/edit2.png\" width=\"10\" height=\"8\" title=\"Editar\" /></button>"
+		    +"</td><td>"
+			+"<button class=\"btn btn-default btn-lg\" onclick=\"EliminarAlimento("+j+")\" >"
 		    + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /></button>"
 		     +"</td></tr>";
 		}
@@ -897,12 +1082,16 @@ function ActualizarTabla(){
 	}
 	var sumatoria=0;
 	for (z = 0; z < ArrKcal.length; z++) {
-		sumatoria+=ArrKcal[z];
+		if(ArrpComida[z]!=-100){
+			sumatoria+=ArrKcal[z];
+		}
+		
 	}
-	var calculo = "<tr><td colspan=\"3\">Total</td><td>"+sumatoria+"</td><td></td></tr>"
+	var calculo = "<tr><td colspan=\"3\">Total</td><td>"+sumatoria+"</td><td></td><td></td></tr>"
 	
 	var NuevaTablaComida = marco + encabCom +calculo+ fintabla;
 	document.getElementById("TablaAlimento").innerHTML = NuevaTablaComida;
+	
 }
 function AgregarTiempoComida(){
 	//ArrTiempoCom.splice(0, ArrTiempoCom.length);
@@ -915,7 +1104,14 @@ function AgregarTiempoComida(){
 	contador++;
 	
 	ActualizarTabla();
-	
+	if(habilitado==false){
+		document.getElementById("alimento").readOnly = false;	
+		document.getElementById("cantidada").readOnly = false;	
+		document.getElementById("porcion").readOnly = false;	
+		document.getElementById("BAlAgregar").disabled = false;
+		document.getElementById("BNAlimento").disabled = false;
+		habilitado=true;
+	}
 	
 }
 
@@ -951,7 +1147,7 @@ jQuery(function(){
 	              		
 	              		document.getElementById('alimento').value  = data.resultado[0].nombre;
 	        	        document.getElementById('calorias').value  = data.resultado[0].calorias;
-	         	      		 
+	        	        document.getElementById("cantidada").focus();	 
 	              		
 	              	
 	              	
@@ -987,6 +1183,55 @@ function CargarAlimento(texto){
         }
     });
 }
+function CalcularIMC(event) {
+    var char = event.which || event.keyCode;
+    if(char == 13){ 
+    
+		var talla=0;
+		var peso=0;
+		var imc=0;
+		var pesomax=0;
+		var pesomin=0;
+		var TempTalla="";
+		var TempPeso="";
+	
+		TempTalla=document.getElementById('talla').value;
+		TempPeso=document.getElementById('pesousual').value;
+		
+		if(TempTalla==""||TempPeso==""){
+			talla=0;
+			peso=0;
+			document.getElementById('imc').value  = "";
+		}else{
+			talla =	parseFloat(TempTalla);
+		    peso =	parseFloat(TempPeso)*0.453592;
+		    pesomax=(24.9 * (talla^2)) * 2.2;
+			pesomin=(18.5 * (talla^2)) * 2.2;
+		    talla=talla*talla;
+		    imc=peso/talla;
+			
+		    
+		    var action="cargaimc";
+			cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
+			$.ajax({
+		        url: "../IMC",
+		        data: cadena,
+		  	    type: 'post',
+		        dataType: 'json',
+		        success: function(data){
+		        	
+		        	document.getElementById('imc').value  = ""+imc;
+		        	document.getElementById('diagnostico').value  = data.diagnostico;
+		        	document.getElementById('pesominimo').value  = ""+ pesomin;
+		        	document.getElementById('pesomax').value  =""+ pesomax;
+		        	document.getElementById('peso').value  =""+ peso;
+		        }
+			});
+		}
+	    
+	}
+   
+}
 </script>
 
 <div class="panel panel-primary">
@@ -996,29 +1241,28 @@ function CargarAlimento(texto){
       	<div class="row">
 				<div class="form-group">
 						<label>Talla(m)</label>
-						<input class="form-control" id="talla" name="talla" type="number"  />
+						<input class="form-control" id="talla" name="talla" type="number" style="width: 65px;" />
 				</div>
 				<div class="form-group">
-						<label>Peso usual(Lbs)</label>
-						<input class="form-control" id="pesousual" name="pesousual" type="number"  />
+						<label>Peso(Lbs)</label>
+						<input class="form-control" id="pesousual" name="pesousual" type="number" style="width: 65px;" onkeypress="CalcularIMC(event)"/>
 				</div>
 				<div class="form-group">
 						<label>Peso minimo(Lbs)</label>
-						<input class="form-control" id="pesominimo" name="pesominimo" type="number"  />
+						<input class="form-control" id="pesominimo" name="pesominimo" type="number" style="width: 65px;" readonly />
 				</div>
-			</div>	
-			<div class="row">
+			
 				<div class="form-group">
 						<label>Peso maximo(Lbs)</label>
-						<input class="form-control" id="pesomax" name="pesomax" type="number"  />
+						<input class="form-control" id="pesomax" name="pesomax" type="number"  style="width: 65px;" readonly />
 				</div>
 				<div class="form-group">
 						<label>Circunferencia de muñeca</label>
-						<input class="form-control" id="circunferencia" name="circunferencia" type="number"  />
+						<input class="form-control" id="circunferencia" name="circunferencia" type="number"  style="width: 65px;"/>
 				</div>
 				<div class="form-group">
 						<label>Constitucion osea</label>
-						<select class="form-control" name="constitucion">
+						<select class="form-control" id="constitucion">
 								<option>Pequeña</option>
 								<option>Mediana</option>
 								<option>Grande</option>
@@ -1036,47 +1280,40 @@ function CargarAlimento(texto){
       		<div class="row">
 					<div class="form-group">
 							<label>Peso (kg)</label>
-							<input class="form-control" id="peso" name="peso" type="number"  />
+							<input class="form-control" id="peso" name="peso" type="number" style="width: 65px;" readonly/>
 					</div>
 					<div class="form-group">
 							<label>% de Grasa</label>
-							<input class="form-control" id="grasa" name="grasa" type="number"  />
+							<input class="form-control" id="grasa" name="grasa" type="number" style="width: 65px;" />
 					</div>
 					<div class="form-group">
 							<label>% de masa muscular</label>
-							<input class="form-control" id="musculo" name="musculo" type="number"  />
+							<input class="form-control" id="musculo" name="musculo" type="number" style="width: 65px;" />
 					</div>
-				</div>	
 				
-				<div class="row">
-					<div class="form-group">
-							<label>Peso (Lbs)</label>
-							<input class="form-control" id="pesolb" name="pesolb" type="number"  />
-					</div>
+					
 					<div class="form-group">
 							<label>% de Agua</label>
-							<input class="form-control" id="agua" name="agua" type="number"  />
+							<input class="form-control" id="pagua" name="pagua" type="number"  style="width: 65px;"/>
 					</div>
 					<div class="form-group">
 							<label>Masa Osea</label>
-							<input class="form-control" id="masa" name="masa" type="number"  />
+							<input class="form-control" id="masa" name="masa" type="number" style="width: 65px;" />
 					</div>
-				</div>
-				<div class="row">
+			
 					<div class="form-group">
 							<label>Grasa Visceral</label>
-							<input class="form-control" id="viscera" name="viscera" type="number"  />
+							<input class="form-control" id="viscera" name="viscera" type="number"  style="width: 65px;"/>
 					</div>
 					<div class="form-group">
 							<label>Cintura Abdominal</label>
-							<input class="form-control" id="abdomen" name="abdomen" type="number"  />
+							<input class="form-control" id="abdomen" name="abdomen" type="number" style="width: 65px;" />
 					</div>
 					<div class="form-group">
 							<label>IMC</label>
-							<input class="form-control" id="imc" name="imc" type="number" readonly  />
+							<input class="form-control" id="imc" name="imc" type="number" readonly  style="width: 65px;"/>
 					</div>
-				</div>
-				<div class="row">
+				
 					<div class="form-group">
 							<label>Diagnostico</label>
 							<input class="form-control" id="diagnostico" name="diagnostico" readonly />
@@ -1095,7 +1332,7 @@ function CargarAlimento(texto){
       		<div class="row">
 			<div class="form-group">
 					<label>Planificacion del tratamiento -Metas-</label>
-					<textarea class="form-control" name="plan" cols="60" rows="15" ></textarea>
+					<textarea class="form-control" id="plan" name="plan" cols="60" rows="15" ></textarea>
 			</div>
 		
 		</div>	
@@ -1114,7 +1351,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Verduras</label>
-					  		<select name="verdura" class="form-control" >
+					  		<select id="verdura" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1125,7 +1362,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frutas</label>
-					  		<select name="fruta" class="form-control" >
+					  		<select id="fruta" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1136,7 +1373,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Carne(res,cerdo), pollo, pescado</label>
-					  		<select name="pollo" class="form-control" >
+					  		<select id="pollo" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1147,7 +1384,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Lacteos</label>
-					  		<select name="lacteo" class="form-control" >
+					  		<select id="lacteo" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1158,7 +1395,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Hamburguesas, pizza, pollo frito</label>
-					  		<select name="hamburguesa" class="form-control" >
+					  		<select id="hamburguesa" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1169,7 +1406,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Snacks (papalinas, tortrix, ricitos, etc)</label>
-					  		<select name="snack" class="form-control" >
+					  		<select id="snack" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1180,7 +1417,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Refrescos embasados</label>
-					  		<select name="refresco" class="form-control" >
+					  		<select id="refresco" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1191,7 +1428,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Galletas, pasteles, pan dulce</label>
-					  		<select name="galleta" class="form-control" >
+					  		<select id="galleta" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1202,7 +1439,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Dulces, chocolates, chicles</label>
-					  		<select name="dulce" class="form-control" >
+					  		<select id="dulce" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1213,7 +1450,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Embutidos</label>
-					  		<select name="embutido" class="form-control" >
+					  		<select id="embutido" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1224,7 +1461,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Sopas instantaneas</label>
-					  		<select name="sopa" class="form-control" >
+					  		<select id="sopa" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1235,7 +1472,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frituras, chicharrones, carnitas</label>
-					  		<select name="fritura" class="form-control" >
+					  		<select id="fritura" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1246,7 +1483,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Tortillas</label>
-					  		<select name="tortilla" class="form-control" >
+					  		<select id="tortilla" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1257,7 +1494,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Papas</label>
-					  		<select name="papa" class="form-control" >
+					  		<select id="papa" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1268,7 +1505,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Pasta</label>
-					  		<select name="pasta" class="form-control" >
+					  		<select id="pasta" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1279,7 +1516,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Arroz</label>
-					  		<select name="Arroz" class="form-control" >
+					  		<select id="arroz" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1290,7 +1527,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frijol</label>
-					  		<select name="frijol" class="form-control" >
+					  		<select id="frijol" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1301,7 +1538,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Pan</label>
-					  		<select name="pan" class="form-control" >
+					  		<select id="pan" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
@@ -1312,7 +1549,7 @@ function CargarAlimento(texto){
 					  <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Huevo</label>
-					  		<select name="huevo" class="form-control" >
+					  		<select id="huevo" class="form-control" >
 				            	<option>Diario</option>
 				                <option>Semanal</option>
 				                <option>Mensual</option>
