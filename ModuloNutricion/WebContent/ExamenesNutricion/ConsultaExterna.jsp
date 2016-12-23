@@ -527,7 +527,7 @@ function BuscarPaciente(entero){
 							  	</div>
 							  	<div class="form-group" align="center">
 							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control" name="refpmhr" id="refpmhr" type="time" />
+							  		<input class="form-control"  id="refpmhr" type="time" />
 							  
 							  	</div>
 				      		</div>
@@ -891,6 +891,34 @@ function enviar_datos(datos){
         }
 	});
 }
+function validar_hora(entrada){
+	var texto="";
+	texto=document.getElementById(entrada).value;
+	if(texto==""){
+		texto="0:00";
+	}
+	return texto;
+}
+function obtenerRegistro(){
+	var encabCom1="";
+	for (i = 0; i < contador; i++) { 
+		encabCom1 += "%"+ArrTiempoCom[i];
+		
+		for (j = 0; j < ArrpComida.length; j++) { 
+			
+			
+		if((i==ArrpComida[j])&&(ArrpComida[j]!=-100)){
+			encabCom1+=","+ArrComida[j]+","+ArrCant[j]+","+ArrUnidad[j]+"!";
+		}
+		}
+		
+		
+	}
+	
+	
+	return encodeURIComponent(encabCom1);
+	
+}
 function Guardar(){
 	var action="guardar";
 	var carnet=document.getElementById('carnet').value;
@@ -912,18 +940,18 @@ function Guardar(){
 	var variable14=validar_check("bebidaalc"); 
 	var variable15=validad_vacio("bebidaalcfrec");
 	var variable16=validar_check("tdesayuno"); 
-	var variable17=validad_vacio("horadesayuno");
+	var variable17=validar_hora("horadesayuno");
 	var variable18=validar_check("refam"); 
-	var variable19=validad_vacio("refamhr");
+	var variable19=validar_hora("refamhr");
 	var variable20=validar_check("talmu"); 
 	
 	
 	         	
-	var variable21=validad_vacio("almh");
+	var variable21=validar_hora("almh");
 	var variable22=validar_check("refpm"); 
-	var variable23=validad_vacio("refpmhr");
+	var variable23=validar_hora("refpmhr");
 	var variable24=validar_check("cenaa"); 
-	var variable25=validad_vacio("cenhr");
+	var variable25=validar_hora("cenhr");
 	var variable26=validar_check("Lcasa"); 
 	var variable27=validar_check("Ltrabajo");
 	var variable28=validar_check("Lotro"); 
@@ -945,17 +973,17 @@ function Guardar(){
 	
 	var variable41=validad_vacio("dbaja");
 	var variable42=validad_vacio("dalta");
-	var variable43=validad_vacio("talla");
-	var variable44=validad_vacio("pesousual");
-	var variable45=validad_vacio("circunferencia");
+	var variable43=validar_numerovacio("talla");
+	var variable44=validar_numerovacio("pesousual");
+	var variable45=validar_numerovacio("circunferencia");
 	var variable46=validad_vacio("constitucion");
 	
-	var variable47=validad_vacio("grasa");
-	var variable48=validad_vacio("musculo");
-	var variable49=validad_vacio("pagua");
-	var variable50=validad_vacio("masa");
-	var variable51=validad_vacio("viscera");
-	var variable52=validad_vacio("abdomen");
+	var variable47=validar_numerovacio("grasa");
+	var variable48=validar_numerovacio("musculo");
+	var variable49=validar_numerovacio("pagua");
+	var variable50=validar_numerovacio("masa");
+	var variable51=validar_numerovacio("viscera");
+	var variable52=validar_numerovacio("abdomen");
 	var variable53=validad_vacio("plan");
 	
 	var variable54=validad_vacio("verdura");
@@ -981,6 +1009,7 @@ function Guardar(){
 	
 	var variable71=validad_vacio("pan");
 	var variable72=validad_vacio("huevo");
+	var variable73=obtenerRegistro();
 	
 	var cadena = [ 	'carnet='+ carnet,'a='+action
 		         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
@@ -997,7 +1026,7 @@ function Guardar(){
 		         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
 		         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
 		         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
-		         	  ,'p71='+variable71,'p72='+variable72].join('&');
+		         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73].join('&');
 	
 		         	enviar_datos(cadena);
 		         	

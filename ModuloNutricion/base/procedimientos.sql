@@ -109,3 +109,22 @@ DELIMITER ;
 
 GRANT EXECUTE ON PROCEDURE NutricionUsalud.Registrar_fruta TO 'nutricionprueba'@'localhost';
 GRANT ALL ON NutricionUsalud.Registrar_fruta TO nutricionprueba@'localhost'; 
+
+DELIMITER $
+CREATE PROCEDURE Registrar_ConsultaExterna(IN paciente integer ,
+                                    IN antecedente integer,
+                                    IN estilo integer ,
+                                    IN habito integer ,
+                                    IN antropometria integer ,
+                                    IN registro integer ,
+                                   OUT resultado TEXT)
+BEGIN
+insert into CONSULTA_EXTERNA(FECHA,PACIENTE_idPACIENTE, ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO)
+values(CURDATE(),paciente,antecedente,estilo,habito,antropometria,registro);
+SET resultado = (select LAST_INSERT_ID());
+END $
+DELIMITER ;
+
+
+GRANT EXECUTE ON PROCEDURE NutricionUsalud.Registrar_ConsultaExterna TO 'nutricionprueba'@'localhost';
+GRANT ALL ON NutricionUsalud.Registrar_ConsultaExternaa TO nutricionprueba@'localhost'; 

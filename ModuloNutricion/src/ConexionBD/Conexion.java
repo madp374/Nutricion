@@ -384,7 +384,47 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
-	
+	public String RegistrarConsultaExterna(String paciente,
+			String antecedente,
+			String estilo,
+			String habito,
+			String antropometria,
+			String registro){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+		
+			CallableStatement proc = conn.prepareCall(" CALL Registrar_ConsultaExterna(?,?,?,?,?,?,?) ");
+			
+        
+            proc.setInt(1, Integer.parseInt(paciente));
+            proc.setInt(2, Integer.parseInt(antecedente));
+            proc.setInt(3, Integer.parseInt(estilo));
+            proc.setInt(4, Integer.parseInt(habito));
+            proc.setInt(5, Integer.parseInt(antropometria));
+            proc.setInt(6, Integer.parseInt(registro));
+         
+            proc.registerOutParameter(7, Types.VARCHAR);
+         
+            proc.execute();            
+          
+            resultado = proc.getString(7);
+            
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado;
+		}
+		
+	}
 	public String RegistrarIDAlimento(String nombre,String calorias,String grupo){
 		String resultado=null;
 		procedimientoAL="&noAccessToProcedureBodies=true";

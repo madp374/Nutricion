@@ -45,3 +45,20 @@ insert into ALIMENTO(nombre,caloria,imagen,GrupoAlimenticio_idGrupoAlimenticio) 
 select LAST_INSERT_ID();
 
 select * from ALIMENTO;
+
+insert into ESTABLECIMIENTO(nombre, tipo) values('casa','lugar');
+insert into ESTABLECIMIENTO(nombre, tipo) values('trabajo','lugar');
+insert into ESTABLECIMIENTO(nombre, tipo) values('otros','lugar');
+
+insert into ESTABLECIMIENTO(nombre, tipo) values('casa','origen');
+insert into ESTABLECIMIENTO(nombre, tipo) values('cafeteria','origen');
+insert into ESTABLECIMIENTO(nombre, tipo) values('caseta','origen');
+insert into ESTABLECIMIENTO(nombre, tipo) values('chiclero','origen');
+
+insert into ALIMENTO_FRECUENCIA(alimento) values('verdura'),('fruta'),('carne'),('lacteo'),('hamburguesa'),
+                        ('snack'),('refresco'),('galleta'),('dulce'),('embutido'),
+                        ('sopa'),('fritura'),('tortilla'),('papa'),('pasta'),
+                        ('arroz'),('frijol'),('pan'),('huevo');
+                        
+insert into TIEMPO_COMIDA(comida) values('desayuno'),('refaccion am'),('almuerzo'),('refaccion pm'),('cena');
+
