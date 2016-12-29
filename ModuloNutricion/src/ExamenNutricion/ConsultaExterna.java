@@ -142,23 +142,23 @@ public class ConsultaExterna extends HttpServlet {
 				+"\n,p61:"+p61+",p2:"+p62+",p63:"+p63+",p64:"+p64+",p65:"+p65+",p66:"+p66+",p67:"+p67+",p68:"+p68+",p69:"+p69+",p70:"+p70
 				+"\n,p71:"+p71+",p2:"+p72;
 		
-		System.out.println(cadena);
+		//System.out.println(cadena);
 		if(accion.equalsIgnoreCase("guardar")){
 			Conexion query = new Conexion();
 			String IDAntecedente=query.UltimoIDAntecedenteMedico(p1,p2,p3,p4,p5,p6,p7);
-			System.out.println("++++++++++ ID Antecedente: "+IDAntecedente+"++++++++");
+			//System.out.println("++++++++++ ID Antecedente: "+IDAntecedente+"++++++++");
 			String IDEstiloVida=query.UltimoIDEstiloVida(p8,p9,p10,p11,p12,p13,p14,p15);
-			System.out.println("++++++++++ ID Estilo: "+IDEstiloVida+"++++++++");
+			//System.out.println("++++++++++ ID Estilo: "+IDEstiloVida+"++++++++");
 			String IDHabitoAlimentario=query.UltimoIDHabitoAlimentario(p33,p34,p35,p36,p37,p38,p39,p40);
-			System.out.println("++++++++++ ID Habito: "+IDHabitoAlimentario+"++++++++");
+			//System.out.println("++++++++++ ID Habito: "+IDHabitoAlimentario+"++++++++");
 			String IDAntropometria=query.UltimoIDAntropometria(p41,p42,p43,p44,p45,p46);
-			System.out.println("++++++++++ ID Antropometria: "+IDAntropometria+"++++++++");
+			//System.out.println("++++++++++ ID Antropometria: "+IDAntropometria+"++++++++");
 			String IDRegistro=query.UltimoIDRegistro(p47,p48,p49,p50,p51,p52,p53);
-			System.out.println("++++++++++ ID Registro: "+IDRegistro+"++++++++");
+			//System.out.println("++++++++++ ID Registro: "+IDRegistro+"++++++++");
 			String IDConsultaExterna=query.RegistrarConsultaExterna(carnet,IDAntecedente,IDEstiloVida,IDHabitoAlimentario,IDAntropometria,IDRegistro);
 			
 			
-			System.out.println("++++++++++ ID Consulta: "+IDConsultaExterna+"++++++++");
+			//System.out.println("++++++++++ ID Consulta: "+IDConsultaExterna+"++++++++");
 			
 			String consulta="insert into ESTABLECIMIENTO_HAS_CONSULTA_EXTERNA(ESTABLECIMIENTO_idESTABLECIMIENTO, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, marca)" 
 					+"values(1,"+IDConsultaExterna+","+p26+"),(2,"+IDConsultaExterna+","+p27+"),(3,"+IDConsultaExterna+","+p28+"),(4,"+IDConsultaExterna+","+p29+"),(5,"+IDConsultaExterna+","+p30+"),(6,"+IDConsultaExterna+","+p31+"),(7,"+IDConsultaExterna+","+p32+");";
@@ -174,8 +174,11 @@ public class ConsultaExterna extends HttpServlet {
 					+"values("+IDConsultaExterna+",1,'"+p17+"'),("+IDConsultaExterna+",2,'"+p19+"'),("+IDConsultaExterna+",3,'"+p21+"'),("+IDConsultaExterna+",4,'"+p23+"'),("+IDConsultaExterna+",5,'"+p25+"');";
 			query.Insertar(consulta);
 			
-			System.out.println("recordatorio: "+p73);
-			
+			//System.out.println("recordatorio: "+p73);
+			String tcomida="";
+			String idTcomida="";
+			String idAlim="";
+			String idPorcion="";
 			
 	        String[] TiempoComidaArray = p73.split("%");
 	        for (int i = 0; i < TiempoComidaArray.length; i++) {
@@ -189,10 +192,20 @@ public class ConsultaExterna extends HttpServlet {
 	    	        	}else{
 	    	        		String[] TiempoComidaArray3 = TiempoComidaArray2[j].split(",");
 	    	        		if(j==0){
-	    	        			System.out.println("tiempo comida:"+TiempoComidaArray3[0]);
+	    	        			
+	    	        			tcomida=TiempoComidaArray3[0];
 	    	        		}
 	    	        		if(TiempoComidaArray3.length>1){
-	    	        			System.out.println("alimento:"+TiempoComidaArray3[1]+",cantidad"+TiempoComidaArray3[2]+"meetrica:"+TiempoComidaArray3[3]);
+	    	        			//System.out.println("tiempo comida:"+tcomida);
+	    	        			//System.out.println("alimento:"+TiempoComidaArray3[1]+",cantidad"+TiempoComidaArray3[2]+"meetrica:"+TiempoComidaArray3[3]);
+	    	        			
+	    	        			idTcomida="(SELECT idTIEMPO_COMIDA FROM TIEMPO_COMIDA where comida='"+tcomida+"')";
+	    	        			idAlim="(select idALIMENTO from ALIMENTO where nombre='"+TiempoComidaArray3[1]+"')";
+	    	        			idPorcion="(select idPORCION from PORCION where nombre='"+TiempoComidaArray3[3]+"')";
+	    	        			
+	    	        			consulta="insert into RECORDATORIO(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ALIMENTO_idALIMENTO, TIEMPO_COMIDA_idTIEMPO_COMIDA, cantidad, PORCION_idPORCION) "
+	    	        						+"values("+IDConsultaExterna+","+idAlim+","+idTcomida+","+TiempoComidaArray3[2]+","+idPorcion+");";
+	    	        			query.Insertar(consulta);
 	    	        		}
 	    	        		
 	    	        	}
@@ -203,7 +216,7 @@ public class ConsultaExterna extends HttpServlet {
 	        }
 	        
 			
-			String result="{\"resultado\":\"bien\"}";
+			String result="{\"resultado\":\"bien\",\"ID\":\""+IDConsultaExterna+"\"}";
 			out.println(result);
 		}
 		

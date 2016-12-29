@@ -72,19 +72,7 @@
         </head>
 
         <body onload="CargaInicio()">
-        <script>
-        	function CargaInicio() {
-        	
-        		var  today = new Date();
-        		var m = today.getMonth() + 1;
-        		var mes = (m < 10) ? '0' + m : m;
-        		 
-        		var fecha=today.getDate()+'/' +mes+'/'+today.getFullYear();
-
-        		document.getElementById('fecha').value=fecha;
-        	}
-        	
-        </script>
+        
         <div class="container">
          <div class="panel2 panel-body">
         <header class="row col-sm-12">
@@ -163,7 +151,7 @@
 				<div class="form-group">
 				  
 					  <label for="LFecha">Fecha</label>
-					  <input class="form-control input-sm" id="fecha" type="text" disabled/>
+					  <input class="form-control input-sm" id="fecha" type="text" readonly/>
 				  </div>
 			
 		
@@ -173,7 +161,7 @@
 		</div>
 		<div class="form-group">
 			<label for="Ltalla">IMC</label>
-			<input class="form-control input-sm" id="imc3" name="imc3" type="number"  min="0.1" step="any"  style="width: 65px;" required/>   
+			<input class="form-control input-sm" id="imc3" name="imc3" type="number"  min="0.1" step="any"  style="width: 65px;" readonly/>   
 		</div>
 		  <div class="form-group">
 			  <label for="TipoExame">Actividad fisica</label>
@@ -196,9 +184,132 @@
 
   </article>
   	<script type="text/javascript">
+  	var pesoL=0;
+  	var talla=0;
+	var idCE="";
+	var SexoVET="";
+	var EdadVET=0;
+  	function CargaInicio() {
+		CargarHora();
+		
+		var idCE = getUrlVars()["prodId"];
+		//var idCE = "1";
+		if(idCE==undefined){
+			alert('Error reload');
+		}else{
+			CargarTallaPeso(idCE);
+		}
+		
+	}
+  	function getUrlVars() {
+	    var vars = {};
+	    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+	    function(m,key,value) {
+	      vars[key] = value;
+	    });
+	    return vars;
+	  }
+  	function CargarTallaPeso(entrada){
+	    var action="CargarTallaPeso";
+		cadena = [ 	'ID=' + entrada,'a='+action].join('&');
+		$.ajax({
+	        url: "../CalculosVET",
+	        data: cadena,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	talla=parseFloat(data.talla);
+	        	pesoL=parseFloat(data.peso)*(0.453592);
+	        	document.getElementById('peso').value  = pesoL;	
+	        	idCE=data.idCE;
+	        	SexoVET=data.sexo;
+	        	EdadVET=parseInt(data.edad);
+	        }
+		});
+	}
+  	function CargarHora(){
+		var  today = new Date();
+		var m = today.getMonth() + 1;
+		var mes = (m < 10) ? '0' + m : m;
+		 
+		var fecha=today.getDate()+'/' +mes+'/'+today.getFullYear();
+
+		document.getElementById('fecha').value=fecha;
+	}
+  	function validar_vacio(entrada){
+		var texto="";
+		texto=document.getElementById(entrada).value;
+		if(texto==""){
+			texto="null";
+		}
+		return texto;
+	}
+	function validar_numerovacio(entrada){
+		var texto="";
+		texto=document.getElementById(entrada).value;
+		if(texto==""){
+			texto="0";
+		}
+		return texto;
+	}
+  	function Guardar(){
+		var action="guardar";
+	
+		var variable1=validar_numerovacio('peso');
+		var variable2=validar_numerovacio("imc3");
+		var variable3=validar_numerovacio("ActividadFisica");
+		var variable4=validar_vacio("formulavet");
+		var variable5=validar_numerovacio("vet");
+		var variable6=validar_numerovacio("veta");
+		var variable7=validar_numerovacio("ReadBP");
+		var variable8=validar_numerovacio("ReadSP");
+		var variable9=validar_numerovacio("ReadOb");
+		var variable10=validar_numerovacio("porCarbo");
+		
+		var variable11=validar_numerovacio('porProte');
+		var variable12=validar_numerovacio("porGrasa");
+		var variable13=validar_numerovacio("porLacteoSG");
+		var variable14=validar_numerovacio("porLacteoE");
+		var variable15=validar_numerovacio("porVege");
+		var variable16=validar_numerovacio("porFruta");
+		var variable17=validar_numerovacio("porCereal");
+		var variable18=validar_numerovacio("porCarne");
+		var variable19=validar_numerovacio("porGrasa1");
+		var variable20=validar_numerovacio("porAzucar");
+		
+		var cadena = ['ID='+ idCE,'a='+action
+		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
+		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
+		      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
+		enviar_datos(cadena);
+			         	
+
+		alert("guardando");
+	}
+  	function enviar_datos(datos){
+		var resultado="";
+
+		$.ajax({
+	        url: "../CalculosVET",
+	        data: datos,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	alert(data.resultado);
+	        	
+	        }
+		});
+	}
+  	
   	document.getElementById('peso').onkeypress = function (e) {
         if (e.which === 13) {
-            document.getElementById("imc3").focus();
+        	
+        	var auxpeso=parseFloat(validar_numerovacio('peso'));
+        	var auxtalla=talla*talla;
+		    var imc4=auxpeso/auxtalla;
+		    document.getElementById('imc3').value=imc4;
+            document.getElementById("ActividadFisica").focus();
             return false;
         }
     };
@@ -221,9 +332,9 @@
         }
     };
     function CalculoAdecuacion(){
-    	var TpProte=(parseFloat( document.getElementById('TProte').value)/parseFloat( document.getElementById('grsProte').value))*100;
-    	var TpCarbo=(parseFloat( document.getElementById('TCarbo').value)/parseFloat( document.getElementById('grsCarbo').value))*100;
-    	var TpGrasa=(parseFloat( document.getElementById('TGrasa').value)/parseFloat( document.getElementById('grsGrasa').value))*100;
+    	var TpProte=(parseFloat( validar_numerovacio('TProte'))/parseFloat( validar_numerovacio('grsProte')))*100;
+    	var TpCarbo=(parseFloat( validar_numerovacio('TCarbo'))/parseFloat( validar_numerovacio('grsCarbo')))*100;
+    	var TpGrasa=(parseFloat( validar_numerovacio('TGrasa'))/parseFloat( validar_numerovacio('grsGrasa')))*100;
     	
     	document.getElementById('TpProte').value=TpProte;
     	document.getElementById('TpCarbo').value=TpCarbo;
@@ -231,10 +342,10 @@
     	
     }
     function AutoSumaTotales1(){
-    	var TKcal = parseFloat( document.getElementById('KcalAzucar').value)+parseFloat(document.getElementById('KcalGrasa1').value )+parseFloat(document.getElementById('KcalCarne').value )+parseFloat(document.getElementById('KcalCereal').value )+parseFloat(document.getElementById('KcalFruta').value )+parseFloat(document.getElementById('KcalVege').value )+parseFloat(document.getElementById('KcalLacteoE').value )+parseFloat(document.getElementById('KcalLacteoSG').value );
-    	var TProte = parseFloat(document.getElementById('ProteAzucar').value )+parseFloat(document.getElementById('ProteGrasa1').value)+parseFloat(document.getElementById('ProteCarne').value )+parseFloat(document.getElementById('ProteCereal').value )+parseFloat(document.getElementById('ProteFruta').value )+parseFloat(document.getElementById('ProteVege').value )+parseFloat(document.getElementById('ProteLacteoE').value )+parseFloat(document.getElementById('ProteLacteoSG').value );
-    	var TCarbo = parseFloat(document.getElementById('CarboAzucar').value )+parseFloat(document.getElementById('CarboGrasa1').value )+parseFloat(document.getElementById('CarboCarne').value )+parseFloat(document.getElementById('CarboCereal').value )+parseFloat(document.getElementById('CarboFruta').value )+parseFloat(document.getElementById('CarboVege').value )+parseFloat(document.getElementById('CarboLacteoE').value )+parseFloat(document.getElementById('CarboLacteoSG').value );
-    	var TGrasa = parseFloat(document.getElementById('GrasaAzucar').value )+parseFloat(document.getElementById('GrasaGrasa1').value )+parseFloat(document.getElementById('GrasaCarne').value )+parseFloat(document.getElementById('GrasaCereal').value )+parseFloat(document.getElementById('GrasaFruta').value )+parseFloat(document.getElementById('GrasaVege').value )+parseFloat(document.getElementById('GrasaLacteoE').value )+parseFloat(document.getElementById('GrasaLacteoSG').value );
+    	var TKcal =  parseFloat(validar_numerovacio('KcalAzucar'))+ parseFloat(validar_numerovacio('KcalGrasa1'))+ parseFloat(validar_numerovacio('KcalCarne'))+ parseFloat(validar_numerovacio('KcalCereal'))+ parseFloat(validar_numerovacio('KcalFruta'))+ parseFloat(validar_numerovacio('KcalVege'))+ parseFloat(validar_numerovacio('KcalLacteoE'))+ parseFloat(validar_numerovacio('KcalLacteoSG'));
+    	var TProte = parseFloat(validar_numerovacio('ProteAzucar'))+parseFloat(validar_numerovacio('ProteGrasa1'))+parseFloat(validar_numerovacio('ProteCarne'))+parseFloat(validar_numerovacio('ProteCereal'))+parseFloat(validar_numerovacio('ProteFruta'))+parseFloat(validar_numerovacio('ProteVege'))+parseFloat(validar_numerovacio('ProteLacteoE'))+parseFloat(validar_numerovacio('ProteLacteoSG'));
+    	var TCarbo = parseFloat(validar_numerovacio('CarboAzucar'))+parseFloat(validar_numerovacio('CarboGrasa1'))+parseFloat(validar_numerovacio('CarboCarne'))+parseFloat(validar_numerovacio('CarboCereal'))+parseFloat(validar_numerovacio('CarboFruta'))+parseFloat(validar_numerovacio('CarboVege'))+parseFloat(validar_numerovacio('CarboLacteoE'))+parseFloat(validar_numerovacio('CarboLacteoSG'));
+    	var TGrasa = parseFloat(validar_numerovacio('GrasaAzucar'))+parseFloat(validar_numerovacio('GrasaGrasa1'))+parseFloat(validar_numerovacio('GrasaCarne'))+parseFloat(validar_numerovacio('GrasaCereal'))+parseFloat(validar_numerovacio('GrasaFruta'))+parseFloat(validar_numerovacio('GrasaVege'))+parseFloat(validar_numerovacio('GrasaLacteoE'))+parseFloat(validar_numerovacio('GrasaLacteoSG'));
     	document.getElementById('TKcal').value=TKcal ;
     	document.getElementById('TProte').value=TProte;
     	document.getElementById('TCarbo').value=TCarbo;
@@ -280,6 +391,7 @@
         	document.getElementById('CarboGrasa1').value=CarboLacteoSG;
         	document.getElementById('ProteGrasa1').value=ProteLacteoSG;
         	document.getElementById('GrasaGrasa1').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porAzucar").focus();
         }
     }
@@ -301,6 +413,7 @@
         	document.getElementById('CarboCarne').value=CarboLacteoSG;
         	document.getElementById('ProteCarne').value=ProteLacteoSG;
         	document.getElementById('GrasaCarne').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porGrasa1").focus();
         }
     }
@@ -322,6 +435,7 @@
         	document.getElementById('ProteCereal').value=ProteLacteoSG;
         	document.getElementById('CarboCereal').value=CarboLacteoSG;
         	document.getElementById('GrasaCereal').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porCarne").focus();
         }
     }
@@ -343,6 +457,7 @@
         	document.getElementById('ProteFruta').value=ProteLacteoSG;
         	document.getElementById('CarboFruta').value=CarboLacteoSG;
         	document.getElementById('GrasaFruta').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porCereal").focus();
         }
     }
@@ -364,6 +479,7 @@
         	document.getElementById('CarboVege').value=CarboLacteoSG;
         	document.getElementById('ProteVege').value=ProteLacteoSG;
         	document.getElementById('GrasaVege').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porFruta").focus();
         }
     }
@@ -385,6 +501,7 @@
         	document.getElementById('CarboLacteoE').value=CarboLacteoSG;
         	document.getElementById('ProteLacteoE').value=ProteLacteoSG;
         	document.getElementById('GrasaLacteoE').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porVege").focus();
         }
     }
@@ -406,18 +523,19 @@
         	document.getElementById('CarboLacteoSG').value=CarboLacteoSG;
         	document.getElementById('ProteLacteoSG').value=ProteLacteoSG;
         	document.getElementById('GrasaLacteoSG').value=GrasaLacteoSG;
+        	AutoSumaTotales1();
         	document.getElementById("porLacteoE").focus();
         }
     }
     
     function AutoSumaKcalPor(){
-    	var porCarbo = parseFloat(document.getElementById('porCarbo').value);
-    	var porProte = parseFloat(document.getElementById('porProte').value);
-    	var porGrasa = parseFloat(document.getElementById('porGrasa').value);
+    	var porCarbo = parseFloat(validar_numerovacio('porCarbo'));
+    	var porProte = parseFloat(validar_numerovacio('porProte'));
+    	var porGrasa = parseFloat(validar_numerovacio('porGrasa'));
     	
-    	var KcalCarbo = parseFloat(document.getElementById('KcalCarbo').value);
-    	var KcalProte = parseFloat(document.getElementById('KcalProte').value);
-    	var KcalGrasa = parseFloat(document.getElementById('KcalGrasa').value);
+    	var KcalCarbo = parseFloat(validar_numerovacio('KcalCarbo'));
+    	var KcalProte = parseFloat(validar_numerovacio('KcalProte'));
+    	var KcalGrasa = parseFloat(validar_numerovacio('KcalGrasa'));
     	
     	var totalpor = porCarbo + porProte + porGrasa;
     	var totalKcal = KcalCarbo + KcalProte + KcalGrasa;
@@ -428,12 +546,12 @@
     function CalculoGrasa(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(document.getElementById('porGrasa').value);
-        	var IMC=parseFloat(document.getElementById("imc3").value);
-        	var veta = parseFloat(document.getElementById("veta").value);
-        	var ReadBP=parseFloat(document.getElementById('ReadBP').value);
-        	var ReadSP=parseFloat(document.getElementById('ReadSP').value);
-        	var ReadOb=parseFloat(document.getElementById('ReadOb').value);
+        	var porCarbo = parseFloat(validar_numerovacio('porGrasa'));
+        	var IMC=parseFloat(validar_numerovacio("imc3"));
+        	var veta = parseFloat(validar_numerovacio("veta"));
+        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
         	var KcalCarbo = 0;
         	
         	if(IMC > 18.49 && IMC < 25){
@@ -455,12 +573,12 @@
     function CalculoProte(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(document.getElementById('porProte').value);
-        	var IMC=parseFloat(document.getElementById("imc3").value);
-        	var veta = parseFloat(document.getElementById("veta").value);
-        	var ReadBP=parseFloat(document.getElementById('ReadBP').value);
-        	var ReadSP=parseFloat(document.getElementById('ReadSP').value);
-        	var ReadOb=parseFloat(document.getElementById('ReadOb').value);
+        	var porCarbo = parseFloat(validar_numerovacio('porProte'));
+        	var IMC=parseFloat(validar_numerovacio("imc3"));
+        	var veta = parseFloat(validar_numerovacio("veta"));
+        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
         	var KcalCarbo = 0;
         	
         	if(IMC > 18.49 && IMC < 25){
@@ -477,6 +595,7 @@
         	document.getElementById('KcalProte').value  = KcalCarbo;
         	
         	document.getElementById('grsProte').value  = grsCarbo;
+        	AutoSumaKcalPor();
         	document.getElementById("porGrasa").focus();
         	
         }
@@ -484,12 +603,12 @@
     function CalculoCarbo(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(document.getElementById('porCarbo').value);
-        	var IMC=parseFloat(document.getElementById("imc3").value);
-        	var veta = parseFloat(document.getElementById("veta").value);
-        	var ReadBP=parseFloat(document.getElementById('ReadBP').value);
-        	var ReadSP=parseFloat(document.getElementById('ReadSP').value);
-        	var ReadOb=parseFloat(document.getElementById('ReadOb').value);
+        	var porCarbo = parseFloat(validar_numerovacio('porCarbo'));
+        	var IMC=parseFloat(validar_numerovacio("imc3"));
+        	var veta = parseFloat(validar_numerovacio("veta"));
+        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
         	var KcalCarbo = 0;
         	
         	if(IMC > 18.49 && IMC < 25){
@@ -504,6 +623,7 @@
         	var grsCarbo = KcalCarbo/4;
         	document.getElementById('KcalCarbo').value  = KcalCarbo;
         	document.getElementById('grsCarbo').value  = grsCarbo;
+        	AutoSumaKcalPor();
         	document.getElementById("porProte").focus();
         }
     	
@@ -512,7 +632,7 @@
     	var ReadBP=0;
     	var ReadSP=0;
     	var ReadOb=0;
-    	var IMC=parseFloat(document.getElementById("imc3").value);
+    	var IMC=parseFloat(validar_numerovacio("imc3"));
     	
     	if(IMC < 18.5){
     		ReadBP = actividad + 250;
@@ -529,7 +649,7 @@
    	function CalcularVETMaxActivFisica(vet){
    		//var OpcionActividad=document.getElementById("ActividadFisica");
     	//var Actividad = OpcionActividad.options[OpcionActividad.selectedIndex].value;
-    	var Actividad = document.getElementById("ActividadFisica").value;
+    	var Actividad = validar_numerovacio("ActividadFisica");
     	var ActividadFisica = parseFloat(Actividad);
     	
     	var operacion=ActividadFisica*vet;
@@ -539,14 +659,13 @@
     function CalculosVET(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var SexoVET="Masculino";
-        	var EdadVET=23;
+        	//var SexoVET="Masculino";
+        	//var EdadVET=23;
         	var PesoKG=0;
         	var FormulaVET="";
         	var VET=0;
-        	var talla=1.6;
-        	
-        	PesoKG=parseInt(document.getElementById("peso").value);
+        	//var talla=1.6;
+        	PesoKG=parseInt(validar_numerovacio("peso"));
         	var FormulaVET=document.getElementById("formulavet");
         	var OpcionFormula = FormulaVET.options[FormulaVET.selectedIndex].value;
         	
@@ -652,12 +771,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo" type="number"   style="width: 65px;" />             
+								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo" type="number"   style="width: 65px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo" type="number"  style="width: 65px;" />              
+								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo" type="number"  style="width: 65px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -675,12 +794,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte" type="number"   style="width: 65px;" />             
+								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte" type="number"   style="width: 65px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte" type="number"  style="width: 65px;" />              
+								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte" type="number"  style="width: 65px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -698,12 +817,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa" type="number"   style="width: 65px;" />             
+								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa" type="number"   style="width: 65px;" readonly  />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa" type="number"    style="width: 65px;" />              
+								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa" type="number"    style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 							</tr>
@@ -716,12 +835,12 @@
 								</td>
 								<td>
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="totalpor" name="totalpor" type="number"   style="width: 65px;" />              
+								  		%<input class="form-control input-sm" id="totalpor" name="totalpor" type="number"   style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 								<td>
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal" type="number"    style="width: 65px;" />              
+								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal" type="number"    style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 								<td></td>
@@ -774,22 +893,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalLacteoSG" name="KcalLacteoSG" type="number"    style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalLacteoSG" name="KcalLacteoSG" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteLacteoSG" name="ProteLacteoSG" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteLacteoSG" name="ProteLacteoSG" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboLacteoSG" name="CarboLacteoSG" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboLacteoSG" name="CarboLacteoSG" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaLacteoSG" name="GrasaLacteoSG" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaLacteoSG" name="GrasaLacteoSG" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -807,22 +926,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalLacteoE" name="KcalLacteoE" type="number"   style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalLacteoE" name="KcalLacteoE" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteLacteoE" name="ProteLacteoE" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteLacteoE" name="ProteLacteoE" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboLacteoE" name="CarboLacteoE" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboLacteoE" name="CarboLacteoE" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaLacteoE" name="GrasaLacteoE" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaLacteoE" name="GrasaLacteoE" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -840,22 +959,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalVege" name="KcalVege" type="number"   style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalVege" name="KcalVege" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteVege" name="ProteVege" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteVege" name="ProteVege" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboVege" name="CarboVege" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboVege" name="CarboVege" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaVege" name="GrasaVege" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaVege" name="GrasaVege" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -873,22 +992,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalFruta" name="KcalFruta" type="number"  style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalFruta" name="KcalFruta" type="number"  style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteFruta" name="ProteFruta" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteFruta" name="ProteFruta" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboFruta" name="CarboFruta" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboFruta" name="CarboFruta" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaFruta" name="GrasaFruta" type="number"  style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaFruta" name="GrasaFruta" type="number"  style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -906,22 +1025,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalCereal" name="KcalCereal" type="number"   style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalCereal" name="KcalCereal" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteCereal" name="ProteCereal" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteCereal" name="ProteCereal" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboCereal" name="CarboCereal" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboCereal" name="CarboCereal" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaCereal" name="GrasaCereal" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaCereal" name="GrasaCereal" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -939,22 +1058,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalCarne" name="KcalCarne" type="number"   style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalCarne" name="KcalCarne" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteCarne" name="ProteCarne" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteCarne" name="ProteCarne" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboCarne" name="CarboCarne" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboCarne" name="CarboCarne" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaCarne" name="GrasaCarne" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaCarne" name="GrasaCarne" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -972,22 +1091,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalGrasa1" name="KcalGrasa1" type="number"    style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalGrasa1" name="KcalGrasa1" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteGrasa1" name="ProteGrasa1" type="number"    style="width: 65px;"/>                  
+								  		grs<input class="form-control input-sm" id="ProteGrasa1" name="ProteGrasa1" type="number"    style="width: 65px;" readonly />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboGrasa1" name="CarboGrasa1" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboGrasa1" name="CarboGrasa1" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaGrasa1" name="GrasaGrasa1" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaGrasa1" name="GrasaGrasa1" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -1005,22 +1124,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalAzucar" name="KcalAzucar" type="number"   style="width: 65px;" />                  
+								  		Kcal<input class="form-control input-sm" id="KcalAzucar" name="KcalAzucar" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteAzucar" name="ProteAzucar" type="number"   style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="ProteAzucar" name="ProteAzucar" type="number"   style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboAzucar" name="CarboAzucar" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="CarboAzucar" name="CarboAzucar" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaAzucar" name="GrasaAzucar" type="number"    style="width: 65px;" />                  
+								  		grs<input class="form-control input-sm" id="GrasaAzucar" name="GrasaAzucar" type="number"    style="width: 65px;" readonly  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -1035,22 +1154,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TKcal" name="TKcal" type="number"   style="width: 65px;" />                 
+								  		Total<input class="form-control input-sm" id="TKcal" name="TKcal" type="number"   style="width: 65px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TProte" name="TProte" type="number"   style="width: 65px;" />                 
+								  		Total<input class="form-control input-sm" id="TProte" name="TProte" type="number"   style="width: 65px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TCarbo" name="TCarbo" type="number"    style="width: 65px;" />                 
+								  		Total<input class="form-control input-sm" id="TCarbo" name="TCarbo" type="number"    style="width: 65px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TGrasa" name="TGrasa" type="number"   style="width: 65px;" />                
+								  		Total<input class="form-control input-sm" id="TGrasa" name="TGrasa" type="number"   style="width: 65px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
@@ -1064,17 +1183,17 @@
 						
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpProte" name="TpProte" type="number"   style="width: 65px;" />                 
+								  		%<input class="form-control input-sm" id="TpProte" name="TpProte" type="number"   style="width: 65px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpCarbo" name="TpCarbo" type="number"    style="width: 65px;" />                 
+								  		%<input class="form-control input-sm" id="TpCarbo" name="TpCarbo" type="number"    style="width: 65px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa" type="number"    style="width: 65px;" />                
+								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa" type="number"    style="width: 65px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
@@ -1092,14 +1211,14 @@
 
   </article>
   </br>
-            <p align="center">
-            	<input type="image" name="checkout"
-            	 class="btn btn-default btn-lg" type="button"
-								value="Pr"
-								src="../imagenes/guardado.png" style="width: 80px; height:60px;\"
-								alt="Proceed to Checkout\"
-								title="Guardar">
-        	</p>
+            <div class="row" align="center">
+            <div class="form-group">
+						     <label for="BNuevo">Guardar</label>			
+							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
+							
+			</div>
+			</div>
 </form>
         
 

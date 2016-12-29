@@ -571,6 +571,85 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
+	
+	public String ObtenerTallaPeso(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("select talla,peso from ANTROPOMETRIA where idANTROPOMETRIA=(select ANTROPOMETRIA_idANTROPOMETRIA from CONSULTA_EXTERNA where idCONSULTA_EXTERNA="+ID+");");
+		 
+		    String talla="";
+		    String peso="";
+		    String diagnostico="";
+		    while (rs.next()) {
+		    	talla=rs.getString("talla");
+		    	peso=rs.getString("peso");
+		     
+		    }
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"idCE\":\""+ID+"\"}";
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado;
+		}
+		
+	}
+	public String ObtenerMedidaPaciente(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		    String consulta="select A.talla,A.peso,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P "
+							+" where E.PACIENTE_idPACIENTE=P.idPACIENTE"
+							+" AND E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA"
+							+" AND idCONSULTA_EXTERNA="+ID+";";
+		   
+		    rs = cmd.executeQuery(consulta);
+		 
+		    String talla="";
+		    String peso="";
+		    String edad="";
+		    String sexo="";
+		    while (rs.next()) {
+		    	talla=rs.getString("A.talla");
+		    	peso=rs.getString("A.peso");
+		    	edad=rs.getString("EDAD");
+		    	sexo=rs.getString("P.sexo");
+		    }
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"edad\":\""+edad+"\",\"sexo\":\""+sexo+"\",\"idCE\":\""+ID+"\"}";
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado;
+		}
+		
+	}	
 public int countRec(String fname, String tname) throws Exception {
 	    BDConnect();
 		String sql = "SELECT count(" + fname + ") FROM " + tname;

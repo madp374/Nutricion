@@ -168,7 +168,7 @@
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
         	<ul>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Catalogo</a></li>
+				<li><a href="http://localhost:8080/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Catalogo</a></li>
 		    </ul>
         </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
@@ -355,7 +355,7 @@ function BuscarPaciente(entero){
 			      	<div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Enfermedades</label>
-					  		<textarea class="form-control" name="enfermedad" id="enfermedad" cols="25" rows="5" ></textarea>
+					  		<textarea class="form-control" name="enfermedad" id="enfermedad" cols="25" rows="5" required></textarea>
 					                   
 					  	</div>
 					  	<div class="form-group">
@@ -649,7 +649,7 @@ function BuscarPaciente(entero){
 			        <div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Consumo de Agua(Vasos)</label>
-					  		<input class="form-control" name="agua" id="agua" type="number"  required/>
+					  		<input class="form-control" name="agua" id="agua" type="number"  />
 					                  
 					  	</div>
 					  	
@@ -775,8 +775,14 @@ function BuscarPaciente(entero){
 												<div class="form-group">
 												    <label>Grupo</label>
 												     <select class="form-control" id="NuevoGrupo">
-													<option value="1" >Lacteo</option>
-													<option value="2" >Fruta</option>
+													<option value="1" >Lacteos bajos en grasa</option>
+													<option value="2" >Lacteos enteros</option>
+													<option value="3" >Vegetales</option>
+													<option value="4" >Frutas</option>
+													<option value="5" >Cereales</option>
+													<option value="6" >Carnes</option>
+													<option value="7" >Grasa</option>
+													<option value="8" >Azucares</option>
 												</select>
 												</div>
 								      	</div>
@@ -821,7 +827,7 @@ var posicion=0;
 
 var contador=0;
 var contp=0;
-
+var idCE=0;
 var habilitado=false;
 
 function AñadirAlimentoBD(){
@@ -886,6 +892,7 @@ function enviar_datos(datos){
         dataType: 'json',
         success: function(data){
         	alert(data.resultado);
+        	idCE=data.ID;
         	//data.resultado[i].id
         	
         }
@@ -1277,6 +1284,13 @@ function CalcularIMC(event) {
 	}
    
 }
+function Reconsulta(){
+	window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
+}
+
+function CalculosVET(){
+	window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+idCE);
+}
 </script>
 
 
@@ -1614,15 +1628,26 @@ function CalcularIMC(event) {
   
   </div>
   </br>
-            <p align="center">
-            	<input type="image" name="checkout"
-            	 class="btn btn-default btn-lg" type="button"
-								value="Pr"
-								src="../imagenes/guardado.png" style="width: 80px; height:60px;\"
-								alt="Proceed to Checkout\"
-								onclick="Guardar()"
-								title="Guardar">
-        	</p>
+            <div class="row" align="center">
+            <div class="form-group">
+						     <label for="BNuevo">Guardar</label>			
+							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
+							
+			</div>
+			<div class="form-group">
+						     <label for="BNuevo">Reconsulta</label>			
+							<button class="btn btn-default btn-lg" onclick="Reconsulta()" >
+						     <img src="../imagenes/reco.jpg" width="80" height="60" title="Reconsulta" /></button>
+							
+			</div>
+			<div class="form-group">
+						     <label for="BNuevo">Calculos VET</label>			
+							<button class="btn btn-default btn-lg" onclick="CalculosVET()" >
+						     <img src="../imagenes/vet.jpg" width="80" height="60" title="CalculosVET" /></button>
+							
+			</div>
+        	</div>
 </form>
         
 
