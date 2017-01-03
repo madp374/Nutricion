@@ -34,7 +34,6 @@ insert into DIAGNOSTICO(rango_inicio,rango_fin,descripcion) values(40,1000,'Obes
 insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE) 
 values(CURDATE(),1,12,34,45,2,3,2,1,1,201020698);
 
-insert into DIAGNOSTICO(rango_inicio,rango_fin,descripcion) values(0,18.5,'Bajo Peso');
 
 insert into GrupoAlimenticio(nombre) values('Lacteos bajos en grasa'),('Lacteos enteros'),('Vegetales'),('Frutas')
                         ,('Cereales'),('Carnes'),('Grasa'),('Azucares');

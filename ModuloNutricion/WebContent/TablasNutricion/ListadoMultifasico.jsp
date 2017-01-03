@@ -87,20 +87,7 @@
         </head>
 
         <body>
-        <script>
-        
-        	function CargaInicio() {
-        	
-        		var  today = new Date();
-        		var m = today.getMonth() + 1;
-        		var mes = (m < 10) ? '0' + m : m;
-        		 
-        		var fecha=today.getDate()+'/' +mes+'/'+today.getFullYear();
-
-        		document.getElementById('fecha').value=fecha;
-        	}
-        	
-        </script>
+       
         <div class="container">
          <div class="panel2 panel-body">
         <header class="row col-sm-12">
@@ -140,7 +127,7 @@
         
         <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li > <a href="#"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a> </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a> </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Prescripción dietetica </a>
         <ul>
 		<li><a href="#">Page 1</a></li>
@@ -187,6 +174,7 @@
 								value="Pr"
 								src="../imagenes/editar.png" style="width: 80px; height:60px;\"
 								alt="Proceed to Checkout\"
+								onclick="EditarRegistro()"
 								title="Editar">
         	
             	<input type="image" name="checkout"
@@ -194,7 +182,7 @@
 								value="Pr"
 								src="../imagenes/eliminar.png" style="width: 80px; height:60px;\"
 								alt="Proceed to Checkout\"
-								onclick="Eliminartsecundaria()"
+								onclick="EliminarRegistro()"
 								title="Eliminar">
         	</p>
 
@@ -242,7 +230,15 @@ function addFormData()
 	$("#flex1").flexOptions({params: dt});
 	return true;
 	}
-function Eliminartsecundaria(){
+
+function EditarRegistro(){
+	if(idMultifasicos=="0"){
+		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
+	}else{
+		window.location.replace("/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp?MID="+idMultifasicos);
+	}
+}
+function EliminarRegistro(){
 	if(idMultifasicos=="0"){
 		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
 		

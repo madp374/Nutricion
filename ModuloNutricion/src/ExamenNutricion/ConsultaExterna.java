@@ -144,7 +144,22 @@ public class ConsultaExterna extends HttpServlet {
 		
 		//System.out.println(cadena);
 		if(accion.equalsIgnoreCase("guardar")){
+			String ResultadoInsertar="";
+			String result="";
 			Conexion query = new Conexion();
+			
+			String p90 = request.getParameter("busqueda");// busqueda
+			if(p90.equalsIgnoreCase("false")){
+				String p74 = request.getParameter("p74");// nombre
+				String p75 = request.getParameter("p75");// sexo
+				String p76 = request.getParameter("p76");// fecha nac
+				String p77 = request.getParameter("p77");// facultad
+				String query2="insert into PACIENTE(idPACIENTE,usuario,password,nombre,fecha_nacimiento,sexo,estado,FACULTAD_idFACULTAD) "
+						+"values("+carnet+",'prueba3','prueba5','"+p74+"','"+p76+"','"+p75+"','activo',"+p77+");";
+				
+				query.Insertar(query2);
+			}
+			
 			String IDAntecedente=query.UltimoIDAntecedenteMedico(p1,p2,p3,p4,p5,p6,p7);
 			//System.out.println("++++++++++ ID Antecedente: "+IDAntecedente+"++++++++");
 			String IDEstiloVida=query.UltimoIDEstiloVida(p8,p9,p10,p11,p12,p13,p14,p15);
@@ -172,7 +187,10 @@ public class ConsultaExterna extends HttpServlet {
 			
 			consulta="insert into CONSULTA_EXTERNA_HAS_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
 					+"values("+IDConsultaExterna+",1,'"+p17+"'),("+IDConsultaExterna+",2,'"+p19+"'),("+IDConsultaExterna+",3,'"+p21+"'),("+IDConsultaExterna+",4,'"+p23+"'),("+IDConsultaExterna+",5,'"+p25+"');";
-			query.Insertar(consulta);
+			
+			
+			ResultadoInsertar=query.InsertarRegistro(consulta);
+			
 			
 			//System.out.println("recordatorio: "+p73);
 			String tcomida="";
@@ -215,8 +233,12 @@ public class ConsultaExterna extends HttpServlet {
 	            
 	        }
 	        
-			
-			String result="{\"resultado\":\"bien\",\"ID\":\""+IDConsultaExterna+"\"}";
+	        if(ResultadoInsertar.equals("0")){
+	        	result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\"}";
+			}else{
+				result=ResultadoInsertar;
+			}
+			//result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\"}";
 			out.println(result);
 		}
 		

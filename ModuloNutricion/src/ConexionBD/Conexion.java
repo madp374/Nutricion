@@ -526,6 +526,51 @@ public class Conexion extends HttpServlet{
         return list;
     }
 	
+	public String CargaMultifasico(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idMULTIFASICO, fecha, talla, peso, IMC, peso_ideal, peso_maximo, tricipital, subescapular, TIPO_EXAMEN_idTIPO_EXAMEN, DIAGNOSTICO_idDIAGNOSTICO, PACIENTE_idPACIENTE " 
+		    		+"FROM MULTIFASICO WHERE idMULTIFASICO="+ID);
+		 
+		    String talla="";
+		    String peso="";
+		    String codigo="";
+		    String tricipital="";
+		    String subescapular="";
+		    while (rs.next()) {
+		    	talla=rs.getString("talla");
+		    	peso=rs.getString("peso");
+		    	tricipital=rs.getString("tricipital");
+		    	subescapular=rs.getString("subescapular");
+		    	codigo=rs.getString("PACIENTE_idPACIENTE");
+		    }
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"codigo\":\""+codigo+"\",\"tricipital\":\""+tricipital+"\",\"subescapular\":\""+subescapular+"\"}";
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	
 	public String ConsultarIMC(double IMC, double talla, double peso){
 		String resultado="";
 
@@ -689,7 +734,7 @@ public int countRec(String fname, String tname) throws Exception {
 
 	}
 	
-	public void Insertar(String query){
+	public void Insertar(String query){ //intentar borrar
 		try{
 			
 			BDConnect();
@@ -709,6 +754,31 @@ public int countRec(String fname, String tname) throws Exception {
 			} catch(Exception ex){ 
 				System.out.println("Se produjo una excepción:"+ex);
 			}
+	}
+	public String InsertarRegistro(String query){
+		String resultado="0";
+		try{
+			
+			BDConnect();
+			
+			Statement cmd = getconnection().createStatement();
+			cmd = getconnection().createStatement();
+
+		    cmd.executeUpdate(query);
+			
+			System.out.println("Conexión realizada con éxito a: "+conn.getCatalog());
+			
+			BDClose();
+			
+			} catch(SQLException ex)
+			{ 	
+				resultado="{\"resultado\":\"ERROR\"}";
+				System.out.println("Se produjo una excepción durante la conexión:"+ex);
+			} catch(Exception ex){ 
+				resultado="{\"resultado\":\"ERROR\"}";
+				System.out.println("Se produjo una excepción:"+ex);
+			}
+		return resultado;
 	}
 	public void Eliminar(String query){
 		try{
