@@ -95,14 +95,22 @@ GRANT EXECUTE ON PROCEDURE NutricionUsalud.IngresarRegistro TO 'nutricionprueba'
 GRANT ALL ON NutricionUsalud.IngresarRegistro TO nutricionprueba@'localhost'; 
 
 DELIMITER $
-CREATE PROCEDURE Registrar_fruta(IN nombre varchar(100) ,
+CREATE PROCEDURE Registrar_fruta(IN nombres varchar(100) ,
 									IN caloria integer,
                                     IN grupo integer ,
                                    OUT resultado TEXT)
 BEGIN
-insert into ALIMENTO(nombre,caloria,GrupoAlimenticio_idGrupoAlimenticio) 
-values(nombre,caloria,grupo);
-SET resultado = (select LAST_INSERT_ID());
+
+set @valor=(SELECT nombre FROM nutricionusalud.alimento where nombre=nombres);
+
+IF @valor = nombres THEN
+    SET resultado = 'ERROR';
+ELSE 
+     insert into ALIMENTO(nombre,caloria,GrupoAlimenticio_idGrupoAlimenticio) 
+     values(nombres,caloria,grupo);
+     SET resultado = (select LAST_INSERT_ID());
+END IF;
+
 END $
 DELIMITER ;
 

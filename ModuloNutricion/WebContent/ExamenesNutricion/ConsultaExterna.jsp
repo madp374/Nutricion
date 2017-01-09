@@ -53,7 +53,7 @@
 			}
 		</style>
 		<style type="text/css">
-		label { display:block; margin:5px 0 5px; font-size:10pt; }
+		label { display:block; margin:5px 0 5px; font-size:9pt; }
        	.ui-autocomplete {
 		    position: absolute;
 		    z-index: 1000;
@@ -108,7 +108,7 @@
 
         </head>
 
-        <body>
+        <body onload="CargaInicio()">
         
        
         
@@ -117,20 +117,14 @@
         var ERRORSQL=false;
         var carnetaccion="";
         
-        var tiempoCom="Desayuno";
-        var marco="<div class=\"table-responsive\"><table class=\"table\" border=\"1px\" >";
-        var fintabla="</table></div>";
-        var encabCom="";
+        
         var listadoAlimentos="";
-        var ArrTiempoCom=[];
+        var ArrTiempoCom=["","","","",""];
         var ArrComida=[];
         var ArrCant=[];
         var ArrUnidad=[];
         var ArrpComida=[];
         var ArrKcal=[];
-        var posicion=0;
-
-        var contador=0;
         var contp=0;
         var idCE=0;
         var habilitado=false;
@@ -139,8 +133,195 @@
         	alert(texto);        
         } 
         	function CargaInicio() {
-        	
-        		//cargar_hora();
+        		
+        		var MID = getUrlVars()["prodId"];
+        		idCE = getUrlVars()["idCE"];
+        		if(idCE!=undefined){
+        			CargaEdicion(idCE)
+        			document.getElementById("Guard").style.display = 'none';
+        		}else{
+        			if(MID!=undefined){
+            			document.getElementById("Guard").style.display = 'none';
+            			//CargaEdicion(MID);
+            		}else{
+            			document.getElementById("Mod").style.display = 'none';
+            		}
+        		}
+        		
+        	}
+        	function CargaEdicion(MID){
+        		var action="CargaEdicion";
+        		var cadena = ['a='+action,'ID='+MID].join('&');
+
+        		$.ajax({
+        	        url: "../ConsultaExterna",
+        	        data: cadena,
+        	  	    type: 'post',
+        	        dataType: 'json',
+        	        success: function(data){
+        	        	if(data.resultado=='OK'){
+        	        		document.getElementById('carnet').value  = data.PACIENTE_idPACIENTE;
+        	        		document.getElementById('carnet').readOnly = true;
+        	        		document.getElementById("dbaja").value  = data.DietaBaja;
+        	        		document.getElementById("dalta").value  = data.DietaAlta;
+        	        		document.getElementById("talla").value  = data.talla;
+        	        		document.getElementById("pesousual").value  = data.peso;
+        	        		document.getElementById("circunferencia").value  = data.CircunferenciaMuneca;
+
+        	        		document.getElementById("fuma").checked  = AsignarCheck(data.fuma);
+        	        		document.getElementById("ncigarro").value  = data.numero_cigarros;
+        	        		document.getElementById("fumafrec").value  = data.frec_fuma;
+        	        		document.getElementById("ejercicio").checked  = AsignarCheck(data.ejercicio);
+        	        		document.getElementById("ejerciciotiempo").value  = data.tiempo_min;
+        	        		document.getElementById("ejerciciofrec").value  = data.frec_ejercicio;
+        	        		document.getElementById("bebidaalc").checked  = AsignarCheck(data.bebida);
+        	        		document.getElementById("bebidaalcfrec").value  = data.frec_bebida;
+        	        		
+        	        		document.getElementById("tcdesayuno").value  = data.TDesayuno;
+        	        		document.getElementById("tcrefaccion").value  = data.TRefaccion;
+        	        		document.getElementById("tcalmuerzo").value  = data.TAlmuerzo;
+        	        		document.getElementById("tccena").value  = data.TCena;
+        	        		document.getElementById("agua").value  = data.NoVasoAgua;
+        	        		document.getElementById("ald").value  = data.AlimentoDano;
+        	        		document.getElementById("aln").value  = data.AlimentoNoGusta;
+        	        		document.getElementById("alp").value  = data.AlimentoPreferido;
+        	        		
+        	        		
+        	        		document.getElementById("grasa").value  = data.PorGrasa;
+        	        		document.getElementById("musculo").value  = data.PorMasaMuscular;
+        	        		document.getElementById("pagua").value  = data.PorAgua;
+        	        		document.getElementById("masa").value  = data.MasaOsea;
+        	        		document.getElementById("viscera").value  = data.GrasaVisceral;
+        	        		document.getElementById("abdomen").value  = data.CinturaAbdominal;
+        	        		document.getElementById("plan").value  = data.plan;
+        	        		
+        	        		document.getElementById("enfermedad").value  = data.enfermedad_actual;
+        	        		document.getElementById("medicamento").value  = data.medicamento;
+        	        		document.getElementById("suplemento").value  = data.suplemento;
+        	        		document.getElementById("diarrea").checked = AsignarCheck(data.diarrea);
+        	        		document.getElementById("flatulencia").checked  = AsignarCheck(data.flatulencia);
+        	        		document.getElementById("acidez").checked  = AsignarCheck(data.acidez);
+        	        		document.getElementById("estreñimiento").checked = AsignarCheck(data.estrenimiento);
+        	        		
+        	        		document.getElementById("Lcasa").checked = AsignarCheck(data.marcaE0);
+        	        		document.getElementById("Ltrabajo").checked = AsignarCheck(data.marcaE1);
+        	        		document.getElementById("Lotro").checked = AsignarCheck(data.marcaE2);
+        	        		document.getElementById("Ocasa").checked = AsignarCheck(data.marcaE3);
+        	        		document.getElementById("Ocafeteria").checked = AsignarCheck(data.marcaE4);
+        	        		document.getElementById("Ocaseta").checked = AsignarCheck(data.marcaE5);
+        	        		document.getElementById("Ochiclero").checked = AsignarCheck(data.marcaE6);
+        	        		
+        	        		document.getElementById("horadesayuno").value = data.horarioE0;
+        	        		document.getElementById("refamhr").value = data.horarioE1;
+        	        		document.getElementById("almh").value = data.horarioE2;
+        	        		document.getElementById("refpmhr").value = data.horarioE3;
+        	        		document.getElementById("cenhr").value = data.horarioE4;
+        	        		
+        	        		document.getElementById("tdesayuno").checked = AsignarCheckHora(data.horarioE0);
+        	        		document.getElementById("refam").checked = AsignarCheckHora(data.horarioE1);
+        	        		document.getElementById("talmu").checked = AsignarCheckHora(data.horarioE2);
+        	        		document.getElementById("refpm").checked = AsignarCheckHora(data.horarioE3);
+        	        		document.getElementById("cenaa").checked = AsignarCheckHora(data.horarioE4);
+        	        		
+        	        		
+        	        		
+        	        		CalcIMC();
+        	        		
+        	        		document.getElementById("verdura").value  = data.FrecF0;
+        	        		document.getElementById("fruta").value  = data.FrecF1;
+        	        		document.getElementById("pollo").value  = data.FrecF2;
+        	        		document.getElementById("lacteo").value  = data.FrecF3;
+        	        		document.getElementById("hamburguesa").value  = data.FrecF4;
+        	        		document.getElementById("snack").value  = data.FrecF5;
+        	        		document.getElementById("refresco").value  = data.FrecF6;
+        	        		document.getElementById("galleta").value  = data.FrecF7;
+        	        		document.getElementById("dulce").value  = data.FrecF8;
+        	        		document.getElementById("embutido").value  = data.FrecF9;
+        	        		document.getElementById("sopa").value  = data.FrecF10;
+        	        		document.getElementById("fritura").value  = data.FrecF11;
+        	        		document.getElementById("tortilla").value  = data.FrecF12;
+        	        		document.getElementById("papa").value  = data.FrecF13;
+        	        		document.getElementById("pasta").value  = data.FrecF14;
+        	        		document.getElementById("arroz").value  = data.FrecF15;
+        	        		document.getElementById("frijol").value  = data.FrecF16;
+        	        		document.getElementById("pan").value  = data.FrecF17;
+        	        		document.getElementById("huevo").value  = data.FrecF18;
+        	        		BuscarPaciente(data.PACIENTE_idPACIENTE);
+        	        		
+        	        		var aux= parseInt(data.totalA);
+        	        		if(aux!=0){
+        	        			for (i = 0; i < aux; i++) { 
+        	        				CargaRecordatorio(i,data.Record[i].aliment,data.Record[i].calo,data.Record[i].TiempoCo,data.Record[i].Cantid,data.Record[i].Porci);
+        	        			}
+        	        			ActualizarTabla();
+        	             	    
+        	             	    if(habilitado==false){
+        	             			document.getElementById("alimento").readOnly = false;	
+        	             			document.getElementById("cantidada").readOnly = false;	
+        	             			document.getElementById("porcion").readOnly = false;	
+        	             			document.getElementById("BAlAgregar").disabled = false;
+        	             			document.getElementById("BNAlimento").disabled = false;
+        	             			habilitado=true;
+        	             		}
+        	        			
+        	        		}
+        	        		//CargaIMC(data.talla,data.peso);
+        	        		//CargaPliegues(data.tricipital,data.subescapular);
+        	        		//IDMulti=MID;
+        	        	}else{
+        	        		ERRORSQL=true;
+        	        		MostrarMensajeServidor(data.descripcion);
+        	        		IDMulti="";
+        	        	}
+        	        	
+        	        }
+        		});
+        	}
+        	function CargaRecordatorio(ct,Ealim,Ecal,ETiempoCom,ECant,EMetrica){
+        		
+        		//alert(Ealim+","+Ecal+","+ETiempoCom+","+ECant+","+EMetrica);
+				
+        		var x=parseInt(ETiempoCom)-1;
+        		var y = document.getElementById("TiempoComida").options;
+        	    ArrTiempoCom[x]=y[x].text;
+        	    
+        	    
+        	    var calorias=parseInt(Ecal);
+    			var cant=parseInt(ECant);
+    			
+    			var z=parseInt(EMetrica)-1;
+        		var metrica = document.getElementById("porcion").options;
+        		
+        		
+        		
+        		ArrComida[ct]=Ealim;	
+				ArrCant[ct]=cant;
+				ArrUnidad[ct]=metrica[z].text;						
+				ArrKcal[ct]=cant*calorias;			
+				ArrpComida[ct]=x;
+				contp++;
+        	}
+        	function AsignarCheck(entrada){
+        		var resultado=false;
+        		if(entrada=='1'){
+        			resultado=true;
+        		}
+        		return resultado;
+        	}
+        	function AsignarCheckHora(entrada){
+        		var resultado=true;
+        		if(entrada=='00:00:00'){
+        			resultado=false;
+        		}
+        		return resultado;
+        	}
+        	function getUrlVars() {
+        	    var vars = {};
+        	    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+        	    function(m,key,value) {
+        	        vars[key] = value;
+        	        });
+        	    return vars;
         	}
         	function cargar_hora(){
         		var  today = new Date();
@@ -248,6 +429,7 @@
     			        		document.getElementById('edad').value  = data.fecha;
     			        		document.getElementById('facultad').value  = data.facultad;
     		        			busqueda=true;
+    		        			document.getElementById("enfermedad").focus();
     		        	}else{	  
     		        		busqueda=false;
     		        		CargaFacultad();
@@ -261,24 +443,38 @@
         		var alim=validad_vacio('NuevoAl');
         		var cal=validar_numerovacio("NuevaCal");
         		var grupo=validad_vacio("NuevoGrupo");
+        		if(alim=="null"||cal==0){
+        			alert("Error, faltan valores a ingresar");
+        		}else{
+        			var action="agregar";
+            		var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
+
+
+            		$.ajax({
+            	        url: "../Alimento",
+            	        data: cadena,
+            	  	    type: 'post',
+            	        dataType: 'json',
+            	        success: function(data){
+            	        	if(data.resultado=='OK'){
+            	        		document.getElementById('alimento').value  = alim.toLowerCase();
+                		        document.getElementById('calorias').value  = data.caloria;
+                		        
+                		        document.getElementById('NuevoAl').value  = "";
+                		        document.getElementById('NuevaCal').value  = "";
+                		        
+                		        document.getElementById("cantidada").focus();	
+            	        	}else{
+            	        		alert(data.descripcion);
+            	        	}
+            	        	
+            	        	
+            	        	
+            	        }
+            		});
+        		}
         		
-        		var action="agregar";
-        		var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
-
-
-        		$.ajax({
-        	        url: "../Alimento",
-        	        data: cadena,
-        	  	    type: 'post',
-        	        dataType: 'json',
-        	        success: function(data){
-        	        	alert(data.resultado);
-        	        	document.getElementById('alimento').value  = data.alimento;
-        		        document.getElementById('calorias').value  = data.caloria;
-        		        document.getElementById("cantidada").focus();	
-        	        	
-        	        }
-        		});
+        		
         		
         	}
         	function validad_vacio(entrada){
@@ -320,12 +516,14 @@
         	        success: function(data){
         	        	if(data.resultado=='OK'){
                     		ERRORSQL=false;
-                    		alert(data.resultado);
+                    		alert("Informacion almacenada");
             	        	idCE=data.ID;
+            	        	document.getElementById("Guard").style.display = 'none';
+            	        	document.getElementById("Mod").style.display = 'block';
                     		//MostrarMensajeServidor("Informacion almacenada con exito");
                     	}else{
                     		ERRORSQL=true;
-                    		//MostrarMensajeServidor("Error al almacenar");
+                    		MostrarMensajeServidor("Error al almacenar");
                     	}
         	        	
         	        	
@@ -342,6 +540,7 @@
         	}
         	function obtenerRegistro(){
         		var encabCom1="";
+        		var contador=5;
         		for (i = 0; i < contador; i++) { 
         			encabCom1 += "%"+ArrTiempoCom[i];
         			
@@ -486,7 +685,7 @@
             		
             	    enviar_datos(cadena);
             			         	
-            		alert("guardando");
+            		
         		}else{
         			ERRORSQL=true;
         			MostrarMensajeServidor("Error, realice la busqueda del paciente e intentelo nuevamente");
@@ -502,27 +701,41 @@
         	}
         	function AgregarAlimento(){
         		
+        		var encontrado=false;
+        		
         		var auxCaloria=document.getElementById("calorias").value;
         		var auxCantidad=document.getElementById("cantidada").value;
         		
         		if(auxCaloria!=""&&auxCantidad!=""){
-        			ArrComida[contp]=document.getElementById("alimento").value;
+        			
+        			var x = document.getElementById("TiempoComida").selectedIndex;
+        			var Al = (document.getElementById("alimento").value).toLowerCase();
+        			
         			var calorias=parseInt(auxCaloria);
         			var cant=parseInt(auxCantidad);
         			
         			var e = document.getElementById("porcion");
         			var porcion = e.options[e.selectedIndex].text;
         			
-        			ArrCant[contp]=cant;
-        			ArrUnidad[contp]=porcion;
-        			
-        			
-        			ArrKcal[contp]=cant*calorias;
-        			ArrpComida[contp]=posicion;
-        			contp++;
+        			for (i = 0; i <= contp; i++) { 
+        				if((ArrComida[i]==Al)&&(ArrpComida[i]==x)){
+        					ArrCant[i]=ArrCant[i]+cant;
+        					ArrKcal[i]=calorias*ArrCant[i];
+        					encontrado=true;
+        					break;
+        				}
+        			}
+        			if(encontrado==false){
+        				ArrComida[contp]=Al;	
+        				ArrCant[contp]=cant;
+        				ArrUnidad[contp]=porcion;						
+        				ArrKcal[contp]=cant*calorias;			
+        				ArrpComida[contp]=x;
+        				contp++;
+        			}
+
         			ActualizarTabla();
         			LimpiarElementos();
-        			
         		}else{
         			alert("Error: Faltan datos a ingresar");
         		}
@@ -558,31 +771,36 @@
         	}
 
         	function ActualizarTabla(){
-        		encabCom="";
+        		var marco="<div class=\"table-responsive\"><table class=\"table\" border=\"1px\" >";
+        	    var fintabla="</table></div>";
+        	    var encabCom="";
         		document.getElementById("TablaAlimento").innerHTML= "";
         		var info="";
         		var Cantidad=0;
         		var Metrica=0;
         		var info="";
-        		for (i = 0; i < contador; i++) { 
-        			encabCom += "<tr><th colspan=\"6\" bgcolor=\"#2D7C06\"><font color=\"white\">"+ArrTiempoCom[i]+"</font></th></tr>";
-        			encabCom+="<tr><th>Alimento</th><th>Cantidad</th><th>Porcion</th><th>Kcal</th><th></th><th></th></tr>";
+        		for (i = 0; i < 5; i++) { 
+        			if(ArrTiempoCom[i]!=""){
+        				encabCom += "<tr><th colspan=\"6\" bgcolor=\"#2D7C06\"><font color=\"white\">"+ArrTiempoCom[i]+"</font></th></tr>";
+        				encabCom+="<tr><th>Alimento</th><th>Cantidad</th><th>Porcion</th><th>Kcal</th><th></th><th></th></tr>";
+        				
+        				for (j = 0; j < ArrpComida.length; j++) { 
+        					
+        					
+        				if((i==ArrpComida[j])&&(ArrpComida[j]!=-100)){
+        					encabCom+="<tr><td>"+ArrComida[j]+"</td><td>"
+        					+"<input class=\"form-control\" id=\"auxcant"+j+"\" type=\"number\" value=\""+ArrCant[j]+"\" style=\"width: 65px;\" readonly onkeypress=\"ConfirmarEdicion(event,"+j+")\" />"
+        					+"</td><td>"+ArrUnidad[j]+"</td><td>"+ArrKcal[j]+"</td><td>"
+        					+"<button class=\"btn btn-default btn-lg\" onclick=\"EditarAlimento("+j+")\" >"
+        				    + "<img src=\"../imagenes/edit2.png\" width=\"10\" height=\"8\" title=\"Editar\" /></button>"
+        				    +"</td><td>"
+        					+"<button class=\"btn btn-default btn-lg\" onclick=\"EliminarAlimento("+j+")\" >"
+        				    + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /></button>"
+        				     +"</td></tr>";
+        				}
+        				}
+        			}
         			
-        			for (j = 0; j < ArrpComida.length; j++) { 
-        				
-        				
-        			if((i==ArrpComida[j])&&(ArrpComida[j]!=-100)){
-        				encabCom+="<tr><td>"+ArrComida[j]+"</td><td>"
-        				+"<input class=\"form-control\" id=\"auxcant"+j+"\" type=\"number\" value=\""+ArrCant[j]+"\" style=\"width: 65px;\" readonly onkeypress=\"ConfirmarEdicion(event,"+j+")\" />"
-        				+"</td><td>"+ArrUnidad[j]+"</td><td>"+ArrKcal[j]+"</td><td>"
-        				+"<button class=\"btn btn-default btn-lg\" onclick=\"EditarAlimento("+j+")\" >"
-        			    + "<img src=\"../imagenes/edit2.png\" width=\"10\" height=\"8\" title=\"Editar\" /></button>"
-        			    +"</td><td>"
-        				+"<button class=\"btn btn-default btn-lg\" onclick=\"EliminarAlimento("+j+")\" >"
-        			    + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /></button>"
-        			     +"</td></tr>";
-        			}
-        			}
         			
         			
         		}
@@ -600,17 +818,15 @@
         		
         	}
         	function AgregarTiempoComida(){
-        		//ArrTiempoCom.splice(0, ArrTiempoCom.length);
-        		
-        		tiempoCom = document.getElementById("TiempoComida").value;
-        		
-        		//ArrTiempoCom.push(tiempoCom);
-        		ArrTiempoCom[contador]=tiempoCom;
-        		posicion=contador;
-        		contador++;
-        		
-        		ActualizarTabla();
-        		if(habilitado==false){
+        		var x = document.getElementById("TiempoComida").selectedIndex;
+        	    var y = document.getElementById("TiempoComida").options;
+        	    
+        	    
+        	    ArrTiempoCom[x]=y[x].text;
+        	    
+        	    ActualizarTabla();
+        	    
+        	    if(habilitado==false){
         			document.getElementById("alimento").readOnly = false;	
         			document.getElementById("cantidada").readOnly = false;	
         			document.getElementById("porcion").readOnly = false;	
@@ -689,52 +905,53 @@
         	        }
         	    });
         	}
+        	function CalcIMC(){
+        		var talla=0;
+    			var peso=0;
+    			var imc=0;
+    			var pesomax=0;
+    			var pesomin=0;
+    			var TempTalla="";
+    			var TempPeso="";
+    		
+    			TempTalla=document.getElementById('talla').value;
+    			TempPeso=document.getElementById('pesousual').value;
+    			
+    			if(TempTalla==""||TempPeso==""){
+    				talla=0;
+    				peso=0;
+    				document.getElementById('imc').value  = "";
+    			}else{
+    				talla =	parseFloat(TempTalla);
+    			    peso =	parseFloat(TempPeso)*0.453592;
+    			    pesomax=(24.9 * (talla^2)) * 2.2;
+    				pesomin=(18.5 * (talla^2)) * 2.2;
+    			    talla=talla*talla;
+    			    imc=peso/talla;
+    				
+    			    
+    			    var action="cargaimc";
+    				cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
+    				$.ajax({
+    			        url: "../IMC",
+    			        data: cadena,
+    			  	    type: 'post',
+    			        dataType: 'json',
+    			        success: function(data){
+    			        	
+    			        	document.getElementById('imc').value  = ""+imc.toFixed(2);
+    			        	document.getElementById('diagnostico').value  = data.diagnostico;
+    			        	document.getElementById('pesominimo').value  = ""+ pesomin.toFixed(2);
+    			        	document.getElementById('pesomax').value  =""+ pesomax.toFixed(2);
+    			        	document.getElementById('peso').value  =""+ peso.toFixed(2);
+    			        }
+    				});
+    			}
+        	}
         	function CalcularIMC(event) {
         	    var char = event.which || event.keyCode;
-        	    if(char == 13){ 
-        	    
-        			var talla=0;
-        			var peso=0;
-        			var imc=0;
-        			var pesomax=0;
-        			var pesomin=0;
-        			var TempTalla="";
-        			var TempPeso="";
-        		
-        			TempTalla=document.getElementById('talla').value;
-        			TempPeso=document.getElementById('pesousual').value;
-        			
-        			if(TempTalla==""||TempPeso==""){
-        				talla=0;
-        				peso=0;
-        				document.getElementById('imc').value  = "";
-        			}else{
-        				talla =	parseFloat(TempTalla);
-        			    peso =	parseFloat(TempPeso)*0.453592;
-        			    pesomax=(24.9 * (talla^2)) * 2.2;
-        				pesomin=(18.5 * (talla^2)) * 2.2;
-        			    talla=talla*talla;
-        			    imc=peso/talla;
-        				
-        			    
-        			    var action="cargaimc";
-        				cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
-        				$.ajax({
-        			        url: "../IMC",
-        			        data: cadena,
-        			  	    type: 'post',
-        			        dataType: 'json',
-        			        success: function(data){
-        			        	
-        			        	document.getElementById('imc').value  = ""+imc;
-        			        	document.getElementById('diagnostico').value  = data.diagnostico;
-        			        	document.getElementById('pesominimo').value  = ""+ pesomin;
-        			        	document.getElementById('pesomax').value  =""+ pesomax;
-        			        	document.getElementById('peso').value  =""+ peso;
-        			        }
-        				});
-        			}
-        		    
+        	    if(char == 13){       	    
+        	    	CalcIMC(); 
         		}
         	   
         	}
@@ -873,7 +1090,7 @@
 			      	<div class="row">
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Enfermedades</label>
-					  		<textarea class="form-control" name="enfermedad" id="enfermedad" cols="25" rows="5" required></textarea>
+					  		<textarea class="form-control" name="enfermedad" id="enfermedad" cols="25" rows="5" ></textarea>
 					                   
 					  	</div>
 					  	<div class="form-group">
@@ -949,7 +1166,10 @@
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="fumafrec">
-							<option>Frecuentemente</option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semanae</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
 						</select>
   
   	</div>
@@ -967,7 +1187,10 @@
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="ejerciciofrec">
-							<option>Frecuentemente</option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semanae</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
 						</select>
   
   	</div>
@@ -980,7 +1203,10 @@
   	<div class="form-group">
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="bebidaalcfrec">
-							<option>Frecuentemente</option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semanae</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
 						</select>
   
   	</div>
@@ -1224,9 +1450,11 @@
 					  		<div class="form-group">
 						    <label>Tiempo de comida</label>
 						    <select class="form-control" id="TiempoComida" name="TiempoComida">
-													<option>Desayuno</option>
-													<option>Almuerzo</option>
-													<option>Cena</option>
+													<option >Desayuno</option>
+													<option >Refaccion AM</option>
+													<option >Almuerzo</option>
+													<option >Refaccion PM</option>
+													<option >Cena</option>
 												</select>
 						</div>
 						<div class="form-group">
@@ -1279,12 +1507,12 @@
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
 							          <h4 class="modal-title">Nuevo Alimento</h4>
 							        </div>
-							        <div class="modal-body">
+							        <div class="modal-body" align="center">
 							      
 							          	<div class="row">
 								      		<div class="form-group">
 												    <label>Alimento</label>
-												    <input class="form-control" id="NuevoAl"  type="text" style="width: 100px;"/>
+												    <input class="form-control" id="NuevoAl"  type="text" style="width: 100px;" />
 												</div>
 												<div class="form-group">
 												    <label>Calorias</label>
@@ -1339,31 +1567,31 @@
       	<div class="row">
 				<div class="form-group">
 						<label>Talla(m)</label>
-						<input class="form-control" id="talla" name="talla" type="number" style="width: 65px;" step="any"  />
+						<input class="form-control" id="talla" name="talla" type="number" style="width: 70px;" step="any"  />
 				</div>
 				<div class="form-group">
 						<label>Peso(Lbs)</label>
-						<input class="form-control" id="pesousual" name="pesousual" type="number" style="width: 65px;" onkeypress="CalcularIMC(event)"/>
+						<input class="form-control" id="pesousual" name="pesousual" type="number" style="width: 70px;" onkeypress="CalcularIMC(event)"/>
 				</div>
 				<div class="form-group">
 						<label>Peso minimo(Lbs)</label>
-						<input class="form-control" id="pesominimo" name="pesominimo" type="number" style="width: 65px;" readonly />
+						<input class="form-control" id="pesominimo" name="pesominimo" type="number" style="width: 120px;" readonly />
 				</div>
 			
 				<div class="form-group">
 						<label>Peso maximo(Lbs)</label>
-						<input class="form-control" id="pesomax" name="pesomax" type="number"  style="width: 65px;" readonly />
+						<input class="form-control" id="pesomax" name="pesomax" type="number"  style="width: 120px;" readonly />
 				</div>
 				<div class="form-group">
 						<label>Circunferencia de muñeca</label>
-						<input class="form-control" id="circunferencia" name="circunferencia" type="number"  style="width: 65px;"/>
+						<input class="form-control" id="circunferencia" name="circunferencia" type="number"  style="width: 170px;"/>
 				</div>
 				<div class="form-group">
 						<label>Constitucion osea</label>
 						<select class="form-control" id="constitucion">
-								<option>Pequeña</option>
-								<option>Mediana</option>
-								<option>Grande</option>
+								<option value="1">Pequeña</option>
+								<option value="2">Mediana</option>
+								<option value="3">Grande</option>
 						</select>
 				</div>
 			</div>	
@@ -1378,44 +1606,47 @@
       		<div class="row">
 					<div class="form-group">
 							<label>Peso (kg)</label>
-							<input class="form-control" id="peso" name="peso" type="number" style="width: 65px;" readonly/>
-					</div>
-					<div class="form-group">
-							<label>% de Grasa</label>
-							<input class="form-control" id="grasa" name="grasa" type="number" style="width: 65px;" />
-					</div>
-					<div class="form-group">
-							<label>% de masa muscular</label>
-							<input class="form-control" id="musculo" name="musculo" type="number" style="width: 65px;" />
-					</div>
-				
-					
-					<div class="form-group">
-							<label>% de Agua</label>
-							<input class="form-control" id="pagua" name="pagua" type="number"  style="width: 65px;"/>
-					</div>
-					<div class="form-group">
-							<label>Masa Osea</label>
-							<input class="form-control" id="masa" name="masa" type="number" style="width: 65px;" />
-					</div>
-			
-					<div class="form-group">
-							<label>Grasa Visceral</label>
-							<input class="form-control" id="viscera" name="viscera" type="number"  style="width: 65px;"/>
-					</div>
-					<div class="form-group">
-							<label>Cintura Abdominal</label>
-							<input class="form-control" id="abdomen" name="abdomen" type="number" style="width: 65px;" />
+							<input class="form-control" id="peso" name="peso" type="number" style="width: 70px;" readonly/>
 					</div>
 					<div class="form-group">
 							<label>IMC</label>
-							<input class="form-control" id="imc" name="imc" type="number" readonly  style="width: 65px;"/>
+							<input class="form-control" id="imc" name="imc" type="number" readonly  style="width: 70px;"/>
 					</div>
 				
 					<div class="form-group">
 							<label>Diagnostico</label>
 							<input class="form-control" id="diagnostico" name="diagnostico" readonly />
 					</div>
+					</div>
+					<div class="row">
+					<div class="form-group">
+							<label>% de Grasa</label>
+							<input class="form-control" id="grasa" name="grasa" type="number" style="width: 70px;" />
+					</div>
+					<div class="form-group">
+							<label>% de masa muscular</label>
+							<input class="form-control" id="musculo" name="musculo" type="number" style="width: 125px;" />
+					</div>
+				
+					
+					<div class="form-group">
+							<label>% de Agua</label>
+							<input class="form-control" id="pagua" name="pagua" type="number"  style="width: 70px;"/>
+					</div>
+					<div class="form-group">
+							<label>Masa Osea</label>
+							<input class="form-control" id="masa" name="masa" type="number" style="width: 70px;" />
+					</div>
+			
+					<div class="form-group">
+							<label>Grasa Visceral</label>
+							<input class="form-control" id="viscera" name="viscera" type="number"  style="width: 70px;"/>
+					</div>
+					<div class="form-group">
+							<label>Cintura Abdominal</label>
+							<input class="form-control" id="abdomen" name="abdomen" type="number" style="width: 70px;" />
+					</div>
+					
 				
 				</div>
       
@@ -1450,9 +1681,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Verduras</label>
 					  		<select id="verdura" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+					  			<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1461,9 +1694,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frutas</label>
 					  		<select id="fruta" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1472,9 +1707,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Carne(res,cerdo), pollo, pescado</label>
 					  		<select id="pollo" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1483,9 +1720,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Lacteos</label>
 					  		<select id="lacteo" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1494,9 +1733,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Hamburguesas, pizza, pollo frito</label>
 					  		<select id="hamburguesa" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1505,9 +1746,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Snacks (papalinas, tortrix, ricitos, etc)</label>
 					  		<select id="snack" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1516,9 +1759,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Refrescos embasados</label>
 					  		<select id="refresco" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1527,9 +1772,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Galletas, pasteles, pan dulce</label>
 					  		<select id="galleta" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1538,9 +1785,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Dulces, chocolates, chicles</label>
 					  		<select id="dulce" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1549,9 +1798,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Embutidos</label>
 					  		<select id="embutido" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1560,9 +1811,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Sopas instantaneas</label>
 					  		<select id="sopa" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1571,9 +1824,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frituras, chicharrones, carnitas</label>
 					  		<select id="fritura" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1582,9 +1837,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Tortillas</label>
 					  		<select id="tortilla" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1593,9 +1850,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Papas</label>
 					  		<select id="papa" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1604,9 +1863,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Pasta</label>
 					  		<select id="pasta" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1615,9 +1876,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Arroz</label>
 					  		<select id="arroz" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1626,9 +1889,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Frijol</label>
 					  		<select id="frijol" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1637,9 +1902,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Pan</label>
 					  		<select id="pan" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1648,9 +1915,11 @@
 					  	<div class="form-group">
 					  		<label for="Ltricipital">Huevo</label>
 					  		<select id="huevo" class="form-control" >
-				            	<option>Diario</option>
-				                <option>Semanal</option>
-				                <option>Mensual</option>
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
 				            </select>        
 					  	</div>
 					  </div>
@@ -1666,25 +1935,34 @@
   
   </div>
   </br>
-            <div class="row" align="center">
+            <div class="row" align="center"  id="Mod">
             <div class="form-group">
-						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" onclick="Guardar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
+						     <label for="BNuevo">Modificar</label>			
+							<button class="btn btn-default btn-lg" onclick="Modificar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
 							
 			</div>
-			<div class="form-group">
+			<div class="form-group" >
 						     <label for="BNuevo">Reconsulta</label>			
 							<button class="btn btn-default btn-lg" onclick="Reconsulta()" >
 						     <img src="../imagenes/reco.jpg" width="80" height="60" title="Reconsulta" /></button>
 							
 			</div>
-			<div class="form-group">
+			<div class="form-group" >
 						     <label for="BNuevo">Calculos VET</label>			
 							<button class="btn btn-default btn-lg" onclick="CalculosVET()" >
 						     <img src="../imagenes/vet.jpg" width="80" height="60" title="CalculosVET" /></button>
 							
 			</div>
+			</div>
+			<div class="row" align="center" id="Guard">
+            <div class="form-group" >
+						     <label for="BNuevo">Guardar</label>			
+							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
+							
+			</div>
+			
         	</div>
 </form>
         

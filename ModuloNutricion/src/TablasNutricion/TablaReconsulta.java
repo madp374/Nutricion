@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import ConexionBD.Conexion;
 
 /**
@@ -63,7 +65,8 @@ public class TablaReconsulta extends HttpServlet {
 			
 		}else{
 			PrintWriter printWriter = new PrintWriter(response.getOutputStream());
-
+			HttpSession misession2= (HttpSession) request.getSession();
+			int idCE = correctInt(misession2.getAttribute("idCE2").toString());
 			int page = correctInt(request.getParameter("page"));
 			int rp = correctInt(request.getParameter("rp"));
 			String sortname = correctNull(request.getParameter("sortname"));
@@ -96,7 +99,9 @@ public class TablaReconsulta extends HttpServlet {
 				where = " WHERE " + qtype + " LIKE '%" + query + "%'";
 			}
 
-			String sql = "SELECT * FROM RECONSULTA " + where + " " + sort + " " + limit;
+			String sql = "SELECT R.idRECONSULTA, R.fecha, C.PACIENTE_idPACIENTE from CONSULTA_EXTERNA C, RECONSULTA R "
+					+"WHERE R.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=C.idCONSULTA_EXTERNA "
+					+"AND C.idCONSULTA_EXTERNA="+ idCE  + where + " " + sort + " " + limit;
 
 			
 		
@@ -161,8 +166,9 @@ public class TablaReconsulta extends HttpServlet {
 		String buffer = "";
 		while (rs.next()) {
 			String idRECONSULTA = rs.getString(1);
-			String Paciente_idPaciente = rs.getString(17);
 			String fecha = rs.getString(2);
+			String Paciente_idPaciente = rs.getString(3);
+			
 			
 			buffer+="<row id='"+idRECONSULTA+"'>";
 			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idRECONSULTA+")' value='"+idRECONSULTA+"' />]]></cell>";

@@ -182,11 +182,19 @@
 	</table>
 	</div>
 	<p align="center">
+				<input type="image" name="checkout"
+			            	 class="btn btn-default btn-lg" type="button"
+											value="Pr"
+											src="../imagenes/nuevo.png" style="width: 80px; height:60px;\"
+											alt="Proceed to Checkout\"
+											onclick="NuevoRegistro()"
+											title="Nuevo">
             	<input type="image" name="checkout"
             	 class="btn btn-default btn-lg" type="button"
 								value="Pr"
 								src="../imagenes/editar.png" style="width: 80px; height:60px;\"
 								alt="Proceed to Checkout\"
+								onclick="EditarRegistro()"
 								title="Editar">
         	
             	<input type="image" name="checkout"
@@ -194,7 +202,7 @@
 								value="Pr"
 								src="../imagenes/eliminar.png" style="width: 80px; height:60px;\"
 								alt="Proceed to Checkout\"
-								onclick="Eliminartsecundaria()"
+								onclick="EliminarRegistro()"
 								title="Eliminar">
         	</p>
 
@@ -242,7 +250,16 @@ function addFormData()
 	$("#flex1").flexOptions({params: dt});
 	return true;
 	}
-function Eliminartsecundaria(){
+function EditarRegistro(){
+	if(idCONSULTA_EXTERNA=="0"){
+		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
+	}
+	else{
+		window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp?idCE="+idCONSULTA_EXTERNA);
+	}
+}
+
+function EliminarRegistro(){
 	if(idCONSULTA_EXTERNA=="0"){
 		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
 		

@@ -63,13 +63,45 @@ public class Reconsulta extends HttpServlet {
 			misession.setAttribute("idCE1", idCE);
 			out.println(result);
 			
-		}else if(accion.equalsIgnoreCase("guardar")){
+		}else if(accion.equalsIgnoreCase("CargarEdicion")){
+			Conexion query = new Conexion();
+			result=query.CargaReconsulta(idCE);
+			out.println(result);
+		}else if(accion.equalsIgnoreCase("modificar")){
+			String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
+			String p2=request.getParameter("p2"); //talla
+			String p3=request.getParameter("p3"); //peso
+			String p4=request.getParameter("p4"); //imc
+			String p5=request.getParameter("p5"); //pesog
+			String p6=request.getParameter("p6"); //pesop
+			String p7=request.getParameter("p7"); //cintura
+			String p8=request.getParameter("p8"); //pgrasa
+			String p9=request.getParameter("p9"); //pagua
+			String p10=request.getParameter("p10"); //grasa visceral
+			String p11=request.getParameter("p11"); //masaosea
+			String p12=request.getParameter("p12"); //vettanita
+			String p13=request.getParameter("p13"); //datos subjetivos
+			String p14=request.getParameter("p14"); //tratamiento
+			String p15=request.getParameter("p15"); //educacion alimentaria
 			
+			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
+					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
+					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
+			System.out.println(cadena);
 			
-		
+			String query="UPDATE RECONSULTA " 
+					+"SET talla="+p2+",peso="+p3+",IMC="+p4+",pesoganado="+p5+",pesoperdido="+p6+",cintura="+p7+",porcentajegrasa="+p8+",porcentajeagua="+p9+",grasavisceral="+p10+",masaosea="+p11+",vettanita="+p12+",datossubjetivos='"+p13+"',tratamiento='"+p14+"',educacion='"+p15+"',TIPO_EXAMEN_idTIPO_EXAMEN="+p1+" WHERE idRECONSULTA="+idCE;
 			
-			misession.setAttribute("idCE1", idCE);
+			Conexion consulta = new Conexion();
+			result=consulta.InsertarRegistro(query);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\"}";
+			}
 			
+			out.println(result);
+		}
+		else if(accion.equalsIgnoreCase("guardar")){
+
 			String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
 			String p2=request.getParameter("p2"); //talla
 			String p3=request.getParameter("p3"); //peso
@@ -97,7 +129,7 @@ public class Reconsulta extends HttpServlet {
 			Conexion consulta = new Conexion();
 			consulta.Insertar(query);
 			
-			result="{\"resultado\":\"bien\"}";
+			result="{\"resultado\":\"OK\"}";
 			out.println(result);
 			
 		}else{

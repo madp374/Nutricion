@@ -143,7 +143,7 @@ public class TablaMultifasico extends HttpServlet {
 				+"<rows><page>"+page+"</page><total>"+total+"</total>"
 				+buffer+"</rows>";
 		
-		System.out.println(cadena);
+		//System.out.println(cadena);
 		return cadena;
 	}
 	

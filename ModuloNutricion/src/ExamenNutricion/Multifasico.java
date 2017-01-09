@@ -102,7 +102,7 @@ public class Multifasico extends HttpServlet {
 		}else if(accion.equalsIgnoreCase("CargaEdicion")){
 			PrintWriter out = response.getWriter();
 			String MID = request.getParameter("MID");// MID
-			System.out.println("MID:"+MID);
+			//System.out.println("MID:"+MID);
 			Conexion con =new Conexion();
 			
 			String result=con.CargaMultifasico(MID);

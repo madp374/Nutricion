@@ -95,7 +95,7 @@
         var IDMulti="";
         function  AccionPagina(){
         	if(ERRORSQL==false){
-        		location.reload();
+        		//location.reload();
         		window.location.href = 'http://localhost:8080/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp';
         	}
         	

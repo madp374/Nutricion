@@ -32,8 +32,8 @@
 			.imc2 {width:10px;}
 		</style>
 		<style type="text/css">
-			label { display:block; margin:5px 0 5px; font-size:10pt; }
-       	
+			label { display:block; margin:5px 0 5px; font-size:9pt; }
+       		input {font-size:8pt;}
 	</style>
 		
 	
@@ -141,7 +141,7 @@
         </div>
         <div class="panel-body">
         
- <form action="../CalculosVET" method="post" class="form-inline" role="form">
+ <form action="../CalculosVET" method="post" class="form-inline" role="form" onsubmit="return false">
    <article>
    <div class="panel panel-primary">
       <div class="panel-heading">Datos Generales</div>
@@ -157,15 +157,15 @@
 		
 		  <div class="form-group">
 			<label for="Lpeso">Peso (Kg)</label>
-			<input class="form-control input-sm" id="peso" name="peso" type="number"  min="0.1" step="any"  style="width: 65px;" required/>         
+			<input class="form-control input-sm" id="peso" name="peso" type="number"  min="0.1" step="any"  style="width: 80px;" required/>         
 		</div>
 		<div class="form-group">
 			<label for="Ltalla">IMC</label>
-			<input class="form-control input-sm" id="imc3" name="imc3" type="number"  min="0.1" step="any"  style="width: 65px;" readonly/>   
+			<input class="form-control input-sm" id="imc3" name="imc3" type="number"  min="0.1" step="any"  style="width: 70px;" readonly/>   
 		</div>
 		  <div class="form-group">
 			  <label for="TipoExame">Actividad fisica</label>
-			  <input class="form-control input-sm" id="ActividadFisica" name="ActividadFisica" type="number"  min="0.1" step="any"  style="width: 65px;" required/>
+			  <input class="form-control input-sm" id="ActividadFisica" name="ActividadFisica" type="number"  min="0.1" step="any"  style="width: 80px;" required/>
 			 
 		  </div>
 		  <div class="form-group">
@@ -189,16 +189,29 @@
 	var idCE="";
 	var SexoVET="";
 	var EdadVET=0;
+	var idVET="";
   	function CargaInicio() {
 		CargarHora();
 		
-		var idCE = getUrlVars()["prodId"];
-		//var idCE = "1";
-		if(idCE==undefined){
-			alert('Error reload');
+		idCE = getUrlVars()["prodId"];
+		idVET = getUrlVars()["idVET"];
+		
+		
+		
+		if(idVET!=undefined){
+			CargarEdicion(idVET);
+			document.getElementById("Guard").style.display = 'none';
+			
 		}else{
-			CargarTallaPeso(idCE);
+			if(idCE==undefined){
+				//alert('Error reload');
+			}else{
+				CargarTallaPeso(idCE);
+				document.getElementById("Mod").style.display = 'none';
+			}
 		}
+		//var idCE = "1";
+		
 		
 	}
   	function getUrlVars() {
@@ -209,6 +222,66 @@
 	    });
 	    return vars;
 	  }
+  	function CargarEdicion(entrada){
+	    var action="CargarEdicion";
+		cadena = [ 	'ID=' + entrada,'a='+action].join('&');
+		$.ajax({
+	        url: "../CalculosVET",
+	        data: cadena,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	if(data.resultado=='OK'){
+	        		talla=parseFloat(data.talla);
+		        	pesoL=parseFloat(data.peso)*(0.453592);
+		        	document.getElementById('peso').value  = pesoL.toFixed(2);	
+		        	document.getElementById('imc3').value=data.imc;
+		        	document.getElementById("ActividadFisica").value=data.ActividadFisica;
+		        	document.getElementById("formulavet").value = data.FormulaVet;
+		        	document.getElementById("vet").value = data.VET;
+		        	document.getElementById("veta").value = data.VETAF;
+		        	
+		        	document.getElementById("ReadBP").value = data.RBajoPeso;
+		        	document.getElementById("ReadSP").value = data.RSobrePeso;
+		        	document.getElementById("ReadOb").value = data.RObesidad;
+		        	
+		        	document.getElementById("porCarbo").value = data.carbohidrato;
+		        	document.getElementById("porProte").value = data.proteina;
+		        	document.getElementById("porGrasa").value = data.grasa;
+		        	
+		        	CalcCarbo();
+		        	CalcProte();
+		        	CalcGrasa();
+		        	AutoSumaKcalPor();
+		        	
+		        	document.getElementById("porLacteoSG").value = data.placteosg;
+		        	document.getElementById("porLacteoE").value = data.placteoe;
+		        	document.getElementById("porVege").value = data.pvegetal;
+		        	document.getElementById("porFruta").value = data.pfruta;
+		        	document.getElementById("porCereal").value = data.pcereal;
+		        	document.getElementById("porCarne").value = data.pcarne;
+		        	document.getElementById("porGrasa1").value = data.pgrasa;
+		        	document.getElementById("porAzucar").value = data.pazucar;
+		        	
+		        	CalcLSG();
+		        	CalcLE();
+		        	CalcVeg();
+		        	CalcFr();
+		        	CalcCer();
+		        	CalcCar();
+		        	CalcGr();
+		        	CalcAz();
+		        	AutoSumaTotales1();
+		        	//idCE=data.idCE;
+		        	SexoVET=data.sexo;
+		        	EdadVET=parseInt(data.edad);
+	        	}else{
+	        		alert("Error al cargar");
+	        	}
+	        	
+	        }
+		});
+	}
   	function CargarTallaPeso(entrada){
 	    var action="CargarTallaPeso";
 		cadena = [ 	'ID=' + entrada,'a='+action].join('&');
@@ -220,7 +293,7 @@
 	        success: function(data){
 	        	talla=parseFloat(data.talla);
 	        	pesoL=parseFloat(data.peso)*(0.453592);
-	        	document.getElementById('peso').value  = pesoL;	
+	        	document.getElementById('peso').value  = pesoL.toFixed(2);	
 	        	idCE=data.idCE;
 	        	SexoVET=data.sexo;
 	        	EdadVET=parseInt(data.edad);
@@ -252,6 +325,46 @@
 		}
 		return texto;
 	}
+	function Modificar(){
+		var action="modificar";
+	
+		var variable1=validar_numerovacio('peso');
+		var variable2=validar_numerovacio("imc3");
+		var variable3=validar_numerovacio("ActividadFisica");
+		var variable4=validar_vacio("formulavet");
+		var variable5=validar_numerovacio("vet");
+		var variable6=validar_numerovacio("veta");
+		var variable7=validar_numerovacio("ReadBP");
+		var variable8=validar_numerovacio("ReadSP");
+		var variable9=validar_numerovacio("ReadOb");
+		var variable10=validar_numerovacio("porCarbo");
+		
+		var variable11=validar_numerovacio('porProte');
+		var variable12=validar_numerovacio("porGrasa");
+		var variable13=validar_numerovacio("porLacteoSG");
+		var variable14=validar_numerovacio("porLacteoE");
+		var variable15=validar_numerovacio("porVege");
+		var variable16=validar_numerovacio("porFruta");
+		var variable17=validar_numerovacio("porCereal");
+		var variable18=validar_numerovacio("porCarne");
+		var variable19=validar_numerovacio("porGrasa1");
+		var variable20=validar_numerovacio("porAzucar");
+		
+		if((idVET!=undefined)&&(idVET!="")&&(variable2!="0")){
+			var cadena = ['ID='+ idVET,'a='+action
+					      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+					      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
+					      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
+					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
+					enviar_datos(cadena);
+		}else{
+			alert("Error al guardar, revise que los campos esten completos");
+		}
+		
+			         	
+
+		
+	}
   	function Guardar(){
 		var action="guardar";
 	
@@ -277,15 +390,20 @@
 		var variable19=validar_numerovacio("porGrasa1");
 		var variable20=validar_numerovacio("porAzucar");
 		
-		var cadena = ['ID='+ idCE,'a='+action
-		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
-		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
-		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
-		      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
-		enviar_datos(cadena);
+		if((idCE!=undefined)&&(idCE!="")&&(variable2!="0")){
+			var cadena = ['ID='+ idCE,'a='+action
+					      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+					      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
+					      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
+					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
+					enviar_datos(cadena);
+		}else{
+			alert("Error al guardar, revise que los campos esten completos");
+		}
+		
 			         	
 
-		alert("guardando");
+		
 	}
   	function enviar_datos(datos){
 		var resultado="";
@@ -296,7 +414,13 @@
 	  	    type: 'post',
 	        dataType: 'json',
 	        success: function(data){
-	        	alert(data.resultado);
+	        	if(data.resultado=='OK'){
+	        		alert("Informacion almacenada correctamente");
+	        		location.reload();
+	        	}else{
+	        		alert("ERROR al almacenar en el servidor");
+	        	}
+	        	
 	        	
 	        }
 		});
@@ -308,7 +432,7 @@
         	var auxpeso=parseFloat(validar_numerovacio('peso'));
         	var auxtalla=talla*talla;
 		    var imc4=auxpeso/auxtalla;
-		    document.getElementById('imc3').value=imc4;
+		    document.getElementById('imc3').value=imc4.toFixed(2);
             document.getElementById("ActividadFisica").focus();
             return false;
         }
@@ -336,9 +460,9 @@
     	var TpCarbo=(parseFloat( validar_numerovacio('TCarbo'))/parseFloat( validar_numerovacio('grsCarbo')))*100;
     	var TpGrasa=(parseFloat( validar_numerovacio('TGrasa'))/parseFloat( validar_numerovacio('grsGrasa')))*100;
     	
-    	document.getElementById('TpProte').value=TpProte;
-    	document.getElementById('TpCarbo').value=TpCarbo;
-    	document.getElementById('TpGrasa').value=TpGrasa;
+    	document.getElementById('TpProte').value=TpProte.toFixed(2);
+    	document.getElementById('TpCarbo').value=TpCarbo.toFixed(2);
+    	document.getElementById('TpGrasa').value=TpGrasa.toFixed(2);
     	
     }
     function AutoSumaTotales1(){
@@ -352,177 +476,201 @@
     	document.getElementById('TGrasa').value=TGrasa;
     	CalculoAdecuacion();
     }
+    function CalcAz(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porAzucar').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*20;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*5;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*0;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
+    	}
+    	document.getElementById('KcalAzucar').value=KcalLacteoSG;
+    	document.getElementById('CarboAzucar').value=CarboLacteoSG;
+    	document.getElementById('ProteAzucar').value=ProteLacteoSG;
+    	document.getElementById('GrasaAzucar').value=GrasaLacteoSG;
+    }
     function CalculoAzucar(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porAzucar').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*20;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*5;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*0;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
-        	}
-        	document.getElementById('KcalAzucar').value=KcalLacteoSG;
-        	document.getElementById('CarboAzucar').value=CarboLacteoSG;
-        	document.getElementById('ProteAzucar').value=ProteLacteoSG;
-        	document.getElementById('GrasaAzucar').value=GrasaLacteoSG;
+        	CalcAz();
         	AutoSumaTotales1();
         }
+    }
+    function CalcGr(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porGrasa1').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*45;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*0;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*0;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*5;
+    	}
+    	document.getElementById('KcalGrasa1').value=KcalLacteoSG;
+    	document.getElementById('CarboGrasa1').value=CarboLacteoSG;
+    	document.getElementById('ProteGrasa1').value=ProteLacteoSG;
+    	document.getElementById('GrasaGrasa1').value=GrasaLacteoSG;
     }
     function CalculoGrasa1(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porGrasa1').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*45;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*0;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*0;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*5;
-        	}
-        	document.getElementById('KcalGrasa1').value=KcalLacteoSG;
-        	document.getElementById('CarboGrasa1').value=CarboLacteoSG;
-        	document.getElementById('ProteGrasa1').value=ProteLacteoSG;
-        	document.getElementById('GrasaGrasa1').value=GrasaLacteoSG;
+        	CalcGr();
         	AutoSumaTotales1();
         	document.getElementById("porAzucar").focus();
         }
     }
+    function CalcCar(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porCarne').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*65;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*0;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*7;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*4;
+    	}
+    	document.getElementById('KcalCarne').value=KcalLacteoSG;
+    	document.getElementById('CarboCarne').value=CarboLacteoSG;
+    	document.getElementById('ProteCarne').value=ProteLacteoSG;
+    	document.getElementById('GrasaCarne').value=GrasaLacteoSG;
+    }
     function CalculoCarne(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porCarne').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*65;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*0;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*7;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*4;
-        	}
-        	document.getElementById('KcalCarne').value=KcalLacteoSG;
-        	document.getElementById('CarboCarne').value=CarboLacteoSG;
-        	document.getElementById('ProteCarne').value=ProteLacteoSG;
-        	document.getElementById('GrasaCarne').value=GrasaLacteoSG;
+        	CalcCar();
         	AutoSumaTotales1();
         	document.getElementById("porGrasa1").focus();
         }
     }
+    function CalcCer(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porCereal').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*75;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*14;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*3;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*1;
+    	}
+    	document.getElementById('KcalCereal').value=KcalLacteoSG;
+    	document.getElementById('ProteCereal').value=ProteLacteoSG;
+    	document.getElementById('CarboCereal').value=CarboLacteoSG;
+    	document.getElementById('GrasaCereal').value=GrasaLacteoSG;
+    }
     function CalculoCereal(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porCereal').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*75;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*14;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*3;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*1;
-        	}
-        	document.getElementById('KcalCereal').value=KcalLacteoSG;
-        	document.getElementById('ProteCereal').value=ProteLacteoSG;
-        	document.getElementById('CarboCereal').value=CarboLacteoSG;
-        	document.getElementById('GrasaCereal').value=GrasaLacteoSG;
+        	CalcCer();
         	AutoSumaTotales1();
         	document.getElementById("porCarne").focus();
         }
     }
+    function CalcFr(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porFruta').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*80;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*20;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*0;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
+    	}
+    	document.getElementById('KcalFruta').value=KcalLacteoSG;
+    	document.getElementById('ProteFruta').value=ProteLacteoSG;
+    	document.getElementById('CarboFruta').value=CarboLacteoSG;
+    	document.getElementById('GrasaFruta').value=GrasaLacteoSG;
+    }
     function CalculoFruta(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porFruta').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*80;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*20;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*0;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
-        	}
-        	document.getElementById('KcalFruta').value=KcalLacteoSG;
-        	document.getElementById('ProteFruta').value=ProteLacteoSG;
-        	document.getElementById('CarboFruta').value=CarboLacteoSG;
-        	document.getElementById('GrasaFruta').value=GrasaLacteoSG;
+        	CalcFr();
         	AutoSumaTotales1();
         	document.getElementById("porCereal").focus();
         }
     }
+    function CalcVeg(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porVege').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*35;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*8;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*1;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
+    	}
+    	document.getElementById('KcalVege').value=KcalLacteoSG;
+    	document.getElementById('CarboVege').value=CarboLacteoSG;
+    	document.getElementById('ProteVege').value=ProteLacteoSG;
+    	document.getElementById('GrasaVege').value=GrasaLacteoSG;
+    }
     function CalculoVegetal(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porVege').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*35;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*8;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*1;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
-        	}
-        	document.getElementById('KcalVege').value=KcalLacteoSG;
-        	document.getElementById('CarboVege').value=CarboLacteoSG;
-        	document.getElementById('ProteVege').value=ProteLacteoSG;
-        	document.getElementById('GrasaVege').value=GrasaLacteoSG;
+        	CalcVeg();
         	AutoSumaTotales1();
         	document.getElementById("porFruta").focus();
         }
     }
+    function CalcLE(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porLacteoE').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*150;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*11;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*9;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*8;
+    	}
+    	document.getElementById('KcalLacteoE').value=KcalLacteoSG;
+    	document.getElementById('CarboLacteoE').value=CarboLacteoSG;
+    	document.getElementById('ProteLacteoE').value=ProteLacteoSG;
+    	document.getElementById('GrasaLacteoE').value=GrasaLacteoSG;
+    }
     function CalculoLacteoEntero(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porLacteoE').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*150;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*11;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*9;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*8;
-        	}
-        	document.getElementById('KcalLacteoE').value=KcalLacteoSG;
-        	document.getElementById('CarboLacteoE').value=CarboLacteoSG;
-        	document.getElementById('ProteLacteoE').value=ProteLacteoSG;
-        	document.getElementById('GrasaLacteoE').value=GrasaLacteoSG;
+        	CalcLE();
         	AutoSumaTotales1();
         	document.getElementById("porVege").focus();
         }
     }
+    function CalcLSG(){
+    	var KcalLacteoSG=0;
+    	var ProteLacteoSG=0;
+    	var CarboLacteoSG=0;
+    	var GrasaLacteoSG=0;
+    	var porLacteoSG = document.getElementById('porLacteoSG').value;
+    	if(porLacteoSG!=""){
+    		KcalLacteoSG = parseFloat(porLacteoSG)*100;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*11;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*7;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*3;
+    	}
+    	document.getElementById('KcalLacteoSG').value=KcalLacteoSG;
+    	document.getElementById('CarboLacteoSG').value=CarboLacteoSG;
+    	document.getElementById('ProteLacteoSG').value=ProteLacteoSG;
+    	document.getElementById('GrasaLacteoSG').value=GrasaLacteoSG;
+    }
     function CalculoLacteoSinGrasa(event){
     	var char = event.which || event.keyCode;
         if(char == 13){
-        	var KcalLacteoSG=0;
-        	var ProteLacteoSG=0;
-        	var CarboLacteoSG=0;
-        	var GrasaLacteoSG=0;
-        	var porLacteoSG = document.getElementById('porLacteoSG').value;
-        	if(porLacteoSG!=""){
-        		KcalLacteoSG = parseFloat(porLacteoSG)*100;
-        		CarboLacteoSG=parseFloat(porLacteoSG)*11;
-        		ProteLacteoSG=parseFloat(porLacteoSG)*7;
-        		GrasaLacteoSG=parseFloat(porLacteoSG)*3;
-        	}
-        	document.getElementById('KcalLacteoSG').value=KcalLacteoSG;
-        	document.getElementById('CarboLacteoSG').value=CarboLacteoSG;
-        	document.getElementById('ProteLacteoSG').value=ProteLacteoSG;
-        	document.getElementById('GrasaLacteoSG').value=GrasaLacteoSG;
+        	CalcLSG();
         	AutoSumaTotales1();
         	document.getElementById("porLacteoE").focus();
         }
@@ -540,89 +688,100 @@
     	var totalpor = porCarbo + porProte + porGrasa;
     	var totalKcal = KcalCarbo + KcalProte + KcalGrasa;
     	
-    	document.getElementById('totalpor').value  = totalpor;
-    	document.getElementById('totalKcal').value  = totalKcal;
+    	document.getElementById('totalpor').value  = totalpor.toFixed(2);
+    	document.getElementById('totalKcal').value  = totalKcal.toFixed(2);
+    }
+    
+    function CalcGrasa(){
+    	var porCarbo = parseFloat(validar_numerovacio('porGrasa'));
+    	var IMC=parseFloat(validar_numerovacio("imc3"));
+    	var veta = parseFloat(validar_numerovacio("veta"));
+    	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+    	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+    	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
+    	var KcalCarbo = 0;
+    	
+    	if(IMC > 18.49 && IMC < 25){
+    		KcalCarbo = (veta*porCarbo)/100;
+    	}else if(IMC < 18.5){
+    		KcalCarbo = ReadBP*porCarbo/100;
+    	}else if(IMC > 24.9 &&  IMC < 30){
+    		KcalCarbo = ReadSP*porCarbo/100;
+    	}else if(IMC > 29.99){
+    		KcalCarbo= ReadOb*porCarbo/100;
+    	}
+    	var grsCarbo = KcalCarbo/9;
+    	document.getElementById('KcalGrasa').value  = KcalCarbo.toFixed(2);
+    	document.getElementById('grsGrasa').value  = grsCarbo.toFixed(2);
     }
     function CalculoGrasa(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(validar_numerovacio('porGrasa'));
-        	var IMC=parseFloat(validar_numerovacio("imc3"));
-        	var veta = parseFloat(validar_numerovacio("veta"));
-        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
-        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
-        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
-        	var KcalCarbo = 0;
-        	
-        	if(IMC > 18.49 && IMC < 25){
-        		KcalCarbo = (veta*porCarbo)/100;
-        	}else if(IMC < 18.5){
-        		KcalCarbo = ReadBP*porCarbo/100;
-        	}else if(IMC > 24.9 &&  IMC < 30){
-        		KcalCarbo = ReadSP*porCarbo/100;
-        	}else if(IMC > 29.99){
-        		KcalCarbo= ReadOb*porCarbo/100;
-        	}
-        	var grsCarbo = KcalCarbo/9;
-        	document.getElementById('KcalGrasa').value  = KcalCarbo;
-        	document.getElementById('grsGrasa').value  = grsCarbo;
+        	CalcGrasa();
         	AutoSumaKcalPor();
         	document.getElementById("porLacteoSG").focus();
         }
     }
+    function CalcProte(){
+    	var porCarbo = parseFloat(validar_numerovacio('porProte'));
+    	var IMC=parseFloat(validar_numerovacio("imc3"));
+    	var veta = parseFloat(validar_numerovacio("veta"));
+    	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+    	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+    	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
+    	var KcalCarbo = 0;
+    	
+    	if(IMC > 18.49 && IMC < 25){
+    		KcalCarbo = (veta*porCarbo)/100;
+    	}else if(IMC < 18.5){
+    		KcalCarbo = ReadBP*porCarbo/100;
+    	}else if(IMC > 24.9 &&  IMC < 30){
+    		KcalCarbo = ReadSP*porCarbo/100;
+    	}else if(IMC > 29.99){
+    		KcalCarbo= ReadOb*porCarbo/100;
+    	}
+    	
+    	var grsCarbo = KcalCarbo/4;
+    	document.getElementById('KcalProte').value  = KcalCarbo.toFixed(2);
+    	
+    	document.getElementById('grsProte').value  = grsCarbo.toFixed(2);
+    }
     function CalculoProte(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(validar_numerovacio('porProte'));
-        	var IMC=parseFloat(validar_numerovacio("imc3"));
-        	var veta = parseFloat(validar_numerovacio("veta"));
-        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
-        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
-        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
-        	var KcalCarbo = 0;
-        	
-        	if(IMC > 18.49 && IMC < 25){
-        		KcalCarbo = (veta*porCarbo)/100;
-        	}else if(IMC < 18.5){
-        		KcalCarbo = ReadBP*porCarbo/100;
-        	}else if(IMC > 24.9 &&  IMC < 30){
-        		KcalCarbo = ReadSP*porCarbo/100;
-        	}else if(IMC > 29.99){
-        		KcalCarbo= ReadOb*porCarbo/100;
-        	}
-        	
-        	var grsCarbo = KcalCarbo/4;
-        	document.getElementById('KcalProte').value  = KcalCarbo;
-        	
-        	document.getElementById('grsProte').value  = grsCarbo;
+        	CalcProte();
         	AutoSumaKcalPor();
         	document.getElementById("porGrasa").focus();
         	
         }
     }
+    function CalcCarbo(){
+    	var porCarbo = parseFloat(validar_numerovacio('porCarbo'));
+    	var IMC=parseFloat(validar_numerovacio("imc3"));
+    	var veta = parseFloat(validar_numerovacio("veta"));
+    	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
+    	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
+    	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
+    	var KcalCarbo = 0;
+    	
+    	if(IMC > 18.49 && IMC < 25){
+    		KcalCarbo = (veta*porCarbo)/100;
+    	}else if(IMC < 18.5){
+    		KcalCarbo = ReadBP*porCarbo/100;
+    	}else if(IMC > 24.9 &&  IMC < 30){
+    		KcalCarbo = ReadSP*porCarbo/100;
+    	}else if(IMC > 29.99){
+    		KcalCarbo= ReadOb*porCarbo/100;
+    	}
+    	var grsCarbo = KcalCarbo/4;
+    	document.getElementById('KcalCarbo').value  = KcalCarbo.toFixed(2);
+    	document.getElementById('grsCarbo').value  = grsCarbo.toFixed(2);
+    	
+    }
     function CalculoCarbo(event){
     	var char = event.which || event.keyCode;
         if(char == 13){ 
-        	var porCarbo = parseFloat(validar_numerovacio('porCarbo'));
-        	var IMC=parseFloat(validar_numerovacio("imc3"));
-        	var veta = parseFloat(validar_numerovacio("veta"));
-        	var ReadBP=parseFloat(validar_numerovacio('ReadBP'));
-        	var ReadSP=parseFloat(validar_numerovacio('ReadSP'));
-        	var ReadOb=parseFloat(validar_numerovacio('ReadOb'));
-        	var KcalCarbo = 0;
-        	
-        	if(IMC > 18.49 && IMC < 25){
-        		KcalCarbo = (veta*porCarbo)/100;
-        	}else if(IMC < 18.5){
-        		KcalCarbo = ReadBP*porCarbo/100;
-        	}else if(IMC > 24.9 &&  IMC < 30){
-        		KcalCarbo = ReadSP*porCarbo/100;
-        	}else if(IMC > 29.99){
-        		KcalCarbo= ReadOb*porCarbo/100;
-        	}
-        	var grsCarbo = KcalCarbo/4;
-        	document.getElementById('KcalCarbo').value  = KcalCarbo;
-        	document.getElementById('grsCarbo').value  = grsCarbo;
+        	CalcCarbo();
         	AutoSumaKcalPor();
         	document.getElementById("porProte").focus();
         }
@@ -641,9 +800,9 @@
     	}else if(IMC > 29.99){
     		ReadOb=actividad - 500;
     	}
-    	document.getElementById('ReadBP').value  = ReadBP;
-    	document.getElementById('ReadSP').value  = ReadSP;
-    	document.getElementById('ReadOb').value  = ReadOb;
+    	document.getElementById('ReadBP').value  = ReadBP.toFixed(2);
+    	document.getElementById('ReadSP').value  = ReadSP.toFixed(2);
+    	document.getElementById('ReadOb').value  = ReadOb.toFixed(2);
     	
     }
    	function CalcularVETMaxActivFisica(vet){
@@ -653,7 +812,7 @@
     	var ActividadFisica = parseFloat(Actividad);
     	
     	var operacion=ActividadFisica*vet;
-    	document.getElementById('veta').value  = operacion;
+    	document.getElementById('veta').value  = operacion.toFixed(2);
     	ReadecuacionPeso(operacion);
    	}
     function CalculosVET(event){
@@ -699,12 +858,15 @@
         			}
         		}
         	}
-        	document.getElementById('vet').value  = VET;
+        	document.getElementById('vet').value  = VET.toFixed(2);
         	CalcularVETMaxActivFisica(VET);
         	document.getElementById("porCarbo").focus();
         	
         }
     	
+    }
+    function VerRegistros(){
+    	window.location.replace("/ModuloNutricion/TablasNutricion/RegistrosCalculosVET.jsp");
     }
   	</script>
   <article>
@@ -716,29 +878,30 @@
 				<div class="row">
 					<div class="form-group">
 						<label for="Lvet">VET </label>
-						<input class="form-control input-sm" id="vet" name="vet" type="number" step="any"  style="width: 65px;" onkeydown="CalculosVET(event)" required/>   
+						<input class="form-control input-sm" id="vet" name="vet" type="number" step="any"  style="width: 80px;" onkeydown="CalculosVET(event)" required/>   
 					</div>
 				
 					<div class="form-group">
 						<label for="Lveta">VET  + Actividad fisica</label>
-						<input class="form-control input-sm" id="veta" name="veta" type="number" step="any"  style="width: 65px;" />   
+						<input class="form-control input-sm" id="veta" name="veta" type="number" step="any"  style="width: 80px;" />   
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion bajo peso</label>
-						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number"   style="width: 65px;" />   
+						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number"   style="width: 80px;" />   
 					</div>
-				
+				</div>
+				<div class="row">
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion sobrepeso</label>
-						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"    style="width: 65px;" />   
+						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"    style="width: 80px;" />   
 					</div>
 				</div>
 				<div class="row">
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion obesidad</label>
-						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"   style="width: 65px;" />   
+						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"   style="width: 80px;" />   
 					</div>
 				</div>
 			</div>
@@ -771,12 +934,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo" type="number"   style="width: 65px;" readonly />             
+								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo" type="number"   style="width: 80px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo" type="number"  style="width: 65px;" readonly />              
+								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo" type="number"  style="width: 80px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -794,12 +957,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte" type="number"   style="width: 65px;" readonly />             
+								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte" type="number"   style="width: 80px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte" type="number"  style="width: 65px;" readonly />              
+								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte" type="number"  style="width: 80px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -817,12 +980,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa" type="number"   style="width: 65px;" readonly  />             
+								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa" type="number"   style="width: 80px;" readonly  />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa" type="number"    style="width: 65px;" readonly  />              
+								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa" type="number"    style="width: 80px;" readonly  />              
 								  	</div>
 								</td>
 							</tr>
@@ -835,12 +998,12 @@
 								</td>
 								<td>
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="totalpor" name="totalpor" type="number"   style="width: 65px;" readonly  />              
+								  		%<input class="form-control input-sm" id="totalpor" name="totalpor" type="number"   style="width: 80px;" readonly  />              
 								  	</div>
 								</td>
 								<td>
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal" type="number"    style="width: 65px;" readonly  />              
+								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal" type="number"    style="width: 80px;" readonly  />              
 								  	</div>
 								</td>
 								<td></td>
@@ -1183,17 +1346,17 @@
 						
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpProte" name="TpProte" type="number"   style="width: 65px;" readonly  />                 
+								  		%<input class="form-control input-sm" id="TpProte" name="TpProte" type="number"   style="width: 80px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpCarbo" name="TpCarbo" type="number"    style="width: 65px;" readonly  />                 
+								  		%<input class="form-control input-sm" id="TpCarbo" name="TpCarbo" type="number"    style="width: 80px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa" type="number"    style="width: 65px;" readonly  />                
+								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa" type="number"    style="width: 80px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
@@ -1212,13 +1375,25 @@
   </article>
   </br>
             <div class="row" align="center">
-            <div class="form-group">
+            <div class="form-group" id="Guard">
 						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="Guardar()" >
 						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
 							
 			</div>
+			<div class="form-group" id="Mod">
+						     <label for="BNuevo">Modificar</label>			
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="Modificar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
+							
 			</div>
+			<div class="form-group">
+						     <label for="BNuevo">Registros</label>			
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="VerRegistros()" >
+						     <img src="../imagenes/registros.png" width="80" height="60" title="Registros" /></button>
+							
+			</div>
+        	</div>
 </form>
         
 

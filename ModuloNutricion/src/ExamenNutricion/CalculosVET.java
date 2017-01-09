@@ -63,7 +63,49 @@ public class CalculosVET extends HttpServlet {
 			misession.setAttribute("idCE2", idCE);
 			out.println(result);
 			
-		}else if(accion.equalsIgnoreCase("guardar")){
+		}else if(accion.equalsIgnoreCase("CargarEdicion")){
+			Conexion query = new Conexion();
+			result=query.CargaCalculosVET(idCE);
+			out.println(result);
+		}else if(accion.equalsIgnoreCase("modificar")){
+			String p1=request.getParameter("p1"); //peso
+			String p2=request.getParameter("p2"); //imc
+			String p3=request.getParameter("p3"); //actividad fisica
+			String p4=request.getParameter("p4"); //formula vet
+			String p5=request.getParameter("p5"); //vet
+			String p6=request.getParameter("p6"); //vet + actividad fisica
+			String p7=request.getParameter("p7"); //Readecuacion bajo peso
+			String p8=request.getParameter("p8"); //Readecuacion sobre peso
+			String p9=request.getParameter("p9"); //Readecuacion obesidad
+			String p10=request.getParameter("p10"); //% carbohidratos
+			String p11=request.getParameter("p11"); //% proteina
+			String p12=request.getParameter("p12"); //% grasa
+			String p13=request.getParameter("p13"); //lacteo sin grasa
+			String p14=request.getParameter("p14"); //lacteo entero
+			String p15=request.getParameter("p15"); //vegetal
+			String p16=request.getParameter("p16"); //fruta
+			String p17=request.getParameter("p17"); //cereal
+			String p18=request.getParameter("p18"); //carne
+			String p19=request.getParameter("p19"); //grasa
+			String p20=request.getParameter("p20"); //azucar
+			
+			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
+					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
+					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
+			System.out.println(cadena);
+			
+			String query="UPDATE CALCULOS_VET set peso="+p1+",imc="+p2+",ActividadFisica="+p3+",FormulaVet='"+p4+"',VET="+p5+",VETAF="+p6+",RBajoPeso="+p7+",RSobrePeso="+p8+",RObesidad="+p9+",carbohidrato="+p10+",proteina="+p11+",grasa="+p12+",placteosg="+p13+",placteoe="+p14+",pvegetal="+p15+",pfruta="+p16+",pcereal="+p17+",pcarne="+p18+",pgrasa="+p19+",pazucar="+p20 +
+					" where idCALCULOS_VET="+idCE;
+			
+			Conexion consulta = new Conexion();
+			result=consulta.InsertarRegistro(query);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\"}";
+			}
+			
+			out.println(result);
+		}
+		else if(accion.equalsIgnoreCase("guardar")){
 			
 			
 		
@@ -100,9 +142,11 @@ public class CalculosVET extends HttpServlet {
 					+"VALUES(CURDATE(),"+p1+","+p2+","+p3+",'"+p4+"',"+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+","+p13+","+p14+","+p15+","+p16+","+p17+","+p18+","+p19+","+p20+","+idCE+");";
 			
 			Conexion consulta = new Conexion();
-			consulta.Insertar(query);
+			result=consulta.InsertarRegistro(query);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\"}";
+			}
 			
-			result="{\"resultado\":\"bien\"}";
 			out.println(result);
 			
 		}else{

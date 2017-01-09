@@ -87,20 +87,7 @@
         </head>
 
         <body>
-        <script>
-        
-        	function CargaInicio() {
-        	
-        		var  today = new Date();
-        		var m = today.getMonth() + 1;
-        		var mes = (m < 10) ? '0' + m : m;
-        		 
-        		var fecha=today.getDate()+'/' +mes+'/'+today.getFullYear();
-
-        		document.getElementById('fecha').value=fecha;
-        	}
-        	
-        </script>
+       
         <div class="container">
          <div class="panel2 panel-body">
         <header class="row col-sm-12">
@@ -140,7 +127,7 @@
         
         <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li > <a href="#"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a> </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a> </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Prescripción dietetica </a>
         <ul>
 		<li><a href="#">Page 1</a></li>
@@ -166,7 +153,7 @@
         <div class="panel panel-default">
         
         <div class="panel-heading">
-        <h3 class="panel-title">Mantenimiento Examen de Reconsulta</h3>
+        <h3 class="panel-title">Examen Calculos VET</h3>
         </div>
         <div class="panel-body">
 	
@@ -207,34 +194,35 @@
         	</p>
 
 <script type="text/javascript">
-var idReconsultas="";
+var idCALCULOS_VET="";
 $("#flex1").flexigrid
 (
 {
-url: '../TablaReconsulta',
+url: '../TablaCalculosVET',
 method: 'POST',
 dataType: 'xml',
 colModel : [
 	{display: 'Seleccionar', name : 'chktradio', width : 90, sortable : false, align: 'left'},
-	{display: 'ID', name : 'idRECONSULTA', width : 50, sortable : true, align: 'center'},
+	{display: 'ID', name : 'idCALCULOS_VET', width : 50, sortable : true, align: 'center'},
 	{display: 'Paciente', name : 'Paciente_idPaciente', width : 80, sortable : true, align: 'left'},
 	{display: 'fecha', name : 'fecha', width : 120, sortable : true, align: 'left'}
 	],
 searchitems : [
-	{display: 'ID', name : 'idRECONSULTA', isdefault: true},
+	{display: 'ID', name : 'idCALCULOS_VET', isdefault: true},
 	{display: 'Carnet', name : 'Paciente_idPaciente'},
 	{display: 'fecha', name : 'fecha'}
 	],
-sortname: "idRECONSULTA",
+sortname: "idCALCULOS_VET",
 sortorder: "asc",
 usepager: true,
-title: 'Reconsulta',
+title: 'Calculos VET',
 useRp: true,
 rp: 10,
 showTableToggleBtn: true,
 width: 800,
 onSubmit: addFormData,
 height: 300,
+
 }
 );
 
@@ -250,19 +238,27 @@ function addFormData()
 	$("#flex1").flexOptions({params: dt});
 	return true;
 	}
+
+function EditarRegistro(){
+	if(idCALCULOS_VET=="0"){
+		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
+	}else{
+		window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?idVET="+idCALCULOS_VET);
+	}
+}
 function EliminarRegistro(){
-	if(idReconsultas=="0"){
+	if(idCALCULOS_VET=="0"){
 		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
 		
 	}
 	else{
 		
 		var action="eliminardato";
-		cadena = [ 	'idRECONSULTA='   + idReconsultas,
+		cadena = [ 	'idCALCULOS_VET='   + idCALCULOS_VET,
 	             	'a='+action
 	            ].join('&');
 		$.ajax({
-	        url: "../TablaReconsulta",
+	        url: "../TablaCalculosVET",
 	        data: cadena,
 	  	    type: 'post',
 	        dataType: 'json',
@@ -282,24 +278,18 @@ function EliminarRegistro(){
 }
 function limpiartabla(){
 	  
-	idReconsultas="0";
+	idCALCULOS_VET="0";
 	  $('#flex1').flexReload();
 }
 function DatosSeleccionados(id){
-	idReconsultas=id;
+	idCALCULOS_VET=id;
 	document.getElementById('mensajes').innerHTML = '';
-}
-function EditarRegistro(){
-	if(idReconsultas=="0"){
-		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
-	}else{
-		window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?idRec="+idReconsultas);
-	}
 }
 function NuevoRegistro(){
 	var valor = ${idCE2};
-	window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+valor);
+	window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+valor);
 }
+
 </script>
         
 

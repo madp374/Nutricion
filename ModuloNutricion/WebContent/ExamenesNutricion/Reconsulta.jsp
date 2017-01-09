@@ -74,6 +74,66 @@
         <script>
         	var pesoL=0;
         	var idCE="";
+        	var idRec=""; 
+        	
+        	function CargaInicio() {
+            	
+        		AgregarFecha();
+        		
+        		idCE = getUrlVars()["prodId"];
+        		idRec=getUrlVars()["idRec"];
+        		
+        		if(idRec!=undefined){
+        			CargarEdicion(idRec);
+        			document.getElementById("Guard").style.display = 'none';
+        			
+        		}else{
+        			if(idCE==undefined){
+        				//alert('Error reload');
+        			}else{
+        				CargarTallaPeso(idCE);
+        				document.getElementById("Mod").style.display = 'none';
+        			}
+        		}
+        		
+        	}
+        	function CargarEdicion(entrada){
+        	    var action="CargarEdicion";
+        		cadena = [ 	'ID=' + entrada,'a='+action].join('&');
+        		$.ajax({
+        	        url: "../Reconsulta",
+        	        data: cadena,
+        	  	    type: 'post',
+        	        dataType: 'json',
+        	        success: function(data){
+        	        	if(data.resultado=='OK'){
+        	        		document.getElementById('talla').value  = data.talla;
+        		        	pesoL=parseInt(data.peso);
+        		        	document.getElementById('fecha').value  = data.fecha;
+        		        	document.getElementById('pesoL').value  = pesoL;
+        		        	document.getElementById('imc').value  = data.IMC;
+        		        	document.getElementById('pesoG').value  = data.pesoganado;
+        		        	document.getElementById('pesoP').value  = data.pesoperdido;
+        		        	document.getElementById('cintura').value  = data.cintura;
+        		        	document.getElementById('pgrasa').value  = data.porcentajegrasa;
+        		        	document.getElementById('pagua').value  = data.porcentajeagua;
+        		        	document.getElementById('grasavisceral').value  = data.grasavisceral;
+        		        	document.getElementById('masaosea').value  = data.masaosea;
+        		        	document.getElementById('vettanita').value  = data.vettanita;
+        		        	document.getElementById('datossubjetivos').value  = data.datossubjetivos;
+        		        	document.getElementById('tratamiento').value  = data.tratamiento;
+        		        	document.getElementById('educacionalimentaria').value  = data.educacion;
+        		        	document.getElementById('TipoExamen').value  = data.TIPO_EXAMEN_idTIPO_EXAMEN;
+        		        	idCE=data.CONSULTA_EXTERNA_idCONSULTA_EXTERNA;
+        		        	CalcIMC();	
+        		        	
+        	        	}else{
+        	        		alert("Error al cargar");
+        	        	}
+        	        	
+        	        }
+        		});
+        	}
         	function validar_vacio(entrada){
         		var texto="";
         		texto=document.getElementById(entrada).value;
@@ -90,10 +150,13 @@
         		}
         		return texto;
         	}
-        	function Guardar(){
-        		var action="guardar";
-        	
-        		var variable1=validar_vacio('TipoExamen');
+        	function Modificar(){
+        		var action="modificar";
+        		var x = document.getElementById("TipoExamen").selectedIndex;
+        	    var y = document.getElementById("TipoExamen").options;
+        	    
+       
+        		var variable1=y[x].text;
         		var variable2=validar_numerovacio("talla");
         		var variable3=validar_numerovacio("pesoL");
         		var variable4=validar_numerovacio("imc");
@@ -110,14 +173,53 @@
         		var variable14=validar_numerovacio("tratamiento");
         		var variable15=validar_numerovacio("educacionalimentaria");
         		
-        		var cadena = ['ID='+ idCE,'a='+action
-        		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
-        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
-        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
-        		enviar_datos(cadena);
+        		if((idRec!=undefined)&&(idRec!="")&&(variable2!="0")&&(variable3!="0")){
+        			var cadena = ['ID='+ idRec,'a='+action
+        	        		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+        	        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
+        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
+        	        		enviar_datos(cadena);
+        		}
+        		else{
+        			alert("Error al guardar, revise que los campos esten completos");
+        		}
+        	}
+        	function Guardar(){
+        		var action="guardar";
+        		var x = document.getElementById("TipoExamen").selectedIndex;
+        	    var y = document.getElementById("TipoExamen").options;
+        	    
+       
+        		var variable1=y[x].text;
+        		var variable2=validar_numerovacio("talla");
+        		var variable3=validar_numerovacio("pesoL");
+        		var variable4=validar_numerovacio("imc");
+        		var variable5=validar_numerovacio("pesoG");
+        		var variable6=validar_numerovacio("pesoP");
+        		var variable7=validar_numerovacio("cintura");
+        		var variable8=validar_numerovacio("pgrasa");
+        		var variable9=validar_numerovacio("pagua");
+        		var variable10=validar_numerovacio("grasavisceral");
+        		
+        		var variable11=validar_numerovacio("masaosea");
+        		var variable12=validar_numerovacio("vettanita");
+        		var variable13=validar_numerovacio("datossubjetivos");
+        		var variable14=validar_numerovacio("tratamiento");
+        		var variable15=validar_numerovacio("educacionalimentaria");
+        		
+        		if((idCE!=undefined)&&(idCE!="")&&(variable2!="0")&&(variable3!="0")){
+        			var cadena = ['ID='+ idCE,'a='+action
+        	        		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+        	        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
+        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
+        	        		enviar_datos(cadena);
+        		}
+        		else{
+        			alert("Error al guardar, revise que los campos esten completos");
+        		}
+        		
         			         	
 
-        		alert("guardando");
         	}
         	function enviar_datos(datos){
         		var resultado="";
@@ -128,24 +230,17 @@
         	  	    type: 'post',
         	        dataType: 'json',
         	        success: function(data){
-        	        	alert(data.resultado);
+        	        	if(data.resultado=='OK'){
+        	        		alert("Informacion almacenada correctamente");
+        	        		location.reload();
+        	        	}else{
+        	        		alert("ERROR al almacenar en el servidor");
+        	        	}
         	        	
         	        }
         		});
         	}
-        	function CargaInicio() {
         	
-        		AgregarFecha();
-        		
-        		var idCE = getUrlVars()["prodId"];
-        		//var idCE = "1";
-        		if(idCE==undefined){
-        			alert('Error reload');
-        		}else{
-        			CargarTallaPeso(idCE);
-        		}
-        		
-        	}
         	function CargarTallaPeso(entrada){
     		    var action="CargarTallaPeso";
     			cadena = [ 	'ID=' + entrada,'a='+action].join('&');
@@ -193,52 +288,55 @@
         		document.getElementById('pesoP').value  = pesop;
         	}
         	
+        	function CalcIMC(){
+        		var talla=0;
+    			var peso=0;
+    			var imc=0;
+    			
+    			var TempTalla="";
+    			var TempPeso="";
+    			
+    			TempTalla=document.getElementById('talla').value;
+    			TempPeso=document.getElementById('pesoL').value;
+    			
+    			if(TempTalla==""||TempPeso==""){
+    				talla=0;
+    				peso=0;
+    				document.getElementById('imc').value  = "";
+    			}else{
+    				talla =	parseFloat(TempTalla);
+    			    peso =	parseFloat(TempPeso);
+    			    CalcularPeso(peso);
+    			    peso =	parseFloat(TempPeso)*0.453592;
+    			    talla=talla*talla;
+    			    imc=peso/talla;
+    			    
+    			    var action="cargaimc";
+    				cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
+    				$.ajax({
+    			        url: "../IMC",
+    			        data: cadena,
+    			  	    type: 'post',
+    			        dataType: 'json',
+    			        success: function(data){
+    			        	document.getElementById('imc').value  = ""+imc;
+    			        	document.getElementById('Diag').value  = data.diagnostico;
+    			        	document.getElementById('peso').value  = peso;
+    			        	//document.getElementById('pesoM').value  = data.pesomax;
+    			        	//document.getElementById('pesoI').value  = data.pesoideal;
+    			        }
+    				});
+    			}
+        	}
         	function CalcularIMC(event) {
         	    var char = event.which || event.keyCode;
         	    if(char == 13){ 
-        	    
-        			var talla=0;
-        			var peso=0;
-        			var imc=0;
-        			
-        			var TempTalla="";
-        			var TempPeso="";
-        			
-        			TempTalla=document.getElementById('talla').value;
-        			TempPeso=document.getElementById('pesoL').value;
-        			
-        			if(TempTalla==""||TempPeso==""){
-        				talla=0;
-        				peso=0;
-        				document.getElementById('imc').value  = "";
-        			}else{
-        				talla =	parseFloat(TempTalla);
-        			    peso =	parseFloat(TempPeso);
-        			    CalcularPeso(peso);
-        			    peso =	parseFloat(TempPeso)*0.453592;
-        			    talla=talla*talla;
-        			    imc=peso/talla;
-        			    
-        			    var action="cargaimc";
-        				cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
-        				$.ajax({
-        			        url: "../IMC",
-        			        data: cadena,
-        			  	    type: 'post',
-        			        dataType: 'json',
-        			        success: function(data){
-        			        	document.getElementById('imc').value  = ""+imc;
-        			        	document.getElementById('Diag').value  = data.diagnostico;
-        			        	document.getElementById('peso').value  = peso;
-        			        	//document.getElementById('pesoM').value  = data.pesomax;
-        			        	//document.getElementById('pesoI').value  = data.pesoideal;
-        			        }
-        				});
-        			}
-        		    
+        	    	CalcIMC();	    
         		}
         	}
-        	
+        function VerRegistros(){
+        	window.location.replace("/ModuloNutricion/TablasNutricion/ListadoReconsulta.jsp");
+        }	
         </script>
         <div class="container">
          <div class="panel2 panel-body">
@@ -308,7 +406,7 @@
         </div>
         <div class="panel-body">
         
- <form action="../Reconsulta" method="post" class="form-inline" role="form">
+ <form action="../Reconsulta" method="post" class="form-inline" role="form" onsubmit="return false">
    <article>
 <div class="panel panel-primary">
 	<div class="panel-heading">Datos Generales</div>
@@ -323,8 +421,8 @@
 				  <div class="form-group">
 				  
 					  <label for="TipoExame">Tipo de Examen</label><select class="form-control" id="TipoExamen">
-											<option>Primera consulta</option>
-											<option>Reconsulta</option>
+											<option value="1">Primera consulta</option>
+											<option value="2">Reconsulta</option>
 										</select>
 				  </div>
 				  
@@ -432,13 +530,25 @@
   </article>
   </br>
             <div class="row" align="center">
-            <div class="form-group">
+            <div class="form-group" id="Guard">
 						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="Guardar()" >
 						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
 							
 			</div>
+			<div class="form-group" id="Mod">
+						     <label for="BNuevo">Modificar</label>			
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="Modificar()" >
+						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
+							
 			</div>
+			<div class="form-group">
+						     <label for="BNuevo">Registros</label>			
+							<button class="btn btn-default btn-lg" id="guardarg" onclick="VerRegistros()" >
+						     <img src="../imagenes/registros.png" width="80" height="60" title="Registros" /></button>
+							
+			</div>
+        	</div>
 </form>
         
 
