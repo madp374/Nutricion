@@ -748,7 +748,61 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
-	
+	public String ObtenerIDCEX(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO"
+		    				+" FROM CONSULTA_EXTERNA WHERE idCONSULTA_EXTERNA="+ID);
+		 
+		    String ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS="";
+		    String ESTILO_DE_VIDA_idESTILO_DE_VIDA="";
+		    String HABITO_ALIMENTO_idHABITO_ALIMENTO="";
+		    String ANTROPOMETRIA_idANTROPOMETRIA="";
+		    String REGISTRO_idREGISTRO="";
+		    
+		    
+		  
+		    while (rs.next()) {
+		    	
+		    	ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS=rs.getString("ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS");
+			    ESTILO_DE_VIDA_idESTILO_DE_VIDA=rs.getString("ESTILO_DE_VIDA_idESTILO_DE_VIDA");
+			    HABITO_ALIMENTO_idHABITO_ALIMENTO=rs.getString("HABITO_ALIMENTO_idHABITO_ALIMENTO");
+			    ANTROPOMETRIA_idANTROPOMETRIA=rs.getString("ANTROPOMETRIA_idANTROPOMETRIA");
+			    REGISTRO_idREGISTRO=rs.getString("REGISTRO_idREGISTRO");
+			    
+			    resultado=ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS+","
+			    		+ESTILO_DE_VIDA_idESTILO_DE_VIDA+","
+			    		+HABITO_ALIMENTO_idHABITO_ALIMENTO+","
+			    		+ANTROPOMETRIA_idANTROPOMETRIA+","
+			    		+REGISTRO_idREGISTRO;
+
+		    }
+		    
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
 	public String CargarRecordatorio(String ID){
 		String resultado="";
 
@@ -803,6 +857,61 @@ public class Conexion extends HttpServlet{
 		    }
 		    String aux=",\"totalA\":\""+i+"\"";
 		    resultado=aux+marco+resultado+fin;
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String DatosPacientejso(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT p.nombre,YEAR(CURDATE())-YEAR(p.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(p.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD',p.sexo,f.nombre "
+					+" FROM CONSULTA_EXTERNA C, PACIENTE p, FACULTAD f"
+					+" WHERE C.PACIENTE_idPACIENTE=p.idPACIENTE"
+					+" AND p.FACULTAD_idfACULTAD=f.idFACULTAD"
+					+" AND C.idCONSULTA_EXTERNA="+ID);
+		 
+		    String pnombre="";
+		    String pedad="";
+		    String psexo="";
+		    String pfacultad="";
+		   
+
+		   
+		    while (rs.next()) {
+		    	
+		    	pnombre=rs.getString("p.nombre");
+			    pedad=rs.getString("EDAD");
+			    psexo=rs.getString("p.sexo");
+			    pfacultad=rs.getString("f.nombre");
+			    
+			    resultado+=",\"pnombre\":\""+pnombre+"\""
+			    		+",\"pedad\":\""+pedad+"\""
+			    		+",\"psexo\":\""+psexo+"\""
+			    		+",\"pfacultad\":\""+pfacultad+"\"";
+		    	
+		    }
+		    
 		    rs.close();
 		    BDClose();
 		    
@@ -939,14 +1048,14 @@ public class Conexion extends HttpServlet{
 	}
 	public String FrecOption(String entrada){
 		String resultado="0";
-		if(entrada.equalsIgnoreCase("Diariamente")){
-			resultado="4";
-		}else if(entrada.equalsIgnoreCase("Ocasionalmente")){
-			resultado="3";
+		if(entrada.equalsIgnoreCase("Ocasionalmente")){
+			resultado="1";
 		}else if(entrada.equalsIgnoreCase("Dos o tres veces por semana")){
 			resultado="2";
 		}else if(entrada.equalsIgnoreCase("Cuatro a cinco veces por semana")){
-			resultado="1";
+			resultado="3";
+		}else if(entrada.equalsIgnoreCase("Diariamente")){
+			resultado="4";
 		}
 		return resultado;
 	}

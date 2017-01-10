@@ -162,11 +162,15 @@
         	        	if(data.resultado=='OK'){
         	        		document.getElementById('carnet').value  = data.PACIENTE_idPACIENTE;
         	        		document.getElementById('carnet').readOnly = true;
+        	        		
+        	        		CargaDPaciente(data.pnombre,data.pedad,data.psexo,data.pfacultad,data.PACIENTE_idPACIENTE)
+        	        		
         	        		document.getElementById("dbaja").value  = data.DietaBaja;
         	        		document.getElementById("dalta").value  = data.DietaAlta;
         	        		document.getElementById("talla").value  = data.talla;
         	        		document.getElementById("pesousual").value  = data.peso;
         	        		document.getElementById("circunferencia").value  = data.CircunferenciaMuneca;
+        	        		document.getElementById("constitucion").value  = data.ConstitucionOsea;
 
         	        		document.getElementById("fuma").checked  = AsignarCheck(data.fuma);
         	        		document.getElementById("ncigarro").value  = data.numero_cigarros;
@@ -246,7 +250,7 @@
         	        		document.getElementById("frijol").value  = data.FrecF16;
         	        		document.getElementById("pan").value  = data.FrecF17;
         	        		document.getElementById("huevo").value  = data.FrecF18;
-        	        		BuscarPaciente(data.PACIENTE_idPACIENTE);
+        	        		//BuscarPaciente(data.PACIENTE_idPACIENTE);
         	        		
         	        		var aux= parseInt(data.totalA);
         	        		if(aux!=0){
@@ -271,7 +275,7 @@
         	        	}else{
         	        		ERRORSQL=true;
         	        		MostrarMensajeServidor(data.descripcion);
-        	        		IDMulti="";
+        	        		
         	        	}
         	        	
         	        }
@@ -384,6 +388,42 @@
         				
         			return texto;	
         	   		
+        	}
+		function CargaDPaciente(pnombre,pedad,psexo,pfacultad,entrada){
+        		
+        		var carnet="";
+        		if(entrada=='A'){
+        			carnet=validar_numerovacio('carnet');
+            		
+        		}else{
+        			carnet=entrada;
+        		}
+        		carnetaccion=carnet;
+        		var texto="<div class=\"form-group\">"
+	   	      		 + "<label for=\"LNombre\">Nombre</label>"
+	   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"nombre\" id=\"nombre\" readonly required  />"
+	   	    	      +"</div>"
+	   	    	      +"<div class=\"form-group\">"
+		   	      		 + "<label for=\"LSexo\">Sexo</label>"
+		   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"sexo\" id=\"sexo\" readonly required  />"
+		   	    	      +"</div>"
+	   					+"<div class=\"form-group\">"
+		   	      		 + "<label for=\"Ledad\">Edad</label>"
+		   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"edad\" id=\"edad\" readonly required  />"
+		   	    	      +"</div>"
+		   	    	   +"<div class=\"form-group\">"
+		   	      		 + "<label for=\"Lfacultad\">Facultad</label>"
+		   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"facultad\" id=\"facultad\" readonly required  />"
+		   	    	      +"</div>";
+	   	        		var capa = document.getElementById("capa");
+	   	        		capa.innerHTML = texto;
+	   	        		document.getElementById('nombre').value  = pnombre;
+		        		document.getElementById('sexo').value  = psexo;
+		        		document.getElementById('edad').value  = pedad;
+		        		document.getElementById('facultad').value  = pfacultad;
+	        			busqueda=true;
+	        			document.getElementById("enfermedad").focus();
+        		
         	}
         	function BuscarPaciente(entrada){
         		
@@ -574,13 +614,13 @@
             		var variable7=validar_check("estreñimiento");
             		var variable8=validar_check("fuma"); 
             		var variable9=validar_numerovacio("ncigarro");
-            		var variable10=validad_vacio("fumafrec");
+            		var variable10=TextoSeleccion("fumafrec");
             		
             		var variable11=validar_check("ejercicio"); 
             		var variable12=validar_numerovacio("ejerciciotiempo");
-            		var variable13=validad_vacio("ejerciciofrec");
+            		var variable13=TextoSeleccion("ejerciciofrec");
             		var variable14=validar_check("bebidaalc"); 
-            		var variable15=validad_vacio("bebidaalcfrec");
+            		var variable15=TextoSeleccion("bebidaalcfrec");
             		var variable16=validar_check("tdesayuno"); 
             		var variable17=validar_hora("horadesayuno");
             		var variable18=validar_check("refam"); 
@@ -618,39 +658,39 @@
             		var variable43=validar_numerovacio("talla");
             		var variable44=validar_numerovacio("pesousual");
             		var variable45=validar_numerovacio("circunferencia");
-            		var variable46=validad_vacio("constitucion");
+            		var variable46=TextoSeleccion("constitucion");
             		
             		var variable47=validar_numerovacio("grasa");
-            		var variable48=validar_numerovacio("musculo");
-            		var variable49=validar_numerovacio("pagua");
+            		var variable48=validar_numerovacio("pagua");
+            		var variable49=validar_numerovacio("musculo");
             		var variable50=validar_numerovacio("masa");
             		var variable51=validar_numerovacio("viscera");
             		var variable52=validar_numerovacio("abdomen");
             		var variable53=validad_vacio("plan");
             		
-            		var variable54=validad_vacio("verdura");
-            		var variable55=validad_vacio("fruta");
-            		var variable56=validad_vacio("pollo");
-            		var variable57=validad_vacio("lacteo");
-            		var variable58=validad_vacio("hamburguesa");
-            		var variable59=validad_vacio("snack");
-            		var variable60=validad_vacio("refresco");
+            		var variable54=TextoSeleccion("verdura");
+            		var variable55=TextoSeleccion("fruta");
+            		var variable56=TextoSeleccion("pollo");
+            		var variable57=TextoSeleccion("lacteo");
+            		var variable58=TextoSeleccion("hamburguesa");
+            		var variable59=TextoSeleccion("snack");
+            		var variable60=TextoSeleccion("refresco");
             		
             		
-            		var variable61=validad_vacio("galleta");
-            		var variable62=validad_vacio("dulce");
-            		var variable63=validad_vacio("embutido");
-            		var variable64=validad_vacio("sopa");
-            		var variable65=validad_vacio("fritura");
-            		var variable66=validad_vacio("tortilla");
-            		var variable67=validad_vacio("papa");
-            		var variable68=validad_vacio("pasta");
-            		var variable69=validad_vacio("arroz");
-            		var variable70=validad_vacio("frijol");
+            		var variable61=TextoSeleccion("galleta");
+            		var variable62=TextoSeleccion("dulce");
+            		var variable63=TextoSeleccion("embutido");
+            		var variable64=TextoSeleccion("sopa");
+            		var variable65=TextoSeleccion("fritura");
+            		var variable66=TextoSeleccion("tortilla");
+            		var variable67=TextoSeleccion("papa");
+            		var variable68=TextoSeleccion("pasta");
+            		var variable69=TextoSeleccion("arroz");
+            		var variable70=TextoSeleccion("frijol");
             		
             		
-            		var variable71=validad_vacio("pan");
-            		var variable72=validad_vacio("huevo");
+            		var variable71=TextoSeleccion("pan");
+            		var variable72=TextoSeleccion("huevo");
             		var variable73=obtenerRegistro();
             		
             		var variable74="";
@@ -666,6 +706,146 @@
                 	}
             		
             		var cadena = [ 	'carnet='+ carnet,'a='+action
+            			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
+            			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
+            			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
+            			         	  ,'p16='+variable16,'p17='+variable17,'p18='+variable18,'p19='+variable19,'p20='+variable20
+            			         	  ,'p21='+variable21,'p22='+variable22,'p23='+variable23,'p24='+variable24,'p25='+variable25
+            			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
+            			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
+            			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
+            			         	  ,'p41='+variable41,'p42='+variable42,'p43='+variable43,'p44='+variable44,'p45='+variable45
+            			         	  ,'p46='+variable46,'p47='+variable47,'p48='+variable48,'p49='+variable49,'p50='+variable50
+            			         	  ,'p51='+variable51,'p52='+variable52,'p53='+variable53,'p54='+variable54,'p55='+variable55
+            			         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
+            			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
+            			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
+            			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
+                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77].join('&');
+            		
+            	    enviar_datos(cadena);
+            			         	
+            		
+        		}else{
+        			ERRORSQL=true;
+        			MostrarMensajeServidor("Error, realice la busqueda del paciente e intentelo nuevamente");
+        			//alert("falta carnet");
+        		}
+        		
+        	}
+        	function TextoSeleccion(entrada){
+        		var resultado="";
+        		var e = document.getElementById(entrada);
+    			resultado = e.options[e.selectedIndex].text;
+    			return resultado;
+        	}
+        	function Modificar(){
+        		ERRORSQL=false;
+        		if(carnetaccion!=""){
+        			var action="modificar";
+            		var carnet=document.getElementById('carnet').value;
+            		
+            		var variable1=validad_vacio('enfermedad');
+            		var variable2=validad_vacio("medicamento");
+            		var variable3=validad_vacio("suplemento");
+            		var variable4=validar_check("diarrea");
+            		var variable5=validar_check("flatulencia");
+            		var variable6=validar_check("acidez");
+            		var variable7=validar_check("estreñimiento");
+            		var variable8=validar_check("fuma"); 
+            		var variable9=validar_numerovacio("ncigarro");
+            		var variable10=TextoSeleccion("fumafrec");
+            		
+            		var variable11=validar_check("ejercicio"); 
+            		var variable12=validar_numerovacio("ejerciciotiempo");
+            		var variable13=TextoSeleccion("ejerciciofrec");
+            		var variable14=validar_check("bebidaalc"); 
+            		var variable15=TextoSeleccion("bebidaalcfrec");
+            		var variable16=validar_check("tdesayuno"); 
+            		var variable17=validar_hora("horadesayuno");
+            		var variable18=validar_check("refam"); 
+            		var variable19=validar_hora("refamhr");
+            		var variable20=validar_check("talmu"); 
+            		
+            		
+            		         	
+            		var variable21=validar_hora("almh");
+            		var variable22=validar_check("refpm"); 
+            		var variable23=validar_hora("refpmhr");
+            		var variable24=validar_check("cenaa"); 
+            		var variable25=validar_hora("cenhr");
+            		var variable26=validar_check("Lcasa"); 
+            		var variable27=validar_check("Ltrabajo");
+            		var variable28=validar_check("Lotro"); 
+            		var variable29=validar_check("Ocasa"); 
+            		var variable30=validar_check("Ocafeteria"); 
+            		
+            		
+            		var variable31=validar_check("Ocaseta"); 
+            		var variable32=validar_check("Ochiclero"); 
+            		var variable33=validar_numerovacio("tcdesayuno");
+            		var variable34=validar_numerovacio("tcrefaccion");
+            		var variable35=validar_numerovacio("tcalmuerzo");
+            		var variable36=validar_numerovacio("tccena");
+            		var variable37=validar_numerovacio("agua");
+            		var variable38=validad_vacio("ald");
+            		var variable39=validad_vacio("aln");
+            		var variable40=validad_vacio("alp");
+
+            		
+            		var variable41=validad_vacio("dbaja");
+            		var variable42=validad_vacio("dalta");
+            		var variable43=validar_numerovacio("talla");
+            		var variable44=validar_numerovacio("pesousual");
+            		var variable45=validar_numerovacio("circunferencia");
+            		var variable46=TextoSeleccion("constitucion");
+            		
+            		var variable47=validar_numerovacio("grasa");
+            		var variable48=validar_numerovacio("pagua");
+            		var variable49=validar_numerovacio("musculo");
+            		var variable50=validar_numerovacio("masa");
+            		var variable51=validar_numerovacio("viscera");
+            		var variable52=validar_numerovacio("abdomen");
+            		var variable53=validad_vacio("plan");
+            		
+            		var variable54=TextoSeleccion("verdura");
+            		var variable55=TextoSeleccion("fruta");
+            		var variable56=TextoSeleccion("pollo");
+            		var variable57=TextoSeleccion("lacteo");
+            		var variable58=TextoSeleccion("hamburguesa");
+            		var variable59=TextoSeleccion("snack");
+            		var variable60=TextoSeleccion("refresco");
+            		
+            		
+            		var variable61=TextoSeleccion("galleta");
+            		var variable62=TextoSeleccion("dulce");
+            		var variable63=TextoSeleccion("embutido");
+            		var variable64=TextoSeleccion("sopa");
+            		var variable65=TextoSeleccion("fritura");
+            		var variable66=TextoSeleccion("tortilla");
+            		var variable67=TextoSeleccion("papa");
+            		var variable68=TextoSeleccion("pasta");
+            		var variable69=TextoSeleccion("arroz");
+            		var variable70=TextoSeleccion("frijol");
+            		
+            		
+            		var variable71=TextoSeleccion("pan");
+            		var variable72=TextoSeleccion("huevo");
+            		var variable73=obtenerRegistro();
+            		
+            		var variable74="";
+            		var variable75="";
+            		var variable76="";
+            		var variable77="";
+            		
+            		if(busqueda==false){
+                		variable74=validad_vacio('nombre');
+                		variable75=validad_vacio('Sexo');
+                		variable76=validad_vacio('fechaNac');
+                		variable77=validad_vacio('Facultad');
+                	}
+            		
+            		var cadena = [ 	'ID='+idCE,'carnet='+ carnet,'a='+action
             			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
             			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
             			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
@@ -1167,7 +1347,7 @@
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="fumafrec">
 							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semanae</option>
+							<option value="2">Dos o tres veces por semana</option>
 							<option value="3">Cuatro a cinco veces por semana</option>
 							<option value="4">Diariamente</option>
 						</select>
@@ -1188,7 +1368,7 @@
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="ejerciciofrec">
 							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semanae</option>
+							<option value="2">Dos o tres veces por semana</option>
 							<option value="3">Cuatro a cinco veces por semana</option>
 							<option value="4">Diariamente</option>
 						</select>
@@ -1204,7 +1384,7 @@
   		<label for="Lsumapliegues">Frecuencia</label>
   		<select class="form-control" id="bebidaalcfrec">
 							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semanae</option>
+							<option value="2">Dos o tres veces por semana</option>
 							<option value="3">Cuatro a cinco veces por semana</option>
 							<option value="4">Diariamente</option>
 						</select>

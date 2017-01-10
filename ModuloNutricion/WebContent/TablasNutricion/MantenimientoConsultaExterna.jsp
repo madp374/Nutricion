@@ -271,15 +271,15 @@ function EliminarRegistro(){
 	             	'a='+action
 	            ].join('&');
 		$.ajax({
-	        url: "../TablaConsultaExterna",
+	        url: "../ConsultaExterna",
 	        data: cadena,
 	  	    type: 'post',
 	        dataType: 'json',
 	        success: function(data){
 	        	
 	        	if(data.resultado=='OK'){
-	        		 document.getElementById('mensajes').innerHTML = data.mensaje;
-	        		limpiartabla();
+	        		 document.getElementById('mensajes').innerHTML = "Registro eliminado";
+	        		 limpiartabla();
 	        	}else{
 	        		document.getElementById('mensajes').innerHTML = 'Error al eliminar';
 	        		
@@ -297,6 +297,9 @@ function limpiartabla(){
 function DatosSeleccionados(id){
 	idCONSULTA_EXTERNA=id;
 	document.getElementById('mensajes').innerHTML = '';
+}
+function NuevoRegistro(){
+	window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp");
 }
 
 </script>
