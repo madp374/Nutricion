@@ -33,6 +33,11 @@
 			    padding-bottom: 9px;
 			    margin: 0px 0 0px;
 			}
+			.btn-default {
+			    color: #333;
+			    background-color: #D8D6D6;
+			    border-color: #ccc;
+			}
 		</style>
 		<style type="text/css">
 		label { display:block; margin:5px 0 5px; font-size:10pt; }
@@ -169,7 +174,7 @@
         <h3 class="panel-title">Examen Consulta Externa</h3>
         </div>
         <div class="panel-body">
-	
+	<form action="../CalculosVET" method="post" class="form-inline" role="form" onsubmit="return false">
 	<label id="mensajes">.</label>
 	
 	<div class="table-responsive">
@@ -181,30 +186,24 @@
 	</tr>
 	</table>
 	</div>
-	<p align="center">
-				<input type="image" name="checkout"
-			            	 class="btn btn-default btn-lg" type="button"
-											value="Pr"
-											src="../imagenes/nuevo.png" style="width: 80px; height:60px;\"
-											alt="Proceed to Checkout\"
-											onclick="NuevoRegistro()"
-											title="Nuevo">
-            	<input type="image" name="checkout"
-            	 class="btn btn-default btn-lg" type="button"
-								value="Pr"
-								src="../imagenes/editar.png" style="width: 80px; height:60px;\"
-								alt="Proceed to Checkout\"
-								onclick="EditarRegistro()"
-								title="Editar">
-        	
-            	<input type="image" name="checkout"
-            	 class="btn btn-default btn-lg" type="button"
-								value="Pr"
-								src="../imagenes/eliminar.png" style="width: 80px; height:60px;\"
-								alt="Proceed to Checkout\"
-								onclick="EliminarRegistro()"
-								title="Eliminar">
-        	</p>
+	<div class="row" align="center" id="Mod" >
+      		<div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
+						     <img src="../imagenes/nuevo.png" width="50" height="40" title="Nuevo" />Nuevo</button>
+							
+			</div>
+            <div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="EditarRegistro()" >
+						     <img src="../imagenes/guardado.png" width="50" height="40" title="Modificar" />Modificar</button>
+							
+			</div>
+			<div class="form-group" >		
+							<button class="btn btn-default btn-lg" onclick="EliminarRegistro()" >
+						     <img src="../imagenes/eliminar.png" width="50" height="40" title="Eliminar" />Eliminar</button>
+							
+			</div>
+		</div>
+ </form>
 
 <script type="text/javascript">
 var idCONSULTA_EXTERNA="";

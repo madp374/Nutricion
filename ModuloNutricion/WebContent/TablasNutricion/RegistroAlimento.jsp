@@ -91,7 +91,7 @@
 
         </head>
 
-        <body>
+        <body onload="CargaInicio()">
        
         <div class="container">
          <div class="panel2 panel-body">
@@ -158,11 +158,11 @@
         <div class="panel panel-default">
         
         <div class="panel-heading">
-        <h3 class="panel-title">Examen Calculos VET</h3>
+        <h3 class="panel-title">Registro de Alimentos</h3>
         </div>
         <div class="panel-body">
-	<form action="../CalculosVET" method="post" class="form-inline" role="form" onsubmit="return false">
-	<label id="mensajes">.</label>
+	
+	
 	
 	<div class="table-responsive">
 	<table class="table" align="center">
@@ -173,14 +173,68 @@
 	</tr>
 	</table>
 	</div>
-<div class="row" align="center" id="Mod" >
+	<label id="mensajes">.</label>
+	 <form action="../RegistroAlimento" method="post" class="form-inline" role="form" onsubmit="return false">
+	 <div class="row">  
+	  <div class="form-group">
+		<label class="form-control" for="NCarnet" style="width: 150px;" >Codigo</label>
+		<input class="form-control" name="codigo" id="codigo" type="number" readonly/>
+	  </div>
+	 </div>
+	<div class="row">  
+	  <div class="form-group">
+		<label class="form-control" for="NCarnet" style="width: 150px;" >Nombre</label>
+		<input class="form-control" name="nombre" id="nombre"  required/>
+	  </div>
+     </div>
+     <div class="row">  
+	  <div class="form-group">
+		<label class="form-control" for="NCarnet" style="width: 150px;" >Calorias</label>
+		<input class="form-control" name="calorias" id="calorias" type="number" required/>
+	  </div>
+     </div>
+     <div class="row">  
+	  <div class="form-group">
+		<label class="form-control" for="NCarnet" style="width: 150px;" >Grupo</label>
+		 <select class="form-control" id="Grupo">
+													<option value="1" >Lacteos bajos en grasa</option>
+													<option value="2" >Lacteos enteros</option>
+													<option value="3" >Vegetales</option>
+													<option value="4" >Frutas</option>
+													<option value="5" >Cereales</option>
+													<option value="6" >Carnes</option>
+													<option value="7" >Grasa</option>
+													<option value="8" >Azucares</option>
+													</select>
+	  </div>
+     </div>
+     <div class="row" align="center" id="guard" >
+      		<div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="50" height="40" title="Guardar" />Guardar</button>
+							
+			</div>
+		</div>
+     <div class="row" align="center" id="ini" >
+      		<div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
+						     <img src="../imagenes/nuevo.png" width="50" height="40" title="Nuevo" />Nuevo</button>
+							
+			</div>
+			<div class="form-group" >		
+							<button class="btn btn-default btn-lg" onclick="EliminarRegistro()" >
+						     <img src="../imagenes/eliminar.png" width="50" height="40" title="Eliminar" />Eliminar</button>
+							
+			</div>
+		</div>
+      <div class="row" align="center" id="Mod" >
       		<div class="form-group" >			
 							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
 						     <img src="../imagenes/nuevo.png" width="50" height="40" title="Nuevo" />Nuevo</button>
 							
 			</div>
             <div class="form-group" >			
-							<button class="btn btn-default btn-lg" onclick="EditarRegistro()" >
+							<button class="btn btn-default btn-lg" onclick="Modificar()" >
 						     <img src="../imagenes/guardado.png" width="50" height="40" title="Modificar" />Modificar</button>
 							
 			</div>
@@ -190,37 +244,39 @@
 							
 			</div>
 		</div>
-</form>
+	 	
+	 </form>
+	
+
 <script type="text/javascript">
-var idCALCULOS_VET="";
+var idALIMENTO=0;
 $("#flex1").flexigrid
 (
 {
-url: '../TablaCalculosVET',
+url: '../TablaAlimento',
 method: 'POST',
 dataType: 'xml',
 colModel : [
 	{display: 'Seleccionar', name : 'chktradio', width : 90, sortable : false, align: 'left'},
-	{display: 'ID', name : 'idCALCULOS_VET', width : 50, sortable : true, align: 'center'},
-	{display: 'Paciente', name : 'Paciente_idPaciente', width : 80, sortable : true, align: 'left'},
-	{display: 'fecha', name : 'fecha', width : 120, sortable : true, align: 'left'}
+	{display: 'ID', name : 'idALIMENTO', width : 50, sortable : true, align: 'center'},
+	{display: 'nombre', name : 'nombre', width : 80, sortable : true, align: 'left'},
+	{display: 'grupo', name : 'grupo', width : 120, sortable : true, align: 'left'}
 	],
 searchitems : [
-	{display: 'ID', name : 'idCALCULOS_VET', isdefault: true},
-	{display: 'Carnet', name : 'Paciente_idPaciente'},
-	{display: 'fecha', name : 'fecha'}
+	{display: 'ID', name : 'idALIMENTO', isdefault: true},
+	{display: 'nombre', name : 'A.nombre'},
+	{display: 'grupo', name : 'G.nombre'}
 	],
-sortname: "idCALCULOS_VET",
+sortname: "idALIMENTO",
 sortorder: "asc",
 usepager: true,
-title: 'Calculos VET',
+title: 'Alimento',
 useRp: true,
 rp: 10,
 showTableToggleBtn: true,
 width: 800,
 onSubmit: addFormData,
-height: 300,
-
+height: 250,
 }
 );
 
@@ -236,37 +292,117 @@ function addFormData()
 	$("#flex1").flexOptions({params: dt});
 	return true;
 	}
-
+function CargaInicio(){
+	document.getElementById("Mod").style.display = 'none';
+	document.getElementById("guard").style.display = 'none';
+}
 function EditarRegistro(){
-	if(idCALCULOS_VET=="0"){
-		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
+	if(idALIMENTO=="0"){
+		MensajeServidor(2,"Error, seleccione un registro valido");
 	}else{
-		window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?idVET="+idCALCULOS_VET);
+		//window.location.replace("/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp?MID="+idMultifasicos);
 	}
 }
+function Guardar(){
+	var nombre=document.getElementById('nombre').value;
+	var caloria=document.getElementById('calorias').value;
+	var grupo=document.getElementById('Grupo').value;
+	if(nombre!=""&&caloria!=""&&grupo!=""){
+		//alert(nombre+","+caloria+","+grupo);
+		AñadirAlimentoBD(nombre,caloria,grupo);
+	}else{
+		MensajeServidor(2,"Error, faltan campos a ingresar");
+	}
+}
+function Modificar(){
+	var codigo=document.getElementById('codigo').value;
+	var nombre=document.getElementById('nombre').value;
+	var caloria=document.getElementById('calorias').value;
+	var grupo=document.getElementById('Grupo').value;
+	
+	if(codigo!=""&&nombre!=""&&caloria!=""){
+		var action="modificar";
+		var cadena = ['a='+action,'codigo='+codigo,'alimento='+nombre,'caloria='+caloria,'grupo='+grupo].join('&');
+
+
+		$.ajax({
+	        url: "../TablaAlimento",
+	        data: cadena,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	if(data.resultado=='OK'){
+	        		limpiartabla();
+	        		MensajeServidor(1,data.descripcion);
+	        	}else{
+	        		MensajeServidor(2,data.descripcion);
+	        	}
+	        	
+	        	
+	        	
+	        }
+		});
+	}else{
+		MensajeServidor(2,"Error, faltan campos a ingresar");
+	}
+	
+	
+}
+function AñadirAlimentoBD(alim,cal,grupo){
+	var action="agregar";
+	var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
+
+
+	$.ajax({
+        url: "../Alimento",
+        data: cadena,
+  	    type: 'post',
+        dataType: 'json',
+        success: function(data){
+        	if(data.resultado=='OK'){
+        		idALIMENTO=0;
+        		document.getElementById('nombre').value = "";
+        		document.getElementById('calorias').value = "";
+        		document.getElementById('Grupo').value = "";
+        		limpiartabla();
+        		MensajeServidor(1,"Registro almacenado correctamente");
+        	}else{
+        		MensajeServidor(2,data.descripcion);
+        	}
+        	
+        	
+        	
+        }
+	});
+	
+}
 function EliminarRegistro(){
-	if(idCALCULOS_VET=="0"){
-		document.getElementById('mensajes').innerHTML = 'Error, seleccione un registro valido';
-		
+	if(idALIMENTO==0){
+		MensajeServidor(2,"Error, seleccione un registro valido");		
 	}
 	else{
 		
 		var action="eliminardato";
-		cadena = [ 	'idCALCULOS_VET='   + idCALCULOS_VET,
+		cadena = [ 	'idALIMENTO='   + idALIMENTO,
 	             	'a='+action
 	            ].join('&');
 		$.ajax({
-	        url: "../TablaCalculosVET",
+	        url: "../TablaAlimento",
 	        data: cadena,
 	  	    type: 'post',
 	        dataType: 'json',
 	        success: function(data){
 	        	
 	        	if(data.resultado=='OK'){
-	        		 document.getElementById('mensajes').innerHTML = data.mensaje;
-	        		limpiartabla();
+	        		 MensajeServidor(1,data.descripcion);	
+	        		 document.getElementById('codigo').value = "";
+	        		 document.getElementById('nombre').value = "";
+	        		 document.getElementById('calorias').value = "";
+	        		 document.getElementById('Grupo').value = 1;
+	        		 idALIMENTO=0;
+	        		 limpiartabla();
 	        	}else{
-	        		document.getElementById('mensajes').innerHTML = 'Error al eliminar';
+	        		MensajeServidor(2,"Error, el alimento esta siendo utilizado en otro registro y no puede ser eliminado");
 	        		
 	        	}
 	        }
@@ -276,18 +412,61 @@ function EliminarRegistro(){
 }
 function limpiartabla(){
 	  
-	idCALCULOS_VET="0";
+	idALIMENTO="0";
 	  $('#flex1').flexReload();
 }
-function DatosSeleccionados(id){
-	idCALCULOS_VET=id;
+function MensajeServidor(codigo,descripcion){
+	if(codigo==1){
+		document.getElementById('mensajes').innerHTML = descripcion;
+		document.getElementById('mensajes').style.color = 'green';
+	}else if(codigo==2){
+		document.getElementById('mensajes').innerHTML = descripcion;
+		document.getElementById('mensajes').style.color = 'red';
+	}
+}
+function DatosSeleccionados(id,nomb,caloria,grup){
+	idALIMENTO=id;
+	document.getElementById('codigo').value = id;
+	document.getElementById('nombre').value = nomb;
+	document.getElementById('calorias').value = caloria;
+	document.getElementById('Grupo').value = valorselect(grup);
 	document.getElementById('mensajes').innerHTML = '';
+	document.getElementById("ini").style.display = 'none';
+	document.getElementById("guard").style.display = 'none';
+	document.getElementById("Mod").style.display = 'block';
+	
 }
 function NuevoRegistro(){
-	var valor = ${idCE2};
-	window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+valor);
+	idALIMENTO=0;
+	document.getElementById('codigo').value = "";
+	document.getElementById('nombre').value = "";
+	document.getElementById('calorias').value = "";
+	document.getElementById('Grupo').value = 1;
+	document.getElementById("guard").style.display = 'block';
+	document.getElementById("Mod").style.display = 'none';
+	document.getElementById("ini").style.display = 'none';
 }
-
+function valorselect(entrada){
+	var resultado=0;
+	if(entrada=='Lacteos bajos en grasa'){
+		resultado=1;
+	}else if(entrada=='Lacteos enteros'){
+		resultado=2;
+	}if(entrada=='Vegetales'){
+		resultado=3;
+	}if(entrada=='Frutas'){
+		resultado=4;
+	}if(entrada=='Cereales'){
+		resultado=5;
+	}if(entrada=='Carnes'){
+		resultado=6;
+	}if(entrada=='Grasa'){
+		resultado=7;
+	}if(entrada=='Azucares'){
+		resultado=8;
+	}
+	return resultado;
+}
 </script>
         
 

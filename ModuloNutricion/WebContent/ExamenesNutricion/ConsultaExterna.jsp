@@ -51,6 +51,11 @@
 			.container{
 				width: 100%;
 			}
+			.btn-default {
+			    color: #333;
+			    background-color: #D8D6D6;
+			    border-color: #ccc;
+			}
 		</style>
 		<style type="text/css">
 		label { display:block; margin:5px 0 5px; font-size:9pt; }

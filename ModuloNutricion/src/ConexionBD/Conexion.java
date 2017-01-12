@@ -1490,17 +1490,17 @@ public int countRec(String fname, String tname) throws Exception {
 
 		    cmd.executeUpdate(query);
 			
-			System.out.println("Conexión realizada con éxito a: "+conn.getCatalog());
+			//System.out.println("Conexión realizada con éxito a: "+conn.getCatalog());
 			
 			BDClose();
 			
 			} catch(SQLException ex)
 			{ 	
 				resultado="{\"resultado\":\"ERROR\"}";
-				System.out.println("Se produjo una excepción durante la conexión:"+ex);
+				//System.out.println("Se produjo una excepción durante la conexión:"+ex);
 			} catch(Exception ex){ 
 				resultado="{\"resultado\":\"ERROR\"}";
-				System.out.println("Se produjo una excepción:"+ex);
+				//System.out.println("Se produjo una excepción:"+ex);
 			}
 		return resultado;
 	}

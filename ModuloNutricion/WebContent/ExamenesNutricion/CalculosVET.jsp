@@ -30,6 +30,11 @@
 			    margin: 0px 0 0px;
 			}
 			.imc2 {width:10px;}
+			.btn-default {
+			    color: #333;
+			    background-color: #D8D6D6;
+			    border-color: #ccc;
+			}
 		</style>
 		<style type="text/css">
 			label { display:block; margin:5px 0 5px; font-size:9pt; }
@@ -1374,26 +1379,31 @@
 
   </article>
   </br>
-            <div class="row" align="center">
-            <div class="form-group" id="Guard">
-						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="Guardar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
+           <div class="row" align="center" id="Guard" >
+      		<div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="50" height="40" title="Guardar" />Guardar</button>
 							
 			</div>
-			<div class="form-group" id="Mod">
-						     <label for="BNuevo">Modificar</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="Modificar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
+			<div class="form-group" >		
+							<button class="btn btn-default btn-lg" onclick="VerRegistros()" >
+						     <img src="../imagenes/registros.png" width="50" height="40" title="Ver Registros" />Ver Registros</button>
 							
 			</div>
-			<div class="form-group">
-						     <label for="BNuevo">Registros</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="VerRegistros()" >
-						     <img src="../imagenes/registros.png" width="80" height="60" title="Registros" /></button>
+		</div>
+		<div class="row" align="center" id="Mod" >
+      		
+            <div class="form-group" >			
+							<button class="btn btn-default btn-lg" onclick="Modificar()" >
+						     <img src="../imagenes/guardado.png" width="50" height="40" title="Modificar" />Modificar</button>
 							
 			</div>
-        	</div>
+			<div class="form-group" >		
+							<button class="btn btn-default btn-lg" onclick="VerRegistros()" >
+						     <img src="../imagenes/registros.png" width="50" height="40" title="Ver Registros" />Ver Registros</button>
+							
+			</div>
+		</div>
 </form>
         
 
