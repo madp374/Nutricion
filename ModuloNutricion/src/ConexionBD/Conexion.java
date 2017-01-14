@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -927,6 +928,65 @@ public class Conexion extends HttpServlet{
 			return resultado;
 		}
 		
+	}
+	public String CargaContenidos(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT archivo, contenido, fecha_inicio, fecha_fin FROM TRIFOLIAR where idTRIFOLIAR="+ID);
+		 
+		    String contenido="";
+		    String archivo="";
+		    String fecha_ini="";
+		    String fecha_fin="";
+		   
+
+		    while (rs.next()) {
+		    	archivo=rs.getString("archivo");
+		    	contenido=CambioHTML(rs.getString("contenido"));
+		    	fecha_ini=rs.getString("fecha_inicio");
+			    fecha_fin=rs.getString("fecha_fin");
+		    }
+		    
+		    rs.close();
+		    BDClose();
+		
+		    resultado="{\"resultado\":\"OK\",\"contenido\":\""+contenido+"\",\"archivo\":\""+archivo+"\",\"fecha_ini\":\""+fecha_ini+"\",\"fecha_fin\":\""+fecha_fin+"\"}";
+		    //System.out.println(resultado);
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String CambioHTML(String texto){
+		String resultado="";
+		int longitud = texto.length();
+		String aux;
+		for(int i=0;i<longitud;i++){
+			aux=texto.substring(i,i+1);
+			if(aux.equals("\"")){
+				resultado+="\\"+aux;
+			}else{
+				resultado+=aux;
+			}
+		}
+		return resultado;
 	}
 	public String CargaTiemposComi(String ID){
 		String resultado="";

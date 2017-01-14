@@ -2,6 +2,8 @@ package TablasNutricion;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -38,14 +40,27 @@ public class TablaTrifoliar extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	public String nombreArchivo(String entrada){
+		String resultado="";
+		if(entrada.equalsIgnoreCase("")){
+			resultado=entrada;
+		}else{
+			String[] cadena = entrada.split("\\\\");
+			int longitud=cadena.length-1;
+			
+			resultado=cadena[longitud];
+			//System.out.println("cadena:"+resultado+",longitud:"+longitud);
+		}
+		return resultado;
+	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=ValidarRequest(request.getParameter("a"));
-		//System.out.println("accion"+action);
+		//System.out.println("accion2"+action);
 		if(action.equalsIgnoreCase("eliminardato")){
 			String result="";
 			PrintWriter out = response.getWriter();
-			String IdBorrar=request.getParameter("idALIMENTO");
-			String sql = "delete from ALIMENTO where idALIMENTO="+IdBorrar+"; ";
+			String IdBorrar=request.getParameter("idTRIFOLIAR");
+			String sql = "DELETE FROM TRIFOLIAR WHERE idTRIFOLIAR="+IdBorrar+"; ";
 
 			try {
 				Conexion consulta = new Conexion();
@@ -60,6 +75,15 @@ public class TablaTrifoliar extends HttpServlet {
 			
 			out.println(result);
 			
+		}else if(action.equalsIgnoreCase("carga")){
+			String ID=request.getParameter("idTRIFOLIAR");
+			//System.out.println(ID);
+			PrintWriter out = response.getWriter();
+			Conexion consulta = new Conexion();
+			String result=consulta.CargaContenidos(ID);
+			
+			//System.out.println(result);
+			out.println(result);
 		}else if(action.equalsIgnoreCase("agregar")){
 			String result="";
 			PrintWriter out = response.getWriter();
@@ -67,9 +91,14 @@ public class TablaTrifoliar extends HttpServlet {
 			String estado=request.getParameter("estado");
 			String descripcion=request.getParameter("descripcion");
 			String contenido=request.getParameter("contenido");
-			String archivo=request.getParameter("archivo");
+			
+			
+			
+			String archivo=nombreArchivo(request.getParameter("archivo"));
 			String fecha_ini=request.getParameter("fecha_ini");
 			String fecha_fin=request.getParameter("fecha_fin");
+			
+			//System.out.println("path:"+archivo);
 			
 			String sql = "INSERT INTO TRIFOLIAR(estado, titulo, descripcion, contenido, archivo, fecha_inicio, fecha_fin) "+
 					"VALUES('"+estado+"','"+titulo+"','"+descripcion+"','"+contenido+"','"+archivo+"','"+fecha_ini+"','"+fecha_fin+"');";
@@ -90,25 +119,33 @@ public class TablaTrifoliar extends HttpServlet {
 		}else if(action.equalsIgnoreCase("modificar")){
 			String result="";
 			PrintWriter out = response.getWriter();
-			String ID=request.getParameter("codigo");
-			String alimento=request.getParameter("alimento");
-			String caloria=request.getParameter("caloria");
-			String grupo=request.getParameter("grupo");
+			String ID=request.getParameter("ID");
+			String titulo=request.getParameter("titulo");
+			String estado=request.getParameter("estado");
+			String descripcion=request.getParameter("descripcion");
+			String contenido=request.getParameter("contenido");
 			
-			String sql = "UPDATE ALIMENTO SET nombre='"+alimento+"', caloria="+caloria+", GrupoAlimenticio_idGrupoAlimenticio="+grupo+" WHERE idALIMENTO="+ID+"; ";
+			
+			
+			String archivo=nombreArchivo(request.getParameter("archivo"));
+			String fecha_ini=request.getParameter("fecha_ini");
+			String fecha_fin=request.getParameter("fecha_fin");
+			
+			//System.out.println("path:"+archivo);
+			
+			String sql = "UPDATE TRIFOLIAR SET estado='"+estado+"', titulo='"+titulo+"', descripcion='"+descripcion+"', contenido='"+contenido+"', archivo='"+archivo+"', fecha_inicio='"+fecha_ini+"', fecha_fin='"+fecha_fin+"' WHERE idTRIFOLIAR="+ID;
 
 			try {
 				Conexion consulta = new Conexion();
 				result=consulta.InsertarRegistro(sql);
 				if(result.equals("0")){
-					result="{\"resultado\":\"OK\",\"descripcion\":\"Registro modificado correctamente\"}";
-				}else{
-					result="{\"resultado\":\"OK\",\"descripcion\":\"Error al modificar, intentelo nuevamente\"}";
+					result="{\"resultado\":\"OK\",\"descripcion\":\"Registro almacenado correctamente\"}";
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 			
 			out.println(result);
 			
@@ -182,11 +219,13 @@ public class TablaTrifoliar extends HttpServlet {
 			String idTRIFOLIAR = rs.getString(1);
 			String titulo = rs.getString(3);
 			String estado = rs.getString(2);
+			String descripcion = rs.getString(4);
+			String contenido = URLEncoder.encode(rs.getString(5), "UTF-8");
 			String fecha_inicio = rs.getString(7);
 			String fecha_fin = rs.getString(8);
 			
 			buffer+="<row id='"+idTRIFOLIAR+"'>";
-			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idTRIFOLIAR+")' value='"+idTRIFOLIAR+"' />]]></cell>";
+			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idTRIFOLIAR+",\""+titulo+"\",\""+estado+"\",\""+descripcion+"\""+")' value='"+idTRIFOLIAR+"' />]]></cell>";
 			buffer+="<cell><![CDATA["+idTRIFOLIAR+"]]></cell>";
 			buffer+="<cell><![CDATA["+titulo+"]]></cell>";
 			buffer+="<cell><![CDATA["+estado+"]]></cell>";

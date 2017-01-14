@@ -8,7 +8,7 @@ CREATE PROCEDURE IngresarAntecedenteMedico(IN enfermedad varchar(250) ,
                                    IN estreñimiento INT,
                                    OUT resultado TEXT)
 BEGIN
-insert into antecendentes_medicos(enfermedad_actual,medicamento,suplemento,diarrea,flatulencia,acidez,estreñimiento) 
+insert into ANTECENDENTES_MEDICOS(enfermedad_actual,medicamento,suplemento,diarrea,flatulencia,acidez,estreñimiento) 
 values(enfermedad,medicamento,suplemento,diarrea,flatulencia,acidez,estreñimiento);
 SET resultado = (select LAST_INSERT_ID());
 END $
@@ -29,7 +29,7 @@ CREATE PROCEDURE IngresarEstiloVida(IN fuma INT,
                                    IN frec_bebida varchar(250) ,
                                    OUT resultado TEXT)
 BEGIN
-insert into estilo_de_vida(fuma,numero_cigarros,frec_fuma,ejercicio,tiempo_min,frec_ejercicio,bebida,frec_bebida) 
+insert into ESTILO_DE_VIDA(fuma,numero_cigarros,frec_fuma,ejercicio,tiempo_min,frec_ejercicio,bebida,frec_bebida) 
 values(fuma,numero_cigarros,frec_fuma,ejercicio,tiempo_min,frec_ejercicio,bebida,frec_bebida);
 SET resultado = (select LAST_INSERT_ID());
 END $
@@ -48,12 +48,11 @@ CREATE PROCEDURE IngresarHabitoAlimentario(IN TDesayuno INT,
                                    IN AlimentoPreferido varchar(250) ,
                                    OUT resultado TEXT)
 BEGIN
-insert into habito_alimento(TDesayuno,TRefaccion,TAlmuerzo,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido) 
+insert into HABITO_ALIMENTO(TDesayuno,TRefaccion,TAlmuerzo,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido) 
 values(TDesayuno,TRefaccion,TAlmuerzo,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido);
 SET resultado = (select LAST_INSERT_ID());
 END $
 DELIMITER ;
-select * from habito_alimento;
 GRANT EXECUTE ON PROCEDURE NutricionUsalud.IngresarHabitoAlimentario TO 'nutricionprueba'@'localhost';
 GRANT ALL ON NutricionUsalud.IngresarHabitoAlimentario TO nutricionprueba@'localhost'; 
 
@@ -66,7 +65,7 @@ CREATE PROCEDURE IngresarAntropometria(IN DietaBaja varchar(45),
                                    IN ConstitucionOsea varchar(45) ,
                                    OUT resultado TEXT)
 BEGIN
-insert into antropometria(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,ConstitucionOsea) 
+insert into ANTROPOMETRIA(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,ConstitucionOsea) 
 values(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,ConstitucionOsea);
 SET resultado = (select LAST_INSERT_ID());
 END $
@@ -85,7 +84,7 @@ CREATE PROCEDURE IngresarRegistro(IN PorGrasa FLOAT,
                                    IN plan varchar(250) ,
                                    OUT resultado TEXT)
 BEGIN
-insert into registro(PorGrasa,PorAgua,PorMasaMuscular,MasaOsea,GrasaVisceral,CinturaAbdominal,plan) 
+insert into REGISTRO(PorGrasa,PorAgua,PorMasaMuscular,MasaOsea,GrasaVisceral,CinturaAbdominal,plan) 
 values(PorGrasa,PorAgua,PorMasaMuscular,MasaOsea,GrasaVisceral,CinturaAbdominal,plan);
 SET resultado = (select LAST_INSERT_ID());
 END $
@@ -101,7 +100,7 @@ CREATE PROCEDURE Registrar_fruta(IN nombres varchar(100) ,
                                    OUT resultado TEXT)
 BEGIN
 
-set @valor=(SELECT nombre FROM nutricionusalud.alimento where nombre=nombres);
+set @valor=(SELECT nombre FROM ALIMENTO where nombre=nombres);
 
 IF @valor = nombres THEN
     SET resultado = 'ERROR';

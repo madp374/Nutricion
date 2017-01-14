@@ -6,14 +6,18 @@
         <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
-		
-		<link rel="stylesheet" media="all" type="text/css" href="../jquery/carrusel/style/style-demo.css">
+        
+         <link rel="stylesheet" href="../cleditor/script/jquery.cleditor.css" />
+		<script src="../cleditor/script/jquery.min.js"></script>
+	   <script src="../cleditor/script/jquery.cleditor.min.js"></script>
+	   
 
 	    
-		<script type="text/javascript" src="../jHtmlArea/scripts/jquery-1.3.2.js"></script>
-	   
+		
+		
+	    
+	    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
 	    
 	   <link href="../jquery/menuacordeon/css/dcaccordion.css" rel="stylesheet" type="text/css" />
 	   <script type='text/javascript' src='../jquery/menuacordeon/js/jquery.cookie.js'></script>
@@ -24,11 +28,7 @@
 		<link href="../jquery/menuacordeon/css/skins/graphite.css" rel="stylesheet" type="text/css" />
 		<link href="../jquery/menuacordeon/css/skins/grey.css" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="../jHtmlArea/scripts/jquery-ui-1.7.2.custom.min.js"></script>
-		<link rel="Stylesheet" type="text/css" href="../jHtmlArea/style/jqueryui/ui-lightness/jquery-ui-1.7.2.custom.css" />
-		<script type="text/javascript" src="../jHtmlArea/scripts/jHtmlArea-0.8.js"></script>
-    	<link rel="Stylesheet" type="text/css" href="../jHtmlArea/style/jHtmlArea.css" />
-    	
+	
     	<style type="text/css">
 			#titulos { color: black; word-spacing: -5 px; letter-spacing: 3px;}
 			
@@ -43,23 +43,18 @@
 			    background-color: #D8D6D6;
 			    border-color: #ccc;
 			}
-			.h1, .h2, .h3, h1, h2, h3, .h4, .h5, .h6, h4, h5, h6 {
-			    margin-top: 0px;
-			    margin-bottom: 0px;
-			}
+			
 		
 		</style>
 		<style type="text/css">
 		label { display:block; margin:5px 0 5px; font-size:10pt; }
-       	div.jHtmlArea .ToolBar ul li a.custom_disk_button 
-        {
-            background: url(images/disk.png) no-repeat;
-            background-position: 0 0;
-        }
+       	
         
-        div.jHtmlArea { border: solid 1px #ccc; }
+       
 	</style>
-		
+		<script type="text/javascript">
+        $(document).ready(function ($) { $("#contenido").cleditor(); });
+    </script>
 	
 		<script type="text/javascript">	
 		
@@ -74,52 +69,14 @@
 					showCount: false,
 					speed: 'slow'
 				});
-				$("#txtDefaultHtmlArea").htmlarea(); // Initialize jHtmlArea's with all default values
-
-	            $("#txtCustomHtmlArea").htmlarea({
-	                // Override/Specify the Toolbar buttons to show
-	                toolbar: [
-	                    ["bold", "italic", "underline", "|", "forecolor"],
-	                    ["p", "h1", "h2", "h3", "h4", "h5", "h6"],
-	                    ["link", "unlink", "|", "image"],                    
-	                    [{
-	                        // This is how to add a completely custom Toolbar Button
-	                        css: "custom_disk_button",
-	                        text: "Save",
-	                        action: function(btn) {
-	                            // 'this' = jHtmlArea object
-	                            // 'btn' = jQuery object that represents the <A> "anchor" tag for the Toolbar Button
-	                            alert('SAVE!\n\n' + this.toHtmlString());
-	                        }
-	                    }]
-	                ],
-
-	                // Override any of the toolbarText values - these are the Alt Text / Tooltips shown
-	                // when the user hovers the mouse over the Toolbar Buttons
-	                // Here are a couple translated to German, thanks to Google Translate.
-	                toolbarText: $.extend({}, jHtmlArea.defaultOptions.toolbarText, {
-	                        "bold": "fett",
-	                        "italic": "kursiv",
-	                        "underline": "unterstreichen"
-	                    }),
-
-	                // Specify a specific CSS file to use for the Editor
-	                css: "style//jHtmlArea.Editor.css",
-
-	                // Do something once the editor has finished loading
-	                loaded: function() {
-	                    //// 'this' is equal to the jHtmlArea object
-	                    //alert("jHtmlArea has loaded!");
-	                    //this.showHTMLView(); // show the HTML view once the editor has finished loading
-	                }
-	            });
+				
 			});
     	</script>
     	
-    	<script type="text/javascript" src="../jquery/flexigrid/jquery.js"></script>
+    	
     	<link rel="stylesheet" type="text/css" href="../CSS/flexigrid/flexigrid/flexigrid.css">
 
-<script type="text/javascript" src="../jquery/flexigrid/flexigrid.js"></script>
+	<script type="text/javascript" src="../jquery/flexigrid/flexigrid.js"></script>
 
 <style>
 
@@ -187,23 +144,23 @@
         
         <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="#"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a> </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Prescripción dietetica </a>
-        <ul>
-		<li><a href="#">Page 1</a></li>
-		<li><a href="#">Page 2</a></li>
-	    </ul>
+        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
+	        <ul>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+		    </ul>
          </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
         	<ul>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Catalogo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
         	<ul>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Catalogo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         </ul>
@@ -228,7 +185,7 @@
 	</tr>
 	</table>
 	</div>
-	<label id="mensajes">.</label>
+	
 	 <form action="../RegistroAlimento" method="post" class="form-inline" role="form" onsubmit="return false">
 	 <div class="row">  
 	  <div class="form-group">
@@ -260,28 +217,46 @@
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control" for="NCarnet" style="width: 150px;" >Contenido</label>
-		<textarea class="form-control" id="txtDefaultHtmlArea" cols="80" rows="15"><p><h3>Nutricion USALUD</h3>Texto de prueba <b>123</b>.</p></textarea>
-
+		
+		<textarea class="form-control" id="contenido" cols="50" rows="5"></textarea>
+		
 	  </div>
      </div>
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Archivo</label>
-		<input class="form-control" id="fileName" type="file" name="fileName" size="30"/><br/> 
+	  <table>
+	  	<tr>
+	  		<td>
+	  			<label class="form-control" for="NCarnet" style="width: 150px;" >Archivo PDF</label>
+	  		</td>
+	  		<td>
+	  			&nbsp;
+	  		</td>
+	  		<td>
+	  			<label id="archivo"></label>
+	  			<input class="form-control" id="fileName" type="file" name="fileName" size="30" accept=".pdf" />
+	  			
+	  		</td>
+	  	</tr>
+	  </table>
+		
+		
+		
 	  </div>
      </div>
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control" for="NCarnet" style="width: 150px;" >Fecha de inicio</label>
-		<input class="form-control" name="fecha_ini" id="fecha_ini" type="date" required/>
+		<input class="form-control" name="fecha_ini" id="fecha_ini" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control" for="NCarnet" style="width: 150px;" >Fecha fin</label>
-		<input class="form-control" name="fecha_fin" id="fecha_fin" type="date" required/>
+		<input class="form-control" name="fecha_fin" id="fecha_fin" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
+   <label id="mensajes">.</label>
      
      <div class="row" align="center" id="guard" >
       		<div class="form-group" >			
@@ -290,18 +265,7 @@
 							
 			</div>
 		</div>
-     <div class="row" align="center" id="ini" >
-      		<div class="form-group" >			
-							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
-						     <img src="../imagenes/nuevo.png" width="50" height="40" title="Nuevo" />Nuevo</button>
-							
-			</div>
-			<div class="form-group" >		
-							<button class="btn btn-default btn-lg" onclick="EliminarRegistro()" >
-						     <img src="../imagenes/eliminar.png" width="50" height="40" title="Eliminar" />Eliminar</button>
-							
-			</div>
-		</div>
+     
       <div class="row" align="center" id="Mod" >
       		<div class="form-group" >			
 							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
@@ -373,7 +337,7 @@ function addFormData()
 	}
 function CargaInicio(){
 	document.getElementById("Mod").style.display = 'none';
-	document.getElementById("guard").style.display = 'none';
+	document.getElementById("guard").style.display = 'block';
 }
 function EditarRegistro(){
 	if(idTRIFOLIAR=="0"){
@@ -393,7 +357,10 @@ function Guardar(){
 	var titulo=document.getElementById('titulo').value;
 	var estado=valorselectInverso(document.getElementById('estado').value);
 	var descripcion=document.getElementById('descripcion').value;
-	var contenido=document.getElementById('txtDefaultHtmlArea').value;
+	var aux=''+document.getElementById('contenido').value+'';
+	
+	var contenido=encodeURI(aux);
+	
 	var archivo=document.getElementById('fileName').value;
     var fecha_ini=validar_vacio(document.getElementById('fecha_ini').value);
 	var fecha_fin=validar_vacio(document.getElementById('fecha_fin').value);
@@ -405,44 +372,76 @@ function Guardar(){
 	}
 }
 function Modificar(){
-	var codigo=document.getElementById('codigo').value;
-	var nombre=document.getElementById('nombre').value;
-	var caloria=document.getElementById('calorias').value;
-	var grupo=document.getElementById('Grupo').value;
+	var titulo=document.getElementById('titulo').value;
+	var estado=valorselectInverso(document.getElementById('estado').value);
+	var descripcion=document.getElementById('descripcion').value;
+	var aux=''+document.getElementById('contenido').value+'';
 	
-	if(codigo!=""&&nombre!=""&&caloria!=""){
-		var action="modificar";
-		var cadena = ['a='+action,'codigo='+codigo,'alimento='+nombre,'caloria='+caloria,'grupo='+grupo].join('&');
-
-
-		$.ajax({
-	        url: "../TablaAlimento",
-	        data: cadena,
-	  	    type: 'post',
-	        dataType: 'json',
-	        success: function(data){
-	        	if(data.resultado=='OK'){
-	        		limpiartabla();
-	        		MensajeServidor(1,data.descripcion);
-	        	}else{
-	        		MensajeServidor(2,data.descripcion);
-	        	}
-	        	
-	        	
-	        	
-	        }
-		});
+	var contenido=encodeURI(aux);
+	
+	var archivo=document.getElementById('fileName').value;
+    var fecha_ini=validar_vacio(document.getElementById('fecha_ini').value);
+	var fecha_fin=validar_vacio(document.getElementById('fecha_fin').value);
+	
+	if(titulo!=""&&descripcion!=""&&contenido!=""&&fecha_ini!=""&&fecha_fin!=""){
+		ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin);
 	}else{
 		MensajeServidor(2,"Error, faltan campos a ingresar");
 	}
 	
 	
 }
+function ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin){
+	var action="modificar";
+	var codigo=document.getElementById('codigo').value;
+	
+	
+	if(archivo!=""){
+		AñadirRegistro2(archivo);
+	}else{
+		archivo=document.getElementById('archivo').textContent;
+		
+	}
+	var cadena = ['a='+action,'ID='+codigo,'titulo='+titulo,'estado='+estado,'descripcion='+descripcion
+	              ,'contenido='+contenido,'archivo='+archivo,'fecha_ini='+fecha_ini,'fecha_fin='+fecha_fin].join('&');
+
+	$.ajax({
+        url: "../TablaTrifoliar",
+        data: cadena,
+  	    type: 'post',
+        dataType: 'json',
+        success: function(data){
+        	if(data.resultado=='OK'){
+        		
+        		NuevoRegistro();
+        		limpiartabla();
+        		MensajeServidor(1,"Registro modificado correctamente");
+        	}else{
+        		MensajeServidor(2,data.descripcion);
+        	}
+        	
+        	
+        	
+        }
+	});
+	
+}
+function AñadirRegistro2(archivo){
+	var formData = new FormData();
+	formData.append("archivo", document.getElementById("fileName").files[0]);
+	var request = new XMLHttpRequest();
+	request.open("POST", "../trifoliar3");
+	request.send(formData);
+}
 function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin){
 	var action="agregar";
 	var cadena = ['a='+action,'titulo='+titulo,'estado='+estado,'descripcion='+descripcion
 	              ,'contenido='+contenido,'archivo='+archivo,'fecha_ini='+fecha_ini,'fecha_fin='+fecha_fin].join('&');
-
+	
+	if(archivo!=""){
+		AñadirRegistro2(archivo);
+	}
+	
 
 	$.ajax({
         url: "../TablaTrifoliar",
@@ -456,7 +455,8 @@ function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fe
         		document.getElementById('estado').value = 1;
         		document.getElementById('titulo').value = "";
         		document.getElementById('descripcion').value = "";
-        		document.getElementById('txtDefaultHtmlArea').value = "Nutricion USALUD";
+        		$('#contenido').val('').blur();
+        		
         		document.getElementById('fileName').value = "";
         		document.getElementById('fecha_ini').value = "";
         		document.getElementById('fecha_fin').value = "";
@@ -472,6 +472,38 @@ function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fe
 	});
 	
 }
+function CargaRegistro(){
+	if(idTRIFOLIAR==0){
+		MensajeServidor(2,"Error, seleccione un registro valido");		
+	}
+	else{
+		
+		var action="carga";
+		cadena = [ 	'idTRIFOLIAR='   + idTRIFOLIAR,
+	             	'a='+action
+	            ].join('&');
+		$.ajax({
+	        url: "../TablaTrifoliar",
+	        data: cadena,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	
+	        	if(data.resultado=='OK'){
+	        		var textos= decodeURI(data.contenido);
+	        		$('#contenido').val(textos).blur();
+	        		document.getElementById('archivo').innerHTML = data.archivo;
+	        		document.getElementById('fecha_ini').value = data.fecha_ini;
+	        		document.getElementById('fecha_fin').value = data.fecha_fin;
+	        	}else{
+	        		MensajeServidor(2,"Error, no se puede eliminar");
+	        		
+	        	}
+	        }
+	    });
+	}
+	
+}
 function EliminarRegistro(){
 	if(idTRIFOLIAR==0){
 		MensajeServidor(2,"Error, seleccione un registro valido");		
@@ -483,7 +515,7 @@ function EliminarRegistro(){
 	             	'a='+action
 	            ].join('&');
 		$.ajax({
-	        url: "../TablaAlimento",
+	        url: "../TablaTrifoliar",
 	        data: cadena,
 	  	    type: 'post',
 	        dataType: 'json',
@@ -492,9 +524,14 @@ function EliminarRegistro(){
 	        	if(data.resultado=='OK'){
 	        		 MensajeServidor(1,data.descripcion);	
 	        		 document.getElementById('codigo').value = "";
-	        		 document.getElementById('nombre').value = "";
-	        		 document.getElementById('calorias').value = "";
-	        		 document.getElementById('Grupo').value = 1;
+	         		 document.getElementById('estado').value = 1;
+	         		 document.getElementById('titulo').value = "";
+	         		 document.getElementById('descripcion').value = "";
+	         		 $('#contenido').val('').blur();
+	         		 document.getElementById('archivo').innerHTML = "";
+	         		 document.getElementById('fileName').value = "";
+	         		 document.getElementById('fecha_ini').value = "";
+	         		 document.getElementById('fecha_fin').value = "";
 	        		 idTRIFOLIAR=0;
 	        		 limpiartabla();
 	        	}else{
@@ -518,29 +555,38 @@ function MensajeServidor(codigo,descripcion){
 	}else if(codigo==2){
 		document.getElementById('mensajes').innerHTML = descripcion;
 		document.getElementById('mensajes').style.color = 'red';
+	}else if(codigo==3){
+		document.getElementById('mensajes').innerHTML = '';
 	}
 }
-function DatosSeleccionados(id){
+function DatosSeleccionados(id,titulo,estado,descripcion){
+
 	idTRIFOLIAR=id;
 	document.getElementById('codigo').value = id;
-	//document.getElementById('nombre').value = nomb;
-	//document.getElementById('calorias').value = caloria;
-	//document.getElementById('Grupo').value = valorselect(grup);
+	document.getElementById('titulo').value = titulo;
+	document.getElementById('estado').value = valorselect(estado);
+	document.getElementById('descripcion').value = descripcion;
+	CargaRegistro();
+	//$('#contenido').val(decodeURI(contenido)).blur();
 	//document.getElementById('mensajes').innerHTML = '';
-	document.getElementById("ini").style.display = 'none';
 	document.getElementById("guard").style.display = 'none';
 	document.getElementById("Mod").style.display = 'block';
-	
+	MensajeServidor(3,"");
 }
 function NuevoRegistro(){
 	idTRIFOLIAR=0;
 	document.getElementById('codigo').value = "";
-	//document.getElementById('nombre').value = "";
-	//document.getElementById('calorias').value = "";
-	//document.getElementById('Grupo').value = 1;
+	document.getElementById('estado').value = 1;
+	document.getElementById('titulo').value = "";
+	document.getElementById('descripcion').value = "";
+	$('#contenido').val('').blur();
+	
+	document.getElementById('fileName').value = "";
+	document.getElementById('fecha_ini').value = "";
+	document.getElementById('fecha_fin').value = "";
+	document.getElementById('archivo').innerHTML = "";
 	document.getElementById("guard").style.display = 'block';
 	document.getElementById("Mod").style.display = 'none';
-	document.getElementById("ini").style.display = 'none';
 }
 function valorselectInverso(entrada){
 	var resultado="";
@@ -559,6 +605,11 @@ function valorselect(entrada){
 		resultado=2;
 	}
 	return resultado;
+}
+function Contenido(){
+	$('#contenido').val('<p>new text data</p>').blur();
+	var codigo=document.getElementById('contenido').value;
+	//alert(codigo);
 }
 </script>
         

@@ -60,3 +60,5 @@ insert into ALIMENTO_FRECUENCIA(alimento) values('verdura'),('fruta'),('carne'),
 insert into TIEMPO_COMIDA(comida) values('Desayuno'),('Refaccion AM'),('Almuerzo'),('Refaccion PM'),('Cena');
 
 insert into PORCION(nombre) values('U'),('ml');
+INSERT INTO TRIFOLIAR(estado, titulo, descripcion, contenido, archivo, fecha_inicio, fecha_fin) 
+VALUES('activo','Prueba Mensaje','Resumen nutricion','La nutricion es alimento','home algo','2017-01-10','2017-01-20');

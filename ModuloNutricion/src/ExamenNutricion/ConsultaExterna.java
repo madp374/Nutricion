@@ -168,7 +168,7 @@ public class ConsultaExterna extends HttpServlet {
 			
 			//System.out.println("++++++++++ ID Consulta: "+IDConsultaExterna+"++++++++");
 			
-			String consulta="insert into ESTABLECIMIENTO_HAS_CONSULTA_EXTERNA(ESTABLECIMIENTO_idESTABLECIMIENTO, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, marca)" 
+			String consulta="insert into ESTABLECIMIENTO_has_CONSULTA_EXTERNA(ESTABLECIMIENTO_idESTABLECIMIENTO, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, marca)" 
 					+"values(1,"+IDConsultaExterna+","+p26+"),(2,"+IDConsultaExterna+","+p27+"),(3,"+IDConsultaExterna+","+p28+"),(4,"+IDConsultaExterna+","+p29+"),(5,"+IDConsultaExterna+","+p30+"),(6,"+IDConsultaExterna+","+p31+"),(7,"+IDConsultaExterna+","+p32+");";
 			query.Insertar(consulta);
 			
@@ -178,7 +178,7 @@ public class ConsultaExterna extends HttpServlet {
 					",(16,"+IDConsultaExterna+",'"+p69+"'),(17,"+IDConsultaExterna+",'"+p70+"'),(18,"+IDConsultaExterna+",'"+p71+"'),(19,"+IDConsultaExterna+",'"+p72+"');";
 			query.Insertar(consulta);
 			
-			consulta="insert into CONSULTA_EXTERNA_HAS_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
+			consulta="insert into CONSULTA_EXTERNA_has_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
 					+"values("+IDConsultaExterna+",1,'"+p17+"'),("+IDConsultaExterna+",2,'"+p19+"'),("+IDConsultaExterna+",3,'"+p21+"'),("+IDConsultaExterna+",4,'"+p23+"'),("+IDConsultaExterna+",5,'"+p25+"');";
 			
 			
@@ -370,7 +370,7 @@ public class ConsultaExterna extends HttpServlet {
 							
 		     ResultadoInsertar=con.InsertarRegistro(query3);
 			 
-			 query3="insert into ESTABLECIMIENTO_HAS_CONSULTA_EXTERNA(ESTABLECIMIENTO_idESTABLECIMIENTO, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, marca)" 
+			 query3="insert into ESTABLECIMIENTO_has_CONSULTA_EXTERNA(ESTABLECIMIENTO_idESTABLECIMIENTO, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, marca)" 
 					 +" values(1,"+ID+","+p26+"),(2,"+ID+","+p27+"),(3,"+ID+","+p28+"),(4,"+ID+","+p29+"),(5,"+ID+","+p30+"),(6,"+ID+","+p31+"),(7,"+ID+","+p32+");";
 							
 			ResultadoInsertar=con.InsertarRegistro(query3);
@@ -380,7 +380,7 @@ public class ConsultaExterna extends HttpServlet {
 			
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 			 
-			query3="insert into CONSULTA_EXTERNA_HAS_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
+			query3="insert into CONSULTA_EXTERNA_has_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
 						+"values("+ID+",1,'"+p17+"'),("+ID+",2,'"+p19+"'),("+ID+",3,'"+p21+"'),("+ID+",4,'"+p23+"'),("+ID+",5,'"+p25+"');";
 				
 			ResultadoInsertar=con.InsertarRegistro(query3);
