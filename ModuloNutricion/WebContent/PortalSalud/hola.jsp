@@ -24,6 +24,10 @@
 			#titulos { color: black; word-spacing: -5 px; letter-spacing: 3px;}
 			#header_carousel { float:right; }
 			.foto-inicio{	width:100%; height:100px; 	}
+			.container{ padding-top:15px;}
+			.page-header {
+			  margin: 0px 0 0px;
+			}
 		</style>
 		
 		<style type="text/css">
@@ -123,8 +127,8 @@
         
         <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li > <a href="#"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Libros </a>
+        <li > <a href="#"> <span class="glyphicon glyphicon-home"></span> Quienes somos </a> </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Docencia </a>
         <ul>
 		<li><a href="#">Page 1</a></li>
 		<li><a href="#">Page 2</a></li>
@@ -132,16 +136,20 @@
 		<li><a href="#">Page 4</a></li>
 	  </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-facetime-video"></span> Películas </a> </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-headphones"></span> Música </a></li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-facetime-video"></span> Investigacion </a> </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-headphones"></span> Extension </a></li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-headphones"></span> Programas </a></li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-headphones"></span> Calendario </a></li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-headphones"></span> Regresar a Menu </a></li>
         </ul>
+   
         </nav>
         
         <section class="col-sm-10">
         <div class="panel panel-default">
         
         <div class="panel-heading">
-        <h3 class="panel-title">¡Bienvenidos a mi sitio web!</h3>
+        <h3 class="panel-title">Nutricion</h3>
         </div>
         <div class="panel-body">
         <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,

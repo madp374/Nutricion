@@ -20,6 +20,11 @@
 
 <link rel="shortcut icon" href="http://usalud.usac.edu.gt/favi.ico" type="image/x-icon">
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
 <link type="text/css" href="../Unidad de Salud _ USAC_files/jquery-ui-1.8.17.custom.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="../Unidad de Salud _ USAC_files/jquery.weekcalendar.css">
 <link href="../Unidad de Salud _ USAC_files/styles.css" rel="stylesheet" type="text/css" media="screen">
@@ -32,7 +37,7 @@
 <script type="text/javascript" src="../Unidad de Salud _ USAC_files/jScrollPane.js"></script>
 <script src="../Unidad de Salud _ USAC_files/base64.js" type="text/javascript" charset="utf-8"></script>
 <script src="../Unidad de Salud _ USAC_files/jcarousellite_1.0.1c4.js" type="text/javascript"></script>
-<script src="../Unidad de Salud _ USAC_files/system.js" type="text/javascript"></script>
+<script src="../Portal_Archivos/system.js" type="text/javascript"></script>
 
 
 <meta name="description" content="División de Bienestar EstudiantiL, USAC. Dentro de las actividades de servicio, se encuentra la realización del examen obligatorio de salud a todos los estudiantes de primer ingreso.">
@@ -162,8 +167,8 @@
 
 
 
-<link href="./Unidad de Salud _ USAC_files/style_portal.css" rel="stylesheet" type="text/css" media="screen">
-<script src="./Unidad de Salud _ USAC_files/system.js" type="text/javascript"></script>
+<link href="../Unidad de Salud _ USAC_files/style_portal.css" rel="stylesheet" type="text/css" media="screen">
+<script src="../Unidad de Salud _ USAC_files/system.js" type="text/javascript"></script>
 <ul id="menu">
 									
 	<li>
@@ -314,10 +319,7 @@
 		</div>
 		
 		
-		<div class="ui-widget-content ui-corner-all">
-		<div><b>Visitas</b> <a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="./Unidad de Salud _ USAC_files/counter.php" border="0" alt="Counter"></a></div>
-		</div>
+		
 		<br>
 		
 </div>
@@ -328,11 +330,11 @@
 
 
 
-<link href="./Unidad de Salud _ USAC_files/style_portal.css" rel="stylesheet" type="text/css" media="screen">	
+<link href="../Unidad de Salud _ USAC_files/style_portal.css" rel="stylesheet" type="text/css" media="screen">	
 <h3 id="Panel-texto-tit" class="ui-state-default ui-corner-all">Nutrición</h3>
 <br>
 		
-		<div id="panel-texto-c4" class="ui-widget-content ui-corner-all  panel-texto-desc jspScrollable" tabindex="0" style="overflow: hidden; padding: 0px; width: 692px;">
+		<div id="panel-texto-c4" class="ui-widget-content ui-corner-all" tabindex="0" style="overflow: hidden; padding: 0px; width: 692px;">
 				
 		<div class="jspContainer" style="width: 692px; height: 500px;"><div class="jspPane" style="padding: 0px; width: 672px; top: 0px;"><div style="margin-left:20px;margin-right:20px;">
 					<div align="justify" style="font-weight: normal;">
@@ -355,16 +357,7 @@
 			2) Asistir el día y hora programada.</p>
 
 
-			<p>Requisitos</br>
-			· Estudiantes: carné vigente</br>
-			· Trabajadores: número de registro </p>
-			<h3 id="Panel-texto-tit" class="ui-state-default ui-corner-all">Archivos</h3>
-			
-			<p><h3><A HREF="http://archivo.pdf">Guia de Nutricion</A></h3></p>
-			<p>Estudio realizaro el 10 de enero de 2016</p>
-			
-			<p><h3><A HREF="http://archivo.pdf">Guia de Nutricion II</A></h3></p>
-			<p>Estudio realizaro el 10 de enero de 2016</p>
+	
 			
 					</div>				
 					
@@ -372,7 +365,7 @@
 				
 				</div>
 				
-				<div class="jspVerticalBar"><div class="jspCap jspCapTop"></div><div class="jspTrack" style="height: 500px;"><div class="jspDrag" style="height: 373px; top: 0px;"><div class="jspDragTop"></div><div class="jspDragBottom"></div></div></div><div class="jspCap jspCapBottom"></div></div>
+			
 				
 		
 		</div>
@@ -380,15 +373,7 @@
 		<br>
 		
 	<div style="clear: both;"></div>						
-<script>
-$(function(){
-	$('#panel-texto-c1').jScrollPane();
-	$('#panel-texto-c2').jScrollPane();
-	$('#panel-texto-c3').jScrollPane();
-	$('#panel-texto-c4').jScrollPane();
-});
 
-</script>
 				
 </div>
 

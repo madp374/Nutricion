@@ -55,7 +55,7 @@ public class TablaTrifoliar extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=ValidarRequest(request.getParameter("a"));
-		//System.out.println("accion2"+action);
+		//System.out.println("accion2:"+action);
 		if(action.equalsIgnoreCase("eliminardato")){
 			String result="";
 			PrintWriter out = response.getWriter();
@@ -102,7 +102,7 @@ public class TablaTrifoliar extends HttpServlet {
 			
 			String sql = "INSERT INTO TRIFOLIAR(estado, titulo, descripcion, contenido, archivo, fecha_inicio, fecha_fin) "+
 					"VALUES('"+estado+"','"+titulo+"','"+descripcion+"','"+contenido+"','"+archivo+"','"+fecha_ini+"','"+fecha_fin+"');";
-
+			
 			try {
 				Conexion consulta = new Conexion();
 				result=consulta.InsertarRegistro(sql);

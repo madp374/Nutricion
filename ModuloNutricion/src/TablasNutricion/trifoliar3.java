@@ -69,8 +69,8 @@ public class trifoliar3 extends HttpServlet {
                     FileItem item = (FileItem) iterator.next();
                     if (!item.isFormField()) {
                         String fileName = item.getName();  
-                        //String root = getServletContext().getRealPath("/");
-                        String root = "C:\\Users\\maynor\\Documents";
+                        String root = getServletContext().getRealPath("/");
+                        
                         //String root = "/home/usuariouds/ClinicaNutricion/";
                         File path = new File(root + "/uploads");
                         if (!path.exists()) {

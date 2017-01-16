@@ -14,6 +14,14 @@ import com.mysql.jdbc.Connection;
 
 import Paciente.DatosPaciente;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+//import com.sun.corba.se.impl.ior.ByteBuffer;
+import java.nio.*;
+
 public class Conexion extends HttpServlet{
 	
 	static Connection conn = null;
@@ -733,6 +741,153 @@ public class Conexion extends HttpServlet{
 		    	
 		    }
 		    
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String decodificar(String entrada) throws UnsupportedEncodingException{
+		
+	    String var=new String(entrada);
+	    byte[] arrByte = var.getBytes("ISO-8859-1");
+
+	    String result = new String(arrByte, "UTF-8");
+	    return result;
+	}
+	public String CargaNoticias2(){
+		String resultado="";
+		
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT titulo, descripcion, contenido, archivo FROM TRIFOLIAR"
+									+" WHERE CURDATE() BETWEEN fecha_inicio AND fecha_fin"
+									+" AND estado='Activo'");
+		 
+		    String titulo="";
+		    String descripcion="";
+		    String contenido="";
+		    String archivo="";
+		   
+
+		    int i=0;
+		    String marco="";
+		    String aux="";
+		    while (rs.next()) {
+		    	marco="";
+		    	titulo=rs.getString("titulo");
+		    	descripcion=rs.getString("descripcion");
+		    	contenido=decodificar(rs.getString("contenido"));
+		    	archivo=rs.getString("archivo");
+			    
+		    	marco="<li><div class=\"panel panel-default\" style=\"width: 500px;\">"
+				        +"<div class=\"panel-heading\">"
+				        +"<h3 class=\"panel-title\">"+titulo+"</h3>"
+				        +"</div>"
+				        +"<div class=\"panel-body\" style=\"height:300px;\">"
+				        +contenido;
+		    	
+		    	if(archivo.equals("")){}
+		    	else{
+		    		String direccion="http://localhost:8080/ModuloNutricion/uploads/"+archivo;
+		    		marco+="<br><br><b>Archivo</b>:"+"<A href=\""+direccion+"\" style=\"color:black;\">"+archivo+"</A>";
+		    	}
+		    	marco+="</div>"
+				        +"</div></li>";
+		    	aux+=marco;
+
+			   i++;
+		    	
+		    }
+		    if(i==0){
+		    	resultado="No hay resultados";
+		    }else{
+		    	resultado=aux;
+		    }
+		    
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String CargaNoticias(){
+		String resultado="";
+		
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT titulo, descripcion, contenido, archivo FROM TRIFOLIAR"
+									+" WHERE CURDATE() BETWEEN fecha_inicio AND fecha_fin"
+									+" AND estado='Activo'");
+		 
+		    String titulo="";
+		    String descripcion="";
+		    String contenido="";
+		    String archivo="";
+		   
+
+		    int i=0;
+		    while (rs.next()) {
+		    	titulo=rs.getString("titulo");
+		    	descripcion=rs.getString("descripcion");
+		    	contenido=CambioHTML(rs.getString("contenido"));
+		    	archivo=rs.getString("archivo");
+			    
+		    	if(i==0){
+		    		resultado+="{\"titulo\":\""+titulo+"\""
+				    		+",\"descripcion\":\""+descripcion+"\""
+				    		+",\"contenido\":\""+contenido+"\""
+				    		+",\"archivo\":\""+archivo+"\"}";
+		    	}else{
+		    		resultado+=",{\"titulo\":\""+titulo+"\""
+				    		+",\"descripcion\":\""+descripcion+"\""
+				    		+",\"contenido\":\""+contenido+"\""
+				    		+",\"archivo\":\""+archivo+"\"}";
+		    	}
+
+			   i++;
+		    	
+		    }
+		    String jq=CambioHTML("<script type=\"text/javascript\">(function($) {$(function() { $(\"#scroller\").simplyScroll();});})(jQuery);</script>");
+		    String marco="{\"resultado\":\"OK\",";
+		    String scrip="\"scrip\":"+"\""+jq+"\",";
+		    String total="\"total\":\""+i+"\",";
+		    String trifoliar = "\"trifoliar\":["+resultado+"]}";
+		    resultado=marco+total+scrip+trifoliar;
 		    rs.close();
 		    BDClose();
 		    
@@ -1556,11 +1711,11 @@ public int countRec(String fname, String tname) throws Exception {
 			
 			} catch(SQLException ex)
 			{ 	
-				resultado="{\"resultado\":\"ERROR\"}";
-				//System.out.println("Se produjo una excepción durante la conexión:"+ex);
+				resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error de almacenamiento en la base de datos\"}";
+				System.out.println("Se produjo una excepción durante la conexión:"+ex);
 			} catch(Exception ex){ 
-				resultado="{\"resultado\":\"ERROR\"}";
-				//System.out.println("Se produjo una excepción:"+ex);
+				resultado="{\"resultado\":\"OK\",\"descripcion\":\"Error de almacenamiento\"}";
+				System.out.println("Se produjo una excepción:"+ex);
 			}
 		return resultado;
 	}
