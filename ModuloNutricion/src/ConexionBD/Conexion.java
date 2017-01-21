@@ -72,7 +72,7 @@ public class Conexion extends HttpServlet{
 		return conn;
 	}
 	
-	public String login(String usuario, String pass, String perfil){
+	public String login(String usuario, String pass, int perfil){
 		String resultado="0";
 
 		try {
@@ -83,8 +83,10 @@ public class Conexion extends HttpServlet{
 			ResultSet rs = null;
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
-
-		    rs = cmd.executeQuery("select idUSUARIO from USUARIO where usuario='"+usuario+"' and password='"+pass+"'");
+		    
+		    String consulta="SELECT idUSUARIO FROM USUARIO WHERE usuario='"+usuario+"' AND password='"+pass+"' AND ROL_idROL="+perfil+" AND estado='activo'";
+		
+		    rs = cmd.executeQuery(consulta);
 
 		    while (rs.next()) {
 		        String nombre = rs.getString("idUSUARIO");
@@ -105,7 +107,83 @@ public class Conexion extends HttpServlet{
 		
 	}
 
-	
+	public String UsuarioExiste(String usuario){
+		String resultado="1";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		    
+		    String consulta="SELECT idUSUARIO FROM USUARIO WHERE usuario='"+usuario+"'";
+		
+		    rs = cmd.executeQuery(consulta);
+
+		    while (rs.next()) {
+		        String nombre = rs.getString("idUSUARIO");
+		       
+		        resultado=nombre;
+		    }
+
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			return "0";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return "0";
+		}
+		
+	}
+	public String CargaDatosUsuario(String usuario){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		    
+		    String consulta="SELECT usuario, password, nombre, correo, estado, ROL_idROL FROM USUARIO WHERE idUSUARIO="+usuario;
+		
+		    rs = cmd.executeQuery(consulta);
+		    
+		    String usuario1="";
+		    String pswd="";
+		    String nombre="";
+		    String correo="";
+		    String estado="";
+		    String rol="";
+		    while (rs.next()) {
+		        usuario1= rs.getString("usuario");
+			    pswd= rs.getString("password");
+			    nombre= rs.getString("nombre");
+			    correo= rs.getString("correo");
+			    estado= rs.getString("estado");
+			    rol= rs.getString("ROL_idROL");
+		    }
+
+		    rs.close();
+		    BDClose();
+		    return resultado="{\"resultado\":\"OK\",\"usuario\":\""+usuario1+"\",\"pass\":"+pswd+",\"nombre\":\""+nombre+"\",\"correo\":\""+correo+"\",\"estado\":\""+estado+"\",\"rol\":\""+rol+"\"}";
+		}catch(SQLException ex){
+			return resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error, intentelo nuevamente\"}";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error, intentelo nuevamente\"}";
+		}
+		
+	}
 	public ArrayList<DatosPaciente> BuscarPaciente1(String carnet){
 		ArrayList<DatosPaciente> ret=new ArrayList<DatosPaciente>();
 
@@ -806,7 +884,7 @@ public class Conexion extends HttpServlet{
 		    	
 		    	if(archivo.equals("")){}
 		    	else{
-		    		String direccion="http://localhost:8080/ModuloNutricion/uploads/"+archivo;
+		    		String direccion="http://usalud.usac.edu.gt/ModuloNutricion/uploads/"+archivo;
 		    		marco+="<br><br><b>Archivo</b>:"+"<A href=\""+direccion+"\" style=\"color:black;\">"+archivo+"</A>";
 		    	}
 		    	marco+="</div>"
@@ -1297,22 +1375,37 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("SELECT idMULTIFASICO, fecha, talla, peso, IMC, peso_ideal, peso_maximo, tricipital, subescapular, TIPO_EXAMEN_idTIPO_EXAMEN, DIAGNOSTICO_idDIAGNOSTICO, PACIENTE_idPACIENTE " 
-		    		+"FROM MULTIFASICO WHERE idMULTIFASICO="+ID);
+		    rs = cmd.executeQuery("SELECT M.idMULTIFASICO, M.fecha, M.talla, M.peso, M.IMC, M.peso_ideal, M.peso_maximo, M.tricipital, M.subescapular, M.abdomen, M.TIPO_EXAMEN_idTIPO_EXAMEN, M.DIAGNOSTICO_idDIAGNOSTICO, M.PACIENTE_idPACIENTE, M.USUARIO_idUSUARIO, U.nombre, R.nombre " 
+							+" FROM MULTIFASICO M, USUARIO U, ROL R"
+							+" WHERE M.USUARIO_idUSUARIO = U.idUSUARIO"
+							+" AND R.idROL=U.ROL_idROL"
+							+" AND M.idMULTIFASICO="+ID);
 		 
 		    String talla="";
 		    String peso="";
 		    String codigo="";
 		    String tricipital="";
 		    String subescapular="";
+		    String abdomen="";
+		    String USR7="";
+		    String fecha="";
+		    String nombre="";
+		    String area="";
+		    String TIPO_EXAMEN_idTIPO_EXAMEN="";
 		    while (rs.next()) {
-		    	talla=rs.getString("talla");
-		    	peso=rs.getString("peso");
-		    	tricipital=rs.getString("tricipital");
-		    	subescapular=rs.getString("subescapular");
-		    	codigo=rs.getString("PACIENTE_idPACIENTE");
+		    	talla=rs.getString("M.talla");
+		    	peso=rs.getString("M.peso");
+		    	tricipital=rs.getString("M.tricipital");
+		    	subescapular=rs.getString("M.subescapular");
+		    	abdomen=rs.getString("M.abdomen");
+		    	codigo=rs.getString("M.PACIENTE_idPACIENTE");
+		    	USR7=rs.getString("M.USUARIO_idUSUARIO");
+		    	fecha=rs.getString("M.fecha");
+			    nombre=rs.getString("U.nombre");
+			    area=rs.getString("R.nombre");
+			    TIPO_EXAMEN_idTIPO_EXAMEN=rs.getString("M.TIPO_EXAMEN_idTIPO_EXAMEN");
 		    }
-		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"codigo\":\""+codigo+"\",\"tricipital\":\""+tricipital+"\",\"subescapular\":\""+subescapular+"\"}";
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"codigo\":\""+codigo+"\",\"tricipital\":\""+tricipital+"\",\"subescapular\":\""+subescapular+"\",\"abdomen\":\""+abdomen+"\",\"USER\":\""+USR7+"\",\"fecha\":\""+fecha+"\",\"nombre\":\""+nombre+"\",\"area\":\""+area+"\",\"TipoExamen\":\""+TIPO_EXAMEN_idTIPO_EXAMEN+"\"}";
 		    rs.close();
 		    BDClose();
 		    
@@ -1552,6 +1645,54 @@ public class Conexion extends HttpServlet{
 		catch(Exception ex){ 
 			System.out.println("Se produjo una excepción:"+ex);
 			return resultado;
+		}
+		
+	}
+	
+	public String ObtenerRegistrosMultifasico(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idMULTIFASICO, fecha, USUARIO_idUSUARIO FROM MULTIFASICO WHERE PACIENTE_idPACIENTE="+ID+";");
+		 
+		    String idMULTIFASICO="";
+		    String fecha="";
+		    String USER7="";
+		    int i=0;
+		    String aux="";
+		    while (rs.next()) {
+		    	idMULTIFASICO=rs.getString("idMULTIFASICO");
+		    	fecha=rs.getString("fecha");
+		    	USER7=rs.getString("USUARIO_idUSUARIO");
+		    	if(i==0){
+		    		aux+="{\"idMULTIFASICO\":\""+idMULTIFASICO+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}else{
+		    		aux+=",{\"idMULTIFASICO\":\""+idMULTIFASICO+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}
+		    	
+		     i++;
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    String multi=",\"Rmultifasico\":["+aux+"]";
+		    resultado=total+multi;
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
 		}
 		
 	}

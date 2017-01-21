@@ -56,7 +56,7 @@ public class Multifasico extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String carnet = request.getParameter("carnet");
 		String accion = validar_vacio(request.getParameter("a")); //accion
-		String p1 ="(select idTIPO_EXAMEN from TIPO_EXAMEN where nombre=\""+request.getParameter("p1")+"\")";// Tipo examen
+		String p1 = request.getParameter("p1");// Tipo examen
 		String p2 = request.getParameter("p2");// talla
 		String p3 = request.getParameter("p3");// peso
 		String p4 = request.getParameter("p4");// imc
@@ -65,17 +65,17 @@ public class Multifasico extends HttpServlet {
 		String p7 = request.getParameter("p7");// tricipital
 		
 		String p8 = request.getParameter("p8");// subescapular
-		
+		String p50 = request.getParameter("p10");// abdomen
 		String p9 = "(select idDIAGNOSTICO from DIAGNOSTICO where descripcion='"+request.getParameter("p9")+"')";// Diagnostico
 		String p10 = request.getParameter("busqueda");// busqueda
-		
+		String USRG = request.getParameter("p60");// busqueda
 		if(accion.equalsIgnoreCase("guardar")){
 			boolean ErrorSQL=false;
 			PrintWriter out = response.getWriter();
-			String cadena ="carnet:"+carnet+",accion:"+accion
-					+"\n,p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",busqueda:"+p10;
+			//String cadena ="carnet:"+carnet+",accion:"+accion
+				//	+"\n,p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",busqueda:"+p10;
 			
-			System.out.println(cadena);
+			//System.out.println(cadena);
 			String ResultadoInsertar="";
 			String result="";
 			Conexion con =new Conexion();
@@ -89,8 +89,8 @@ public class Multifasico extends HttpServlet {
 				
 				con.Insertar(query2);
 			}
-			String query="insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE)"
-					+"values(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p1+","+p9+","+carnet+");";
+			String query="insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,abdomen,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE,USUARIO_idUSUARIO)"
+					+"values(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p50+","+p1+","+p9+","+carnet+","+USRG+");";
 			ResultadoInsertar=con.InsertarRegistro(query);
 			if(ResultadoInsertar.equals("0")){
 				result="{\"resultado\":\"OK\"}";
@@ -106,16 +106,33 @@ public class Multifasico extends HttpServlet {
 			Conexion con =new Conexion();
 			
 			String result=con.CargaMultifasico(MID);
+			//System.out.println(result);
 			out.println(result);
 		}else if(accion.equalsIgnoreCase("modificar")){
 			PrintWriter out = response.getWriter();
 			String ResultadoInsertar="";
 			String result="";
 			String ID = request.getParameter("ID");// MID
-			System.out.println("ID:"+ID);
+			//System.out.println("ID:"+ID);
 			Conexion con =new Conexion();
 			
-			String query3="update MULTIFASICO set talla="+p2+", peso="+p3+",IMC="+p4+",peso_ideal="+p5+",peso_maximo="+p6+",tricipital="+p7+",subescapular="+p8+",TIPO_EXAMEN_idTIPO_EXAMEN="+p1+",DIAGNOSTICO_idDIAGNOSTICO="+p9+" where idMULTIFASICO="+ID;
+			String query3="update MULTIFASICO set talla="+p2+", peso="+p3+",IMC="+p4+",peso_ideal="+p5+",peso_maximo="+p6+",tricipital="+p7+",subescapular="+p8+",abdomen="+p50+",TIPO_EXAMEN_idTIPO_EXAMEN="+p1+",DIAGNOSTICO_idDIAGNOSTICO="+p9+" where idMULTIFASICO="+ID;
+			ResultadoInsertar=con.InsertarRegistro(query3);
+			if(ResultadoInsertar.equals("0")){
+				result="{\"resultado\":\"OK\"}";
+			}else{
+				result=ResultadoInsertar;
+			}
+			out.println(result);
+		}else if(accion.equalsIgnoreCase("eliminar")){
+			PrintWriter out = response.getWriter();
+			String ResultadoInsertar="";
+			String result="";
+			String ID = request.getParameter("ID");// MID
+			//System.out.println("ID:"+ID);
+			Conexion con =new Conexion();
+			
+			String query3="delete from MULTIFASICO where idMULTIFASICO="+ID;
 			ResultadoInsertar=con.InsertarRegistro(query3);
 			if(ResultadoInsertar.equals("0")){
 				result="{\"resultado\":\"OK\"}";
@@ -126,6 +143,7 @@ public class Multifasico extends HttpServlet {
 		}else{
 			//HttpSession misession2= (HttpSession) request.getSession();
 			//idCE=misession2.getAttribute("idCE2").toString();
+			System.out.println("salio");
 			 response.sendRedirect("/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp");
 		}
 		

@@ -78,13 +78,15 @@ public class trifoliar3 extends HttpServlet {
                         }
  
                         File uploadedFile = new File(path + "/" + fileName);
-                        //System.out.println(uploadedFile.getAbsolutePath());
+                        System.out.println(uploadedFile.getAbsolutePath());
                         item.write(uploadedFile);
                     }
                 }
             } catch (FileUploadException e) {
                 e.printStackTrace();
+                System.out.println("subida1:"+e);
             } catch (Exception e) {
+            	System.out.println("subida2:"+e);
                 e.printStackTrace();
             }
         }

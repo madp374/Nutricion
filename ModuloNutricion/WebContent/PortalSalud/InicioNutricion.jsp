@@ -37,6 +37,7 @@
 			.menu_header{
 				width: 100%;
 			}
+			
 
 		</style>
 		
@@ -76,7 +77,7 @@
 
         </head>
 
-        <body>
+        <body onload="CargaInicio()">
         <div class="container">
          <div class="panel2 panel-body">
     <header class="row col-sm-12">
@@ -164,11 +165,16 @@
 		       	 <h3 class="panel-title">Ingreso</h3>
 		        </div>
 		        <div class="panel-body">
-		        	<form action="../Trifoliar" method="post" class="form-inline" role="form" onsubmit="return false">
+		        	<form action="../login" method="post" class="form-inline" role="form" >
+		        	<div class="row">  
+						  <div class="form-group">
+						  		<div id="mensajes"></div>
+						  </div>
+						 </div>
 		        		<div class="row">  
 						  <div class="form-group">
 							Usuario(Carné)
-							<input class="form-control input-sm" name="codigo" id="codigo" type="number" style="width: 120px; height:25px;" />
+							<input class="form-control input-sm" name="user" id="user" style="width: 120px; height:25px;" required />
 						  </div>
 						 </div>
 						 <div class="row">
@@ -177,7 +183,7 @@
 						 <div class="row">  
 						  <div class="form-group">
 							Contraseña&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input class="form-control input-sm" name="codigo" id="codigo" type="password" style="width: 120px; height:25px;" />
+							<input class="form-control input-sm" name="pass" id="pass" type="password" style="width: 120px; height:25px;" required />
 						  </div>
 						 </div>
 						 <div class="row">
@@ -198,10 +204,11 @@
 						 </div>
 						 <div class="row" align="center">  
 						  <div class="form-group">
-							<button type="button" class="btn btn-default">Entrar</button>
+						    <input type="submit" class="btn btn-default" value="Entrar" > 
+									
 						  </div>
 						 </div>
-						 
+						 </form>
 						 <hr style="width: 100%; color: black; height: 1px; background-color:black;">
 						 <div style="text-align:center;"> 
 						 <u><a href="http://rye.usac.edu.gt/index.php?ring=4" target="_blank" style="color: black; text-align:center;">¿Olvidó su contraseña?</a></u>
@@ -211,7 +218,7 @@
 						 <div style="text-align:justify;"> 
 							Ingresar a este sitio por medio de su carnet y pin generado en el Departamento de Registro y Estadística
 						</div>
-		        	</form>
+		        	
 		        </div>
 		     </div>   
         	</div>
@@ -274,7 +281,25 @@
 		</div>
         
         </div>
-       
+       <script type="text/javascript">
+       	   function CargaInicio() {
+       		var lg = getUrlVars()["e"];
+       		if(lg!=undefined){
+       			if(lg=="false"){
+       				//alert("error");
+       				document.getElementById("mensajes").innerHTML = '<p align="center" style="color: red;" >ERROR: USUARIO Y/O PASSWORD INCORRECTOS</p>';
+       			}
+       		}
+       	   }
+	       function getUrlVars() {
+		   	    var vars = {};
+		   	    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		   	    function(m,key,value) {
+		   	      vars[key] = value;
+		   	    });
+		   	    return vars;
+	   	  }
+       </script>
 		  	
         <footer class="row col-sm-12">
         <div class="panel panel-body">

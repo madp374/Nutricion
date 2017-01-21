@@ -10,11 +10,15 @@ Use NutricionUsalud;
 
 
 insert into PERMISO(nombre) values('insertar');
-insert into ROL(nombre) values('Nutricionista');
+insert into ROL(nombre) values('Nutricionista'),('Administrador');
 
 insert into PERMISO_has_ROL(PERMISO_idPERMISO,ROL_idROL) values(1,1);
 
-insert into USUARIO(usuario,password,nombre,correo,estado,ROL_idROL) values('may','374','Maynor De La Rosa','prueba@correo.com','activo',1);
+insert into USUARIO(usuario,password,nombre,correo,estado,ROL_idROL) 
+values('may','374','Maynor De La Rosa','prueba@correo.com','activo',1),
+('dmorales','123','Danilo Morales','dmorales@correo.com','activo',2),
+('marialopez','698','Maria Lopez','maria@correo.com','inactivo',1),
+('jperez','699','Juan Perez','jperez@correo.com','inactivo',2);
 
 
 insert into FACULTAD(nombre) values('Humanidades');
@@ -31,8 +35,8 @@ insert into DIAGNOSTICO(rango_inicio,rango_fin,descripcion) values(30,34.9,'Obes
 insert into DIAGNOSTICO(rango_inicio,rango_fin,descripcion) values(35,39.9,'Obesidad II');
 insert into DIAGNOSTICO(rango_inicio,rango_fin,descripcion) values(40,1000,'Obesidad III');
 
-insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE) 
-values(CURDATE(),1,12,34,45,2,3,2,1,1,201020698);
+insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,abdomen,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE,USUARIO_idUSUARIO) 
+values(CURDATE(),1,12,34,45,2,3,2,3,1,1,201020698,1);
 
 
 insert into GrupoAlimenticio(nombre) values('Lacteos bajos en grasa'),('Lacteos enteros'),('Vegetales'),('Frutas')

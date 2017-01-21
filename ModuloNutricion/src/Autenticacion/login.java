@@ -38,26 +38,43 @@ public class login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession misession= request.getSession(true);
 		String usuario="";
 		String pass="";
-		String perfil="";
+		int perfil;
 		
 		usuario=request.getParameter("user");
 		pass=request.getParameter("pass");
-		perfil=request.getParameter("perfil");
+		perfil=Integer.parseInt(request.getParameter("perfil"))-1;
 		
-		Conexion con =new Conexion();
-		String mensaje="0";
-		mensaje=con.login(usuario,pass,perfil);
-		if(mensaje.equals("0")){
-			response.sendRedirect("PortalSalud/InicioUsalud.jsp");
-		}else{
-			HttpSession session = request.getSession(true);  
-			session.setAttribute("UsuarioActual", "activo");
-			response.sendRedirect("ExamenesNutricion/ExamenMultifasico.jsp");
+		if(perfil==0){}
+		else{
+			Conexion con =new Conexion();
+			String mensaje="0";
+			mensaje=con.login(usuario,pass,perfil);
+			if(mensaje.equalsIgnoreCase("0")){
+				response.sendRedirect("/ModuloNutricion/PortalSalud/InicioNutricion.jsp?e=false");
+			}else{
+				if(perfil==1){
+					//Nutricionista
+					misession.setAttribute("NUSUARIO", usuario);
+					misession.setAttribute("NIDSUARIO", mensaje);
+					misession.setAttribute("NPERFIL", "nutri");
+					response.sendRedirect("/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp");
+				}
+				else if(perfil==2){
+					//Admin
+					misession.setAttribute("NUSUARIO", usuario);
+					misession.setAttribute("NIDSUARIO", mensaje);
+					misession.setAttribute("NPERFIL", "admi");
+					response.sendRedirect("/ModuloNutricion/Administracion/Usuario.jsp");
+				}
+			}
+			response(response, usuario);
 		}
+		
 		
 	}
 	

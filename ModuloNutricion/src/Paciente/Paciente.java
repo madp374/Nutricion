@@ -39,7 +39,7 @@ public class Paciente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=request.getParameter("a");
-		
+		System.out.println(action);
 		if(action.equalsIgnoreCase("buscar")){
 			
 			PrintWriter out = response.getWriter();
@@ -71,6 +71,41 @@ public class Paciente extends HttpServlet {
 		
 			
 			System.out.println(result);
+			out.println(result);
+		}else if(action.equalsIgnoreCase("PacienteMultifasico")){
+			//System.out.println("entro");
+			PrintWriter out = response.getWriter();
+			
+			String carnet = request.getParameter("carnet");
+			String result="";
+			Conexion consulta = new Conexion();
+			ArrayList<DatosPaciente> lista = consulta.BuscarPaciente1(carnet);
+			//System.out.println(lista);
+			String tempNombre="0";
+			String tempSexo="";
+			String tempFecha="";
+			String tempFacultad="";
+			//System.out.println(lista.size());
+			for(int i=0; i<lista.size();i++){
+				    DatosPaciente temp=lista.get(i);
+				 	tempNombre=temp.getNombre();
+				 	tempFecha=temp.getFechaNac();
+				 	tempSexo=temp.getSexo();
+				 	tempFacultad=temp.getFacultad();
+				 	
+			 }
+			
+			if(tempNombre.equalsIgnoreCase("0")){
+				result="{\"resultado\":\"ERROR\",\"nombre\":\""+tempNombre+"\"}";
+			}else{
+				result="{\"resultado\":\"OK\",\"nombre\":\""+tempNombre+"\",\"sexo\":\""+tempSexo+"\",\"fecha\":\""+tempFecha+"\",\"facultad\":\""+tempFacultad+"\"";
+				String RegistrosMultifasico=consulta.ObtenerRegistrosMultifasico(carnet);
+				result+=RegistrosMultifasico+"}";
+				
+			}
+		
+			
+			//System.out.println(result);
 			out.println(result);
 		}
 	}
