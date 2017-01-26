@@ -56,7 +56,7 @@ public class Trifoliar extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			Conexion consulta = new Conexion();
 			String result=consulta.CargaNoticias();
-			System.out.println(result);
+			//System.out.println(result);
 			out.println(result);
 		}
 	}

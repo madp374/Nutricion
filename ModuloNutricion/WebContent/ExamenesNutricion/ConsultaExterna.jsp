@@ -4,20 +4,31 @@
 <html>
 
         <head>
-        <meta charset="utf-8">
+        
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  	
- 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+ 		
   
   		<script src="../jquery/autocompletar/jquery.autocomplete.js"></script>
         
 		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
 		
-		<link rel="stylesheet" media="all" type="text/css" href="../jquery/carrusel/style/style-demo.css">
 
-	 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	 	
 	 
 	  	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	    
@@ -34,6 +45,23 @@
 			    padding-bottom: 9px;
 			    margin: 0px 0 0px;
 			}
+			.container {
+			    width: 75%;
+			    padding-top:15px;
+			}
+			.input-sm {
+			    height: 26px;
+			    font-size: 11px;
+			}
+			.btn-default {
+			    color: #333;
+			    background-color: #D8D6D6;
+			    border-color: #ccc;
+			    font-weight:bold;
+			}
+			.panel-heading {
+			    padding: 6px 15px;
+			    }
 			.nav-tabs>li>a {
 			     color: #555;
 			    cursor: default;
@@ -48,17 +76,18 @@
 			    border: 1px solid #ddd;
 			    border-bottom-color: transparent;
 			}
-			.container{
-				width: 100%;
+			 ul, ul li {
+				 color: black;
 			}
-			.btn-default {
-			    color: #333;
-			    background-color: #D8D6D6;
-			    border-color: #ccc;
+			.nav > li > a:hover, .nav > li > a:focus {
+			    background-color: #112D58;
+			    color:white;
 			}
 		</style>
 		<style type="text/css">
-		label { display:block; margin:5px 0 5px; font-size:9pt; }
+		label { display:block; margin:5px 0 5px; font-size:8pt; }
+		option { font-size:8pt; }
+		select { font-size:8pt; }
        	.ui-autocomplete {
 		    position: absolute;
 		    z-index: 1000;
@@ -86,7 +115,27 @@
 		}
 	</style>
 		
-	
+	<script type="text/javascript">
+$(document).ready(function() {
+        $(function () {
+            $('#horadesayuno').datetimepicker({ 
+		    	format: 'LT'
+	    	});
+            $('#refamhr').datetimepicker({ 
+		    	format: 'LT'
+	    	});
+            $('#almh').datetimepicker({ 
+		    	format: 'LT'
+	    	});
+            $('#refpmhr').datetimepicker({ 
+		    	format: 'LT'
+	    	});
+            $('#cenhr').datetimepicker({ 
+		    	format: 'LT'
+	    	});
+        });
+    });
+</script>
 		<script>	
 			
 			$(document).ready(function($){
@@ -110,14 +159,1115 @@
     	<link href="../jquery/menuacordeon/css/skins/blue.css" rel="stylesheet" type="text/css" />
 		<link href="../jquery/menuacordeon/css/skins/graphite.css" rel="stylesheet" type="text/css" />
 		<link href="../jquery/menuacordeon/css/skins/grey.css" rel="stylesheet" type="text/css" />
-
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         </head>
 
         <body onload="CargaInicio()">
-        
+   <div class="modal fade" id="CrearUsuarioModal" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+							      		El registro del paciente no existe<br>
+							      		¿Desea crearlo?
+								    
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="CargaFacultad()">Crear</button>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>     
        
         
-        <script>
+       
+        <div class="container">
+         <div class="panel2 panel-body">
+<header class="row col-sm-12">
+   <div class="page-header">
+        
+     <form class="form-inline">
+	  <div class="row" align="center">
+	  <div class="form-group">
+	    <div style="float:right;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousac.png" width="200px" height="100px" >
+		</a>
+		</div> 
+	  </div>
+  
+	  <div class="form-group">
+	    <p><h4 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
+				Clinica de Nutricion</br>
+				Unidad de Salud. USAC</h4></p>
+	  </div>
+  
+	  <div class="form-group">
+	    <div style="float:left;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousalud2.gif" width="200px" height="100px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
+		</a>
+		</div> 
+	  </div>
+	</div>
+	<div class="row" align="right">
+		<div class="form-group" >
+	  	
+				<p id="UsuarioSesion">Usuario:</p>
+			</div>
+	 </div>
+	</form>
+	
+       		 
+  </div>
+</header>
+        <div class="row col-sm-12">
+        
+        <nav class="col-sm-2">
+        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
+        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
+	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+		    </ul>
+         </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+		    </ul>
+        </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+		    </ul>
+        </li>
+        </ul>
+        </nav>
+        
+        <section class="col-sm-10">
+        <div class="panel panel-default">
+        
+        <div class="panel-heading">
+        <h3 class="panel-title">Examen Consulta Externa</h3>
+        </div>
+        <div class="panel-body">
+        
+ <form action="../ConsultaExterna" method="post" class="form-inline" role="form" onsubmit="return false">
+  
+  <ul class="nav nav-tabs" >
+    <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
+    <li><a data-toggle="tab" href="#menu1">Pagina2</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <article>
+      <div class="panel panel-primary">
+      <div class="panel-heading">Datos Generales</div>
+      <div class="panel-body">
+      		
+<div class="row">  
+&nbsp;&nbsp;
+  <div class="form-group">
+   
+	<label for="NCarnet">Carnet/Codigo Personal</label>
+	<input class="form-control input-sm" name="carnet" id="carnet" type="number" required/>
+	
+  </div>
+
+  
+ 	 <div id="mensaje1" >
+	</div>
+  </div>
+ <div class="row" id="NRegPacienteNoEncontrado"> 
+ &nbsp;&nbsp;   
+<div class="form-group">
+    <label for=LNombre>Nombre</label>
+    <input class="form-control input-sm" type="text"  name="nombre1" id="nombre1" maxlength="40" />
+</div>
+&nbsp; 
+<div class="form-group">
+    <label for=LNombre>Sexo</label>
+    <select  class="form-control input-sm"  id="sexo1">
+        <option value="Femenino">Femenino</option>
+        <option value="Masculino">Masculino</option>
+    </select>
+</div>
+&nbsp; 
+<div class="form-group">
+    <label for=LNombre>Fecha de Nacimiento</label>
+    <input class="form-control input-sm" type="text"  name="fechaNac" id="fechaNac" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD"  onkeyup="ValidarFecha()" />
+</div>
+&nbsp; 
+<div class="form-group">
+    <label for=LNombre>Facultad/Dependencia</label>
+    <p id="dep5"></p>
+</div>
+ 
+  </div>
+ <div class="row" id="NRegPacienteEncontrado"> 
+ &nbsp;&nbsp;  
+<div class="form-group">
+    <label for=LNombre>Nombre</label>
+    <input class="form-control input-sm" type="text"  name="nombre" id="nombre"  readonly />
+</div>
+&nbsp; 
+<div class="form-group">
+    <label for=LNombre>Sexo</label>
+    <select  class="form-control input-sm"  id="sexo" readonly >
+        <option value="Femenino">Femenino</option>
+        <option value="Masculino">Masculino</option>
+    </select>
+</div>
+&nbsp; 
+<div class="form-group" >
+    <label for=LNombre>Edad</label>
+    <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 80px;" readonly  />
+</div>
+&nbsp; 
+<div class="form-group">
+    <label for=LNombre>Facultad/Dependencia</label>
+    <input class="form-control input-sm" type="text"  name="facultad" id="facultad" readonly  />
+</div>
+ 
+  </div> 
+  <script>
+  $( function() {
+    $( "#fechaNac" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>
+ <div class="row" align="center">
+	  <div id="TablaEncargado"></div>
+</div> 
+
+<div class="row" align="center">
+	  <div id="RegMulti"></div>
+	
+</div>
+	
+      </div>
+    </div>
+     
+      
+      </article>
+     
+     <article>
+     
+	   
+				<div class="panel panel-primary">
+			      <div class="panel-heading">Antecedentes Medicos</div>
+			      <div class="panel-body" align="center" >
+			      	
+			      	<div class="row">
+					  	<div class="form-group">
+					  		<label for="Ltricipital">Enfermedades</label>
+					  		<textarea class="form-control input-sm" name="enfermedad" id="enfermedad" cols="20" rows="2" maxlength="240" ></textarea>
+					                   
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsubescapular">Medicamentos</label>
+					  		<textarea class="form-control input-sm" name="medicamento" id="medicamento" cols="20" rows="2" maxlength="240"></textarea>
+					  		     
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsumapliegues">Suplementos</label>
+					  		<textarea class="form-control input-sm" name="suplemento" id="suplemento" cols="20" rows="2" maxlength="240"></textarea>
+					  		
+					  	</div>
+					  </div>
+			      	
+			      	</div>
+			    </div>
+			
+			
+		
+	
+  
+  
+  </article> 
+
+ 
+<article>
+	<div class="panel panel-primary">
+      <div class="panel-heading">Estilo de vida</div>
+      <div class="panel-body" align="center">
+      
+      	<div class="row">
+  	<div class="form-group">
+  		<label for="Ltricipital" >Fuma<br>&nbsp;</label>
+  		<input class="form-control input-sm" id="fuma" type="checkbox" align="center" onclick="checkFuma(this)" />
+                   
+  	</div>
+  	&nbsp;
+  	<div class="form-group">
+  		<label for="Lsubescapular" >No. Cigarrillos<br>&nbsp;</label>
+  		<input class="form-control input-sm" id="ncigarro"  min="0" type="number"  style="width: 60px;" readonly/>
+            
+  	</div>
+  	&nbsp;
+  	<div class="form-group">
+  		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
+  		<select class="form-control input-sm" id="fumafrec" style="width: 80px;">
+  							<option value="0"></option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semana</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
+						</select>
+  
+  	</div>
+	&nbsp;
+  	<div class="form-group">
+  		<label for="Ltricipital" >Ejercicio<br>&nbsp;</label>
+  		<input class="form-control input-sm" id="ejercicio" type="checkbox" align="center" onclick="checkEjercicio(this)" />
+                   
+  	</div>
+  	&nbsp;
+  	<div class="form-group">
+  		<label for="Lsubescapular" >Tiempo en <br>minutos</label>
+  		<input class="form-control input-sm" id="ejerciciotiempo"  min="0" type="number"  style="width: 60px;" readonly />
+            
+  	</div>
+  	&nbsp;
+  	<div class="form-group">
+  		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
+  		<select class="form-control input-sm" id="ejerciciofrec" style="width: 80px;">
+  							<option value="0"></option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semana</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
+						</select>
+  
+  	</div>
+	&nbsp;
+  	<div class="form-group">
+  		<label for="Ltricipital" >Bebidas <br>alcoholicas</label>
+  		<input class="form-control input-sm" id="bebidaalc" type="checkbox" align="center" onclick="checkBebida(this)" />
+                   
+  	</div>
+  	&nbsp;
+  	<div class="form-group">
+  		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
+  		<select class="form-control input-sm" id="bebidaalcfrec" style="width: 80px;">
+  							<option value="0"></option>
+							<option value="1">Ocasionalmente</option>
+							<option value="2">Dos o tres veces por semana</option>
+							<option value="3">Cuatro a cinco veces por semana</option>
+							<option value="4">Diariamente</option>
+						</select>
+  
+  	</div>
+
+  </div>
+      	
+      	</div>
+    </div>
+
+  
+  </article>
+  
+  <article>
+  <div class="panel panel-primary">
+      <div class="panel-heading">Habitos alimentarios</div>
+      <div class="panel-body">
+      	
+      
+		    <div class="row">
+				<div class="col-sm-6" >
+				
+					<div class="panel panel-primary">
+				      <div class="panel-heading">Horarios de comida</div>
+				      <div class="panel-body" align="center">
+				      		<div class="row">
+				      			<div class="form-group" align="center" style="font-size:8pt;">
+							  		<div class="table-responsive">
+										  <table class="table">
+												<tr>
+													<th>Tiempo</th><th>Horario</th><th>Tiempo de comida<br>(minutos)</th>
+												</tr>
+												<tr>
+													<td>Desayuno</td>
+													<td><input class="form-control input-sm" name="horadesayuno" id="horadesayuno" style="width:70px;" /></td>
+													<td><input class="form-control input-sm" name="tcdesayuno" id="tcdesayuno" type="number" min="0" style="width: 60px;" /></td>
+												</tr>
+												<tr>
+													<td>Refaccion AM</td>
+													<td><input class="form-control input-sm" name="refamhr" id="refamhr" style="width:70px;" /></td>
+													<td><input class="form-control input-sm" name="tcrefaccion" id="tcrefaccion" type="number" min="0" style="width: 60px;" /></td>
+												</tr>
+												<tr>
+													<td>Almuerzo</td>
+													<td><input class="form-control input-sm" name="almh" id="almh" style="width:70px;" /></td>
+													<td><input class="form-control input-sm" name="tcalmuerzo" id="tcalmuerzo" type="number" min="0" style="width: 60px;" /></td>
+												</tr>
+												<tr>
+													<td>Refaccion PM</td>
+													<td><input class="form-control input-sm"  id="refpmhr" style="width:70px;" /></td>
+													<td><input class="form-control input-sm" name="tcrefaccionpm" id="tcrefaccionpm" type="number" min="0" style="width: 60px;" /></td>
+												</tr>
+												<tr>
+													<td>Cena</td>
+													<td><input class="form-control input-sm" name="cenhr" id="cenhr" style="width:70px;" /></td>
+													<td><input class="form-control input-sm" name="tccena" id="tccena" type="number" min="0" style="width: 60px;" /></td>
+												</tr>
+										  </table>
+										</div>
+							  	</div>
+				      		</div>
+				      </div>
+				    </div>
+				
+				</div>
+				<div class="col-sm-3" >
+				<div class="panel panel-primary">
+			      <div class="panel-heading">Transtornos Digestivos</div>
+			      <div class="panel-body" align="center">
+			      
+			      	<div class="row">
+			      		<div class="form-group">
+					  		<label for="Ltricipital">Diarrea</label>
+					  		<input class="form-control input-sm" id="diarrea" type="checkbox" align="center"  />
+					                   
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsubescapular">Flatulencia</label>
+					  		<input class="form-control input-sm" id="flatulencia" type="checkbox" align="center" />
+					  		     
+					  	</div>
+			      	</div>
+			      	<div class="row">
+			      		<div class="form-group">
+					  		<label for="Lsumapliegues">Acidez</label>
+					  		<input class="form-control input-sm" id="acidez" type="checkbox" align="center" />
+					  		
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsumapliegues">Estreñimiento</label>
+					  		<input class="form-control input-sm" id="estreñimiento" type="checkbox" align="center" />
+					  		
+					  	</div>
+			      	</div>
+			      	</div>
+			    </div>
+			</div>
+			<div class="col-sm-3" >
+							<div class="panel panel-primary">
+							      <div class="panel-heading">Lugar de consumo</div>
+							      <div class="panel-body" align="center">
+							      		<div class="row">
+										  	<div class="form-group">
+										  		<label for="Lcasa">Casa</label>
+										  		<input class="form-control input-sm" id="Lcasa" type="checkbox" align="center" />
+										                   
+										  	</div>
+										  	<div class="form-group">
+										  		<label for="Ltrabajo">Trabajo</label>
+										  		<input class="form-control input-sm" id="Ltrabajo" type="checkbox" align="center" />
+										  		     
+										  	</div>
+										  	<div class="form-group">
+										  		<label for="Lotros">Otros</label>
+										  		<input class="form-control input-sm" id="Lotro" type="checkbox" align="center" />
+										  		
+										  	</div>
+										  </div>
+							      </div>
+							    </div>
+						</div>
+				<div class="col-sm-3"  >
+					<div class="form-group">
+					  		<label for="Ltricipital">Consumo de Agua(Vasos)</label>
+					  		<input class="form-control input-sm" name="agua" id="agua" type="number" min="0" style="width: 70px;"  align="right"/>
+					                  
+					  	</div>
+				</div>
+					
+					<div class="row">
+						
+						<div class="col-sm-6" >
+							<div class="panel panel-primary">
+						      <div class="panel-heading">Origen de alimentos</div>
+						      <div class="panel-body" align="center">
+						      		 <div class="row">
+									  	<div class="form-group">
+									  		<label for="Ltricipital">Casa</label>
+									  		<input class="form-control input-sm" id="Ocasa" type="checkbox" align="center" />
+									                   
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="Lsubescapular">Cafeteria</label>
+									  		<input class="form-control input-sm" id="Ocafeteria" type="checkbox" align="center" />
+									  		     
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="Lsumapliegues">Caseta</label>
+									  		<input class="form-control input-sm" id="Ocaseta" type="checkbox" align="center" />
+									  		
+									  	</div>
+									  	<div class="form-group">
+									  		<label for="Lsumapliegues">Chiclero</label>
+									  		<input class="form-control input-sm" id="Ochiclero" type="checkbox" align="center" />
+									  		
+									  	</div>
+									  </div>
+						      </div>
+						    </div>
+						</div>
+					</div>
+				
+				
+			</div>
+		
+   
+		    <div class="row">
+			
+			
+				<div class="panel panel-primary">
+			      <div class="panel-heading">Otros</div>
+			      <div class="panel-body" align="center">
+			      
+			        <div class="row">
+					  	
+					  	
+					  	<div class="form-group">
+					  		<label for="Lsubescapular">Alimentos que le hacen daño</label>
+					  		<textarea class="form-control input-sm" name="ald" id="ald" cols="20" rows="2" maxlength="240" ></textarea>
+					            
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsumapliegues">Alimentos que no le gustan</label>
+					  		<textarea class="form-control input-sm" name="aln" id="aln" cols="20" rows="2" maxlength="240"></textarea>
+					        
+					  		
+					  	</div>
+					  	<div class="form-group">
+					  		<label for="Lsumapliegues">Alimentos preferidos</label>
+					  		<textarea class="form-control input-sm" name="alp" id="alp" cols="20" rows="2" maxlength="240"></textarea>
+					        
+					  		
+					  	</div>
+					  </div>
+			      
+			      </div>
+			    </div>
+			
+			
+			
+		</div>
+		
+      	</div>
+    </div>
+  
+  	
+  
+  
+
+
+  </article>  
+  
+
+   
+    </div>
+    <div id="menu1" class="tab-pane fade">
+    	<article>
+    		
+    			 <div class="row">
+				    <div class="col-sm-8" >
+				    
+			<div class="panel panel-primary">
+		      <div class="panel-heading">Recordatorio de 24 horas</div>
+		      <div class="panel-body">
+		      	
+					  <div class="row">
+					  		<div class="form-group">
+						    <label>Tiempo de comida</label>
+						    <select class="form-control input-sm" id="TiempoComida" name="TiempoComida">
+													<option >Desayuno</option>
+													<option >Refaccion AM</option>
+													<option >Almuerzo</option>
+													<option >Refaccion PM</option>
+													<option >Cena</option>
+												</select>
+						</div>
+						<div class="form-group">
+						     <label for="BNuevo">Agregar</label>			
+							<button class="btn btn-default" id="BtnATC" onclick="AgregarTiempoComida()" >
+						     <img src="../imagenes/th.jpg" width="20" height="15" title="Tiempo" /></button>
+							
+						</div>
+					  </div>
+					  
+					  <div id="TablaAlimento" class="row">
+					  
+					 </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group">
+						    <label>Alimento</label>
+						    <input class="form-control input-sm autocomplete" id="alimento" name="alimento" placeholder="Ingresa alimento" readonly/>
+						</div>
+						<div class="form-group">
+						    <label>Calorias</label>
+						    <input class="form-control input-sm" id="calorias" name="calorias" style="width: 70px;" readonly />
+						</div>
+						<div class="form-group">
+						    <label>Porcion</label>
+						    <input class="form-control input-sm" id="cantidada" name="cantidada" type="number" style="width: 70px;" readonly />
+						</div>
+						<div class="form-group">
+						    <label for="Ntipo">Metrica</label>
+						    <select class="form-control input-sm" name="porcion" id="porcion" readonly>
+													<option value="1" >U</option>
+													<option value="2" >ml</option>
+												</select>
+						  </div>
+						  <div class="form-group">
+						    <label for="BAgregar">Agregar</label>			
+							<button class="btn btn-default" id="BAlAgregar" onclick="AgregarAlimento()" disabled>
+						     <img src="../imagenes/agregar.png" width="20" height="15" title="Agregar" /></button>
+							
+						  </div>
+						<div class="form-group">
+						    
+							
+							<div class="modal fade" id="VentanaNuevoAlimento" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Nuevo Alimento</h4>
+							        </div>
+							        <div class="modal-body" align="center">
+							      		<h5>El alimento no esta registrado,<br>¿Desea crearlo?</h5>
+							      		<br>
+							          	<div class="row">
+								      		<div class="form-group">
+												    <label>1 porcion(100 gramos)</label>
+												    <input class="form-control input-sm" id="NuevoAl"  type="text" style="width: 100px;" placeholder="alimento" />
+												</div>
+												<div class="form-group">
+												    <label>Calorias</label>
+												    <input class="form-control input-sm" id="NuevaCal"  type="number" min="0"  style="width: 70px;"/>
+												</div>
+												<div class="form-group">
+												    <label>Grupo</label>
+												     <select class="form-control input-sm" id="NuevoGrupo">
+													<option value="1" >Lacteos bajos en grasa</option>
+													<option value="2" >Lacteos enteros</option>
+													<option value="3" >Vegetales</option>
+													<option value="4" >Frutas</option>
+													<option value="5" >Cereales</option>
+													<option value="6" >Carnes</option>
+													<option value="7" >Grasa</option>
+													<option value="8" >Azucares</option>
+												</select>
+												</div>
+								      	</div>
+								    
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="AñadirAlimentoBD()" id="Guard6">Guardar</button>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							
+						</div>
+					</div>
+		      	<div class="row" align="center">
+		      		<div class="form-group">
+						    <label>Dieta Baja en</label>
+						    <input class="form-control input-sm" id="dbaja" name="dbaja" type="text" style="width: 90px;" />
+						</div>
+						<div class="form-group">
+						    <label>Dieta Alta en</label>
+						    <input class="form-control input-sm" id="dalta" name="dalta" type="text" style="width: 90px;" />
+						</div>
+		      	</div>
+		      </div>
+		    </div>	    
+						
+
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Evaluacion Antropometrica</div>
+      <div class="panel-body" align="center">
+      
+      	<div class="row" >
+				<div class="form-group">
+						<label >Talla(m)<br>&nbsp;</label>
+						<input class="form-control input-sm" id="talla" name="talla" type="number" style="width: 60px;"  min="0" step="any" onkeyup="ValidarDecimal()" />
+				</div>
+				<div class="form-group">
+						<label >Peso(Lbs)<br>&nbsp;</label>
+						<input class="form-control input-sm" id="pesousual" name="pesousual" type="number" min="0" style="width: 60px;" />
+				</div>
+				<div class="form-group">
+						<label >Peso minimo<br>(Lbs)</label>
+						<input class="form-control input-sm" id="pesominimo" name="pesominimo" type="number" style="width: 70px;" readonly />
+				</div>
+			
+				<div class="form-group">
+						<label >Peso maximo<br>(Lbs)</label>
+						<input class="form-control input-sm" id="pesomax" name="pesomax" type="number"  style="width: 70px;" readonly />
+				</div>
+				<div class="form-group">
+						<label >Circunferencia <br>de muñeca</label>
+						<input class="form-control input-sm" id="circunferencia" name="circunferencia" type="number" min="0"  style="width: 80px;"/>
+				</div>
+				<div class="form-group">
+						<label >Constitucion <br>osea</label>
+						<select class="form-control input-sm" id="constitucion" style="width: 85px;">
+								<option value="1">Pequeña</option>
+								<option value="2">Mediana</option>
+								<option value="3">Grande</option>
+						</select>
+				</div>
+			</div>	
+      
+      </div>
+    </div>
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Registro</div>
+      <div class="panel-body" align="center">
+      		
+					<div class="row" >
+					<div class="form-group">
+							<label>% de Grasa<br>&nbsp;</label>
+							<input class="form-control input-sm" id="grasa" name="grasa" type="number" min="0" style="width: 65px;" />
+					</div>
+					<div class="form-group">
+							<label>% de masa<br>muscular</label>
+							<input class="form-control input-sm" id="musculo" name="musculo" type="number" min="0" style="width: 70px;" />
+					</div>
+				
+					
+					<div class="form-group">
+							<label>% de Agua<br>&nbsp;</label>
+							<input class="form-control input-sm" id="pagua" name="pagua" type="number"  min="0" style="width: 65px;"/>
+					</div>
+					<div class="form-group">
+							<label>Masa<br>Osea</label>
+							<input class="form-control input-sm" id="masa" name="masa" type="number" min="0" style="width: 60px;" />
+					</div>
+			
+					<div class="form-group">
+							<label>Grasa<br>Visceral</label>
+							<input class="form-control input-sm" id="viscera" name="viscera" type="number" min="0" style="width: 60px;"/>
+					</div>
+					<div class="form-group">
+							<label>Cintura<br>Abdominal</label>
+							<input class="form-control input-sm" id="abdomen" name="abdomen" type="number" min="0" style="width: 60px;" />
+					</div>
+					
+				
+				</div>
+				<div class="row">
+					<div class="form-group">
+							<label>Peso (kg)</label>
+							<input class="form-control input-sm" id="peso" name="peso" type="number" style="width: 70px;" readonly/>
+					</div>
+					<div class="form-group">
+							<label>IMC</label>
+							<input class="form-control input-sm" id="imc" name="imc" type="number" readonly  style="width: 70px;"/>
+					</div>
+				
+					<div class="form-group">
+							<label>Diagnostico</label>
+							<input class="form-control input-sm" id="diagnostico" name="diagnostico" readonly />
+					</div>
+					</div>
+      
+      </div>
+    </div>
+
+
+
+<div class="panel panel-primary">
+      <div class="panel-heading">Planificacion</div>
+      <div class="panel-body" align="center">
+      		<div class="row">
+			<div class="form-group">
+					<label>Planificacion del tratamiento -Metas-</label>
+					<textarea class="form-control input-sm" id="plan" name="plan" cols="60" rows="5" maxlength="240"></textarea>
+			</div>
+		
+		</div>	
+      </div>
+    </div>
+	
+				    </div>
+				    
+				    
+				    <div class="col-sm-4" >
+				    <div class="panel panel-primary">
+      <div class="panel-heading">Frecuencia de consumo</div>
+      <div class="panel-body" align="right">
+				    	
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Verduras</b>
+					  		<select id="verdura" class="form-control input-sm" style="width: 90px;">
+					  			<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select> 
+				            &nbsp;&nbsp;       
+					  	</div>
+					  </div>
+					  
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Frutas</b>
+					  		<select id="fruta" class="form-control input-sm" style="width: 90px;" >
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>     
+				            &nbsp;&nbsp;    
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table width="90%">
+								<tr>
+									<td><b>Carne(res,cerdo),</b></td><td rowspan="2">
+									<select id="pollo" class="form-control input-sm" style="width: 90px;" >
+												            	<option value="1">No consume</option>
+												            	<option value="2">Ocasional</option>
+												                <option value="3">Semanal</option>
+												                <option value="4">Mensual</option>
+												                <option value="5">Diario</option>
+												            </select>
+												          
+														</td>
+														<td> &nbsp;&nbsp;&nbsp;</td>
+													</tr>
+													<tr>
+														<td><b>pollo,pescado</b></td>
+													</tr>
+								</table>    
+								     
+								  	</div>
+								  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Lacteos</b>
+					  		<select id="lacteo" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select> 
+				            &nbsp;&nbsp;        
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table>
+							<tr>
+									<td><b>Hamburguesas,pizza,</b></td><td rowspan="2">
+									<select id="hamburguesa" class="form-control input-sm" style="width: 90px;">
+												            	<option value="1">No consume</option>
+												            	<option value="2">Ocasional</option>
+												                <option value="3">Semanal</option>
+												                <option value="4">Mensual</option>
+												                <option value="5">Diario</option>
+												            </select>   
+									</td>
+									<td> &nbsp;&nbsp;&nbsp;</td>
+								</tr>
+								<tr>
+									<td><b>pollo frito</b></td>
+							</tr>
+							</table>      
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table>
+							<tr>
+								<td><b>Snacks(papalinas,</b></td><td rowspan="2">
+								<select id="snack" class="form-control input-sm" style="width: 90px;">
+											            	<option value="1">No consume</option>
+											            	<option value="2">Ocasional</option>
+											                <option value="3">Semanal</option>
+											                <option value="4">Mensual</option>
+											                <option value="5">Diario</option>
+											            </select>  
+								</td>
+								<td> &nbsp;&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>tortrix,ricitos,etc)</b></td>
+							</tr>
+							</table>       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Refrescos embasados</b>
+					  		<select id="refresco" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select> 
+				            &nbsp;&nbsp;      
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table>
+							<tr>
+								<td><b>Galletas,pasteles,</b></td><td rowspan="2">
+								<select id="galleta" class="form-control input-sm" style="width: 90px;">
+											            	<option value="1">No consume</option>
+											            	<option value="2">Ocasional</option>
+											                <option value="3">Semanal</option>
+											                <option value="4">Mensual</option>
+											                <option value="5">Diario</option>
+											            </select>
+								</td>
+								<td> &nbsp;&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>pan dulce</b></td>
+							</tr>
+							</table>       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table>
+							<tr>
+								<td><b>Dulces,chocolates,</b></td><td rowspan="2">
+								<select id="dulce" class="form-control input-sm" style="width: 90px;">
+											            	<option value="1">No consume</option>
+											            	<option value="2">Ocasional</option>
+											                <option value="3">Semanal</option>
+											                <option value="4">Mensual</option>
+											                <option value="5">Diario</option>
+											            </select> 
+								</td>
+								<td> &nbsp;&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>chicles</b></td>
+							</tr>
+							</table>      
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Embutidos</b>
+					  		<select id="embutido" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>  
+				           &nbsp;&nbsp;     
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Sopas instantaneas</b>
+					  		<select id="sopa" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select> 
+				            &nbsp;&nbsp;       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<table>
+							<tr>
+								<td><b>Frituras,chicharron,</b></td><td rowspan="2">
+								<select id="fritura" class="form-control input-sm" style="width: 90px;" >
+											            	<option value="1">No consume</option>
+											            	<option value="2">Ocasional</option>
+											                <option value="3">Semanal</option>
+											                <option value="4">Mensual</option>
+											                <option value="5">Diario</option>
+											            </select> 
+								</td>
+								<td> &nbsp;&nbsp;&nbsp;</td>
+							</tr>
+							<tr>
+								<td><b>carnitas</b></td>
+							</tr>
+							</table>       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Tortillas</b>
+					  		<select id="tortilla" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>  
+				            &nbsp;&nbsp;       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Papas</b>
+					  		<select id="papa" class="form-control input-sm" style="width:90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>    
+				            &nbsp;&nbsp;     
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Pasta</b>
+					  		<select id="pasta" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>  
+				            &nbsp;&nbsp;       
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Arroz</b>
+					  		<select id="arroz" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>   
+				            &nbsp;&nbsp;      
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Frijol</b>
+					  		<select id="frijol" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>     
+				            &nbsp;&nbsp;    
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Pan</b>
+					  		<select id="pan" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>      
+				            &nbsp;&nbsp;   
+					  	</div>
+					  </div>
+					  <br>
+					  <div class="row">
+					  	<div class="form-group" style="font-size:8pt;">
+					  		<b>Huevo</b>
+					  		<select id="huevo" class="form-control input-sm" style="width: 90px;">
+				            	<option value="1">No consume</option>
+				            	<option value="2">Ocasional</option>
+				                <option value="3">Semanal</option>
+				                <option value="4">Mensual</option>
+				                <option value="5">Diario</option>
+				            </select>   
+				            &nbsp;&nbsp;      
+					  	</div>
+					  </div>
+					  </div>
+    </div>
+					  
+				    </div>
+				  </div>
+    		
+    	</article>
+    </div>
+  </div>
+  
+ 
+  </br>
+          <div class="row" align="center" id="Guard" >
+      		<div class="form-group" >			
+							<button class="btn btn-default" onclick="Guardar()" id="Guard4" >
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Guardar" />Guardar</button>
+							
+			</div>
+			</div>
+			<div class="row" align="center" id="Mod" >
+            <div class="form-group" >			
+							<button class="btn btn-default" onclick="Modificar()" id="BtnMod">
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Modificar" />Modificar</button>
+							
+			</div>
+			<div class="form-group" >		
+							<button class="btn btn-default" onclick="EliminarRegistro()" id="BtnEl" >
+						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>
+							
+			</div>
+		</div>
+</form>
+        
+ <script>
         var busqueda=false;
         var ERRORSQL=false;
         var carnetaccion="";
@@ -134,15 +1284,171 @@
         var idCE=0;
         var habilitado=false;
         
+        var UsuarioSesion = "null";
+		var IdUsuarioSesion = "null";
+		var PerfilSesion ="null";
+		var iniciarCarga=false;
+        
+	document.getElementById('carnet').onkeydown = function (e) {
+	        	
+	            if (e.which === 13) {
+	            	var carnet=document.getElementById('carnet').value;
+	            	limpiarInfoGeneral();
+	            	idCE=0;
+	            	if(carnet!=""){
+	            		limpiar_datos();
+	            		BuscarPaciente(carnet);
+	            	}else{
+	            		alert("Ingrese un numero de carnet valido");
+	            	}
+	            	
+	                return false;
+	            }
+	        };
+		document.getElementById('alimento').onkeydown = function (e) {
+			        	
+			            if (e.which === 13) {
+			            	var alimen=document.getElementById('alimento').value;
+			            	if(alimen!=""){
+			            		document.getElementById('NuevoAl').value  = "";
+	            		        document.getElementById('NuevaCal').value  = "";
+	            		        document.getElementById('calorias').value  = "";
+	            		        document.getElementById('cantidada').value  = "";
+			            		VerificarAlimento(alimen);
+			            	}
+			            	
+			            	
+			                return false;
+			            }
+			        };
+		function VerificarAlimento(aliment){
+			var action="AlExiste";
+			var texto=aliment.toLowerCase();
+    		var cadena = ['a='+action,'alimento='+texto].join('&');
+
+
+    		$.ajax({
+    	        url: "../Alimento",
+    	        data: cadena,
+    	  	    type: 'post',
+    	        dataType: 'json',
+    	        success: function(data){
+    	        	if(data.resultado=='OK'){
+    	        		if(data.total=="0"){
+    	        			//El alimento no existe
+    	        			document.getElementById('NuevoAl').value  = texto;
+    	        			VentanaAlimento();
+    	        		}else{
+    	        			document.getElementById('alimento').value  = texto;
+            		        document.getElementById('calorias').value  = data.calorias;
+            		        
+            		        document.getElementById('NuevoAl').value  = "";
+            		        document.getElementById('NuevaCal').value  = "";
+            		        
+            		        document.getElementById("cantidada").focus();
+    	        		}	
+    	        	}else{
+    	        		alert("Error, al buscar el alimento en el servidor");
+    	        	}
+    	        	
+    	        	
+    	        	
+    	        }
+    		});
+		}
+	    function VentanaAlimento(){
+			 jQuery('#VentanaNuevoAlimento').modal("show");
+	    }		
+	    function limpiarInfoGeneral(){
+	    	
+	    	document.getElementById("TablaEncargado").innerHTML = "";
+        	document.getElementById("RegMulti").innerHTML ="";
+        	document.getElementById("NRegPacienteEncontrado").style.display = 'none';
+    		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
+        	document.getElementById("Mod").style.display = 'none';
+			document.getElementById("Guard").style.display = 'block';
+			document.getElementById("BtnMod").disabled = false;
+			document.getElementById("BtnEl").disabled = false;
+			
+			document.getElementById('nombre').value  = "";
+    		document.getElementById('sexo').value  = "Femenino";
+    		document.getElementById('edad').value  = "";
+    		document.getElementById('facultad').value  = "";
+    		
+    		document.getElementById('nombre1').value  = "";
+    		document.getElementById('sexo1').value  = "Femenino";
+    		document.getElementById('fechaNac').value  = "";
+	    }
         function MostrarMensajeServidor(texto){
         	alert(texto);        
         } 
+        
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        
+        function VerificarSesion(){
+    		<% HttpSession misession= request.getSession(true); %>
+    		
+    		UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
+    		IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
+    		PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
+    		
+    		if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
+    			
+    			var x=decodeURIComponent(document.cookie).length;
+    			if(x==0){
+    				//sale
+    				//window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+    			}
+    			else{
+    				UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
+            		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
+            		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
+            		
+            		if(PerfilSesion=="nutri"){
+        				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+        			
+        			}else{
+        				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+        			}
+    			}
+    			
+    		}
+    		else{
+    			document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
+    			document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
+    			document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
+    			
+    			if(PerfilSesion=="nutri"){
+    				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+    			
+    			}else{
+    				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+    			}
+    		}
+    	}
+        
         	function CargaInicio() {
+        		document.getElementById("NRegPacienteEncontrado").style.display = 'none';
+        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
         		
         		var MID = getUrlVars()["prodId"];
         		idCE = getUrlVars()["idCE"];
         		if(idCE!=undefined){
-        			CargaEdicion(idCE)
+        			iniciarCarga=true;
+        			CargaEdicion(idCE);
         			document.getElementById("Guard").style.display = 'none';
         		}else{
         			if(MID!=undefined){
@@ -152,12 +1458,27 @@
             			document.getElementById("Mod").style.display = 'none';
             		}
         		}
+        		VerificarSesion();
+        	}
+        	
+        	function CerrarSesion(){
+        		<%misession.setAttribute("NUSUARIO", "null");%>
+        		<%misession.setAttribute("NIDSUARIO", "null");%>
+        		<%misession.setAttribute("NPERFIL", "null");%>
+        		
+        		document.cookie = "CookieUsuario=; max-age=0";
+    			document.cookie = "CookieIDUsuario=; max-age=0";
+    			document.cookie = "CookiePerfil=; max-age=0";
+        		
+        		window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
         		
         	}
+        	
         	function CargaEdicion(MID){
+        		limpiar_datos();
         		var action="CargaEdicion";
         		var cadena = ['a='+action,'ID='+MID].join('&');
-
+			
         		$.ajax({
         	        url: "../ConsultaExterna",
         	        data: cadena,
@@ -165,10 +1486,11 @@
         	        dataType: 'json',
         	        success: function(data){
         	        	if(data.resultado=='OK'){
-        	        		document.getElementById('carnet').value  = data.PACIENTE_idPACIENTE;
-        	        		document.getElementById('carnet').readOnly = true;
+        	        		idCE=MID;
+        	        		//document.getElementById('carnet').value  = data.PACIENTE_idPACIENTE;
+        	        		//document.getElementById('carnet').readOnly = true;
         	        		
-        	        		CargaDPaciente(data.pnombre,data.pedad,data.psexo,data.pfacultad,data.PACIENTE_idPACIENTE)
+        	        		//CargaDPaciente(data.pnombre,data.pedad,data.psexo,data.pfacultad,data.PACIENTE_idPACIENTE)
         	        		
         	        		document.getElementById("dbaja").value  = data.DietaBaja;
         	        		document.getElementById("dalta").value  = data.DietaAlta;
@@ -189,6 +1511,7 @@
         	        		document.getElementById("tcdesayuno").value  = data.TDesayuno;
         	        		document.getElementById("tcrefaccion").value  = data.TRefaccion;
         	        		document.getElementById("tcalmuerzo").value  = data.TAlmuerzo;
+        	        		document.getElementById("tcrefaccionpm").value  = data.TRefaccionPM;
         	        		document.getElementById("tccena").value  = data.TCena;
         	        		document.getElementById("agua").value  = data.NoVasoAgua;
         	        		document.getElementById("ald").value  = data.AlimentoDano;
@@ -226,11 +1549,11 @@
         	        		document.getElementById("refpmhr").value = data.horarioE3;
         	        		document.getElementById("cenhr").value = data.horarioE4;
         	        		
-        	        		document.getElementById("tdesayuno").checked = AsignarCheckHora(data.horarioE0);
-        	        		document.getElementById("refam").checked = AsignarCheckHora(data.horarioE1);
-        	        		document.getElementById("talmu").checked = AsignarCheckHora(data.horarioE2);
-        	        		document.getElementById("refpm").checked = AsignarCheckHora(data.horarioE3);
-        	        		document.getElementById("cenaa").checked = AsignarCheckHora(data.horarioE4);
+        	        		//document.getElementById("tdesayuno").checked = AsignarCheckHora(data.horarioE0);
+        	        		//document.getElementById("refam").checked = AsignarCheckHora(data.horarioE1);
+        	        		//document.getElementById("talmu").checked = AsignarCheckHora(data.horarioE2);
+        	        		//document.getElementById("refpm").checked = AsignarCheckHora(data.horarioE3);
+        	        		//document.getElementById("cenaa").checked = AsignarCheckHora(data.horarioE4);
         	        		
         	        		
         	        		
@@ -269,7 +1592,7 @@
         	             			document.getElementById("cantidada").readOnly = false;	
         	             			document.getElementById("porcion").readOnly = false;	
         	             			document.getElementById("BAlAgregar").disabled = false;
-        	             			document.getElementById("BNAlimento").disabled = false;
+        	             			
         	             			habilitado=true;
         	             		}
         	        			
@@ -277,6 +1600,31 @@
         	        		//CargaIMC(data.talla,data.peso);
         	        		//CargaPliegues(data.tricipital,data.subescapular);
         	        		//IDMulti=MID;
+        	        		Bloqueo(data.USER,data.fecha,data.nombre4,data.area);
+        	        		if(iniciarCarga){
+        	        			iniciarCarga=false;
+        	        			
+        	        			//BuscarPaciente(data.PACIENTE_idPACIENTE);
+        	        			document.getElementById('carnet').value  = data.PACIENTE_idPACIENTE;
+        	        			carnetaccion=data.PACIENTE_idPACIENTE;
+        	        			document.getElementById("NRegPacienteEncontrado").style.display = 'block';
+        		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
+        		   	        	document.getElementById('nombre').value  = data.pnombre;
+        			        	document.getElementById('sexo').value  = data.psexo;
+        			        	document.getElementById('edad').value  = data.pedad;
+        			        	document.getElementById('facultad').value  = data.pfacultad;
+        		        		busqueda=true;
+        		        		GenerarRegistrosMultifasico(data.total,data.RConsultaExterna);
+        		        		
+        		        		document.getElementById('RMulti').value  = idCE;
+        	    				document.getElementById("BtnRec").disabled = false;
+        	        			document.getElementById("BtnVET").disabled = false;
+        	        			document.getElementById("Guard").style.display = 'none';
+        	        			document.getElementById("Mod").style.display = 'block';
+        		        		document.getElementById("enfermedad").focus();
+        	        			
+        	        		}
+        	        		
         	        	}else{
         	        		ERRORSQL=true;
         	        		MostrarMensajeServidor(data.descripcion);
@@ -286,6 +1634,194 @@
         	        }
         		});
         	}
+        	function Bloqueo(ID,fecha,nomb,area){
+        		var encabCom="";
+        		var marco="<div class=\"table-responsive\"><table class=\"table-bordered\" border=\"1px\" width=\"80%\" >";
+        	    var fintabla="</table></div>";
+				encabCom+="<tr bgcolor=\"#25587E\" align=\"center\"><th><font color=\"white\">Fecha</font></th><th><font color=\"white\">Evaluador</font></th><th><font color=\"white\">Area</font></th></tr>";
+        		var fila='<tr><td>'+fecha+'</td><td>'+nomb+'</td><td>'+area+'</td></tr>';
+        		var tabla=marco+encabCom+fila+fintabla;
+        		document.getElementById("TablaEncargado").innerHTML = tabla;
+        		
+        		if(ID==IdUsuarioSesion){
+        			
+        			document.getElementById('enfermedad').readOnly = false;
+        			document.getElementById('medicamento').readOnly = false;
+        			document.getElementById('suplemento').readOnly = false;
+        			document.getElementById('diarrea').readOnly = false;
+        			document.getElementById('flatulencia').readOnly = false;
+        			document.getElementById('acidez').readOnly = false;
+        			document.getElementById('estreñimiento').readOnly = false;
+        			document.getElementById('fuma').readOnly = false;
+        			document.getElementById('ncigarro').readOnly = false;
+        			document.getElementById('fumafrec').readOnly = false;
+        			
+        			document.getElementById('ejercicio').readOnly =false;
+        			document.getElementById('ejerciciotiempo').readOnly =false;
+        			document.getElementById('ejerciciofrec').readOnly = false;
+        			document.getElementById('bebidaalc').readOnly = false;
+        			document.getElementById('bebidaalcfrec').readOnly = false;
+        			//document.getElementById('tdesayuno').readOnly =false;
+        			document.getElementById('horadesayuno').readOnly = false;
+        			//document.getElementById('refam').readOnly = false;
+        			document.getElementById('refamhr').readOnly = false;
+        			//document.getElementById('talmu').readOnly = false;
+        			
+        			document.getElementById('almh').readOnly = false;
+        			//document.getElementById('refpm').readOnly = false;
+        			document.getElementById('refpmhr').readOnly = false;
+        			//document.getElementById('cenaa').readOnly = false;
+        			document.getElementById('cenhr').readOnly = false;
+        			document.getElementById('Lcasa').readOnly = false;
+        			document.getElementById('Ltrabajo').readOnly = false;
+        			document.getElementById('Lotro').readOnly = false;
+        			document.getElementById('Ocasa').readOnly = false;
+        			document.getElementById('Ocafeteria').readOnly = false;
+        			
+        			document.getElementById('Ocaseta').readOnly = false;
+        			document.getElementById('Ochiclero').readOnly = false;
+        			document.getElementById('tcdesayuno').readOnly = false;
+        			document.getElementById('tcrefaccion').readOnly = false;
+        			document.getElementById('tcalmuerzo').readOnly = false;
+        			document.getElementById('tcrefaccionpm').readOnly = false;
+        			document.getElementById('tccena').readOnly = false;
+        			document.getElementById('agua').readOnly = false;
+        			document.getElementById('ald').readOnly = false;
+        			document.getElementById('aln').readOnly = false;
+        			document.getElementById('alp').readOnly = false;
+        			
+        			document.getElementById('dbaja').readOnly = false;
+        			document.getElementById('dalta').readOnly = false;
+        			document.getElementById('talla').readOnly = false;
+        			document.getElementById('pesousual').readOnly = false;
+        			document.getElementById('circunferencia').readOnly = false;
+        			document.getElementById('constitucion').readOnly = false;
+        			document.getElementById('grasa').readOnly = false;
+        			document.getElementById('pagua').readOnly = false;
+        			document.getElementById('musculo').readOnly = false;
+        			document.getElementById('masa').readOnly = false;
+        			
+        			document.getElementById('viscera').readOnly = false;
+        			document.getElementById('abdomen').readOnly = false;
+        			document.getElementById('plan').readOnly = false;
+        			document.getElementById('verdura').readOnly = false;
+        			document.getElementById('fruta').readOnly = false;
+        			document.getElementById('pollo').readOnly = false;
+        			document.getElementById('lacteo').readOnly = false;
+        			document.getElementById('hamburguesa').readOnly = false;
+        			document.getElementById('snack').readOnly = false;
+        			document.getElementById('refresco').readOnly = false;
+        			
+        			document.getElementById('galleta').readOnly = false;
+        			document.getElementById('dulce').readOnly = false;
+        			document.getElementById('embutido').readOnly = false;
+        			document.getElementById('sopa').readOnly = false;
+        			document.getElementById('fritura').readOnly = false;
+        			document.getElementById('tortilla').readOnly = false;
+        			document.getElementById('papa').readOnly = false;
+        			document.getElementById('pasta').readOnly = false;
+        			document.getElementById('arroz').readOnly = false;
+        			document.getElementById('frijol').readOnly = false;
+        			
+        			document.getElementById('pan').readOnly = false;
+        			document.getElementById('huevo').readOnly = false;
+        			
+        			document.getElementById("BtnMod").disabled = false;
+        			document.getElementById("BtnEl").disabled = false;
+        			document.getElementById("BAlAgregar").disabled = false;
+        			document.getElementById('alimento').readOnly = false;
+        			document.getElementById('BtnATC').disabled = false;
+        			
+        		}else{
+        			
+        			document.getElementById('enfermedad').readOnly = true;
+        			document.getElementById('medicamento').readOnly = true;;
+        			document.getElementById('suplemento').readOnly = true;
+        			document.getElementById('diarrea').readOnly = true;
+        			document.getElementById('flatulencia').readOnly = true;
+        			document.getElementById('acidez').readOnly = true;
+        			document.getElementById('estreñimiento').readOnly = true;
+        			document.getElementById('fuma').readOnly = true;
+        			document.getElementById('ncigarro').readOnly = true;
+        			document.getElementById('fumafrec').readOnly = true;
+        			
+        			document.getElementById('ejercicio').readOnly = true;
+        			document.getElementById('ejerciciotiempo').readOnly = true;;
+        			document.getElementById('ejerciciofrec').readOnly = true;
+        			document.getElementById('bebidaalc').readOnly = true;
+        			document.getElementById('bebidaalcfrec').readOnly = true;
+        			//document.getElementById('tdesayuno').readOnly = true;
+        			document.getElementById('horadesayuno').readOnly = true;
+        			//document.getElementById('refam').readOnly = true;
+        			document.getElementById('refamhr').readOnly = true;
+        			//document.getElementById('talmu').readOnly = true;
+        			
+        			document.getElementById('almh').readOnly = true;
+        			//document.getElementById('refpm').readOnly = true;;
+        			document.getElementById('refpmhr').readOnly = true;
+        			//document.getElementById('cenaa').readOnly = true;
+        			document.getElementById('cenhr').readOnly = true;
+        			document.getElementById('Lcasa').readOnly = true;
+        			document.getElementById('Ltrabajo').readOnly = true;
+        			document.getElementById('Lotro').readOnly = true;
+        			document.getElementById('Ocasa').readOnly = true;
+        			document.getElementById('Ocafeteria').readOnly = true;
+        			
+        			document.getElementById('Ocaseta').readOnly = true;
+        			document.getElementById('Ochiclero').readOnly = true;;
+        			document.getElementById('tcdesayuno').readOnly = true;
+        			document.getElementById('tcrefaccion').readOnly = true;
+        			document.getElementById('tcalmuerzo').readOnly = true;
+        			document.getElementById('tcrefaccionpm').readOnly = true;
+        			document.getElementById('tccena').readOnly = true;
+        			document.getElementById('agua').readOnly = true;
+        			document.getElementById('ald').readOnly = true;
+        			document.getElementById('aln').readOnly = true;
+        			document.getElementById('alp').readOnly = true;
+        			
+        			document.getElementById('dbaja').readOnly = true;
+        			document.getElementById('dalta').readOnly = true;;
+        			document.getElementById('talla').readOnly = true;
+        			document.getElementById('pesousual').readOnly = true;
+        			document.getElementById('circunferencia').readOnly = true;
+        			document.getElementById('constitucion').readOnly = true;
+        			document.getElementById('grasa').readOnly = true;
+        			document.getElementById('pagua').readOnly = true;
+        			document.getElementById('musculo').readOnly = true;
+        			document.getElementById('masa').readOnly = true;
+        			
+        			document.getElementById('viscera').readOnly = true;
+        			document.getElementById('abdomen').readOnly = true;;
+        			document.getElementById('plan').readOnly = true;
+        			document.getElementById('verdura').readOnly = true;
+        			document.getElementById('fruta').readOnly = true;
+        			document.getElementById('pollo').readOnly = true;
+        			document.getElementById('lacteo').readOnly = true;
+        			document.getElementById('hamburguesa').readOnly = true;
+        			document.getElementById('snack').readOnly = true;
+        			document.getElementById('refresco').readOnly = true;
+        			
+        			document.getElementById('galleta').readOnly = true;
+        			document.getElementById('dulce').readOnly = true;;
+        			document.getElementById('embutido').readOnly = true;
+        			document.getElementById('sopa').readOnly = true;
+        			document.getElementById('fritura').readOnly = true;
+        			document.getElementById('tortilla').readOnly = true;
+        			document.getElementById('papa').readOnly = true;
+        			document.getElementById('pasta').readOnly = true;
+        			document.getElementById('arroz').readOnly = true;
+        			document.getElementById('frijol').readOnly = true;
+        			
+        			document.getElementById('pan').readOnly = true;
+        			document.getElementById('huevo').readOnly = true;
+        			document.getElementById("BtnMod").disabled = true;
+        			document.getElementById("BtnEl").disabled = true;
+        			document.getElementById("BAlAgregar").disabled = true;
+        			document.getElementById('alimento').readOnly = true;
+        			document.getElementById('BtnATC').disabled = true;
+        		}
+        	}
+        	
         	function CargaRecordatorio(ct,Ealim,Ecal,ETiempoCom,ECant,EMetrica){
         		
         		//alert(Ealim+","+Ecal+","+ETiempoCom+","+ECant+","+EMetrica);
@@ -303,7 +1839,7 @@
         		
         		
         		
-        		ArrComida[ct]=Ealim;	
+        		ArrComida[ct]=decodeURIComponent(Ealim);	
 				ArrCant[ct]=cant;
 				ArrUnidad[ct]=metrica[z].text;						
 				ArrKcal[ct]=cant*calorias;			
@@ -352,21 +1888,18 @@
         	  	    type: 'post',
         	        dataType: 'json',
         	        success: function(data){
-        	        	    for ( i=0; i < data.resultado.length; i++) {  
-        	        	    	resultado+="<option value=\""+data.resultado[i].id+"\">"+data.resultado[i].nombre+"</option>";
-        	        	      
-        	        	    }
-        	        		
-        	        		var temp=GenerarITEM()+resultado+"</select>"
-        	    			+"</div>";
-        	    			
-        	        		var capa = document.getElementById("capa");
-        	           		capa.innerHTML = temp;
-        	           		
-        	           		var mensajes = document.getElementById("mensaje1");
-        	           		var aux="<div class=\"form-group\"><input class=\"form-control\" type=\"text\" id=\"mensaje2\" name=\"mensaje2\" readonly /></div>";
-        	           		mensajes.innerHTML = aux;
-        	           		document.getElementById('mensaje2').value  = "Paciente no registrado";
+        	        	for ( i=0; i < data.resultado.length; i++) {  
+    	        	    	resultado+="<option value=\""+data.resultado[i].id+"\">"+data.resultado[i].nombre+"</option>";
+    	        	      
+    	        	    }
+    	        	    document.getElementById("NRegPacienteEncontrado").style.display = 'none';
+		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'block';
+    	        	   
+    	    			var marcos="<select class=\"form-control input-sm\" id=\"facultad1\" name=\"facultad1\">";
+    	    			marcos+=resultado+"</select>";
+    	    			
+    	    			document.getElementById("dep5").innerHTML = marcos;
+    	    			document.getElementById("nombre1").focus();
         	        	
         	        }
         		});
@@ -440,7 +1973,7 @@
         			carnet=entrada;
         		}
         		carnetaccion=carnet;
-        		var action="buscar";
+        		var action="PacienteConsultaExterna";
     			cadena = [ 	'carnet='   + carnet,'a='+action].join('&');
     			$.ajax({
     		        url: "../Paciente",
@@ -450,40 +1983,276 @@
     		        success: function(data){
     		        	
     		        	if(data.resultado=='OK'){
-    		        		
-    		        		var texto="<div class=\"form-group\">"
-    		   	      		 + "<label for=\"LNombre\">Nombre</label>"
-    		   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"nombre\" id=\"nombre\" readonly required  />"
-    		   	    	      +"</div>"
-    		   	    	      +"<div class=\"form-group\">"
-    			   	      		 + "<label for=\"LSexo\">Sexo</label>"
-    			   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"sexo\" id=\"sexo\" readonly required  />"
-    			   	    	      +"</div>"
-    		   					+"<div class=\"form-group\">"
-    			   	      		 + "<label for=\"Ledad\">Edad</label>"
-    			   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"edad\" id=\"edad\" readonly required  />"
-    			   	    	      +"</div>"
-    			   	    	   +"<div class=\"form-group\">"
-    			   	      		 + "<label for=\"Lfacultad\">Facultad</label>"
-    			   	    		  +"<input class=\"form-control\" type=\"text\"  name=\"facultad\" id=\"facultad\" readonly required  />"
-    			   	    	      +"</div>";
-    		   	        		var capa = document.getElementById("capa");
-    		   	        		capa.innerHTML = texto;
+    		        		document.getElementById("NRegPacienteEncontrado").style.display = 'block';
+    		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
     		   	        		document.getElementById('nombre').value  = data.nombre;
     			        		document.getElementById('sexo').value  = data.sexo;
     			        		document.getElementById('edad').value  = data.fecha;
     			        		document.getElementById('facultad').value  = data.facultad;
     		        			busqueda=true;
+    		        			GenerarRegistrosMultifasico(data.total,data.RConsultaExterna);
     		        			document.getElementById("enfermedad").focus();
     		        	}else{	  
     		        		busqueda=false;
-    		        		CargaFacultad();
+    		        		//document.getElementById("NRegPacienteEncontrado").style.display = 'none';
+    		        		//document.getElementById("NRegPacienteNoEncontrado").style.display = 'block';
+    		        		//CargaFacultad();
+    		        		VentanaCrearUsuario();
     		        	}
     		        	
     		        }
     		    });
         		
         	}	
+        	
+        	function GenerarRegistrosMultifasico(total,data){
+        		var marcodiv='<div class="row"><div class="form-group"><label for="RegM">Registros de consulta<br>externa</label><select class="form-control input-sm" id="RMulti" onchange=CambioRegMulti()>';
+        		var opciones='<option value=0>Nuevo</option>';
+        		if(total!=0){
+        			for(i=0;i<total;i++){
+        				opciones+='<option value='+data[i].idCONSULTA_EXTERNA+'>'+data[i].fecha+'</option>';
+        			}
+        		}
+        		var fin='</select></div>'
+        		var botones=''
+        			+'&nbsp;&nbsp;<div class="form-group">'
+								+ '   <label for="BAgregar">Calculos VET</label>	'		
+									+'<button class="btn btn-default btn-lg" id="BtnVET"  onclick="CalculosVET()" >'
+								 +  '  <img src="../imagenes/vet2.jpg" width="20" height="20" title="CalculosVET" /></button>'
+								 +' </div>&nbsp;&nbsp;<div class="form-group">'
+								 +  ' <label for="BAgregar">Reconsulta</label>'			
+									+'<button class="btn btn-default btn-lg" id="BtnRec" onclick="Reconsulta()" >'
+								   + ' <img src="../imagenes/reco.png" width="20" height="20" title="Reconsulta" /></button></div></div>';
+        		var componente=marcodiv+opciones+fin+botones;
+        		document.getElementById("RegMulti").innerHTML =componente;
+        		//document.getElementById("Examenes").style.display = 'none';
+        		//document.getElementById("talla").focus();
+        		document.getElementById("BtnRec").disabled = true;
+    			document.getElementById("BtnVET").disabled = true;
+    			
+    			
+        	}
+        	function CambioRegMulti(){
+        		var valor=document.getElementById('RMulti').value;
+        		document.getElementById("TablaEncargado").innerHTML = "";
+        		if(valor!=0){
+        			idCE=valor;
+        			document.getElementById("BtnRec").disabled = false;
+        			document.getElementById("BtnVET").disabled = false;
+        			document.getElementById("Guard").style.display = 'none';
+        			document.getElementById("Mod").style.display = 'block';
+        			
+        			CargaEdicion(idCE);
+        			//document.getElementById("Examenes").style.display = 'block';
+        		}else{
+        			document.getElementById("BtnRec").disabled = true;
+        			document.getElementById("BtnVET").disabled = true;
+        			//document.getElementById("Examenes").style.display = 'none';
+        			document.getElementById("Mod").style.display = 'none';
+        			document.getElementById("Guard").style.display = 'block';
+        			document.getElementById("BtnMod").disabled = false;
+        			
+        			
+        			
+        			limpiar_datos();
+        		}
+        		}
+        	function limpiar_datos(){
+        		document.getElementById('enfermedad').value  = "";
+    			document.getElementById('medicamento').value  = "";
+    			document.getElementById('suplemento').value  = "";
+    			document.getElementById('diarrea').checked = false;
+    			document.getElementById('flatulencia').checked = false;
+    			document.getElementById('acidez').checked = false;
+    			document.getElementById('estreñimiento').checked = false;
+    			document.getElementById('fuma').checked = false;
+    			document.getElementById('ncigarro').value  = "";
+    			document.getElementById('fumafrec').value  = 1;
+    			
+    			document.getElementById('ejercicio').checked = false;
+    			document.getElementById('ejerciciotiempo').value  = "";
+    			document.getElementById('ejerciciofrec').value  = 1;
+    			document.getElementById('bebidaalc').checked = false;
+    			document.getElementById('bebidaalcfrec').value  = 1;
+    			//document.getElementById('tdesayuno').checked = false;
+    			document.getElementById('horadesayuno').value  = "";
+    			//document.getElementById('refam').checked = false;
+    			document.getElementById('refamhr').value  = "";
+    			//document.getElementById('talmu').checked = false;
+    			
+    			document.getElementById('almh').value  = "";
+    			//document.getElementById('refpm').checked = false;
+    			document.getElementById('refpmhr').value  = "";
+    			//document.getElementById('cenaa').checked = false;
+    			document.getElementById('cenhr').value  = "";
+    			document.getElementById('Lcasa').checked = false;
+    			document.getElementById('Ltrabajo').checked = false;
+    			document.getElementById('Lotro').checked = false;
+    			document.getElementById('Ocasa').checked = false;
+    			document.getElementById('Ocafeteria').checked = false;
+    			
+    			document.getElementById('Ocaseta').checked = false;
+    			document.getElementById('Ochiclero').checked = false;
+    			document.getElementById('tcdesayuno').value  = "";
+    			document.getElementById('tcrefaccion').value  = "";
+    			document.getElementById('tcalmuerzo').value  = "";
+    			document.getElementById('tcrefaccionpm').value  = "";
+    			document.getElementById('tccena').value  = "";
+    			document.getElementById('agua').value  = "";
+    			document.getElementById('ald').value  = "";
+    			document.getElementById('aln').value  = "";
+    			document.getElementById('alp').value  = "";
+    			
+    			document.getElementById('dbaja').value  = "";
+    			document.getElementById('dalta').value  = "";
+    			document.getElementById('talla').value  = "";
+    			document.getElementById('pesousual').value  = "";
+    			document.getElementById('circunferencia').value  = "";
+    			document.getElementById('constitucion').value  = 1;
+    			document.getElementById('grasa').value  = "";
+    			document.getElementById('pagua').value  = "";
+    			document.getElementById('musculo').value  = "";
+    			document.getElementById('masa').value  = "";
+    			
+    			document.getElementById('viscera').value  = "";
+    			document.getElementById('abdomen').value  = "";
+    			document.getElementById('plan').value  = "";
+    			document.getElementById('verdura').value  = 1;
+    			document.getElementById('fruta').value  = 1;
+    			document.getElementById('pollo').value  = 1;
+    			document.getElementById('lacteo').value  = 1;
+    			document.getElementById('hamburguesa').value  = 1;
+    			document.getElementById('snack').value  = 1;
+    			document.getElementById('refresco').value  = 1;
+    			
+    			document.getElementById('galleta').value  = 1;
+    			document.getElementById('dulce').value  = 1;
+    			document.getElementById('embutido').value  = 1;
+    			document.getElementById('sopa').value  = 1;
+    			document.getElementById('fritura').value  = 1;
+    			document.getElementById('tortilla').value  = 1;
+    			document.getElementById('papa').value  = 1;
+    			document.getElementById('pasta').value  = 1;
+    			document.getElementById('arroz').value  = 1;
+    			document.getElementById('frijol').value  = 1;
+    			
+    			document.getElementById('pan').value  = 1;
+    			document.getElementById('huevo').value  = 1;
+    			
+    			document.getElementById('pesominimo').value  = "";
+    			document.getElementById('pesomax').value  = "";
+    			document.getElementById('peso').value  = "";
+    			document.getElementById('imc').value  = "";
+    			document.getElementById('diagnostico').value  = "";
+    			
+    			listadoAlimentos="";
+    	        ArrTiempoCom=["","","","",""];
+    	        ArrComida=[];
+    	        ArrCant=[];
+    	        ArrUnidad=[];
+    	        ArrpComida=[];
+    	        ArrKcal=[];
+    	        contp=0;
+    	        idCE=0;
+    	        habilitado=false;
+    	        
+    	        document.getElementById("TablaAlimento").innerHTML= "";
+    	        document.getElementById("alimento").readOnly = false;	
+    	        document.getElementById("cantidada").readOnly = false;	
+    	        document.getElementById("porcion").readOnly = false;	
+    	        document.getElementById("BAlAgregar").disabled = false;
+    	        
+    			
+    			document.getElementById('enfermedad').readOnly = false;
+    			document.getElementById('medicamento').readOnly = false;
+    			document.getElementById('suplemento').readOnly = false;
+    			document.getElementById('diarrea').readOnly = false;
+    			document.getElementById('flatulencia').readOnly = false;
+    			document.getElementById('acidez').readOnly = false;
+    			document.getElementById('estreñimiento').readOnly = false;
+    			document.getElementById('fuma').readOnly = false;
+    			document.getElementById('ncigarro').readOnly = false;
+    			document.getElementById('fumafrec').readOnly = false;
+    			
+    			document.getElementById('ejercicio').readOnly =false;
+    			document.getElementById('ejerciciotiempo').readOnly =false;
+    			document.getElementById('ejerciciofrec').readOnly = false;
+    			document.getElementById('bebidaalc').readOnly = false;
+    			document.getElementById('bebidaalcfrec').readOnly = false;
+    			//document.getElementById('tdesayuno').readOnly =false;
+    			document.getElementById('horadesayuno').readOnly = false;
+    			//document.getElementById('refam').readOnly = false;
+    			document.getElementById('refamhr').readOnly = false;
+    			//document.getElementById('talmu').readOnly = false;
+    			
+    			document.getElementById('almh').readOnly = false;
+    			//document.getElementById('refpm').readOnly = false;
+    			document.getElementById('refpmhr').readOnly = false;
+    			//document.getElementById('cenaa').readOnly = false;
+    			document.getElementById('cenhr').readOnly = false;
+    			document.getElementById('Lcasa').readOnly = false;
+    			document.getElementById('Ltrabajo').readOnly = false;
+    			document.getElementById('Lotro').readOnly = false;
+    			document.getElementById('Ocasa').readOnly = false;
+    			document.getElementById('Ocafeteria').readOnly = false;
+    			
+    			document.getElementById('Ocaseta').readOnly = false;
+    			document.getElementById('Ochiclero').readOnly = false;
+    			document.getElementById('tcdesayuno').readOnly = false;
+    			document.getElementById('tcrefaccion').readOnly = false;
+    			document.getElementById('tcalmuerzo').readOnly = false;
+    			document.getElementById('tcrefaccionpm').readOnly = false;
+    			document.getElementById('tccena').readOnly = false;
+    			document.getElementById('agua').readOnly = false;
+    			document.getElementById('ald').readOnly = false;
+    			document.getElementById('aln').readOnly = false;
+    			document.getElementById('alp').readOnly = false;
+    			
+    			document.getElementById('dbaja').readOnly = false;
+    			document.getElementById('dalta').readOnly = false;
+    			document.getElementById('talla').readOnly = false;
+    			document.getElementById('pesousual').readOnly = false;
+    			document.getElementById('circunferencia').readOnly = false;
+    			document.getElementById('constitucion').readOnly = false;
+    			document.getElementById('grasa').readOnly = false;
+    			document.getElementById('pagua').readOnly = false;
+    			document.getElementById('musculo').readOnly = false;
+    			document.getElementById('masa').readOnly = false;
+    			
+    			document.getElementById('viscera').readOnly = false;
+    			document.getElementById('abdomen').readOnly = false;
+    			document.getElementById('plan').readOnly = false;
+    			document.getElementById('verdura').readOnly = false;
+    			document.getElementById('fruta').readOnly = false;
+    			document.getElementById('pollo').readOnly = false;
+    			document.getElementById('lacteo').readOnly = false;
+    			document.getElementById('hamburguesa').readOnly = false;
+    			document.getElementById('snack').readOnly = false;
+    			document.getElementById('refresco').readOnly = false;
+    			
+    			document.getElementById('galleta').readOnly = false;
+    			document.getElementById('dulce').readOnly = false;
+    			document.getElementById('embutido').readOnly = false;
+    			document.getElementById('sopa').readOnly = false;
+    			document.getElementById('fritura').readOnly = false;
+    			document.getElementById('tortilla').readOnly = false;
+    			document.getElementById('papa').readOnly = false;
+    			document.getElementById('pasta').readOnly = false;
+    			document.getElementById('arroz').readOnly = false;
+    			document.getElementById('frijol').readOnly = false;
+    			
+    			document.getElementById('pan').readOnly = false;
+    			document.getElementById('huevo').readOnly = false;
+    			
+    			document.getElementById("BAlAgregar").disabled = false;
+    			document.getElementById('alimento').readOnly = false;
+    			document.getElementById('BtnATC').disabled = false;
+    			
+    			
+    			//document.getElementById("Mod").style.display = 'none';
+    			//document.getElementById("Guard").style.display = 'block';
+    			//document.getElementById("BtnMod").disabled = false;
+        	}
         	function AñadirAlimentoBD(){
         		var alim=validad_vacio('NuevoAl');
         		var cal=validar_numerovacio("NuevaCal");
@@ -491,6 +2260,8 @@
         		if(alim=="null"||cal==0){
         			alert("Error, faltan valores a ingresar");
         		}else{
+        			var AlimAux=alim.toLowerCase();
+        			alim=encodeURI(alim);
         			var action="agregar";
             		var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
 
@@ -502,7 +2273,7 @@
             	        dataType: 'json',
             	        success: function(data){
             	        	if(data.resultado=='OK'){
-            	        		document.getElementById('alimento').value  = alim.toLowerCase();
+            	        		document.getElementById('alimento').value  = AlimAux;
                 		        document.getElementById('calorias').value  = data.caloria;
                 		        
                 		        document.getElementById('NuevoAl').value  = "";
@@ -526,7 +2297,7 @@
         		var texto="";
         		texto=document.getElementById(entrada).value;
         		if(texto==""){
-        			texto="null";
+        			texto="";
         		}
         		return texto;
         	}
@@ -561,11 +2332,13 @@
         	        success: function(data){
         	        	if(data.resultado=='OK'){
                     		ERRORSQL=false;
-                    		alert("Informacion almacenada");
-            	        	idCE=data.ID;
-            	        	document.getElementById("Guard").style.display = 'none';
-            	        	document.getElementById("Mod").style.display = 'block';
+                    		alert(data.mensaje);
+            	        	//idCE=data.ID;
+            	        	document.getElementById("Guard").style.display = 'block';
+            	        	document.getElementById("Mod").style.display = 'none';
                     		//MostrarMensajeServidor("Informacion almacenada con exito");
+                    		window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp");
+            	        	//limpiar_datos();
                     	}else{
                     		ERRORSQL=true;
                     		MostrarMensajeServidor("Error al almacenar");
@@ -579,7 +2352,7 @@
         		var texto="";
         		texto=document.getElementById(entrada).value;
         		if(texto==""){
-        			texto="0:00";
+        			texto="11:48 AM";
         		}
         		return texto;
         	}
@@ -604,6 +2377,16 @@
         		return encodeURIComponent(encabCom1);
         		
         	}
+        	function EliminarRegistro(){
+        		var action="eliminardato";
+        		if((idCE!=undefined)&&(idCE!="")){
+        			var cadena = ['idCONSULTA_EXTERNA='+ idCE,'a='+action].join('&');
+        	        		enviar_datos(cadena);
+        		}
+        		else{
+        			alert("Error al eliminar");
+        		}
+        	}
         	function Guardar(){
         		ERRORSQL=false;
         		if(carnetaccion!=""){
@@ -626,18 +2409,18 @@
             		var variable13=TextoSeleccion("ejerciciofrec");
             		var variable14=validar_check("bebidaalc"); 
             		var variable15=TextoSeleccion("bebidaalcfrec");
-            		var variable16=validar_check("tdesayuno"); 
+            		//var variable16=validar_check("tdesayuno"); 
             		var variable17=validar_hora("horadesayuno");
-            		var variable18=validar_check("refam"); 
+            		//var variable18=validar_check("refam"); 
             		var variable19=validar_hora("refamhr");
-            		var variable20=validar_check("talmu"); 
+            		//var variable20=validar_check("talmu"); 
             		
             		
             		         	
             		var variable21=validar_hora("almh");
-            		var variable22=validar_check("refpm"); 
+            		//var variable22=validar_check("refpm"); 
             		var variable23=validar_hora("refpmhr");
-            		var variable24=validar_check("cenaa"); 
+            		//var variable24=validar_check("cenaa"); 
             		var variable25=validar_hora("cenhr");
             		var variable26=validar_check("Lcasa"); 
             		var variable27=validar_check("Ltrabajo");
@@ -651,6 +2434,7 @@
             		var variable33=validar_numerovacio("tcdesayuno");
             		var variable34=validar_numerovacio("tcrefaccion");
             		var variable35=validar_numerovacio("tcalmuerzo");
+            		var variable24=validar_numerovacio("tcrefaccionpm"); 
             		var variable36=validar_numerovacio("tccena");
             		var variable37=validar_numerovacio("agua");
             		var variable38=validad_vacio("ald");
@@ -697,6 +2481,7 @@
             		var variable71=TextoSeleccion("pan");
             		var variable72=TextoSeleccion("huevo");
             		var variable73=obtenerRegistro();
+            		var variable100=IdUsuarioSesion;
             		
             		var variable74="";
             		var variable75="";
@@ -704,8 +2489,8 @@
             		var variable77="";
             		
             		if(busqueda==false){
-                		variable74=validad_vacio('nombre');
-                		variable75=validad_vacio('Sexo');
+                		variable74=validad_vacio('nombre1');
+                		variable75=validad_vacio('sexo1');
                 		variable76=validad_vacio('fechaNac');
                 		variable77=validad_vacio('Facultad');
                 	}
@@ -714,8 +2499,8 @@
             			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
             			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
             			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
-            			         	  ,'p16='+variable16,'p17='+variable17,'p18='+variable18,'p19='+variable19,'p20='+variable20
-            			         	  ,'p21='+variable21,'p22='+variable22,'p23='+variable23,'p24='+variable24,'p25='+variable25
+            			         	  ,'p17='+variable17,'p19='+variable19,'p24='+variable24
+            			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
             			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
             			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
             			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
@@ -726,7 +2511,7 @@
             			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
             			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
             			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
-                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77].join('&');
+                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100].join('&');
             		
             	    enviar_datos(cadena);
             			         	
@@ -766,18 +2551,18 @@
             		var variable13=TextoSeleccion("ejerciciofrec");
             		var variable14=validar_check("bebidaalc"); 
             		var variable15=TextoSeleccion("bebidaalcfrec");
-            		var variable16=validar_check("tdesayuno"); 
+            		//var variable16=validar_check("tdesayuno"); 
             		var variable17=validar_hora("horadesayuno");
-            		var variable18=validar_check("refam"); 
+            		//var variable18=validar_check("refam"); 
             		var variable19=validar_hora("refamhr");
-            		var variable20=validar_check("talmu"); 
+            		//var variable20=validar_check("talmu"); 
             		
             		
             		         	
             		var variable21=validar_hora("almh");
-            		var variable22=validar_check("refpm"); 
+            		//var variable22=validar_check("refpm"); 
             		var variable23=validar_hora("refpmhr");
-            		var variable24=validar_check("cenaa"); 
+            		//var variable24=validar_check("cenaa"); 
             		var variable25=validar_hora("cenhr");
             		var variable26=validar_check("Lcasa"); 
             		var variable27=validar_check("Ltrabajo");
@@ -791,6 +2576,7 @@
             		var variable33=validar_numerovacio("tcdesayuno");
             		var variable34=validar_numerovacio("tcrefaccion");
             		var variable35=validar_numerovacio("tcalmuerzo");
+            		var variable24=validar_numerovacio("tcrefaccionpm"); 
             		var variable36=validar_numerovacio("tccena");
             		var variable37=validar_numerovacio("agua");
             		var variable38=validad_vacio("ald");
@@ -844,8 +2630,8 @@
             		var variable77="";
             		
             		if(busqueda==false){
-                		variable74=validad_vacio('nombre');
-                		variable75=validad_vacio('Sexo');
+                		variable74=validad_vacio('nombre1');
+                		variable75=validad_vacio('sexo1');
                 		variable76=validad_vacio('fechaNac');
                 		variable77=validad_vacio('Facultad');
                 	}
@@ -854,8 +2640,8 @@
             			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
             			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
             			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
-            			         	  ,'p16='+variable16,'p17='+variable17,'p18='+variable18,'p19='+variable19,'p20='+variable20
-            			         	  ,'p21='+variable21,'p22='+variable22,'p23='+variable23,'p24='+variable24,'p25='+variable25
+            			         	  ,'p17='+variable17,'p19='+variable19,'p24='+variable24
+            			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
             			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
             			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
             			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
@@ -894,6 +2680,8 @@
         		if(auxCaloria!=""&&auxCantidad!=""){
         			
         			var x = document.getElementById("TiempoComida").selectedIndex;
+        			var y = document.getElementById("TiempoComida").options;
+        			ArrTiempoCom[x]=y[x].text;
         			var Al = (document.getElementById("alimento").value).toLowerCase();
         			
         			var calorias=parseInt(auxCaloria);
@@ -956,7 +2744,7 @@
         	}
 
         	function ActualizarTabla(){
-        		var marco="<div class=\"table-responsive\"><table class=\"table\" border=\"1px\" >";
+        		var marco="<div class=\"table-responsive\" style=\"font-size:8pt;\"><table class=\"table\" border=\"1px\" >";
         	    var fintabla="</table></div>";
         	    var encabCom="";
         		document.getElementById("TablaAlimento").innerHTML= "";
@@ -974,12 +2762,12 @@
         					
         				if((i==ArrpComida[j])&&(ArrpComida[j]!=-100)){
         					encabCom+="<tr><td>"+ArrComida[j]+"</td><td>"
-        					+"<input class=\"form-control\" id=\"auxcant"+j+"\" type=\"number\" value=\""+ArrCant[j]+"\" style=\"width: 65px;\" readonly onkeypress=\"ConfirmarEdicion(event,"+j+")\" />"
+        					+"<input class=\"form-control input-sm\" id=\"auxcant"+j+"\" type=\"number\" value=\""+ArrCant[j]+"\" style=\"width: 65px;\" readonly onkeypress=\"ConfirmarEdicion(event,"+j+")\" />"
         					+"</td><td>"+ArrUnidad[j]+"</td><td>"+ArrKcal[j]+"</td><td>"
-        					+"<button class=\"btn btn-default btn-lg\" onclick=\"EditarAlimento("+j+")\" >"
+        					+"<button class=\"btn btn-default btn-sm\" onclick=\"EditarAlimento("+j+")\" >"
         				    + "<img src=\"../imagenes/edit2.png\" width=\"10\" height=\"8\" title=\"Editar\" /></button>"
         				    +"</td><td>"
-        					+"<button class=\"btn btn-default btn-lg\" onclick=\"EliminarAlimento("+j+")\" >"
+        					+"<button class=\"btn btn-default btn-sm\" onclick=\"EliminarAlimento("+j+")\" >"
         				    + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /></button>"
         				     +"</td></tr>";
         				}
@@ -1016,7 +2804,7 @@
         			document.getElementById("cantidada").readOnly = false;	
         			document.getElementById("porcion").readOnly = false;	
         			document.getElementById("BAlAgregar").disabled = false;
-        			document.getElementById("BNAlimento").disabled = false;
+        			
         			habilitado=true;
         		}
         		
@@ -1140,6 +2928,818 @@
         		}
         	   
         	}
+        	document.getElementById('enfermedad').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("medicamento").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('medicamento').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("suplemento").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('suplemento').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("fuma").focus();
+            		 return false;
+                   
+            	}
+            }
+        	
+        	document.getElementById('fuma').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("ncigarro").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('ncigarro').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("fumafrec").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('fumafrec').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("ejercicio").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('ejercicio').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("ejerciciotiempo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('ejerciciotiempo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("ejerciciofrec").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('ejerciciofrec').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("bebidaalc").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('bebidaalc').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("bebidaalcfrec").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('bebidaalcfrec').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("horadesayuno").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('horadesayuno').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tcdesayuno").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tcdesayuno').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("refamhr").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('refamhr').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tcrefaccion").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tcrefaccion').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("almh").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('almh').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tcalmuerzo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tcalmuerzo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("refpmhr").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('refpmhr').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tcrefaccionpm").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tcrefaccionpm').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("cenhr").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('cenhr').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tccena").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tccena').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("diarrea").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	
+        	document.getElementById('diarrea').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("flatulencia").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('flatulencia').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("acidez").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('acidez').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("estreñimiento").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('estreñimiento').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Lcasa").focus();
+            		 return false;
+                   
+            	}
+            }
+        
+        	document.getElementById('Lcasa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Ltrabajo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('Ltrabajo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Lotro").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('Lotro').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("agua").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('agua').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Ocasa").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('Ocasa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Ocafeteria").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('Ocafeteria').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Ocaseta").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('Ocaseta').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Ochiclero").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('Ochiclero').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("ald").focus();
+            		 return false;
+                   
+            	}
+            }
+        	
+        	document.getElementById('ald').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("aln").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('aln').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("alp").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('alp').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			activaTab("menu1");
+            		
+            		 return false;
+                   
+            	}
+            }
+        	function activaTab(tab){
+        	    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+        	    document.getElementById("dbaja").focus();
+        	};
+        	function ValidarDecimal(){
+        		var texto=document.getElementById('talla').value;
+            	var longitud=texto.length;
+            	if(longitud==2){
+            		var ini = texto.substr(0,1);
+            	    var aux= texto.substr(longitud-1,longitud);
+            	    var palabra=ini+"."+aux;
+            		document.getElementById('talla').value=palabra;
+            	}
+        	}
+        	document.getElementById('dbaja').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("dalta").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('dalta').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("talla").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('talla').onkeydown = function (e) {
+            	//alert(e.keyCode);
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("pesousual").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('pesousual').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			CalcularIMC(e);
+            		document.getElementById("circunferencia").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('circunferencia').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("constitucion").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('constitucion').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("grasa").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('grasa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("musculo").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('musculo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("pagua").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('pagua').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("masa").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('masa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("viscera").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('viscera').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("abdomen").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('abdomen').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("plan").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+        	document.getElementById('plan').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("verdura").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('verdura').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("fruta").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('fruta').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("pollo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('pollo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("lacteo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('lacteo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("hamburguesa").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('hamburguesa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("snack").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('snack').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("refresco").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('refresco').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("galleta").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('galleta').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("dulce").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('dulce').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("embutido").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('embutido').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("sopa").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('sopa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("fritura").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('fritura').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("tortilla").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('tortilla').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("papa").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('papa').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("pasta").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('pasta').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("arroz").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('arroz').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("frijol").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('frijol').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("pan").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('pan').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("huevo").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('huevo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Guard4").focus();
+            		 return false;
+                   
+            	}
+            }
+        	function VentanaCrearUsuario(){
+        		jQuery('#CrearUsuarioModal').modal("show");
+        	}
+        	
+        	function ValidarFecha(){
+            	var texto=document.getElementById('fechaNac').value;
+            	var longitud=texto.length;
+            	if(longitud==4){
+            		var ini = texto.substr(0,4);
+            	    //var aux= texto.substr(longitud-1,longitud);
+            	    var palabra=ini+"-";
+            		document.getElementById('fechaNac').value=palabra;
+            	}else if(longitud==7){
+            		var ini = texto.substr(0,7);
+            	    //var aux= texto.substr(longitud-1,longitud);
+            	    var palabra=ini+"-";
+            		document.getElementById('fechaNac').value=palabra;
+            	}else if(longitud>10){
+            		var ini = texto.substr(0,10);
+            		document.getElementById('fechaNac').value=ini;
+            	}
+            }
+        	document.getElementById('nombre1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("sexo1").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('sexo1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("fechaNac").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('fechaNac').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		var validar=document.getElementById('fechaNac').value;
+            		if(existeFecha(validar)==false){
+            			alert("Error: ingrese una fecha valida");
+            			document.getElementById('fechaNac').value="";
+            		}
+            		
+            		document.getElementById("talla").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('NuevoAl').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("NuevaCal").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('NuevaCal').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("NuevoGrupo").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+            document.getElementById('NuevoGrupo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("Guard6").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('cantidada').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("porcion").focus();
+            		 return false;
+                   
+            	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+            		        return false;
+            	}
+            }
+            document.getElementById('porcion').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("BAlAgregar").focus();
+            		 return false;
+                   
+            	}
+            }
+            function existeFecha(fecha){
+                var fechaf = fecha.split("-");
+                var day = fechaf[2];
+                var month = fechaf[1];
+                var year = fechaf[0];
+                var date = new Date(year,month,'0');
+                if((day-0)>(date.getDate()-0)){
+                      return false;
+                }
+                var Mes=parseInt(month);
+                if(Mes>12){
+                	return false;
+                }
+                return true;
+          }
+            function checkFuma(checkbox)
+            {
+                if (checkbox.checked)
+                {
+                	document.getElementById('ncigarro').readOnly = false;
+                   
+                }else{
+                	document.getElementById('ncigarro').readOnly = true;
+                
+                }
+            }
+            function checkEjercicio(checkbox)
+            {
+                if (checkbox.checked)
+                {
+                	document.getElementById('ejerciciotiempo').readOnly = false;
+                   
+                }else{
+                	document.getElementById('ejerciciotiempo').readOnly = true;
+                
+                }
+            }
+            function checkBebida(checkbox)
+            {
+                if (checkbox.checked)
+                {
+                	document.getElementById('bebidaalcfrec').readOnly = false;
+                   
+                }else{
+                	document.getElementById('bebidaalcfrec').readOnly = true;
+                
+                }
+            }
         	function Reconsulta(){
         		window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
         		//window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
@@ -1150,1010 +3750,6 @@
         		//window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+idCE);
         	} 	
         </script>
-        <div class="container">
-         <div class="panel2 panel-body">
-        <header class="row col-sm-12">
-         <div class="page-header">
-        
-     <form class="form-inline">
-  
-  <div class="form-group">
-    <div style="float:right;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousac.png" width="270px"  >
-	</a>
-	</div> 
-  </div>
-  
-  <div class="form-group">
-    <p><h3 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
-			Clinica de Nutricion</br>
-			Unidad de Salud. USAC</h3></p>
-  </div>
-  
-  <div class="form-group">
-    <div style="float:left;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousalud2.gif" width="270px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
-	</a>
-	</div> 
-  </div>
-  
-</form>
-	
-       		 
-        </div>
-        </header>
-        <div class="row col-sm-12">
-        
-       <nav class="col-sm-2">
-        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
-	        <ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
-		    </ul>
-         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
-        </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
-        </li>
-        </ul>
-        </nav>
-        
-        <section class="col-sm-10">
-        <div class="panel panel-default">
-        
-        <div class="panel-heading">
-        <h3 class="panel-title">Examen Consulta Externa</h3>
-        </div>
-        <div class="panel-body">
-        
- <form action="../ConsultaExterna" method="post" class="form-inline" role="form" onsubmit="return false">
-   <div class="container" >
-  <ul class="nav nav-tabs" >
-    <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
-    <li><a data-toggle="tab" href="#menu1">Pagina2</a></li>
-  </ul>
-  
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <article>
-      <div class="panel panel-primary">
-      <div class="panel-heading">Datos Generales</div>
-      <div class="panel-body">
-      		
-<div class="row">  
-  <div class="form-group">
-   
-	<label for="NCarnet">Carnet/Codigo Personal</label>
-	<input class="form-control" name="carnet" id="carnet" type="number" required/>
-	
-  </div>
-  <div class="form-group">
-    <label for="Ntipo">Paciente</label>
-    <select class="form-control" name="TipoCodigo">
-							<option>Estudiante</option>
-							<option>Trabajador</option>
-						</select>
-  </div>
-  <div class="form-group">
-    <p>
-    
-	<label  for="Ntipo">Buscar</label>
-	<button class="btn btn-default btn-lg" onclick="BuscarPaciente('A');">
-     <img src="../imagenes/ver.png" width="25" height="15" title="Buscar" /></button>
-	</p>
-  </div>
- 	 <div id="mensaje1" >
-	</div>
-  </div>
-  <div id="capa" class="row">
-</div>
-      		
-      </div>
-    </div>
-     
-      
-      </article>
-     
-     <article>
-     <div class="container">
-	    <div class="row">
-			<div class="col-sm-9" >
-				<div class="panel panel-primary">
-			      <div class="panel-heading">Antecedentes Medicos</div>
-			      <div class="panel-body" align="center">
-			      	
-			      	<div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Enfermedades</label>
-					  		<textarea class="form-control" name="enfermedad" id="enfermedad" cols="25" rows="5" ></textarea>
-					                   
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsubescapular">Medicamentos</label>
-					  		<textarea class="form-control" name="medicamento" id="medicamento" cols="25" rows="5" ></textarea>
-					  		     
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Suplementos</label>
-					  		<textarea class="form-control" name="suplemento" id="suplemento" cols="25" rows="5" ></textarea>
-					  		
-					  	</div>
-					  </div>
-			      	
-			      	</div>
-			    </div>
-			</div>
-			<div class="col-sm-3" >
-				<div class="panel panel-primary">
-			      <div class="panel-heading">Transtornos Digestivos</div>
-			      <div class="panel-body" align="center">
-			      
-			      	<div class="row">
-			      		<div class="form-group">
-					  		<label for="Ltricipital">Diarrea</label>
-					  		<input class="form-control" id="diarrea" type="checkbox" align="center" />
-					                   
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsubescapular">Flatulencia</label>
-					  		<input class="form-control" id="flatulencia" type="checkbox" align="center" />
-					  		     
-					  	</div>
-			      	</div>
-			      	<div class="row">
-			      		<div class="form-group">
-					  		<label for="Lsumapliegues">Acidez</label>
-					  		<input class="form-control" id="acidez" type="checkbox" align="center" />
-					  		
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Estreñimiento</label>
-					  		<input class="form-control" id="estreñimiento" type="checkbox" align="center" />
-					  		
-					  	</div>
-			      	</div>
-			      	</div>
-			    </div>
-			</div>
-		</div>
-	</div>
-  
-  
-  </article> 
-
- 
-<article>
-	<div class="panel panel-primary">
-      <div class="panel-heading">Estilo de vida</div>
-      <div class="panel-body" align="center">
-      
-      	<div class="row">
-  	<div class="form-group">
-  		<label for="Ltricipital">Fuma</label>
-  		<input class="form-control" id="fuma" type="checkbox" align="center" />
-                   
-  	</div>
-  	<div class="form-group">
-  		<label for="Lsubescapular">No. Cigarrillos</label>
-  		<input class="form-control" id="ncigarro"  min="0.1" type="number" step="any" style="width: 80px;" />
-            
-  	</div>
-  	<div class="form-group">
-  		<label for="Lsumapliegues">Frecuencia</label>
-  		<select class="form-control" id="fumafrec">
-							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semana</option>
-							<option value="3">Cuatro a cinco veces por semana</option>
-							<option value="4">Diariamente</option>
-						</select>
-  
-  	</div>
-
-  	<div class="form-group">
-  		<label for="Ltricipital">Ejercicio</label>
-  		<input class="form-control" id="ejercicio" type="checkbox" align="center" />
-                   
-  	</div>
-  	<div class="form-group">
-  		<label for="Lsubescapular">Tiempo en minutos</label>
-  		<input class="form-control" id="ejerciciotiempo"  min="0.1" type="number" step="any" style="width: 80px;" />
-            
-  	</div>
-  	<div class="form-group">
-  		<label for="Lsumapliegues">Frecuencia</label>
-  		<select class="form-control" id="ejerciciofrec">
-							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semana</option>
-							<option value="3">Cuatro a cinco veces por semana</option>
-							<option value="4">Diariamente</option>
-						</select>
-  
-  	</div>
-
-  	<div class="form-group">
-  		<label for="Ltricipital">Bebidas alcoholicas</label>
-  		<input class="form-control" id="bebidaalc" type="checkbox" align="center" />
-                   
-  	</div>
-  	<div class="form-group">
-  		<label for="Lsumapliegues">Frecuencia</label>
-  		<select class="form-control" id="bebidaalcfrec">
-							<option value="1">Ocasionalmente</option>
-							<option value="2">Dos o tres veces por semana</option>
-							<option value="3">Cuatro a cinco veces por semana</option>
-							<option value="4">Diariamente</option>
-						</select>
-  
-  	</div>
-
-  </div>
-      	
-      	</div>
-    </div>
-
-  
-  </article>
-  
-  <article>
-  <div class="panel panel-primary">
-      <div class="panel-heading">Habitos alimentarios</div>
-      <div class="panel-body">
-      	
-      	<div class="container">
-		    <div class="row">
-				<div class="col-sm-6" >
-				
-					<div class="panel panel-primary">
-				      <div class="panel-heading">Tiempos de comida</div>
-				      <div class="panel-body" align="center">
-				      		<div class="row">
-				      			<div class="form-group" align="center">
-							  		<label for="Ltricipital">Desayuno</label>
-							  		<input class="form-control" id="tdesayuno" type="checkbox" align="center" />
-							                   
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control" name="horadesayuno" id="horadesayuno" type="time" />
-							  
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Ltricipital">Refaccion AM</label>
-							  		<input class="form-control" id="refam" type="checkbox" align="center" />
-							                   
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control" name="refamhr" id="refamhr" type="time" />
-							  
-							  	</div>
-				      		</div>
-				      		<div class="row">
-				      			<div class="form-group" align="center">
-							  		<label for="Ltricipital">Almuerzo</label>
-							  		<input class="form-control" id="talmu" type="checkbox" align="center" />
-							                   
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control" name="almh" id="almh" type="time" />
-							  
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Ltricipital">Refaccion PM</label>
-							  		<input class="form-control" id="refpm" type="checkbox" align="center" />
-							                   
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control"  id="refpmhr" type="time" />
-							  
-							  	</div>
-				      		</div>
-				      		<div class="row">
-				      			<div class="form-group" align="center">
-							  		<label for="Ltricipital">Cena</label>
-							  		<input class="form-control" id="cenaa" type="checkbox" align="center" />
-							                   
-							  	</div>
-							  	<div class="form-group" align="center">
-							  		<label for="Lsumapliegues">Hr</label>
-							  		<input class="form-control" name="cenhr" id="cenhr" type="time" />
-							  
-							  	</div>
-				      		</div>
-				      </div>
-				    </div>
-				
-				</div>
-				<div class="col-sm-6" >
-					<div class="row">
-						<div class="panel panel-primary">
-			      <div class="panel-heading">Tiempo por comida(minutos)</div>
-			      <div class="panel-body" align="center">
-			      
-			      <div class="row">
-				  	<div class="form-group">
-				  		<label for="Ltricipital">Desayuno</label>
-				  		<input class="form-control" name="tcdesayuno" id="tcdesayuno" type="number" style="width: 70px;" />
-				                   
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="Lsubescapular">Refaccion</label>
-				  		<input class="form-control" name="tcrefaccion" id="tcrefaccion" type="number" style="width: 70px;" />
-				  		     
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="Lsumapliegues">Almuerzo</label>
-				  		<input class="form-control" name="tcalmuerzo" id="tcalmuerzo" type="number" style="width: 70px;" />
-				  		
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="Lsumapliegues">Cena</label>
-				  		<input class="form-control" name="tccena" id="tccena" type="number" style="width: 70px;" />
-				  		
-				  	</div>
-				  </div>
-			      
-			      </div>
-			    </div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6" >
-							<div class="panel panel-primary">
-							      <div class="panel-heading">Lugar de consumo</div>
-							      <div class="panel-body" align="center">
-							      		<div class="row">
-										  	<div class="form-group">
-										  		<label for="Lcasa">Casa</label>
-										  		<input class="form-control" id="Lcasa" type="checkbox" align="center" />
-										                   
-										  	</div>
-										  	<div class="form-group">
-										  		<label for="Ltrabajo">Trabajo</label>
-										  		<input class="form-control" id="Ltrabajo" type="checkbox" align="center" />
-										  		     
-										  	</div>
-										  	<div class="form-group">
-										  		<label for="Lotros">Otros</label>
-										  		<input class="form-control" id="Lotro" type="checkbox" align="center" />
-										  		
-										  	</div>
-										  </div>
-							      </div>
-							    </div>
-						</div>
-						<div class="col-sm-6" >
-							<div class="panel panel-primary">
-						      <div class="panel-heading">Origen de alimentos</div>
-						      <div class="panel-body" align="center">
-						      		 <div class="row">
-									  	<div class="form-group">
-									  		<label for="Ltricipital">Casa</label>
-									  		<input class="form-control" id="Ocasa" type="checkbox" align="center" />
-									                   
-									  	</div>
-									  	<div class="form-group">
-									  		<label for="Lsubescapular">Cafeteria</label>
-									  		<input class="form-control" id="Ocafeteria" type="checkbox" align="center" />
-									  		     
-									  	</div>
-									  	<div class="form-group">
-									  		<label for="Lsumapliegues">Caseta</label>
-									  		<input class="form-control" id="Ocaseta" type="checkbox" align="center" />
-									  		
-									  	</div>
-									  	<div class="form-group">
-									  		<label for="Lsumapliegues">Chiclero</label>
-									  		<input class="form-control" id="Ochiclero" type="checkbox" align="center" />
-									  		
-									  	</div>
-									  </div>
-						      </div>
-						    </div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-   
-		    <div class="row">
-			
-			
-				<div class="panel panel-primary">
-			      <div class="panel-heading">Otros</div>
-			      <div class="panel-body" align="center">
-			      
-			        <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Consumo de Agua(Vasos)</label>
-					  		<input class="form-control" name="agua" id="agua" type="number"  />
-					                  
-					  	</div>
-					  	
-					  	<div class="form-group">
-					  		<label for="Lsubescapular">Alimentos que le hacen daño</label>
-					  		<textarea class="form-control" name="ald" id="ald" cols="20" rows="5" ></textarea>
-					            
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Alimentos que no le gustan</label>
-					  		<textarea class="form-control" name="aln" id="aln" cols="20" rows="5" ></textarea>
-					        
-					  		
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Alimentos preferidos</label>
-					  		<textarea class="form-control" name="alp" id="alp" cols="20" rows="5" ></textarea>
-					        
-					  		
-					  	</div>
-					  </div>
-			      
-			      </div>
-			    </div>
-			
-			
-			
-		</div>
-		
-      	</div>
-    </div>
-  
-  	
-  
-  
-
-
-  </article>  
-  
-
-   
-    </div>
-    <div id="menu1" class="tab-pane fade">
-    	<article>
-    		<div class="container">
-    			 <div class="row">
-				    <div class="col-sm-9" >
-				    
-			<div class="panel panel-primary">
-		      <div class="panel-heading">Recordatorio de 24 horas</div>
-		      <div class="panel-body">
-		      	
-					  <div class="row">
-					  		<div class="form-group">
-						    <label>Tiempo de comida</label>
-						    <select class="form-control" id="TiempoComida" name="TiempoComida">
-													<option >Desayuno</option>
-													<option >Refaccion AM</option>
-													<option >Almuerzo</option>
-													<option >Refaccion PM</option>
-													<option >Cena</option>
-												</select>
-						</div>
-						<div class="form-group">
-						     <label for="BNuevo">Agregar</label>			
-							<button class="btn btn-default btn-lg" onclick="AgregarTiempoComida()" >
-						     <img src="../imagenes/th.jpg" width="20" height="15" title="Tiempo" /></button>
-							
-						</div>
-					  </div>
-					  <br>
-					  <div id="TablaAlimento" class="row">
-					  
-					 </div>
-					  <br>
-					  <div class="row">
-					  	<div class="form-group">
-						    <label>Alimento</label>
-						    <input class="form-control autocomplete" id="alimento" name="alimento" placeholder="Ingresa alimento" readonly/>
-						</div>
-						<div class="form-group">
-						    <label>Calorias</label>
-						    <input class="form-control" id="calorias" name="calorias" style="width: 70px;" readonly />
-						</div>
-						<div class="form-group">
-						    <label>Cantidad</label>
-						    <input class="form-control" id="cantidada" name="cantidada" type="number" style="width: 70px;" readonly required />
-						</div>
-						<div class="form-group">
-						    <label for="Ntipo">Porcion</label>
-						    <select class="form-control" name="porcion" id="porcion" readonly>
-													<option value="1" >U</option>
-													<option value="2" >ml</option>
-												</select>
-						  </div>
-						  <div class="form-group">
-						    <label for="BAgregar">Agregar</label>			
-							<button class="btn btn-default btn-lg" id="BAlAgregar" onclick="AgregarAlimento()" disabled>
-						     <img src="../imagenes/agregar.png" width="20" height="15" title="Agregar" /></button>
-							
-						  </div>
-						<div class="form-group">
-						    <label for="BNuevo">Nuevo</label>				
-							<button class="btn btn-default btn-lg" id="BNAlimento" data-toggle="modal" data-target="#VentanaNuevoAlimento" disabled>
-						     <img src="../imagenes/AgregarAlimento.jpg" width="20" height="15" title="Nuevo alimento" /></button>
-							
-							<div class="modal fade" id="VentanaNuevoAlimento" role="dialog">
-							    <div class="modal-dialog modal-sm">
-							      <div class="modal-content">
-							        <div class="modal-header">
-							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 class="modal-title">Nuevo Alimento</h4>
-							        </div>
-							        <div class="modal-body" align="center">
-							      
-							          	<div class="row">
-								      		<div class="form-group">
-												    <label>Alimento</label>
-												    <input class="form-control" id="NuevoAl"  type="text" style="width: 100px;" />
-												</div>
-												<div class="form-group">
-												    <label>Calorias</label>
-												    <input class="form-control" id="NuevaCal"  type="number"  style="width: 70px;"/>
-												</div>
-												<div class="form-group">
-												    <label>Grupo</label>
-												     <select class="form-control" id="NuevoGrupo">
-													<option value="1" >Lacteos bajos en grasa</option>
-													<option value="2" >Lacteos enteros</option>
-													<option value="3" >Vegetales</option>
-													<option value="4" >Frutas</option>
-													<option value="5" >Cereales</option>
-													<option value="6" >Carnes</option>
-													<option value="7" >Grasa</option>
-													<option value="8" >Azucares</option>
-												</select>
-												</div>
-								      	</div>
-								    
-							        </div>
-							        <div class="modal-footer">
-							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="AñadirAlimentoBD()">Guardar</button>
-							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							        </div>
-							      </div>
-							    </div>
-							  </div>
-							
-						</div>
-					</div>
-		      	<div class="row">
-		      		<div class="form-group">
-						    <label>Dieta Baja en</label>
-						    <input class="form-control" id="dbaja" name="dbaja" type="text" />
-						</div>
-						<div class="form-group">
-						    <label>Dieta Alta en</label>
-						    <input class="form-control" id="dalta" name="dalta" type="text"  />
-						</div>
-		      	</div>
-		      </div>
-		    </div>	    
-						
-
-
-
-<div class="panel panel-primary">
-      <div class="panel-heading">Evaluacion Antropometrica</div>
-      <div class="panel-body">
-      
-      	<div class="row">
-				<div class="form-group">
-						<label>Talla(m)</label>
-						<input class="form-control" id="talla" name="talla" type="number" style="width: 70px;" step="any"  />
-				</div>
-				<div class="form-group">
-						<label>Peso(Lbs)</label>
-						<input class="form-control" id="pesousual" name="pesousual" type="number" style="width: 70px;" onkeypress="CalcularIMC(event)"/>
-				</div>
-				<div class="form-group">
-						<label>Peso minimo(Lbs)</label>
-						<input class="form-control" id="pesominimo" name="pesominimo" type="number" style="width: 120px;" readonly />
-				</div>
-			
-				<div class="form-group">
-						<label>Peso maximo(Lbs)</label>
-						<input class="form-control" id="pesomax" name="pesomax" type="number"  style="width: 120px;" readonly />
-				</div>
-				<div class="form-group">
-						<label>Circunferencia de muñeca</label>
-						<input class="form-control" id="circunferencia" name="circunferencia" type="number"  style="width: 170px;"/>
-				</div>
-				<div class="form-group">
-						<label>Constitucion osea</label>
-						<select class="form-control" id="constitucion">
-								<option value="1">Pequeña</option>
-								<option value="2">Mediana</option>
-								<option value="3">Grande</option>
-						</select>
-				</div>
-			</div>	
-      
-      </div>
-    </div>
-
-
-<div class="panel panel-primary">
-      <div class="panel-heading">Registro</div>
-      <div class="panel-body">
-      		<div class="row">
-					<div class="form-group">
-							<label>Peso (kg)</label>
-							<input class="form-control" id="peso" name="peso" type="number" style="width: 70px;" readonly/>
-					</div>
-					<div class="form-group">
-							<label>IMC</label>
-							<input class="form-control" id="imc" name="imc" type="number" readonly  style="width: 70px;"/>
-					</div>
-				
-					<div class="form-group">
-							<label>Diagnostico</label>
-							<input class="form-control" id="diagnostico" name="diagnostico" readonly />
-					</div>
-					</div>
-					<div class="row">
-					<div class="form-group">
-							<label>% de Grasa</label>
-							<input class="form-control" id="grasa" name="grasa" type="number" style="width: 70px;" />
-					</div>
-					<div class="form-group">
-							<label>% de masa muscular</label>
-							<input class="form-control" id="musculo" name="musculo" type="number" style="width: 125px;" />
-					</div>
-				
-					
-					<div class="form-group">
-							<label>% de Agua</label>
-							<input class="form-control" id="pagua" name="pagua" type="number"  style="width: 70px;"/>
-					</div>
-					<div class="form-group">
-							<label>Masa Osea</label>
-							<input class="form-control" id="masa" name="masa" type="number" style="width: 70px;" />
-					</div>
-			
-					<div class="form-group">
-							<label>Grasa Visceral</label>
-							<input class="form-control" id="viscera" name="viscera" type="number"  style="width: 70px;"/>
-					</div>
-					<div class="form-group">
-							<label>Cintura Abdominal</label>
-							<input class="form-control" id="abdomen" name="abdomen" type="number" style="width: 70px;" />
-					</div>
-					
-				
-				</div>
-      
-      </div>
-    </div>
-
-
-
-<div class="panel panel-primary">
-      <div class="panel-heading">Planificacion</div>
-      <div class="panel-body" align="center">
-      		<div class="row">
-			<div class="form-group">
-					<label>Planificacion del tratamiento -Metas-</label>
-					<textarea class="form-control" id="plan" name="plan" cols="60" rows="15" ></textarea>
-			</div>
-		
-		</div>	
-      </div>
-    </div>
-	
-				    </div>
-				    
-				    <div class="col-sm-1" >
-				    </div>
-				    <div class="col-sm-3" >
-				    <div class="panel panel-primary">
-      <div class="panel-heading">Frecuencia de consumo</div>
-      <div class="panel-body">
-				    	
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Verduras</label>
-					  		<select id="verdura" class="form-control" >
-					  			<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Frutas</label>
-					  		<select id="fruta" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Carne(res,cerdo), pollo, pescado</label>
-					  		<select id="pollo" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Lacteos</label>
-					  		<select id="lacteo" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Hamburguesas, pizza, pollo frito</label>
-					  		<select id="hamburguesa" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Snacks (papalinas, tortrix, ricitos, etc)</label>
-					  		<select id="snack" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Refrescos embasados</label>
-					  		<select id="refresco" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Galletas, pasteles, pan dulce</label>
-					  		<select id="galleta" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Dulces, chocolates, chicles</label>
-					  		<select id="dulce" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Embutidos</label>
-					  		<select id="embutido" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Sopas instantaneas</label>
-					  		<select id="sopa" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Frituras, chicharrones, carnitas</label>
-					  		<select id="fritura" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Tortillas</label>
-					  		<select id="tortilla" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Papas</label>
-					  		<select id="papa" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Pasta</label>
-					  		<select id="pasta" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Arroz</label>
-					  		<select id="arroz" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Frijol</label>
-					  		<select id="frijol" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Pan</label>
-					  		<select id="pan" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  
-					  <div class="row">
-					  	<div class="form-group">
-					  		<label for="Ltricipital">Huevo</label>
-					  		<select id="huevo" class="form-control" >
-				            	<option value="1">No consume</option>
-				            	<option value="2">Ocasional</option>
-				                <option value="3">Semanal</option>
-				                <option value="4">Mensual</option>
-				                <option value="5">Diario</option>
-				            </select>        
-					  	</div>
-					  </div>
-					  </div>
-    </div>
-					  
-				    </div>
-				  </div>
-    		</div>
-    	</article>
-    </div>
-  </div>
-  
-  </div>
-  </br>
-            <div class="row" align="center"  id="Mod">
-            <div class="form-group">
-						     <label for="BNuevo">Modificar</label>			
-							<button class="btn btn-default btn-lg" onclick="Modificar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
-							
-			</div>
-			<div class="form-group" >
-						     <label for="BNuevo">Reconsulta</label>			
-							<button class="btn btn-default btn-lg" onclick="Reconsulta()" >
-						     <img src="../imagenes/reco.jpg" width="80" height="60" title="Reconsulta" /></button>
-							
-			</div>
-			<div class="form-group" >
-						     <label for="BNuevo">Calculos VET</label>			
-							<button class="btn btn-default btn-lg" onclick="CalculosVET()" >
-						     <img src="../imagenes/vet.jpg" width="80" height="60" title="CalculosVET" /></button>
-							
-			</div>
-			</div>
-			<div class="row" align="center" id="Guard">
-            <div class="form-group" >
-						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" onclick="Guardar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
-							
-			</div>
-			
-        	</div>
-</form>
-        
-
             
             
         

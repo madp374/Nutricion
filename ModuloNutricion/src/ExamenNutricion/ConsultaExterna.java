@@ -37,9 +37,9 @@ public class ConsultaExterna extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public String validar_horario(String marca,String hora){
-		
+		System.out.println(hora);
 		if(marca.equals("0")){
-			hora="0:00";
+			hora="11:48 AM";
 		}
 		return hora;
 	}
@@ -70,17 +70,17 @@ public class ConsultaExterna extends HttpServlet {
 			String p14 = request.getParameter("p14");// Bebida alcoholica check
 			String p15 = request.getParameter("p15");// frecuencia bebida alcoholica
 			
-			String p16 = request.getParameter("p16");// Tiempo desayuno check
-			String p17 = validar_horario(p16,request.getParameter("p17"));// Hora desayuno
-			String p18 = request.getParameter("p18");// Tiempo Refaccion AM check
-			String p19 = validar_horario(p18,request.getParameter("p19"));// Hora refaccion AM
-			String p20 = request.getParameter("p20");// Tiempo almuero check
+			//String p16 = request.getParameter("p16");// Tiempo desayuno check %%% BORRAR
+			String p17 = request.getParameter("p17");// Hora desayuno
+			//String p18 = request.getParameter("p18");// Tiempo Refaccion AM check %%% BORRAR
+			String p19 = request.getParameter("p19");// Hora refaccion AM
+			//String p20 = request.getParameter("p20");// Tiempo almuero check %%% BORRAR
 			
-			String p21 = validar_horario(p20,request.getParameter("p21"));// Hora almuero
-			String p22 = request.getParameter("p22");// Tiempo refaccion PM check
-			String p23 = validar_horario(p22,request.getParameter("p23"));// Hora refaccion PM
-			String p24 = request.getParameter("p24");// Tiempo cena check
-			String p25 = validar_horario(p24,request.getParameter("p25"));// Hora cena
+			String p21 = request.getParameter("p21");// Hora almuero
+			//String p22 = request.getParameter("p22");// Tiempo refaccion PM check %%% BORRAR
+			String p23 = request.getParameter("p23");// Hora refaccion PM
+			
+			String p25 = request.getParameter("p25");// Hora cena
 			
 			String p26 = request.getParameter("p26");// Lugar casa check
 			String p27 = request.getParameter("p27");// Lugar trabajo check
@@ -93,6 +93,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p33 = request.getParameter("p33");// Tiempo min desayuno
 			String p34 = request.getParameter("p34");// Tiempo min refaccion
 			String p35 = request.getParameter("p35");// Tiempo min almuero
+			String p24 = request.getParameter("p24");// Min Refa PM
 			String p36 = request.getParameter("p36");// Tiempo min cena
 			String p37 = request.getParameter("p37");// vasos de agua
 			String p38 = request.getParameter("p38");// Alimentos dañinos
@@ -142,6 +143,7 @@ public class ConsultaExterna extends HttpServlet {
 			Conexion query = new Conexion();
 			
 			String p90 = request.getParameter("busqueda");// busqueda
+			String p100 = request.getParameter("p100");// ID USUARIO
 			if(p90.equalsIgnoreCase("false")){
 				String p74 = request.getParameter("p74");// nombre
 				String p75 = request.getParameter("p75");// sexo
@@ -157,13 +159,13 @@ public class ConsultaExterna extends HttpServlet {
 			//System.out.println("++++++++++ ID Antecedente: "+IDAntecedente+"++++++++");
 			String IDEstiloVida=query.UltimoIDEstiloVida(p8,p9,p10,p11,p12,p13,p14,p15);
 			//System.out.println("++++++++++ ID Estilo: "+IDEstiloVida+"++++++++");
-			String IDHabitoAlimentario=query.UltimoIDHabitoAlimentario(p33,p34,p35,p36,p37,p38,p39,p40);
+			String IDHabitoAlimentario=query.UltimoIDHabitoAlimentario(p33,p34,p35,p24,p36,p37,p38,p39,p40);
 			//System.out.println("++++++++++ ID Habito: "+IDHabitoAlimentario+"++++++++");
 			String IDAntropometria=query.UltimoIDAntropometria(p41,p42,p43,p44,p45,p46);
 			//System.out.println("++++++++++ ID Antropometria: "+IDAntropometria+"++++++++");
 			String IDRegistro=query.UltimoIDRegistro(p47,p48,p49,p50,p51,p52,p53);
 			//System.out.println("++++++++++ ID Registro: "+IDRegistro+"++++++++");
-			String IDConsultaExterna=query.RegistrarConsultaExterna(carnet,IDAntecedente,IDEstiloVida,IDHabitoAlimentario,IDAntropometria,IDRegistro);
+			String IDConsultaExterna=query.RegistrarConsultaExterna(carnet,IDAntecedente,IDEstiloVida,IDHabitoAlimentario,IDAntropometria,IDRegistro,p100);
 			
 			
 			//System.out.println("++++++++++ ID Consulta: "+IDConsultaExterna+"++++++++");
@@ -179,7 +181,7 @@ public class ConsultaExterna extends HttpServlet {
 			query.Insertar(consulta);
 			
 			consulta="insert into CONSULTA_EXTERNA_has_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
-					+"values("+IDConsultaExterna+",1,'"+p17+"'),("+IDConsultaExterna+",2,'"+p19+"'),("+IDConsultaExterna+",3,'"+p21+"'),("+IDConsultaExterna+",4,'"+p23+"'),("+IDConsultaExterna+",5,'"+p25+"');";
+					+"values("+IDConsultaExterna+",1,STR_TO_DATE('"+p17+"', '%h:%i %p')),("+IDConsultaExterna+",2,STR_TO_DATE('"+p19+"', '%h:%i %p')),("+IDConsultaExterna+",3,STR_TO_DATE('"+p21+"', '%h:%i %p')),("+IDConsultaExterna+",4,STR_TO_DATE('"+p23+"', '%h:%i %p')),("+IDConsultaExterna+",5,STR_TO_DATE('"+p25+"', '%h:%i %p'));";
 			
 			
 			ResultadoInsertar=query.InsertarRegistro(consulta);
@@ -229,7 +231,7 @@ public class ConsultaExterna extends HttpServlet {
 	        if(ResultadoInsertar.equals("0")){
 	        	HttpSession misession= request.getSession(true);
 	        	misession.setAttribute("idCE2", IDConsultaExterna);
-	        	result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\"}";
+	        	result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\",\"mensaje\":\"Registro almacenado correctamente\"}";
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -253,17 +255,17 @@ public class ConsultaExterna extends HttpServlet {
 			String p14 = request.getParameter("p14");// Bebida alcoholica check
 			String p15 = request.getParameter("p15");// frecuencia bebida alcoholica
 			
-			String p16 = request.getParameter("p16");// Tiempo desayuno check
-			String p17 = validar_horario(p16,request.getParameter("p17"));// Hora desayuno
-			String p18 = request.getParameter("p18");// Tiempo Refaccion AM check
-			String p19 = validar_horario(p18,request.getParameter("p19"));// Hora refaccion AM
-			String p20 = request.getParameter("p20");// Tiempo almuero check
+			//String p16 = request.getParameter("p16");// Tiempo desayuno check
+			String p17 = request.getParameter("p17");// Hora desayuno
+			//String p18 = request.getParameter("p18");// Tiempo Refaccion AM check
+			String p19 = request.getParameter("p19");// Hora refaccion AM
+			//String p20 = request.getParameter("p20");// Tiempo almuero check
 			
-			String p21 = validar_horario(p20,request.getParameter("p21"));// Hora almuero
-			String p22 = request.getParameter("p22");// Tiempo refaccion PM check
-			String p23 = validar_horario(p22,request.getParameter("p23"));// Hora refaccion PM
-			String p24 = request.getParameter("p24");// Tiempo cena check
-			String p25 = validar_horario(p24,request.getParameter("p25"));// Hora cena
+			String p21 = request.getParameter("p21");// Hora almuero
+			//String p22 = request.getParameter("p22");// Tiempo refaccion PM check
+			String p23 = request.getParameter("p23");// Hora refaccion PM
+			//String p24 = request.getParameter("p24");// Tiempo cena check
+			String p25 = request.getParameter("p25");// Hora cena
 			
 			String p26 = request.getParameter("p26");// Lugar casa check
 			String p27 = request.getParameter("p27");// Lugar trabajo check
@@ -276,6 +278,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p33 = request.getParameter("p33");// Tiempo min desayuno
 			String p34 = request.getParameter("p34");// Tiempo min refaccion
 			String p35 = request.getParameter("p35");// Tiempo min almuero
+			String p24 = request.getParameter("p24");// Tiempo min refa pm
 			String p36 = request.getParameter("p36");// Tiempo min cena
 			String p37 = request.getParameter("p37");// vasos de agua
 			String p38 = request.getParameter("p38");// Alimentos dañinos
@@ -345,7 +348,7 @@ public class ConsultaExterna extends HttpServlet {
 		
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
-		    query3="UPDATE HABITO_ALIMENTO SET TDesayuno="+p33+", TRefaccion="+p34+", TAlmuerzo="+p35+", TCena="+p36+", NoVasoAgua="+p37+", AlimentoDaño='"+p38+"', AlimentoNoGusta='"+p39+"', AlimentoPreferido='"+p40+"'"
+		    query3="UPDATE HABITO_ALIMENTO SET TDesayuno="+p33+", TRefaccion="+p34+", TAlmuerzo="+p35+",TRefaccionPM="+p24+" ,TCena="+p36+", NoVasoAgua="+p37+", AlimentoDaño='"+p38+"', AlimentoNoGusta='"+p39+"', AlimentoPreferido='"+p40+"'"
 				+" WHERE idHABITO_ALIMENTO=(SELECT HABITO_ALIMENTO_idHABITO_ALIMENTO"
 				+" FROM CONSULTA_EXTERNA"
 				+" WHERE idCONSULTA_EXTERNA="+ID+");";
@@ -381,7 +384,7 @@ public class ConsultaExterna extends HttpServlet {
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 			 
 			query3="insert into CONSULTA_EXTERNA_has_TIEMPO_COMIDA(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, TIEMPO_COMIDA_idTIEMPO_COMIDA, horario) "
-						+"values("+ID+",1,'"+p17+"'),("+ID+",2,'"+p19+"'),("+ID+",3,'"+p21+"'),("+ID+",4,'"+p23+"'),("+ID+",5,'"+p25+"');";
+						+"values("+ID+",1,STR_TO_DATE('"+p17+"', '%h:%i %p')),("+ID+",2,STR_TO_DATE('"+p19+"', '%h:%i %p')),("+ID+",3,STR_TO_DATE('"+p21+"', '%h:%i %p')),("+ID+",4,STR_TO_DATE('"+p23+"', '%h:%i %p')),("+ID+",5,STR_TO_DATE('"+p25+"', '%h:%i %p'));";
 				
 			ResultadoInsertar=con.InsertarRegistro(query3);
 			
@@ -442,7 +445,7 @@ public class ConsultaExterna extends HttpServlet {
 	        }
 			
 			if(ResultadoInsertar.equals("0")){
-				result="{\"resultado\":\"OK\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -460,8 +463,10 @@ public class ConsultaExterna extends HttpServlet {
 			String AlF = con.CargaFrecComida(ID);
 			String Pac = con.DatosPacientejso(ID);
 			String Reco = con.CargarRecordatorio(ID);
+			String aux="(SELECT PACIENTE_idPACIENTE FROM CONSULTA_EXTERNA WHERE idCONSULTA_EXTERNA="+ID+")";
+			String Regs =con.ObtenerRegistrosConsultaExterna(aux);
 			String fin="}";
-			result=cuerpo+Est+Tcom+AlF+Pac+Reco+fin;
+			result=cuerpo+Est+Tcom+AlF+Pac+Reco+Regs+fin;
 			//System.out.println(result);
 			HttpSession misession= request.getSession(true);
         	misession.setAttribute("idCE2", ID);
@@ -524,7 +529,7 @@ public class ConsultaExterna extends HttpServlet {
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
 		    if(ResultadoInsertar.equals("0")){
-				result="{\"resultado\":\"OK\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -537,7 +542,7 @@ public class ConsultaExterna extends HttpServlet {
 			String texto="1,2,3,4,5";
 			
 			String[] IDEL = ResultadoInsertar.split(",");
-			System.out.println(IDEL[0]+","+IDEL[1]+","+IDEL[2]+","+IDEL[3]+","+IDEL[4]);
+			//System.out.println(IDEL[0]+","+IDEL[1]+","+IDEL[2]+","+IDEL[3]+","+IDEL[4]);
 			out.println(result);
 		}
 		

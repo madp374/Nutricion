@@ -36,7 +36,7 @@
 			    margin: 0px 0 0px;
 			}
 			.container {
-			    width: 75%;
+			    width: 70%;
 			    padding-top:15px;
 			}
 			.input-sm {
@@ -196,33 +196,33 @@
 </header>
         <div class="row col-sm-12">
         
-        <nav class="col-sm-2">
+        <nav class="col-sm-3">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
         <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				<li><a href="http://10.50.50.54/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
 				
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="http://10.50.50.54/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
         	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
         	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         </ul>
         </nav>
         
-        <section class="col-sm-10">
+        <section class="col-sm-9">
         <div class="panel panel-default">
         
         <div class="panel-heading">
@@ -237,17 +237,20 @@
       <div class="panel-body">
       	
       	<div class="row">  
+   &nbsp;&nbsp;
   <div class="form-group">
    
 	<label  for="NCarnet">Carnet/Codigo Personal</label>
 	<input class="form-control input-sm" name="carnet" id="carnet" type="number" required/>
 	
   </div>
+ &nbsp;
 <div class="form-group">
 	  
 		  <label for="LFecha">Fecha</label>
 		  <input class="form-control input-sm" id="fecha" style="width: 80px;" type="text" readonly/>
 	  </div>
+	  &nbsp;
 	  <div class="form-group">
 		  <label for="TipoExame">Tipo de Examen</label><select class="form-control input-sm" id="TipoExamen">
 								<option value="1">Ingreso</option>
@@ -258,22 +261,27 @@
   <div id="mensaje1" >
 </div>
   </div>
-<div class="row" id="NRegPacienteNoEncontrado">  
+<div class="row" id="NRegPacienteNoEncontrado"> 
+&nbsp;&nbsp;
 <div class="form-group">
     <label for=LNombre>Nombre</label>
     <input class="form-control input-sm" type="text"  name="nombre1" id="nombre1"  />
 </div>
+&nbsp;
 <div class="form-group">
+
     <label for=LNombre>Sexo</label>
     <select  class="form-control input-sm"  id="sexo1">
         <option value="Femenino">Femenino</option>
         <option value="Masculino">Masculino</option>
     </select>
 </div>
+&nbsp;
 <div class="form-group">
     <label for=LNombre>Fecha de Nacimiento</label>
     <input class="form-control input-sm" type="text"  name="fechaNac" id="fechaNac" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD"  onkeyup="ValidarFecha()" />
 </div>
+&nbsp;
 <div class="form-group">
     <label for=LNombre>Facultad/Dependencia</label>
     <p id="dep5"></p>
@@ -281,10 +289,12 @@
  
   </div>
  <div class="row" id="NRegPacienteEncontrado">  
+ &nbsp;&nbsp;
 <div class="form-group">
     <label for=LNombre>Nombre</label>
     <input class="form-control input-sm" type="text"  name="nombre" id="nombre"  readonly />
 </div>
+&nbsp;
 <div class="form-group">
     <label for=LNombre>Sexo</label>
     <select  class="form-control input-sm"  id="sexo" readonly >
@@ -292,10 +302,12 @@
         <option value="Masculino">Masculino</option>
     </select>
 </div>
+&nbsp;
 <div class="form-group" >
     <label for=LNombre>Edad</label>
     <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 80px;" readonly  />
 </div>
+&nbsp;
 <div class="form-group">
     <label for=LNombre>Facultad/Dependencia</label>
     <input class="form-control input-sm" type="text"  name="facultad" id="facultad" readonly  />
@@ -324,38 +336,43 @@
   <article>
   <div class="panel panel-primary">
       <div class="panel-heading">Antropometria</div>
-      <div class="panel-body">
+      <div class="panel-body" >
       	
 <div class="row">  
+	&nbsp;&nbsp;
 	<div class="form-group">
-		<label for="Ltalla">Talla (m)</label>
-		<input class="form-control input-sm" id="talla" name="talla" type="number"  min="0" max="5" step="any"  style="width: 80px;" onkeyup="ValidarDecimal()" required/>
+		<label for="Ltalla">Talla (m)<br>&nbsp;</label>
+		<input class="form-control input-sm" id="talla" name="talla" type="number"  min="0" max="5" step="any"  style="width: 60px;" onkeyup="ValidarDecimal()" required/>
 	</div>
+	&nbsp;
 	<div class="form-group">
-		<label for="Lpeso">Peso (Lbs)</label>
-		<input  class="form-control input-sm"id="peso" name="peso" type="number"  min="0.1" max="800" step="any" onkeydown="CalcularIMC(event)"  style="width: 80px;" required/>
+		<label for="Lpeso">Peso (Lbs)<br>&nbsp;</label>
+		<input  class="form-control input-sm"id="peso" name="peso" type="number"  min="0" max="800" step="any" onkeydown="CalcularIMC(event)"  style="width: 60px;" required/>
                    
 	</div>
-	
+	&nbsp;
 	<div class="form-group">
-		 <label for="Lims">IMC</label>
-		 <input class="form-control input-sm" id="imc" name="imc" type="number" step="any" readonly style="width: 80px;" required/>
+		 <label for="Lims">IMC<br>&nbsp;</label>
+		 <input class="form-control input-sm" id="imc" name="imc" type="number" step="any" readonly style="width: 65px;" required/>
                     
 	</div>
+	&nbsp;
 	<div class="form-group">
-		<label for="LpesoI">Peso ideal (Lbs)</label>
-		<input class="form-control input-sm" id="pesoI" name="pesoI" type="number" step="any" readonly style="width: 105px;" required/>
+		<label for="LpesoI">Peso ideal<br>(Lbs)</label>
+		<input class="form-control input-sm" id="pesoI" name="pesoI" type="number" step="any" readonly style="width: 65px;" required/>
                 	
 	</div>
+	&nbsp;
 	<div class="form-group">
-		<label for="LpesoM">Peso maximo (Lbs)</label>
-		<input class="form-control input-sm" id="pesoM" name="pesoM" type="number" step="any" readonly style="width: 120px;" required/>
+		<label for="LpesoM">Peso maximo<br>(Lbs)</label>
+		<input class="form-control input-sm" id="pesoM" name="pesoM" type="number" step="any" readonly style="width: 65px;" required/>
                     
                    
 	</div>
+	&nbsp;
 	<div class="form-group">
-		 <label for="LDiag">Diagnostico</label>
-		 <input class="form-control input-sm" id="Diag" name="Diag" type="text" readonly style="width: 120px;" required/>
+		 <label for="LDiag">Diagnostico<br>&nbsp;</label>
+		 <input class="form-control input-sm" id="Diag" name="Diag" type="text" readonly style="width: 100px;" required/>
                     
 	</div>
 	</div>
@@ -368,27 +385,31 @@
   <article>
   <div class="panel panel-primary">
       <div class="panel-heading">Pliegues Cutaneos</div>
-      <div class="panel-body">
+      <div class="panel-body" >
       	
   <div class="row">
+  &nbsp;&nbsp;
   	<div class="form-group">
-  		<label for="Ltricipital">Tricipital (mm)</label>
-  		<input class="form-control input-sm" id="tricipital" name="tricipital" min="0" type="number" step="any" onkeyup="CalcularPliegues(event)" style="width: 120px;" required />
+  		<label for="Ltricipital">Tricipital<br>(mm)</label>
+  		<input class="form-control input-sm" id="tricipital" name="tricipital" min="0" type="number" step="any" onkeyup="CalcularPliegues(event)" style="width: 60px;" required />
                    
   	</div>
+  	&nbsp;
   	<div class="form-group">
-  		<label for="Lsubescapular">Subescapular (mm)</label>
-  		<input class="form-control input-sm" id="subescapular" name="subescapular" min="0" type="number" step="any" onkeyup="CalcularPliegues(event)" style="width: 120px;" required "/></td>
+  		<label for="Lsubescapular">Subescapular<br>(mm)</label>
+  		<input class="form-control input-sm" id="subescapular" name="subescapular" min="0" type="number" step="any" onkeyup="CalcularPliegues(event)" style="width: 60px;" required "/></td>
                    
   	</div>
+  	&nbsp;
   	<div class="form-group">
-  		<label for="Lsumapliegues">Sumatoria de ambos pliegues</label>
-  		<input class="form-control input-sm" id="sumapliegues" name="sumapliegues" type="number" step="any" readonly style="width: 120px;" required />
+  		<label for="Lsumapliegues">Sumatoria de<br>ambos pliegues</label>
+  		<input class="form-control input-sm" id="sumapliegues" name="sumapliegues" type="number" step="any" readonly style="width: 65px;" required />
          
   	</div>
+  	&nbsp;
   	<div class="form-group">
-							<label>Cintura Abdominal</label>
-							<input class="form-control input-sm" id="abdomen" min="0" step="any" name="abdomen" type="number" style="width: 70px;" />
+							<label>Cintura<br>Abdominal</label>
+							<input class="form-control input-sm" id="abdomen" min="0" step="any" name="abdomen" type="number" style="width: 60px;" />
 					</div>
   </div>
       	
@@ -523,7 +544,7 @@ document.getElementById('carnet').onkeydown = function (e) {
 			document.getElementById('abdomen').value= "";
 			document.getElementById('subescapular').value= "";
 			document.getElementById('abdomen').value= "";
-			MID=0;
+			IDMulti=0;
 			
 			document.getElementById('nombre').value  = "";
     		document.getElementById('sexo').value  = "Femenino";
@@ -612,7 +633,6 @@ document.getElementById('carnet').onkeydown = function (e) {
         		var MID = getUrlVars()["MID"];
         		if(MID!=undefined){
         			document.getElementById("Guard").style.display = 'none';
-        			CargaEdicion(MID);
         		}else{
         			document.getElementById("Mod").style.display = 'none';
         		}
@@ -805,11 +825,11 @@ document.getElementById('carnet').onkeydown = function (e) {
         		var valor=document.getElementById('RMulti').value;
         		document.getElementById("TablaEncargado").innerHTML = "";
         		if(valor!=0){
-        			MID=valor;
+        			IDMulti=valor;
         			document.getElementById("Guard").style.display = 'none';
         			document.getElementById("Mod").style.display = 'block';
         			
-        			CargaEdicion(MID);
+        			CargaEdicion(IDMulti);
         		}else{
         			document.getElementById("Mod").style.display = 'none';
         			document.getElementById("Guard").style.display = 'block';
@@ -835,7 +855,7 @@ document.getElementById('carnet').onkeydown = function (e) {
         			document.getElementById('subescapular').readOnly = false;
         			document.getElementById('abdomen').readOnly = false;
         			document.getElementById('TipoExamen').readOnly = false;
-        			MID=0;
+        			IDMulti=0;
         		}
       
         	}
@@ -992,7 +1012,8 @@ document.getElementById('carnet').onkeydown = function (e) {
         		
         		var FechaE=false;
         		if(variable13!=""){
-        			FechaE=existeFecha(fechaNac);
+        			//FechaE=existeFecha(fechaNac);
+        			FechaE=true;
         		}else{
         			alert("Error: ingrese una fecha valida");
         		}

@@ -462,6 +462,9 @@ function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fe
         		document.getElementById('fecha_fin').value = "";
         		limpiartabla();
         		MensajeServidor(1,"Registro almacenado correctamente");
+        		//if(archivo!=""){
+        		//	AñadirRegistro2(archivo);
+        		//}
         	}else{
         		MensajeServidor(2,data.descripcion);
         	}

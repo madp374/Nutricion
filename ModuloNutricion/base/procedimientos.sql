@@ -41,6 +41,7 @@ DELIMITER $
 CREATE PROCEDURE IngresarHabitoAlimentario(IN TDesayuno INT,
 									IN TRefaccion INT,
                                     IN TAlmuerzo INT,
+                                    IN TRefaccionPM INT,
                                    IN TCena INT,
                                    IN NoVasoAgua INT,
                                    IN AlimentoDaño varchar(250) ,
@@ -48,8 +49,8 @@ CREATE PROCEDURE IngresarHabitoAlimentario(IN TDesayuno INT,
                                    IN AlimentoPreferido varchar(250) ,
                                    OUT resultado TEXT)
 BEGIN
-insert into HABITO_ALIMENTO(TDesayuno,TRefaccion,TAlmuerzo,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido) 
-values(TDesayuno,TRefaccion,TAlmuerzo,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido);
+insert into HABITO_ALIMENTO(TDesayuno,TRefaccion,TAlmuerzo,TRefaccionPM,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido) 
+values(TDesayuno,TRefaccion,TAlmuerzo,TRefaccionPM,TCena,NoVasoAgua,AlimentoDaño,AlimentoNoGusta,AlimentoPreferido);
 SET resultado = (select LAST_INSERT_ID());
 END $
 DELIMITER ;
@@ -124,10 +125,11 @@ CREATE PROCEDURE Registrar_ConsultaExterna(IN paciente integer ,
                                     IN habito integer ,
                                     IN antropometria integer ,
                                     IN registro integer ,
+                                    IN usuario integer,
                                    OUT resultado TEXT)
 BEGIN
-insert into CONSULTA_EXTERNA(FECHA,PACIENTE_idPACIENTE, ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO)
-values(CURDATE(),paciente,antecedente,estilo,habito,antropometria,registro);
+insert into CONSULTA_EXTERNA(FECHA,PACIENTE_idPACIENTE, ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO,USUARIO_idUSUARIO)
+values(CURDATE(),paciente,antecedente,estilo,habito,antropometria,registro,usuario);
 SET resultado = (select LAST_INSERT_ID());
 END $
 DELIMITER ;

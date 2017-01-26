@@ -34,7 +34,7 @@ public class Alimento extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json");
 		String action=request.getParameter("a");
-		System.out.println(action);
+		//System.out.println(action);
 		
 		if(action!=null){
 			
@@ -44,7 +44,7 @@ public class Alimento extends HttpServlet {
 			Conexion consulta = new Conexion();
 			String result="";
 			result=consulta.BuscarAlimento(valor);
-			System.out.println(result);
+			//System.out.println(result);
 			out.println(result);
 		}
 		else{
@@ -54,7 +54,7 @@ public class Alimento extends HttpServlet {
                 Conexion consulta = new Conexion();
                 ArrayList<String> list = consulta.getAlimento(term);
                 String searchList = new Gson().toJson(list);
-                System.out.println(searchList);
+               // System.out.println(searchList);
                 response.getWriter().write(searchList);              
     			
 	        } catch (Exception e) {
@@ -78,7 +78,14 @@ public class Alimento extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			Conexion query = new Conexion();
 			String resultado = query.RegistrarIDAlimento(alimen.toLowerCase(),cal,grupo);
-			System.out.println(resultado);
+			//System.out.println(resultado);
+
+			out.println(resultado);
+		}else if(accion.equals("AlExiste")){
+			PrintWriter out = response.getWriter();
+			Conexion query = new Conexion();
+			String resultado = query.BuscarAlimentoExistente(alimen.toLowerCase());
+			//System.out.println(resultado);
 
 			out.println(resultado);
 		}

@@ -353,6 +353,7 @@ public class Conexion extends HttpServlet{
 	public String UltimoIDHabitoAlimentario(String TDesayuno,
 			String TRefaccion,
 			String TAlmuerzo,
+			String TRefaccionPM,
 			String TCena,
 			String NoVasoAgua,
 			String AlimentoDaño,
@@ -363,22 +364,23 @@ public class Conexion extends HttpServlet{
 		try {
 			BDConnect();
 			//Class.forName("com.mysql.jdbc.Driver");
-			CallableStatement proc = conn.prepareCall(" CALL IngresarHabitoAlimentario(?,?,?,?,?,?,?,?,?) ");
+			CallableStatement proc = conn.prepareCall(" CALL IngresarHabitoAlimentario(?,?,?,?,?,?,?,?,?,?) ");
             
             proc.setInt(1, Integer.parseInt(TDesayuno));//Tipo string
             proc.setInt(2, Integer.parseInt(TRefaccion));//Tipo string
             proc.setInt(3, Integer.parseInt(TAlmuerzo));//Tipo string
-            proc.setInt(4, Integer.parseInt(TCena));//Tipo string
-            proc.setInt(5, Integer.parseInt(NoVasoAgua));//Tipo string
+            proc.setInt(4, Integer.parseInt(TRefaccionPM));//Tipo string
+            proc.setInt(5, Integer.parseInt(TCena));//Tipo string
+            proc.setInt(6, Integer.parseInt(NoVasoAgua));//Tipo string
             
-            proc.setString(6, AlimentoDaño);//Tipo String
-            proc.setString(7, AlimentoNoGusta);//Tipo String
-            proc.setString(8, AlimentoPreferido);//Tipo String
-            proc.registerOutParameter(9, Types.VARCHAR);//Tipo String
+            proc.setString(7, AlimentoDaño);//Tipo String
+            proc.setString(8, AlimentoNoGusta);//Tipo String
+            proc.setString(9, AlimentoPreferido);//Tipo String
+            proc.registerOutParameter(10, Types.VARCHAR);//Tipo String
             // Se ejecuta el procedimiento almacenado
             proc.execute();            
             // devuelve el valor del parametro de salida del procedimiento
-            resultado = proc.getString(9);
+            resultado = proc.getString(10);
 			
 		    BDClose();
 		    return resultado;
@@ -476,14 +478,15 @@ public class Conexion extends HttpServlet{
 			String estilo,
 			String habito,
 			String antropometria,
-			String registro){
+			String registro,
+			String idusuario1){
 		String resultado=null;
 		procedimientoAL="&noAccessToProcedureBodies=true";
 		try {
 			BDConnect();
 			//Class.forName("com.mysql.jdbc.Driver");
 		
-			CallableStatement proc = conn.prepareCall(" CALL Registrar_ConsultaExterna(?,?,?,?,?,?,?) ");
+			CallableStatement proc = conn.prepareCall(" CALL Registrar_ConsultaExterna(?,?,?,?,?,?,?,?) ");
 			
         
             proc.setInt(1, Integer.parseInt(paciente));
@@ -492,12 +495,13 @@ public class Conexion extends HttpServlet{
             proc.setInt(4, Integer.parseInt(habito));
             proc.setInt(5, Integer.parseInt(antropometria));
             proc.setInt(6, Integer.parseInt(registro));
+            proc.setInt(7, Integer.parseInt(idusuario1));
          
-            proc.registerOutParameter(7, Types.VARCHAR);
+            proc.registerOutParameter(8, Types.VARCHAR);
          
             proc.execute();            
           
-            resultado = proc.getString(7);
+            resultado = proc.getString(8);
             
 			
 		    BDClose();
@@ -589,7 +593,44 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
-	
+	public String BuscarAlimentoExistente(String texto){
+		String resultado="";
+		String temp="";
+		String inicio="{\"resultado\":\"OK\"";
+		
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idALIMENTO, nombre, caloria FROM ALIMENTO WHERE nombre='"+texto+"'");
+		    int i=0;
+		    while (rs.next()) {
+		    	
+		    		temp+=",\"nombre\":\""+rs.getString("nombre")+"\",\"calorias\":\""+rs.getString("caloria")+"\"";
+		    		i++;
+		    	 
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    resultado=inicio+total+temp+"}";
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado="{\"resultado\":\"ERROR\"}";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado="{\"resultado\":\"ERROR\"}";
+		}
+		
+	}
 	public ArrayList<String> getAlimento(String texto) {
         ArrayList<String> list = new ArrayList<String>();
       
@@ -629,19 +670,21 @@ public class Conexion extends HttpServlet{
 		    cmd = getconnection().createStatement();
 		   
 		    rs = cmd.executeQuery("SELECT "
-	+"C.PACIENTE_idPACIENTE, "
-	+"A.DietaBaja, A.DietaAlta, A.talla, A.peso, A.CircunferenciaMuñeca, A.ConstitucionOsea,"
-	+"E.fuma, E.numero_cigarros, E.frec_fuma, E.ejercicio, E.tiempo_min, E.frec_ejercicio, E.bebida, E.frec_bebida,"
-	+" H.TDesayuno, H.TRefaccion, H.TAlmuerzo, H.TCena, H.NoVasoAgua, H.AlimentoDaño, H.AlimentoNoGusta, H.AlimentoPreferido,"
-	+" R.PorGrasa, R.PorAgua, R.PorMasaMuscular, R.MasaOsea, R.GrasaVisceral, R.CinturaAbdominal, R.plan,"
-	+" M.enfermedad_actual, M.medicamento, M.suplemento, M.diarrea, M.flatulencia, M.acidez, M.estreñimiento "
-	+" FROM CONSULTA_EXTERNA C, ANTROPOMETRIA A,ESTILO_DE_VIDA E, HABITO_ALIMENTO H, REGISTRO R, ANTECENDENTES_MEDICOS M "
-	+" WHERE A.idANTROPOMETRIA=C.ANTROPOMETRIA_idANTROPOMETRIA"
-	+" AND E.idESTILO_DE_VIDA=C.ESTILO_DE_VIDA_idESTILO_DE_VIDA"
-	+" AND H.idHABITO_ALIMENTO=C.HABITO_ALIMENTO_idHABITO_ALIMENTO"
-	+" AND R.idREGISTRO=C.REGISTRO_idREGISTRO"
-	+" AND M.idANTECENDENTES_MEDICOS=C.ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS"
-	+" AND C.idCONSULTA_EXTERNA="+ID);
+				+" C.PACIENTE_idPACIENTE, C.fecha, C.USUARIO_idUSUARIO, U.nombre, Z.nombre, "
+				+" A.DietaBaja, A.DietaAlta, A.talla, A.peso, A.CircunferenciaMuñeca, A.ConstitucionOsea,"
+				+" E.fuma, E.numero_cigarros, E.frec_fuma, E.ejercicio, E.tiempo_min, E.frec_ejercicio, E.bebida, E.frec_bebida,"
+				+" H.TDesayuno, H.TRefaccion, H.TAlmuerzo,  H.TRefaccionPM, H.TCena, H.NoVasoAgua, H.AlimentoDaño, H.AlimentoNoGusta, H.AlimentoPreferido,"
+				+" R.PorGrasa, R.PorAgua, R.PorMasaMuscular, R.MasaOsea, R.GrasaVisceral, R.CinturaAbdominal, R.plan,"
+				+" M.enfermedad_actual, M.medicamento, M.suplemento, M.diarrea, M.flatulencia, M.acidez, M.estreñimiento "
+				+" FROM CONSULTA_EXTERNA C, ANTROPOMETRIA A,ESTILO_DE_VIDA E, HABITO_ALIMENTO H, REGISTRO R, ANTECENDENTES_MEDICOS M, USUARIO U, ROL Z"
+				+" WHERE A.idANTROPOMETRIA=C.ANTROPOMETRIA_idANTROPOMETRIA"
+				+" AND E.idESTILO_DE_VIDA=C.ESTILO_DE_VIDA_idESTILO_DE_VIDA"
+				+" AND H.idHABITO_ALIMENTO=C.HABITO_ALIMENTO_idHABITO_ALIMENTO"
+				+" AND R.idREGISTRO=C.REGISTRO_idREGISTRO"
+				+" AND M.idANTECENDENTES_MEDICOS=C.ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS"
+			    +" AND C.USUARIO_idUSUARIO = U.idUSUARIO"
+			    +" AND Z.idROL=U.ROL_idROL"
+				+" AND C.idCONSULTA_EXTERNA="+ID);
 		 
 		    String PACIENTE_idPACIENTE="";
 		    String DietaBaja="";
@@ -663,6 +706,7 @@ public class Conexion extends HttpServlet{
 		    String TDesayuno="";
 		    String TRefaccion="";
 		    String TAlmuerzo="";
+		    String TRefaccionPM="";
 		    String TCena="";
 		    String NoVasoAgua="";
 		    String AlimentoDaño="";
@@ -684,10 +728,20 @@ public class Conexion extends HttpServlet{
 		    String flatulencia="";
 		    String acidez="";
 		    String estreñimiento="";
-
+		    
+		    String USR7="";
+		    String fecha="";
+		    String nombre="";
+		    String area="";
 		    
 		    while (rs.next()) {
 		    	PACIENTE_idPACIENTE=rs.getString("C.PACIENTE_idPACIENTE");
+		    	
+		    	USR7=rs.getString("C.USUARIO_idUSUARIO");
+		    	fecha=rs.getString("C.fecha");
+			    nombre=rs.getString("U.nombre");
+			    area=rs.getString("Z.nombre");
+		    	
 		    	DietaBaja=rs.getString("A.DietaBaja");
 			    DietaAlta=rs.getString("A.DietaAlta");
 			    talla=rs.getString("A.talla");
@@ -707,6 +761,7 @@ public class Conexion extends HttpServlet{
 			    TDesayuno=rs.getString("H.TDesayuno");
 			    TRefaccion=rs.getString("H.TRefaccion");
 			    TAlmuerzo=rs.getString("H.TAlmuerzo");
+			    TRefaccionPM=rs.getString("H.TRefaccionPM");
 			    TCena=rs.getString("H.TCena");
 			    NoVasoAgua=rs.getString("H.NoVasoAgua");
 			    AlimentoDaño=rs.getString("H.AlimentoDaño");
@@ -747,6 +802,7 @@ public class Conexion extends HttpServlet{
 		    		+"\",\"frec_bebida\":\""+frec_bebida
 		    		+"\",\"TDesayuno\":\""+TDesayuno
 		    		+"\",\"TRefaccion\":\""+TRefaccion
+		    		+"\",\"TRefaccionPM\":\""+TRefaccionPM
 		    		+"\",\"TAlmuerzo\":\""+TAlmuerzo
 		    		+"\",\"TCena\":\""+TCena
 		    		+"\",\"NoVasoAgua\":\""+NoVasoAgua
@@ -767,6 +823,10 @@ public class Conexion extends HttpServlet{
 		    		+"\",\"flatulencia\":\""+flatulencia
 		    		+"\",\"acidez\":\""+acidez
 		    		+"\",\"estrenimiento\":\""+estreñimiento
+		    		+"\",\"USER\":\""+USR7
+		    		+"\",\"fecha\":\""+fecha
+		    		+"\",\"nombre4\":\""+nombre
+		    		+"\",\"area\":\""+area
 		    		+"\"";
 		    rs.close();
 		    BDClose();
@@ -841,6 +901,15 @@ public class Conexion extends HttpServlet{
 	    byte[] arrByte = var.getBytes("ISO-8859-1");
 
 	    String result = new String(arrByte, "UTF-8");
+	    return result;
+	}
+	public String Codificar(String entrada) throws UnsupportedEncodingException{
+		
+	    String var=new String(entrada);
+	    
+	    byte[] arrByte = var.getBytes("UTF-8");
+
+	    String result = new String(arrByte, "ISO-8859-1");
 	    return result;
 	}
 	public String CargaNoticias2(){
@@ -1065,7 +1134,8 @@ public class Conexion extends HttpServlet{
 
 		    int i=0;
 		    while (rs.next()) {
-		    	aliment=rs.getString("A.nombre");
+		    	aliment=Codificar(rs.getString("A.nombre"));
+		    	
 		    	calo=rs.getString("A.caloria");
 		    	TiempoCo=rs.getString("R.TIEMPO_COMIDA_idTIEMPO_COMIDA");
 		    	Cantid=rs.getString("R.cantidad");
@@ -1233,7 +1303,7 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("SELECT T.comida, C.horario"
+		    rs = cmd.executeQuery("SELECT T.comida, TIME_FORMAT(C.horario, '%h:%i %p') as hora "
 						+" FROM CONSULTA_EXTERNA_has_TIEMPO_COMIDA C, TIEMPO_COMIDA T"
 						+" WHERE C.TIEMPO_COMIDA_idTIEMPO_COMIDA=T.idTIEMPO_COMIDA"
 						+" AND C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID);
@@ -1246,8 +1316,10 @@ public class Conexion extends HttpServlet{
 		    int i=0;
 		    while (rs.next()) {
 		    	comida=rs.getString("T.comida");
-		    	horario=rs.getString("C.horario");
-			    
+		    	horario=rs.getString("hora");
+			    if(horario.equalsIgnoreCase("11:48 AM")){
+			    	horario="";
+			    }
 			    resultado+=",\"comidaE"+i+"\":\""+comida+"\""
 			    		+",\"horarioE"+i+"\":\""+horario+"\"";
 			    		
@@ -1434,8 +1506,11 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("SELECT fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion, TIPO_EXAMEN_idTIPO_EXAMEN, CONSULTA_EXTERNA_idCONSULTA_EXTERNA"
-		    +" FROM RECONSULTA WHERE idRECONSULTA="+ID);
+		    rs = cmd.executeQuery("SELECT M.fecha, M.talla, M.peso, M.IMC, M.pesoganado, M.pesoperdido, M.cintura, M.porcentajegrasa, M.porcentajeagua, M.grasavisceral, M.masaosea, M.vettanita, M.datossubjetivos, M.tratamiento, M.educacion,  M.CONSULTA_EXTERNA_idCONSULTA_EXTERNA, M.USUARIO_idUSUARIO, U.nombre, R.nombre "
+								+" FROM RECONSULTA M, USUARIO U, ROL R"
+								+" WHERE M.USUARIO_idUSUARIO = U.idUSUARIO"
+								+" AND R.idROL=U.ROL_idROL"
+								+" AND M.idRECONSULTA="+ID);
 		 
 		    String fecha="";
 		    String talla="";
@@ -1452,29 +1527,34 @@ public class Conexion extends HttpServlet{
 		    String datossubjetivos="";
 		    String tratamiento="";
 		    String educacion="";
-		    String TIPO_EXAMEN_idTIPO_EXAMEN="";
+		    String USUARIO_idUSUARIO="";
 		    String CONSULTA_EXTERNA_idCONSULTA_EXTERNA="";
+		    String nombre="";
+		    String rol="";
 
 
 		    while (rs.next()) {
-		    	fecha=rs.getString("fecha");
-		    	talla=rs.getString("talla");
-		    	peso=rs.getString("peso");
-		    	IMC=rs.getString("IMC");
-		    	pesoganado=rs.getString("pesoganado");
-		    	pesoperdido=rs.getString("pesoperdido");
-		    	cintura=rs.getString("cintura");
-		    	porcentajegrasa=rs.getString("porcentajegrasa");
-		    	porcentajeagua=rs.getString("porcentajeagua");
-		    	grasavisceral=rs.getString("grasavisceral");
-		    	masaosea=rs.getString("masaosea");
-		    	vettanita=rs.getString("vettanita");
-		    	datossubjetivos=rs.getString("datossubjetivos");
-		    	tratamiento=rs.getString("tratamiento");
-		    	educacion=rs.getString("educacion");
-		    	TIPO_EXAMEN_idTIPO_EXAMEN=rs.getString("TIPO_EXAMEN_idTIPO_EXAMEN");
-		 
-		    	CONSULTA_EXTERNA_idCONSULTA_EXTERNA=rs.getString("CONSULTA_EXTERNA_idCONSULTA_EXTERNA");
+		    	fecha=rs.getString("M.fecha");
+		    	talla=rs.getString("M.talla");
+		    	peso=rs.getString("M.peso");
+		    	IMC=rs.getString("M.IMC");
+		    	pesoganado=rs.getString("M.pesoganado");
+		    	pesoperdido=rs.getString("M.pesoperdido");
+		    	cintura=rs.getString("M.cintura");
+		    	porcentajegrasa=rs.getString("M.porcentajegrasa");
+		    	porcentajeagua=rs.getString("M.porcentajeagua");
+		    	grasavisceral=rs.getString("M.grasavisceral");
+		    	masaosea=rs.getString("M.masaosea");
+		    	vettanita=rs.getString("M.vettanita");
+		    	datossubjetivos=rs.getString("M.datossubjetivos");
+		    	tratamiento=rs.getString("M.tratamiento");
+		    	educacion=rs.getString("M.educacion");
+		    	USUARIO_idUSUARIO=rs.getString("M.USUARIO_idUSUARIO");
+		    	
+			    nombre=rs.getString("U.nombre");
+			    rol=rs.getString("R.nombre");
+			    
+		    	CONSULTA_EXTERNA_idCONSULTA_EXTERNA=rs.getString("M.CONSULTA_EXTERNA_idCONSULTA_EXTERNA");
 
 		    }
 		    resultado="{\"resultado\":\"OK\",\"fecha\":\""+fecha+"\",\"peso\":\""+peso
@@ -1482,7 +1562,8 @@ public class Conexion extends HttpServlet{
 		    		+"\",\"pesoperdido\":\""+pesoperdido+"\",\"cintura\":\""+cintura+"\",\"porcentajegrasa\":\""+porcentajegrasa
 		    		+"\",\"porcentajeagua\":\""+porcentajeagua+"\",\"grasavisceral\":\""+grasavisceral+"\",\"masaosea\":\""+masaosea
 		    		+"\",\"vettanita\":\""+vettanita+"\",\"datossubjetivos\":\""+datossubjetivos+"\",\"tratamiento\":\""+tratamiento
-		    		+"\",\"educacion\":\""+educacion+"\",\"TIPO_EXAMEN_idTIPO_EXAMEN\":\""+TIPO_EXAMEN_idTIPO_EXAMEN
+		    		+"\",\"educacion\":\""+educacion+"\",\"USUARIO_idUSUARIO\":\""+USUARIO_idUSUARIO
+		    		+"\",\"nombre\":\""+nombre+"\",\"rol\":\""+rol
 		    		+"\",\"CONSULTA_EXTERNA_idCONSULTA_EXTERNA\":\""+CONSULTA_EXTERNA_idCONSULTA_EXTERNA+"\"}";
 		    rs.close();
 		    BDClose();
@@ -1512,11 +1593,13 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("SELECT A.talla,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo, C.fecha, C.peso, C.imc, C.ActividadFisica, C.FormulaVet, C.VET, C.VETAF, C.RBajoPeso, C.RSobrePeso, C.RObesidad, C.carbohidrato, C.proteina, C.grasa, C.placteosg, C.placteoe, C.pvegetal, C.pfruta, C.pcereal, C.pcarne, C.pgrasa, C.pazucar, C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA" 
-								+" FROM CONSULTA_EXTERNA E, ANTROPOMETRIA A, CALCULOS_VET C, PACIENTE P" 
+		    rs = cmd.executeQuery("SELECT A.talla,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo, C.fecha, C.peso, C.imc, C.ActividadFisica, C.FormulaVet, C.VET, C.VETAF, C.RBajoPeso, C.RSobrePeso, C.RObesidad, C.carbohidrato, C.proteina, C.grasa, C.placteosg, C.placteoe, C.pvegetal, C.pfruta, C.pcereal, C.pcarne, C.pgrasa, C.pazucar, C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA, C.USUARIO_idUSUARIO, U.nombre, R.nombre "
+								+" FROM CONSULTA_EXTERNA E, ANTROPOMETRIA A, CALCULOS_VET C, PACIENTE P, USUARIO U, ROL R"
 								+" WHERE E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA"
 								+" AND C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA"
 								+" AND E.PACIENTE_idPACIENTE=P.idPACIENTE"
+								+" AND C.USUARIO_idUSUARIO = U.idUSUARIO"
+								+" AND R.idROL=U.ROL_idROL"
 								+" AND C.idCALCULOS_VET="+ID);
 		 
 		    String talla="";
@@ -1544,6 +1627,9 @@ public class Conexion extends HttpServlet{
 		    String pgrasa="";
 		    String pazucar="";
 		    String CONSULTA_EXTERNA_idCONSULTA_EXTERNA="";
+		    String USR7="";
+		    String nombre="";
+		    String rol="";
 
 		    while (rs.next()) {
 		    	talla=rs.getString("A.talla");
@@ -1571,6 +1657,9 @@ public class Conexion extends HttpServlet{
 		    	pgrasa=rs.getString("C.pgrasa");
 		    	pazucar=rs.getString("C.pazucar");
 		    	CONSULTA_EXTERNA_idCONSULTA_EXTERNA=rs.getString("CONSULTA_EXTERNA_idCONSULTA_EXTERNA");
+		    	USR7=rs.getString("C.USUARIO_idUSUARIO");
+			    nombre=rs.getString("U.nombre");
+			    rol=rs.getString("R.nombre");
 
 		    }
 		    resultado="{\"resultado\":\"OK\",\"fecha\":\""+fecha+"\",\"peso\":\""+peso
@@ -1585,6 +1674,9 @@ public class Conexion extends HttpServlet{
 		    		+"\",\"pfruta\":\""+pfruta+"\",\"pcereal\":\""+pcereal
 		    		+"\",\"pcarne\":\""+pcarne+"\",\"pgrasa\":\""+pgrasa
 		    		+"\",\"pazucar\":\""+pazucar
+		    		+"\",\"USR7\":\""+USR7
+		    		+"\",\"nombre\":\""+nombre
+		    		+"\",\"rol\":\""+rol
 		    		+"\",\"CONSULTA_EXTERNA_idCONSULTA_EXTERNA\":\""+CONSULTA_EXTERNA_idCONSULTA_EXTERNA+"\"}";
 		    rs.close();
 		    BDClose();
@@ -1696,7 +1788,53 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
-	
+	public String ObtenerRegistrosConsultaExterna(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idCONSULTA_EXTERNA, fecha, USUARIO_idUSUARIO FROM CONSULTA_EXTERNA WHERE PACIENTE_idPACIENTE="+ID+";");
+		 
+		    String idCONSULTA_EXTERNA="";
+		    String fecha="";
+		    String USER7="";
+		    int i=0;
+		    String aux="";
+		    while (rs.next()) {
+		    	idCONSULTA_EXTERNA=rs.getString("idCONSULTA_EXTERNA");
+		    	fecha=rs.getString("fecha");
+		    	USER7=rs.getString("USUARIO_idUSUARIO");
+		    	if(i==0){
+		    		aux+="{\"idCONSULTA_EXTERNA\":\""+idCONSULTA_EXTERNA+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}else{
+		    		aux+=",{\"idCONSULTA_EXTERNA\":\""+idCONSULTA_EXTERNA+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}
+		    	
+		     i++;
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    String multi=",\"RConsultaExterna\":["+aux+"]";
+		    resultado=total+multi;
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		
+	}
 	public String ObtenerTallaPeso(String ID){
 		String resultado="";
 
@@ -1719,7 +1857,7 @@ public class Conexion extends HttpServlet{
 		    	peso=rs.getString("peso");
 		     
 		    }
-		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"idCE\":\""+ID+"\"}";
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"idCE\":\""+ID+"\"";
 		    rs.close();
 		    BDClose();
 		    return resultado;
@@ -1730,6 +1868,100 @@ public class Conexion extends HttpServlet{
 		catch(Exception ex){ 
 			System.out.println("Se produjo una excepción:"+ex);
 			return resultado;
+		}
+		
+	}
+	public String ObtenerRegistrosReconsulta(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idRECONSULTA, fecha, USUARIO_idUSUARIO FROM RECONSULTA WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+";");
+		 
+		    String idRECONSULTA="";
+		    String fecha="";
+		    String USER7="";
+		    int i=0;
+		    String aux="";
+		    while (rs.next()) {
+		    	idRECONSULTA=rs.getString("idRECONSULTA");
+		    	fecha=rs.getString("fecha");
+		    	USER7=rs.getString("USUARIO_idUSUARIO");
+		    	if(i==0){
+		    		aux+="{\"idRECONSULTA\":\""+idRECONSULTA+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}else{
+		    		aux+=",{\"idRECONSULTA\":\""+idRECONSULTA+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}
+		    	
+		     i++;
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    String multi=",\"RRECONSULTA\":["+aux+"]";
+		    resultado=total+multi;
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		
+	}
+	public String ObtenerRegistrosCalculosVET(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idCALCULOS_VET, fecha, USUARIO_idUSUARIO FROM CALCULOS_VET WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+";");
+		 
+		    String idCALCULOS_VET="";
+		    String fecha="";
+		    String USER7="";
+		    int i=0;
+		    String aux="";
+		    while (rs.next()) {
+		    	idCALCULOS_VET=rs.getString("idCALCULOS_VET");
+		    	fecha=rs.getString("fecha");
+		    	USER7=rs.getString("USUARIO_idUSUARIO");
+		    	if(i==0){
+		    		aux+="{\"idCALCULOS_VET\":\""+idCALCULOS_VET+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}else{
+		    		aux+=",{\"idCALCULOS_VET\":\""+idCALCULOS_VET+"\",\"fecha\":\""+fecha+"\",\"USER\":\""+USER7+"\"}";
+		    	}
+		    	
+		     i++;
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    String multi=",\"RCALCULOSVET\":["+aux+"]";
+		    resultado=total+multi;
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado=",\"total\":\"0\"";
 		}
 		
 	}
@@ -1761,7 +1993,7 @@ public class Conexion extends HttpServlet{
 		    	edad=rs.getString("EDAD");
 		    	sexo=rs.getString("P.sexo");
 		    }
-		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"edad\":\""+edad+"\",\"sexo\":\""+sexo+"\",\"idCE\":\""+ID+"\"}";
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"edad\":\""+edad+"\",\"sexo\":\""+sexo+"\",\"idCE\":\""+ID+"\"";
 		    rs.close();
 		    BDClose();
 		    return resultado;

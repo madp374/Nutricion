@@ -4,7 +4,6 @@
 <html>
 
         <head>
-        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
@@ -29,9 +28,28 @@
 			    padding-bottom: 9px;
 			    margin: 0px 0 0px;
 			}
+			.container {
+			    width: 70%;
+			    padding-top:15px;
+			}
+			.panel-heading {
+			    padding: 6px 15px;
+			    }
+			
+			.input-sm {
+			    height: 26px;
+			    font-size: 11px;
+			}
+			 ul, ul li {
+				 color: black;
+			}
+			.nav > li > a:hover, .nav > li > a:focus {
+			    background-color: #112D58;
+			    color:white;
+			}
 		</style>
 		<style type="text/css">
-		label { display:block; margin:5px 0 5px; font-size:10pt; }
+		label { display:block; margin:5px 0 5px; font-size:8pt; }
        	
 	</style>
 		
@@ -71,11 +89,323 @@
         </head>
 
         <body onload="CargaInicio()">
-        <script>
+        
+        <div class="container">
+         <div class="panel2 panel-body">
+<header class="row col-sm-12">
+   <div class="page-header">
+        
+     <form class="form-inline">
+	  <div class="row" align="center">
+	  <div class="form-group">
+	    <div style="float:right;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousac.png" width="200px" height="100px" >
+		</a>
+		</div> 
+	  </div>
+  
+	  <div class="form-group">
+	    <p><h4 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
+				Clinica de Nutricion</br>
+				Unidad de Salud. USAC</h4></p>
+	  </div>
+  
+	  <div class="form-group">
+	    <div style="float:left;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousalud2.gif" width="200px" height="100px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
+		</a>
+		</div> 
+	  </div>
+	</div>
+	<div class="row" align="right">
+		<div class="form-group" >
+	  	
+				<p id="UsuarioSesion">Usuario:</p>
+			</div>
+	 </div>
+	</form>
+	
+       		 
+  </div>
+</header>
+        <div class="row col-sm-12">
+        
+ <nav class="col-sm-3">
+        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
+        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
+	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+		    </ul>
+         </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+		    </ul>
+        </li>
+        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+		    </ul>
+        </li>
+        </ul>
+        </nav>
+        
+        <section class="col-sm-9">
+        <div class="panel panel-default">
+        
+        <div class="panel-heading">
+        <h3 class="panel-title">Examen de Reconsulta</h3>
+        </div>
+        <div class="panel-body">
+        
+ <form action="../Reconsulta" method="post" class="form-inline" role="form" onsubmit="return false">
+   <article>
+<div class="panel panel-primary">
+	<div class="panel-heading">Datos Generales</div>
+		<div class="panel-body" align="center">
+			      	
+			<div class="row">
+				<div class="form-group">
+				  
+					  <label for="LFecha">Fecha</label>
+					  <input class="form-control input-sm" id="fecha" type="text" style="width:80px" disabled/>
+				  </div>
+				  <div class="form-group">
+				  
+					  <label for="TipoExame">Tipo de Examen</label><select class="form-control input-sm" id="TipoExamen" onchange=CambioConsulta()>
+											<option value="1">Reconsulta</option>
+											<option value="2">Primera consulta</option>
+										</select>
+				  </div>
+				  
+			</div>
+			<div class="row" align="center">
+				  <div id="TablaEncargado"></div>
+			</div> 
+			<div class="row" align="center">
+				  <div id="RegMulti"></div>
+			</div>      	
+		</div>
+</div>
+  </article>	
+  <article>
+<div class="panel panel-primary">
+	<div class="panel-heading">Datos objetivos</div>
+		<div class="panel-body" align="center">
+			      	
+		  <div class="row">  
+			<div class="form-group">
+				<label for="Ltalla">Talla (m)<br>&nbsp;</label>
+				<input class="form-control input-sm" id="talla" name="talla" type="number"  min="0" max="5" step="any"  style="width: 70px;" onkeyup="ValidarDecimal()" required/>
+			</div>
+			&nbsp;
+			<div class="form-group">
+				<label for="LpesoI">Peso (Lbs)<br>&nbsp;</label>
+				<input class="form-control input-sm" id="pesoL" name="pesoL" type="number" step="any" min="0"  style="width: 70px;" required/>      	
+			</div>
+			&nbsp;
+			<div class="form-group">
+				<label for="Lpeso">Peso (Kg)<br>&nbsp;</label>
+				<input  class="form-control input-sm"id="peso" name="peso" type="number"  min="0"  step="any"  style="width: 70px;"  readonly required/>	   
+			</div>
+			 &nbsp;
+			<div class="form-group">
+				<label for="LpesoM">Peso ganado<br>(Lbs)</label>
+				<input class="form-control input-sm" id="pesoG" name="pesoG" type="number" min="0" step="any"   style="width: 70px;" readonly required/>               
+			</div>
+			&nbsp;
+			<div class="form-group">
+				<label for="LpesoM">Peso perdido<br>(Lbs)</label>
+				<input class="form-control input-sm" id="pesoP" name="pesoP" type="number" min="0" step="any"   style="width: 70px;" readonly required/>               
+			</div>
+			&nbsp;
+			<div class="form-group">
+					 <label for="Lims">IMC<br>&nbsp;</label>
+					 <input class="form-control input-sm" id="imc" name="imc" type="number"  min="0" step="any"  style="width: 70px;" readonly required/>                
+				</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="LDiag">Diagnostico<br>&nbsp;</label>
+					 <input class="form-control input-sm" id="Diag" name="Diag" type="text"  readonly style="width: 85px;" required/>            
+				</div>
+			</div>	
+			
+			<div class="row"> 
+			<div class="form-group">
+				<label for="LpesoM">Cintura<br>abdominal</label>
+				<input class="form-control input-sm" id="cintura" name="cintura" min="0" type="number" step="any"   style="width: 70px;" required/>               
+			</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="Lims">Porcentaje<br>de grasa</label>
+					 <input class="form-control input-sm" id="pgrasa" name="pgrasa" min="0" type="number" step="any"   style="width: 70px;" required/>                
+				</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="LDiag">Porcentaje<br>de agua</label>
+					 <input class="form-control input-sm" id="pagua" name="pagua" type="number" min="0"  style="width: 70px;" required/>            
+				</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="LDiag">Grasa visceral<br>&nbsp;</label>
+					 <input class="form-control input-sm" id="grasavisceral" name="grasavisceral" type="number"  min="0" style="width: 70px;" required/>            
+				</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="Lims">Masa osea<br>&nbsp;</label>
+					 <input class="form-control input-sm" id="masaosea" name="masaosea" type="number" step="any" min="0" style="width: 70px;" required/>                
+				</div>
+			&nbsp;
+				<div class="form-group">
+					 <label for="LDiag">VET TANITA<br>&nbsp;</label>
+					 <input class="form-control input-sm" id="vettanita" name="vettanita" type="number" min="0" style="width: 70px;" required/>            
+				</div>
+				
+			</div>			
+		</div>
+</div>
+  </article>
+  <article>
+<div class="panel panel-primary">
+	<div class="panel-heading">Plan</div>
+		<div class="panel-body" align="center">
+		  <div class="row">
+			<div class="form-group">
+				<label for="Ltricipital">Datos subjetivos</label>
+				<textarea class="form-control input-sm" name="datossubjetivos" id="datossubjetivos" cols="20" rows="2" maxlength="240"></textarea>
+						   
+			</div>
+			&nbsp;
+			<div class="form-group">
+				<label for="Lsubescapular">Tratamiento</label>
+				<textarea class="form-control input-sm" name="tratamiento" id="tratamiento"  cols="20" rows="2" maxlength="240"></textarea>
+						   
+			</div>
+			&nbsp;
+			<div class="form-group">
+				<label for="Lsumapliegues">Educacion Alimentaria Nutricional</label>
+				<textarea class="form-control input-sm" name="educacionalimentaria" id="educacionalimentaria" cols="20" rows="2" maxlength="240"></textarea>
+				 
+			</div>
+		  </div>				
+		</div>
+</div>
+  </article>
+  </br>
+             <div class="row" align="center" id="Guard" >
+      		<div class="form-group" >			
+							<button class="btn btn-default" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Guardar" />Guardar</button>
+							
+			</div>
+			</div>
+			<div class="row" align="center" id="Mod" >
+            <div class="form-group" >			
+							<button class="btn btn-default" onclick="Modificar()" id="BtnMod">
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Modificar" />Modificar</button>
+							
+			</div>
+			<div class="form-group" >		
+							<button class="btn btn-default" onclick="Eliminar()" id="BtnEl" >
+						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>
+							
+			</div>
+		</div>
+</form>
+        
+<script>
         	var pesoL=0;
         	var idCE="";
         	var idRec=""; 
-        	
+        	var UsuarioSesion = "null";
+    		var IdUsuarioSesion = "null";
+    		var PerfilSesion ="null";
+    		
+    		function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+    		
+    		function VerificarSesion(){
+        		<% HttpSession misession= request.getSession(true); %>
+        		
+        		UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
+        		IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
+        		PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
+        		
+        		if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
+        			
+        			var x=decodeURIComponent(document.cookie).length;
+        			if(x==0){
+        				//sale
+        				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+        			}
+        			else{
+        				UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
+                		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
+                		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
+                		
+                		if(PerfilSesion=="nutri"){
+            				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+            			
+            			}else{
+            				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+            			}
+        			}
+        			
+        		}
+        		else{
+        			document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
+        			document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
+        			document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
+        			
+        			if(PerfilSesion=="nutri"){
+        				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+        			
+        			}else{
+        				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+        			}
+        		}
+        	}
+    		
+    		function CambioConsulta(){
+    			var x = document.getElementById("TipoExamen").selectedIndex;
+    			if(x==1){
+    				window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp?idCE="+idCE);
+    			}
+    			
+    		}
+    		
+    		function CerrarSesion(){
+        		<%misession.setAttribute("NUSUARIO", "null");%>
+        		<%misession.setAttribute("NIDSUARIO", "null");%>
+        		<%misession.setAttribute("NPERFIL", "null");%>
+        		
+        		document.cookie = "CookieUsuario=; max-age=0";
+    			document.cookie = "CookieIDUsuario=; max-age=0";
+    			document.cookie = "CookiePerfil=; max-age=0";
+        		
+        		window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+        		
+        	}
         	function CargaInicio() {
             	
         		AgregarFecha();
@@ -95,6 +425,7 @@
         				document.getElementById("Mod").style.display = 'none';
         			}
         		}
+        		VerificarSesion();
         		
         	}
         	function CargarEdicion(entrada){
@@ -123,16 +454,65 @@
         		        	document.getElementById('datossubjetivos').value  = data.datossubjetivos;
         		        	document.getElementById('tratamiento').value  = data.tratamiento;
         		        	document.getElementById('educacionalimentaria').value  = data.educacion;
-        		        	document.getElementById('TipoExamen').value  = data.TIPO_EXAMEN_idTIPO_EXAMEN;
+        		        	//document.getElementById('TipoExamen').value  = data.TIPO_EXAMEN_idTIPO_EXAMEN;
         		        	idCE=data.CONSULTA_EXTERNA_idCONSULTA_EXTERNA;
         		        	CalcIMC();	
-        		        	
+        		        	Bloqueo(data.USUARIO_idUSUARIO,data.fecha,data.nombre,data.rol);
         	        	}else{
         	        		alert("Error al cargar");
         	        	}
         	        	
         	        }
         		});
+        	}
+        	function Bloqueo(ID,fecha,nomb,area){
+        		var encabCom="";
+        		var marco="<div class=\"table-responsive\"><table class=\"table-bordered\" border=\"1px\" width=\"80%\" >";
+        	    var fintabla="</table></div>";
+				encabCom+="<tr bgcolor=\"#25587E\" align=\"center\"><th><font color=\"white\">Fecha</font></th><th><font color=\"white\">Evaluador</font></th><th><font color=\"white\">Area</font></th></tr>";
+        		var fila='<tr><td>'+fecha+'</td><td>'+nomb+'</td><td>'+area+'</td></tr>';
+        		var tabla=marco+encabCom+fila+fintabla;
+        		document.getElementById("TablaEncargado").innerHTML = tabla;
+        		
+        		if(ID==IdUsuarioSesion){
+        			
+        			document.getElementById('talla').readOnly = false;
+        			document.getElementById('pesoL').readOnly = false;
+        			
+        			document.getElementById('cintura').readOnly = false;
+        			document.getElementById('pgrasa').readOnly = false;
+        			document.getElementById('pagua').readOnly = false;
+        			document.getElementById('grasavisceral').readOnly = false;
+        			document.getElementById('masaosea').readOnly = false;
+        			document.getElementById('vettanita').readOnly = false;
+        			
+        			document.getElementById('datossubjetivos').readOnly = false;
+        			document.getElementById('tratamiento').readOnly = false;
+        			document.getElementById('educacionalimentaria').readOnly = false;
+        			
+        			document.getElementById("BtnMod").disabled = false;
+        			document.getElementById("BtnEl").disabled = false;
+        			
+        			document.getElementById("talla").focus();
+        		}else{
+        			
+        			document.getElementById('talla').readOnly = true;
+        			document.getElementById('pesoL').readOnly = true;
+        			
+        			document.getElementById('cintura').readOnly = true;
+        			document.getElementById('pgrasa').readOnly = true;
+        			document.getElementById('pagua').readOnly = true;
+        			document.getElementById('grasavisceral').readOnly = true;
+        			document.getElementById('masaosea').readOnly = true;
+        			document.getElementById('vettanita').readOnly = true;
+        			
+        			document.getElementById('datossubjetivos').readOnly = true;
+        			document.getElementById('tratamiento').readOnly = true;
+        			document.getElementById('educacionalimentaria').readOnly = true;
+        			
+        			document.getElementById("BtnMod").disabled = true;
+        			document.getElementById("BtnEl").disabled = true;
+        		}
         	}
         	function validar_vacio(entrada){
         		var texto="";
@@ -184,13 +564,23 @@
         			alert("Error al guardar, revise que los campos esten completos");
         		}
         	}
+        	function Eliminar(){
+        		var action="eliminar";
+        		if((idRec!=undefined)&&(idRec!="")){
+        			var cadena = ['ID='+ idRec,'a='+action].join('&');
+        	        		enviar_datos(cadena);
+        		}
+        		else{
+        			alert("Error al eliminar");
+        		}
+        	}
         	function Guardar(){
         		var action="guardar";
         		var x = document.getElementById("TipoExamen").selectedIndex;
         	    var y = document.getElementById("TipoExamen").options;
         	    
-       
-        		var variable1=y[x].text;
+       			var variable0=IdUsuarioSesion;
+        		//var variable1=y[x].text;
         		var variable2=validar_numerovacio("talla");
         		var variable3=validar_numerovacio("pesoL");
         		var variable4=validar_numerovacio("imc");
@@ -209,7 +599,7 @@
         		
         		if((idCE!=undefined)&&(idCE!="")&&(variable2!="0")&&(variable3!="0")){
         			var cadena = ['ID='+ idCE,'a='+action
-        	        		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
+        	        		      	,"p0="+variable0,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
         	        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
         	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
         	        		enviar_datos(cadena);
@@ -231,7 +621,7 @@
         	        dataType: 'json',
         	        success: function(data){
         	        	if(data.resultado=='OK'){
-        	        		alert("Informacion almacenada correctamente");
+        	        		alert(data.mensaje);
         	        		location.reload();
         	        	}else{
         	        		alert("ERROR al almacenar en el servidor");
@@ -253,8 +643,76 @@
     		        	document.getElementById('talla').value  = data.talla;
     		        	pesoL=parseInt(data.peso);
     		        	idCE=data.idCE;
+    		        	GenerarRegistrosReconsulta(data.total,data.RRECONSULTA);
     		        }
     			});
+        	}
+        	function GenerarRegistrosReconsulta(total,data){
+        		var marcodiv='<div class="form-group"><label for="RegM">Registros de consulta</label><select class="form-control input-sm" id="RMulti" onchange=CambioRegMulti()>';
+        		var opciones='<option value=0>Nuevo</option>';
+        		if(total!=0){
+        			for(i=0;i<total;i++){
+        				opciones+='<option value='+data[i].idRECONSULTA+'>'+data[i].fecha+'</option>';
+        			}
+        		}
+        		var fin='</select></div>'
+        		var componente=marcodiv+opciones+fin;
+        		document.getElementById("RegMulti").innerHTML =componente;
+        		document.getElementById("talla").focus();
+        	}
+        	function CambioRegMulti(){
+        		var valor=document.getElementById('RMulti').value;
+        		document.getElementById("TablaEncargado").innerHTML = "";
+        		if(valor!=0){
+        			idRec=valor;
+        			document.getElementById("Guard").style.display = 'none';
+        			document.getElementById("Mod").style.display = 'block';
+        			
+        			CargarEdicion(idRec);
+        		}else{
+        			document.getElementById("Mod").style.display = 'none';
+        			document.getElementById("Guard").style.display = 'block';
+        			document.getElementById("BtnMod").disabled = false;
+        			
+        			document.getElementById('talla').value  = "";
+        			document.getElementById('pesoL').value  = "";
+        			document.getElementById('imc').value  = "";
+        			document.getElementById('pesoG').value  = "";
+        			document.getElementById('pesoP').value= "";
+        			
+        			document.getElementById('peso').value  = "";
+        			document.getElementById('Diag').value= "";
+        			
+        			document.getElementById('cintura').value= "";
+        			document.getElementById('pgrasa').value= "";
+        			document.getElementById('pagua').value= "";
+        			document.getElementById('grasavisceral').value= "";
+        			document.getElementById('masaosea').value= "";
+        			document.getElementById('vettanita').value= "";
+        			
+        			document.getElementById('datossubjetivos').value= "";
+        			document.getElementById('tratamiento').value= "";
+        			document.getElementById('educacionalimentaria').value= "";
+        			
+        			document.getElementById('talla').readOnly = false;
+        			document.getElementById('pesoL').readOnly = false;
+        			
+        			document.getElementById('cintura').readOnly = false;
+        			document.getElementById('pgrasa').readOnly = false;
+        			document.getElementById('pagua').readOnly = false;
+        			document.getElementById('grasavisceral').readOnly = false;
+        			document.getElementById('masaosea').readOnly = false;
+        			document.getElementById('vettanita').readOnly = false;
+        			
+        			document.getElementById('datossubjetivos').readOnly = false;
+        			document.getElementById('tratamiento').readOnly = false;
+        			document.getElementById('educacionalimentaria').readOnly = false;
+        			
+        			CargarTallaPeso(idCE);
+        			
+        			idRec=0;
+        		}
+      
         	}
         	function AgregarFecha(){
         		var  today = new Date();
@@ -284,8 +742,8 @@
         			pesog=calculo;
         		}
         	
-        		document.getElementById('pesoG').value  = pesog;
-        		document.getElementById('pesoP').value  = pesop;
+        		document.getElementById('pesoG').value  = pesog.toFixed(2);
+        		document.getElementById('pesoP').value  = pesop.toFixed(2);
         	}
         	
         	function CalcIMC(){
@@ -310,7 +768,7 @@
     			    peso =	parseFloat(TempPeso)*0.453592;
     			    talla=talla*talla;
     			    imc=peso/talla;
-    			    
+    			    imc=imc.toFixed(2);
     			    var action="cargaimc";
     				cadena = [ 	'talla=' + talla,'peso='+peso,'a='+action].join('&');
     				$.ajax({
@@ -321,7 +779,7 @@
     			        success: function(data){
     			        	document.getElementById('imc').value  = ""+imc;
     			        	document.getElementById('Diag').value  = data.diagnostico;
-    			        	document.getElementById('peso').value  = peso;
+    			        	document.getElementById('peso').value  = peso.toFixed(2);
     			        	//document.getElementById('pesoM').value  = data.pesomax;
     			        	//document.getElementById('pesoI').value  = data.pesoideal;
     			        }
@@ -337,221 +795,124 @@
         function VerRegistros(){
         	window.location.replace("/ModuloNutricion/TablasNutricion/ListadoReconsulta.jsp");
         }	
+        function ValidarDecimal() {
+        	var texto=document.getElementById('talla').value;
+        	var longitud=texto.length;
+        	if(longitud==2){
+        		var ini = texto.substr(0,1);
+        	    var aux= texto.substr(longitud-1,longitud);
+        	    var palabra=ini+"."+aux;
+        		document.getElementById('talla').value=palabra;
+        	}
+        	
+        }
+        document.getElementById('talla').onkeydown = function (e) {
+        	//alert(e.keyCode);
+        	if(e.keyCode == 13){
+        		
+        		document.getElementById("pesoL").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('pesoL').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			CalcularIMC(e);
+        		document.getElementById("cintura").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('cintura').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("pgrasa").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('pgrasa').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("pagua").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('pagua').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("grasavisceral").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('grasavisceral').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("masaosea").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('masaosea').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("vettanita").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('vettanita').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("datossubjetivos").focus();
+        		 return false;
+               
+        	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
+        		        return false;
+        	}
+        }
+        document.getElementById('datossubjetivos').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("tratamiento").focus();
+        		 return false;
+               
+        	}
+        }
+        document.getElementById('tratamiento').onkeydown = function (e) {
+        	//alert(e.keyCode);
+    		if(e.keyCode == 13){
+    			
+        		document.getElementById("educacionalimentaria").focus();
+        		 return false;
+               
+        	}
+        }
         </script>
-        <div class="container">
-         <div class="panel2 panel-body">
-        <header class="row col-sm-12">
-         <div class="page-header">
-        
-     <form class="form-inline">
-  
-  <div class="form-group">
-    <div style="float:right;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousac.png" width="270px"  >
-	</a>
-	</div> 
-  </div>
-  
-  <div class="form-group">
-    <p><h3 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
-			Clinica de Nutricion</br>
-			Unidad de Salud. USAC</h3></p>
-  </div>
-  
-  <div class="form-group">
-    <div style="float:left;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousalud2.gif" width="270px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
-	</a>
-	</div> 
-  </div>
-  
-</form>
-	
-       		 
-        </div>
-        </header>
-        <div class="row col-sm-12">
-        
-        <nav class="col-sm-2">
-        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
-	        <ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
-		    </ul>
-         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
-        </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
-        </li>
-        </ul>
-        </nav>
-        
-        <section class="col-sm-10">
-        <div class="panel panel-default">
-        
-        <div class="panel-heading">
-        <h3 class="panel-title">Examen de Reconsulta</h3>
-        </div>
-        <div class="panel-body">
-        
- <form action="../Reconsulta" method="post" class="form-inline" role="form" onsubmit="return false">
-   <article>
-<div class="panel panel-primary">
-	<div class="panel-heading">Datos Generales</div>
-		<div class="panel-body" align="center">
-			      	
-			<div class="row">
-				<div class="form-group">
-				  
-					  <label for="LFecha">Fecha</label>
-					  <input class="form-control" id="fecha" type="text" disabled/>
-				  </div>
-				  <div class="form-group">
-				  
-					  <label for="TipoExame">Tipo de Examen</label><select class="form-control" id="TipoExamen">
-											<option value="1">Primera consulta</option>
-											<option value="2">Reconsulta</option>
-										</select>
-				  </div>
-				  
-			</div>
-			      	
-		</div>
-</div>
-  </article>	
-  <article>
-<div class="panel panel-primary">
-	<div class="panel-heading">Datos objetivos</div>
-		<div class="panel-body" align="center">
-			      	
-		  <div class="row">  
-			<div class="form-group">
-				<label for="Ltalla">Talla (m)</label>
-				<input class="form-control" id="talla" name="talla" type="number"  min="0.1" max="5" step="any"  style="width: 85px;" onkeypress="CalcularIMC(event)" required/>
-			</div>
-			
-			<div class="form-group">
-				<label for="LpesoI">Peso (Lbs)</label>
-				<input class="form-control" id="pesoL" name="pesoL" type="number" step="any"   style="width: 80px;" onkeypress="CalcularIMC(event)" required/>      	
-			</div>
-			<div class="form-group">
-				<label for="Lpeso">Peso (Kg)</label>
-				<input  class="form-control"id="peso" name="peso" type="number"  min="0.1" max="800" step="any"  style="width: 80px;" onkeypress="CalcularIMC(event)" readonly required/>
-						   
-			</div>
-			 
-			
-			<div class="form-group">
-				<label for="LpesoM">Peso ganado (Lbs)</label>
-				<input class="form-control" id="pesoG" name="pesoG" type="number" step="any"   style="width: 80px;" readonly required/>               
-			</div>
-			<div class="form-group">
-				<label for="LpesoM">Peso perdido (Lbs)</label>
-				<input class="form-control" id="pesoP" name="pesoP" type="number" step="any"   style="width: 80px;" readonly required/>               
-			</div>
-			<div class="form-group">
-				<label for="LpesoM">Cintura abdominal</label>
-				<input class="form-control" id="cintura" name="cintura" type="number" step="any"   style="width: 80px;" required/>               
-			</div>
-			
-			</div>	
-			<div class="row"> 
-				<div class="form-group">
-					 <label for="Lims">IMC</label>
-					 <input class="form-control" id="imc" name="imc" type="number" step="any"  style="width: 80px;" readonly required/>                
-				</div>
-				<div class="form-group">
-					 <label for="LDiag">Diagnostico</label>
-					 <input class="form-control" id="Diag" name="Diag" type="text" readonly required/>            
-				</div>
-			</div>
-			<div class="row"> 
-				<div class="form-group">
-					 <label for="Lims">Porcentaje de grasa</label>
-					 <input class="form-control" id="pgrasa" name="pgrasa" type="number" step="any"   style="width: 80px;" required/>                
-				</div>
-				<div class="form-group">
-					 <label for="LDiag">Porcentaje de agua</label>
-					 <input class="form-control" id="pagua" name="pagua" type="number"   style="width: 80px;" required/>            
-				</div>
-				<div class="form-group">
-					 <label for="LDiag">Grasa visceral</label>
-					 <input class="form-control" id="grasavisceral" name="grasavisceral" type="number"   style="width: 80px;" required/>            
-				</div>
-
-				<div class="form-group">
-					 <label for="Lims">Masa osea</label>
-					 <input class="form-control" id="masaosea" name="masaosea" type="number" step="any"  style="width: 80px;" required/>                
-				</div>
-				<div class="form-group">
-					 <label for="LDiag">VET TANITA</label>
-					 <input class="form-control" id="vettanita" name="vettanita" type="number"  style="width: 80px;" required/>            
-				</div>
-				
-			</div>			
-		</div>
-</div>
-  </article>
-  <article>
-<div class="panel panel-primary">
-	<div class="panel-heading">Plan</div>
-		<div class="panel-body" align="center">
-		  <div class="row">
-			<div class="form-group">
-				<label for="Ltricipital">Datos subjetivos</label>
-				<textarea class="form-control" name="datossubjetivos" id="datossubjetivos" cols="20" rows="5" ></textarea>
-						   
-			</div>
-			<div class="form-group">
-				<label for="Lsubescapular">Tratamiento</label>
-				<textarea class="form-control" name="tratamiento" id="tratamiento"  cols="20" rows="5" ></textarea>
-						   
-			</div>
-			<div class="form-group">
-				<label for="Lsumapliegues">Educacion Alimentaria Nutricional</label>
-				<textarea class="form-control" name="educacionalimentaria" id="educacionalimentaria" cols="20" rows="5" ></textarea>
-				 
-			</div>
-		  </div>				
-		</div>
-</div>
-  </article>
-  </br>
-            <div class="row" align="center">
-            <div class="form-group" id="Guard">
-						     <label for="BNuevo">Guardar</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="Guardar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Guardar" /></button>
-							
-			</div>
-			<div class="form-group" id="Mod">
-						     <label for="BNuevo">Modificar</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="Modificar()" >
-						     <img src="../imagenes/guardado.png" width="80" height="60" title="Modificar" /></button>
-							
-			</div>
-			<div class="form-group">
-						     <label for="BNuevo">Registros</label>			
-							<button class="btn btn-default btn-lg" id="guardarg" onclick="VerRegistros()" >
-						     <img src="../imagenes/registros.png" width="80" height="60" title="Registros" /></button>
-							
-			</div>
-        	</div>
-</form>
-        
-
             
             
         

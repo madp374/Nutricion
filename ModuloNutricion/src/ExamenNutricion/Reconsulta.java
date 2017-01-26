@@ -56,19 +56,43 @@ public class Reconsulta extends HttpServlet {
 		String idCE = validar_numero(request.getParameter("ID"));
 		String accion = validar_vacio(request.getParameter("a")); //accion
 		String result="{\"resultado\":\"error\"}";
-		System.out.println("accion:"+accion);
+		//System.out.println("accion:"+accion);
 		if(accion.equalsIgnoreCase("CargarTallaPeso")){
 			Conexion query = new Conexion();
 			result=query.ObtenerTallaPeso(idCE);
+			String regs=query.ObtenerRegistrosReconsulta(idCE);
+			result+=regs+"}";
 			misession.setAttribute("idCE1", idCE);
+			//System.out.println(result);
 			out.println(result);
 			
 		}else if(accion.equalsIgnoreCase("CargarEdicion")){
 			Conexion query = new Conexion();
 			result=query.CargaReconsulta(idCE);
 			out.println(result);
+		}else if(accion.equalsIgnoreCase("eliminar")){
+			
+			String IdBorrar=request.getParameter("ID");
+			String sql = "delete from RECONSULTA where idRECONSULTA="+IdBorrar+"; ";
+
+			String result2="";
+			
+			try {
+				Conexion consulta = new Conexion();
+				consulta.Eliminar(sql); 
+				result2="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
+				//System.out.println("resultado eliminar:");
+			} catch (Exception e) {
+				e.printStackTrace();
+				result2="{\"resultado\":\"Error\",\"mensaje\":\"Error al eliminiar\"}";
+			}
+			
+			
+			//System.out.println(result);
+			out.println(result2);
+			
 		}else if(accion.equalsIgnoreCase("modificar")){
-			String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
+			//String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
 			String p2=request.getParameter("p2"); //talla
 			String p3=request.getParameter("p3"); //peso
 			String p4=request.getParameter("p4"); //imc
@@ -84,25 +108,25 @@ public class Reconsulta extends HttpServlet {
 			String p14=request.getParameter("p14"); //tratamiento
 			String p15=request.getParameter("p15"); //educacion alimentaria
 			
-			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
-					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
-					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
-			System.out.println(cadena);
+			//String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
+			//		+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
+			//		+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
+			//System.out.println(cadena);
 			
 			String query="UPDATE RECONSULTA " 
-					+"SET talla="+p2+",peso="+p3+",IMC="+p4+",pesoganado="+p5+",pesoperdido="+p6+",cintura="+p7+",porcentajegrasa="+p8+",porcentajeagua="+p9+",grasavisceral="+p10+",masaosea="+p11+",vettanita="+p12+",datossubjetivos='"+p13+"',tratamiento='"+p14+"',educacion='"+p15+"',TIPO_EXAMEN_idTIPO_EXAMEN="+p1+" WHERE idRECONSULTA="+idCE;
+					+"SET talla="+p2+",peso="+p3+",IMC="+p4+",pesoganado="+p5+",pesoperdido="+p6+",cintura="+p7+",porcentajegrasa="+p8+",porcentajeagua="+p9+",grasavisceral="+p10+",masaosea="+p11+",vettanita="+p12+",datossubjetivos='"+p13+"',tratamiento='"+p14+"',educacion='"+p15+"' WHERE idRECONSULTA="+idCE;
 			
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
 			}
 			
 			out.println(result);
 		}
 		else if(accion.equalsIgnoreCase("guardar")){
-
-			String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
+			String p0=request.getParameter("p0"); //usuario
+			//String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
 			String p2=request.getParameter("p2"); //talla
 			String p3=request.getParameter("p3"); //peso
 			String p4=request.getParameter("p4"); //imc
@@ -118,18 +142,18 @@ public class Reconsulta extends HttpServlet {
 			String p14=request.getParameter("p14"); //tratamiento
 			String p15=request.getParameter("p15"); //educacion alimentaria
 			
-			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
+			String cadena=idCE+","+accion+",p0:"+p0+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
 					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
 			System.out.println(cadena);
 			
-			String query="insert into RECONSULTA(fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion, TIPO_EXAMEN_idTIPO_EXAMEN, CONSULTA_EXTERNA_idCONSULTA_EXTERNA) " 
-					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"',"+p1+","+idCE+");";
+			String query="insert into RECONSULTA(fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, USUARIO_idUSUARIO) " 
+					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"',"+idCE+","+p0+");";
 			
 			Conexion consulta = new Conexion();
 			consulta.Insertar(query);
 			
-			result="{\"resultado\":\"OK\"}";
+			result="{\"resultado\":\"OK\",\"mensaje\":\"Registro almacenado correctamente\"}";
 			out.println(result);
 			
 		}else{

@@ -55,11 +55,13 @@ public class CalculosVET extends HttpServlet {
 		String idCE = validar_numero(request.getParameter("ID"));
 		String accion = validar_vacio(request.getParameter("a")); //accion
 		String result="{\"resultado\":\"error\"}";
-		System.out.println("accion:"+accion);
+		
 		
 		if(accion.equalsIgnoreCase("CargarTallaPeso")){
 			Conexion query = new Conexion();
 			result=query.ObtenerMedidaPaciente(idCE);
+			result+=query.ObtenerRegistrosCalculosVET(idCE)+"}";
+			//System.out.println(result);
 			misession.setAttribute("idCE2", idCE);
 			out.println(result);
 			
@@ -67,6 +69,27 @@ public class CalculosVET extends HttpServlet {
 			Conexion query = new Conexion();
 			result=query.CargaCalculosVET(idCE);
 			out.println(result);
+		}else if(accion.equalsIgnoreCase("eliminar")){
+			
+			String IdBorrar=request.getParameter("ID");
+			String sql = "delete from CALCULOS_VET where idCALCULOS_VET="+IdBorrar+"; ";
+
+			String result2="";
+			
+			try {
+				Conexion consulta = new Conexion();
+				consulta.Eliminar(sql); 
+				result2="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
+				//System.out.println("resultado eliminar:");
+			} catch (Exception e) {
+				e.printStackTrace();
+				result2="{\"resultado\":\"Error\",\"mensaje\":\"Error al eliminiar\"}";
+			}
+			
+			
+			//System.out.println(result);
+			out.println(result2);
+			
 		}else if(accion.equalsIgnoreCase("modificar")){
 			String p1=request.getParameter("p1"); //peso
 			String p2=request.getParameter("p2"); //imc
@@ -92,7 +115,7 @@ public class CalculosVET extends HttpServlet {
 			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
 					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
-			System.out.println(cadena);
+			//System.out.println(cadena);
 			
 			String query="UPDATE CALCULOS_VET set peso="+p1+",imc="+p2+",ActividadFisica="+p3+",FormulaVet='"+p4+"',VET="+p5+",VETAF="+p6+",RBajoPeso="+p7+",RSobrePeso="+p8+",RObesidad="+p9+",carbohidrato="+p10+",proteina="+p11+",grasa="+p12+",placteosg="+p13+",placteoe="+p14+",pvegetal="+p15+",pfruta="+p16+",pcereal="+p17+",pcarne="+p18+",pgrasa="+p19+",pazucar="+p20 +
 					" where idCALCULOS_VET="+idCE;
@@ -100,7 +123,7 @@ public class CalculosVET extends HttpServlet {
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
 			}
 			
 			out.println(result);
@@ -112,6 +135,7 @@ public class CalculosVET extends HttpServlet {
 			
 			misession.setAttribute("idCE2", idCE);
 			
+			String p0=request.getParameter("p0"); //usuario
 			String p1=request.getParameter("p1"); //peso
 			String p2=request.getParameter("p2"); //imc
 			String p3=request.getParameter("p3"); //actividad fisica
@@ -133,18 +157,18 @@ public class CalculosVET extends HttpServlet {
 			String p19=request.getParameter("p19"); //grasa
 			String p20=request.getParameter("p20"); //azucar
 			
-			String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
-					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
-					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
-			System.out.println(cadena);
+			//String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
+				//	+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
+					//+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
+			//System.out.println(cadena);
 			
-			String query="insert into CALCULOS_VET(fecha, peso, imc, ActividadFisica, FormulaVet, VET, VETAF, RBajoPeso, RSobrePeso, RObesidad, carbohidrato, proteina, grasa, placteosg, placteoe, pvegetal, pfruta, pcereal, pcarne, pgrasa, pazucar, CONSULTA_EXTERNA_idCONSULTA_EXTERNA) " 
-					+"VALUES(CURDATE(),"+p1+","+p2+","+p3+",'"+p4+"',"+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+","+p13+","+p14+","+p15+","+p16+","+p17+","+p18+","+p19+","+p20+","+idCE+");";
+			String query="insert into CALCULOS_VET(fecha, peso, imc, ActividadFisica, FormulaVet, VET, VETAF, RBajoPeso, RSobrePeso, RObesidad, carbohidrato, proteina, grasa, placteosg, placteoe, pvegetal, pfruta, pcereal, pcarne, pgrasa, pazucar, CONSULTA_EXTERNA_idCONSULTA_EXTERNA,USUARIO_idUSUARIO) " 
+					+"VALUES(CURDATE(),"+p1+","+p2+","+p3+",'"+p4+"',"+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+","+p13+","+p14+","+p15+","+p16+","+p17+","+p18+","+p19+","+p20+","+idCE+","+p0+");";
 			
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro almacenado correctamente\"}";
 			}
 			
 			out.println(result);
