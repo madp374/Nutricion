@@ -4,11 +4,21 @@
 <html>
 
         <head>
-        <meta charset="utf-8">
+       
        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
   
  
         
@@ -196,28 +206,22 @@
 </header>
         <div class="row col-sm-12">
         
-        <nav class="col-sm-3">
+       <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://10.50.50.54/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
 				
-				<li><a href="http://10.50.50.54/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
         </li>
         </ul>
         </nav>
@@ -252,11 +256,10 @@
 	  </div>
 	  &nbsp;
 	  <div class="form-group">
-		  <label for="TipoExame">Tipo de Examen</label><select class="form-control input-sm" id="TipoExamen">
-								<option value="1">Ingreso</option>
-								<option value="2">Reingreso</option>
-							</select>
+		  <label for="TipoExame">Tipo de Examen</label>
+		  <p id="TipoExame1"></p>
 	  </div>
+	  
   
   <div id="mensaje1" >
 </div>
@@ -281,6 +284,11 @@
     <label for=LNombre>Fecha de Nacimiento</label>
     <input class="form-control input-sm" type="text"  name="fechaNac" id="fechaNac" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD"  onkeyup="ValidarFecha()" />
 </div>
+ <script>
+  $( function() {
+    $( "#fechaNac" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>
 &nbsp;
 <div class="form-group">
     <label for=LNombre>Facultad/Dependencia</label>
@@ -314,11 +322,7 @@
 </div>
  
   </div> 
-    <script>
-  $( function() {
-    $( "#fechaNac" ).datepicker({ dateFormat: 'yy-mm-dd' });
-  } );
-  </script>
+   
 <div class="row" align="center">
 	  <div id="TablaEncargado"></div>
 </div> 
@@ -606,7 +610,7 @@ document.getElementById('carnet').onkeydown = function (e) {
                 		
                 		if(PerfilSesion=="nutri"){
             				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
-            			
+            				CargaTiposExamen();
             			}else{
             				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
             			}
@@ -672,8 +676,8 @@ document.getElementById('carnet').onkeydown = function (e) {
         	        		document.getElementById('subescapular').value  = data.subescapular;
         	        		document.getElementById('abdomen').value  = data.abdomen;
         	        		
-        	        		
-        	        		CargaIMC(data.talla,data.peso);
+        	        		var auxpeso=parseFloat(data.peso)*(0.453592);
+        	        		CargaIMC(data.talla,auxpeso);
         	        		CargaPliegues(data.tricipital,data.subescapular);
         	        		IDMulti=MID;
         	        		Bloqueo(data.USER,data.fecha,data.nombre,data.area);
@@ -1214,6 +1218,46 @@ document.getElementById('carnet').onkeydown = function (e) {
     	});
     }
     
+    function CargaTiposExamen(){
+		
+			
+			var action="cargaexamen";
+    		var cadena = ['a='+action].join('&');
+
+
+    		$.ajax({
+    	        url: "../Multifasico",
+    	        data: cadena,
+    	  	    type: 'post',
+    	        dataType: 'json',
+    	        success: function(data){
+    	        	if(data.resultado=='OK'){
+    	        		//document.getElementById('enfe').value  = EnfeAux;
+    	        		//alert(data.total);
+    	        		AgregarTExamen(data.total,data);
+    	        		//AgregarEnfermedadTabla(EnfeAux);
+    	        		//document.getElementById('enfermedad').value  = "";
+    	        	}
+    	        	
+    	        	
+    	        	
+    	        }
+    		});
+		
+
+	}
+    function AgregarTExamen(total,data){
+    	document.getElementById("TipoExame1").innerHTML='';
+    	var marco='<select id="TipoExamen" class="form-control input-sm" >';
+    	var fin='</select>';
+    	var opcion='';
+    	for (j = 0; j < total; j++) {
+    		opcion+='<option value="'+data.Lista[j].idTIPO_EXAMEN+'">'+data.Lista[j].nombre+'</option>';
+    	}
+    	var resultado=marco+opcion+fin;
+    	
+    	document.getElementById("TipoExame1").innerHTML=resultado;
+    }
    
  </script>
         </body>

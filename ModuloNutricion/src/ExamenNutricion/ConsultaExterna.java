@@ -74,7 +74,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p17 = request.getParameter("p17");// Hora desayuno
 			//String p18 = request.getParameter("p18");// Tiempo Refaccion AM check %%% BORRAR
 			String p19 = request.getParameter("p19");// Hora refaccion AM
-			//String p20 = request.getParameter("p20");// Tiempo almuero check %%% BORRAR
+			String p20 = request.getParameter("p20");// Diagnostico
 			
 			String p21 = request.getParameter("p21");// Hora almuero
 			//String p22 = request.getParameter("p22");// Tiempo refaccion PM check %%% BORRAR
@@ -165,7 +165,7 @@ public class ConsultaExterna extends HttpServlet {
 			//System.out.println("++++++++++ ID Antropometria: "+IDAntropometria+"++++++++");
 			String IDRegistro=query.UltimoIDRegistro(p47,p48,p49,p50,p51,p52,p53);
 			//System.out.println("++++++++++ ID Registro: "+IDRegistro+"++++++++");
-			String IDConsultaExterna=query.RegistrarConsultaExterna(carnet,IDAntecedente,IDEstiloVida,IDHabitoAlimentario,IDAntropometria,IDRegistro,p100);
+			String IDConsultaExterna=query.RegistrarConsultaExterna(carnet,IDAntecedente,IDEstiloVida,IDHabitoAlimentario,IDAntropometria,IDRegistro,p100,p20);
 			
 			
 			//System.out.println("++++++++++ ID Consulta: "+IDConsultaExterna+"++++++++");
@@ -228,10 +228,21 @@ public class ConsultaExterna extends HttpServlet {
 	            
 	        }
 	        
+	        String p80 = request.getParameter("p80");// enfermedades
+	        String idenfermedad="";
+	        String[] EnfermedadArray = p80.split("%");
+	        for (int i = 0; i < EnfermedadArray.length; i++) {
+	        	if(EnfermedadArray[i].equals("")){}else{
+	        		idenfermedad="(SELECT idENFERMEDAD FROM ENFERMEDAD WHERE NOMBRE='"+EnfermedadArray[i]+"')";
+	        		consulta="INSERT INTO REGISTRO_ENFERMEDAD(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ENFERMEDAD_idENFERMEDAD) VALUES("+IDConsultaExterna+","+idenfermedad+")";
+	        		query.Insertar(consulta);
+	        	}
+	        }
+	        
 	        if(ResultadoInsertar.equals("0")){
 	        	HttpSession misession= request.getSession(true);
 	        	misession.setAttribute("idCE2", IDConsultaExterna);
-	        	result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\",\"mensaje\":\"Registro almacenado correctamente\"}";
+	        	result="{\"resultado\":\"OK\",\"ID\":\""+IDConsultaExterna+"\",\"mensaje\":\"Registro almacenado correctamente\",\"b\":\"1\"}";
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -259,7 +270,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p17 = request.getParameter("p17");// Hora desayuno
 			//String p18 = request.getParameter("p18");// Tiempo Refaccion AM check
 			String p19 = request.getParameter("p19");// Hora refaccion AM
-			//String p20 = request.getParameter("p20");// Tiempo almuero check
+			String p20 = request.getParameter("p20");// Diagnostico
 			
 			String p21 = request.getParameter("p21");// Hora almuero
 			//String p22 = request.getParameter("p22");// Tiempo refaccion PM check
@@ -347,6 +358,10 @@ public class ConsultaExterna extends HttpServlet {
 			+" WHERE idCONSULTA_EXTERNA="+ID+");";
 		
 		    ResultadoInsertar=con.InsertarRegistro(query3);
+		    
+		    query3="UPDATE CONSULTA_EXTERNA SET IMC='"+p20+"' WHERE idCONSULTA_EXTERNA="+ID;
+				
+				    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
 		    query3="UPDATE HABITO_ALIMENTO SET TDesayuno="+p33+", TRefaccion="+p34+", TAlmuerzo="+p35+",TRefaccionPM="+p24+" ,TCena="+p36+", NoVasoAgua="+p37+", AlimentoDaño='"+p38+"', AlimentoNoGusta='"+p39+"', AlimentoPreferido='"+p40+"'"
 				+" WHERE idHABITO_ALIMENTO=(SELECT HABITO_ALIMENTO_idHABITO_ALIMENTO"
@@ -443,9 +458,23 @@ public class ConsultaExterna extends HttpServlet {
 	        	}
 	            
 	        }
+	        query3="DELETE FROM REGISTRO_ENFERMEDAD WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+"; ";
+			
+		    ResultadoInsertar=con.InsertarRegistro(query3);
+	        String p80 = request.getParameter("p80");// enfermedades
+	        String consulta="";
+	        String idenfermedad="";
+	        String[] EnfermedadArray = p80.split("%");
+	        for (int i = 0; i < EnfermedadArray.length; i++) {
+	        	if(EnfermedadArray[i].equals("")){}else{
+	        		idenfermedad="(SELECT idENFERMEDAD FROM ENFERMEDAD WHERE NOMBRE='"+EnfermedadArray[i]+"')";
+	        		consulta="INSERT INTO REGISTRO_ENFERMEDAD(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ENFERMEDAD_idENFERMEDAD) VALUES("+ID+","+idenfermedad+")";
+	        		con.Insertar(consulta);
+	        	}
+	        }
 			
 			if(ResultadoInsertar.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\",\"b\":\"1\"}";
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -463,10 +492,11 @@ public class ConsultaExterna extends HttpServlet {
 			String AlF = con.CargaFrecComida(ID);
 			String Pac = con.DatosPacientejso(ID);
 			String Reco = con.CargarRecordatorio(ID);
+			String Enf = con.CargarListaEnfermedad(ID);
 			String aux="(SELECT PACIENTE_idPACIENTE FROM CONSULTA_EXTERNA WHERE idCONSULTA_EXTERNA="+ID+")";
 			String Regs =con.ObtenerRegistrosConsultaExterna(aux);
 			String fin="}";
-			result=cuerpo+Est+Tcom+AlF+Pac+Reco+Regs+fin;
+			result=cuerpo+Est+Tcom+AlF+Pac+Reco+Enf+Regs+fin;
 			//System.out.println(result);
 			HttpSession misession= request.getSession(true);
         	misession.setAttribute("idCE2", ID);
@@ -500,6 +530,10 @@ public class ConsultaExterna extends HttpServlet {
 			
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
+		    query3="DELETE FROM REGISTRO_ENFERMEDAD WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+"; ";
+			
+		    ResultadoInsertar=con.InsertarRegistro(query3);
+		    
 		    String IDCEX=con.ObtenerIDCEX(ID);
 		    
 		    query3="DELETE FROM CONSULTA_EXTERNA WHERE idCONSULTA_EXTERNA="+ID+"; ";
@@ -528,8 +562,10 @@ public class ConsultaExterna extends HttpServlet {
 			
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
+		    
+		    
 		    if(ResultadoInsertar.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\",\"b\":\"2\"}";
 			}else{
 				result=ResultadoInsertar;
 			}

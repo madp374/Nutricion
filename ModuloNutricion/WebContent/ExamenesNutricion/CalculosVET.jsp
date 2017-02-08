@@ -32,7 +32,7 @@
 			    padding: 6px 15px;
 			    }
 			.container {
-			    width: 75%;
+			    width: 80%;
 			    padding-top:15px;
 			}
 			.input-sm {
@@ -137,28 +137,22 @@
 </header>
         <div class="row col-sm-12">
         
-        <nav class="col-sm-2">
+      <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
 				
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://10.50.50.54/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
         </li>
         </ul>
         </nav>
@@ -167,7 +161,7 @@
         <div class="panel panel-default">
         
         <div class="panel-heading">
-        <h3 class="panel-title">Examen de Calculos VET</h3>
+        <h3 class="panel-title">Calculos VET</h3>
         </div>
         <div class="panel-body">
         
@@ -176,7 +170,34 @@
    <div class="panel panel-primary">
       <div class="panel-heading">Datos Generales</div>
       <div class="panel-body">
-      
+      		 <div class="row">  
+      		 	&nbsp;&nbsp;
+      		 	<div class="form-group">
+					<label  for="NCarnet">Carnet/Codigo Personal</label>
+					<input class="form-control input-sm" name="carnet" id="carnet" type="number" style="width: 110px;" readonly/>
+				  </div>
+				 &nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Nombre</label>
+				    <input class="form-control input-sm" type="text"  name="nombre" id="nombre"  readonly />
+				</div>
+				&nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Sexo</label>
+				    <input class="form-control input-sm" type="text"  name="sexo" id="sexo" style="width: 80px;"readonly  />
+				</div>
+				&nbsp;
+				<div class="form-group" >
+				    <label for=LNombre>Edad</label>
+				    <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 70px;" readonly  />
+				</div>
+				&nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Facultad/Dependencia</label>
+				    <input class="form-control input-sm" type="text"  name="facultad" id="facultad" style="width: 110px;"readonly  />
+				</div>
+				 
+				  </div> 
 	      	<div class="row">
 	      		&nbsp;&nbsp;
 				<div class="form-group">
@@ -231,32 +252,42 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Lvet">VET<br>&nbsp;</label>
-						<input class="form-control input-sm" id="vet" name="vet" type="number" step="any"  style="width: 70px;" onkeydown="CalculosVET(event)" required/>   
+						<input class="form-control input-sm" id="vet" name="vet" type="number" step="any"  style="width: 80px;" onkeydown="CalculosVET(event)" required/>   
 					</div>
 					&nbsp;
 					<div class="form-group">
 						<label for="Lveta">VET  + Actividad<br>fisica</label>
-						<input class="form-control input-sm" id="veta" name="veta" type="number" step="any"  style="width: 70px;" />   
+						<input class="form-control input-sm" id="veta" name="veta" type="number" step="any"  style="width: 80px;" />   
 					</div>
 				</div>
 				<div class="row">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>bajo peso</label>
-						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number"   style="width: 70px;" />   
+						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number"   style="width: 80px;" />   
 					</div>
 					&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>sobrepeso</label>
-						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"    style="width: 70px;" />   
+						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"    style="width: 80px;" />   
 					</div>
 				</div>
 				<div class="row">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>obesidad</label>
-						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"   style="width: 70px;" />   
+						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"   style="width: 80px;" />   
 					</div>
+					&nbsp;
+					<div class="form-group">
+							  <label for="Lformulavet">Tipo de dieta<br></label>
+							  					<select class="form-control input-sm" id="tdieta" name="tdieta" style="width: 100px;" onchange=CambioTDieta()>
+													<option value="0">Personalizado</option>
+													<option value="1">Dietas Estandarizadas</option>
+													<option value="2">Dietas Estandarizadas Hiperproteicas</option>
+													<option value="3">Dietas Estandarizadas Hipograsa</option>
+												</select>
+						  </div>
 				</div>
 			</div>
 			
@@ -288,12 +319,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo" type="number"   style="width: 65px;" readonly />             
+								  		Kcal <input class="form-control input-sm" id="KcalCarbo" name="KcalCarbo"    style="width: 65px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo" type="number"  style="width: 65px;" readonly />              
+								  		Gramos <input class="form-control input-sm" id="grsCarbo" name="grsCarbo"  style="width: 65px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -311,12 +342,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte" type="number"   style="width: 65px;" readonly />             
+								  		Kcal <input class="form-control input-sm" id="KcalProte" name="KcalProte"   style="width: 65px;" readonly />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte" type="number"  style="width: 65px;" readonly />              
+								  		Gramos <input class="form-control input-sm" id="grsProte" name="grsProte"   style="width: 65px;" readonly />              
 								  	</div>
 								</td>
 							</tr>
@@ -334,12 +365,12 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa" type="number"   style="width: 65px;" readonly  />             
+								  		Kcal <input class="form-control input-sm" id="KcalGrasa" name="KcalGrasa"    style="width: 65px;" readonly  />             
 								  	</div>
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa" type="number"    style="width: 65px;" readonly  />              
+								  		Gramos <input class="form-control input-sm" id="grsGrasa" name="grsGrasa"    style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 							</tr>
@@ -352,12 +383,12 @@
 								</td>
 								<td>
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="totalpor" name="totalpor" type="number"   style="width: 65px;" readonly  />              
+								  		%<input class="form-control input-sm" id="totalpor" name="totalpor"    style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 								<td>
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal" type="number"    style="width: 65px;" readonly  />              
+								  		Kcal<input class="form-control input-sm" id="totalKcal" name="totalKcal"     style="width: 65px;" readonly  />              
 								  	</div>
 								</td>
 								<td></td>
@@ -380,20 +411,32 @@
   <div class="panel panel-primary">
       <div class="panel-heading">Distribucion de porciones</div>
       <div class="panel-body">
-      
+  <div class="row" align="center">
+				  <div id="SelKcal"></div>
+			</div>     
   <div class="row">
   	<div class="form-group">
   		<div class="table-responsive">
-			<table class="table" width="90%" style="font-size:8pt;">  
+			<table class="table table-bordered" width="90%" style="font-size:8pt;">  
 				<thead>
-					<tr>
+					<tr align="center" >
+						<th colspan="6"></th>
+						<th colspan="5" align="center">Distribución en tiempos de comida</th>
+					</tr>
+					<tr >
 						<th>Grupo</th>
-						<th>&nbsp;</th>
+						<th>Porciones</th>
 						<th>&nbsp;</th>
 						<th>Proteinas</th>
 						<th>Carbohidratos</th>
 						<th>Grasas</th>
+						<th>Des</th>
+						<th>Ref</th>
+						<th>Alm</th>
+						<th>Ref</th>
+						<th>Cen</th>
 					</tr>
+					
 				</thead>
 				<tbody>
 					<tr>
@@ -405,27 +448,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porLacteoSG" name="porLacteoSG" type="number"   style="width: 65px;" onkeydown="CalculoLacteoSinGrasa(event)" />                  
+										&nbsp;<br>
+								  		<input class="form-control input-sm" id="porLacteoSG" name="porLacteoSG" type="number"   style="width: 50px;" onkeydown="CalculoLacteoSinGrasa(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalLacteoSG" name="KcalLacteoSG" type="number"    style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalLacteoSG" name="KcalLacteoSG"     style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteLacteoSG" name="ProteLacteoSG" type="number"    style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteLacteoSG" name="ProteLacteoSG"    style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboLacteoSG" name="CarboLacteoSG" type="number"   style="width: 65px;" readonly  />                  
+										&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboLacteoSG" name="CarboLacteoSG"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaLacteoSG" name="GrasaLacteoSG" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaLacteoSG" name="GrasaLacteoSG"    style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+										&nbsp;<br>
+								  		<input class="form-control input-sm" id="de1" name="de1"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra1',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra1" name="ra1"  type="number"  style="width: 50px;" onkeydown="desplazarse('az1',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az1" name="az1"  type="number"  style="width: 50px;"  onkeydown="desplazarse('rp1',event)" />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp1" name="rp1"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce1',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce1" name="ce1"  type="number"  style="width: 50px;"  onkeydown="desplazarse('de2',event)" />                  
 								  	</div>
 						</td>
 					</tr>
@@ -438,27 +512,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porLacteoE" name="porLacteoE" type="number"   style="width: 65px;" onkeydown="CalculoLacteoEntero(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porLacteoE" name="porLacteoE" type="number"   style="width: 50px;" onkeydown="CalculoLacteoEntero(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalLacteoE" name="KcalLacteoE" type="number"   style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalLacteoE" name="KcalLacteoE"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteLacteoE" name="ProteLacteoE" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteLacteoE" name="ProteLacteoE"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboLacteoE" name="CarboLacteoE" type="number"   style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboLacteoE" name="CarboLacteoE"    style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaLacteoE" name="GrasaLacteoE" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaLacteoE" name="GrasaLacteoE"   style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de2" name="de2"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra2',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra2" name="ra2"  type="number"  style="width: 50px;" onkeydown="desplazarse('az2',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az2" name="az2"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp2',event)"   />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp2" name="rp2"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce2',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce2" name="ce2"  type="number"  style="width: 50px;" onkeydown="desplazarse('de3',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -471,27 +576,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porVege" name="porVege" type="number"   style="width: 65px;" onkeydown="CalculoVegetal(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porVege" name="porVege" type="number"   style="width: 50px;" onkeydown="CalculoVegetal(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalVege" name="KcalVege" type="number"   style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalVege" name="KcalVege"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteVege" name="ProteVege" type="number"    style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteVege" name="ProteVege"    style="width:40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboVege" name="CarboVege" type="number"    style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboVege" name="CarboVege"     style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaVege" name="GrasaVege" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaVege" name="GrasaVege"   style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de3" name="de3"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra3',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra3" name="ra3"  type="number"  style="width: 50px;" onkeydown="desplazarse('az3',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az3" name="az3"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp3',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp3" name="rp3"  type="number"  style="width: 50px;"  onkeydown="desplazarse('ce3',event)" />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce3" name="ce3"  type="number"  style="width: 50px;" onkeydown="desplazarse('de4',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -504,27 +640,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porFruta" name="porFruta" type="number"   style="width: 65px;" onkeydown="CalculoFruta(event)"/>                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porFruta" name="porFruta" type="number"   style="width: 50px;" onkeydown="CalculoFruta(event)"/>                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalFruta" name="KcalFruta" type="number"  style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalFruta" name="KcalFruta"  style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteFruta" name="ProteFruta" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteFruta" name="ProteFruta"   style="width:40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboFruta" name="CarboFruta" type="number"   style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboFruta" name="CarboFruta"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaFruta" name="GrasaFruta" type="number"  style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaFruta" name="GrasaFruta"  style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de4" name="de4"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra4',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra4" name="ra4"  type="number"  style="width: 50px;" onkeydown="desplazarse('az4',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az4" name="az4"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp4',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp4" name="rp4"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce4',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce4" name="ce4"  type="number"  style="width: 50px;" onkeydown="desplazarse('de5',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -537,27 +704,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porCereal" name="porCereal" type="number"   style="width: 65px;" onkeydown="CalculoCereal(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porCereal" name="porCereal" type="number"   style="width: 50px;" onkeydown="CalculoCereal(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalCereal" name="KcalCereal" type="number"   style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalCereal" name="KcalCereal"  style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteCereal" name="ProteCereal" type="number"    style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteCereal" name="ProteCereal"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboCereal" name="CarboCereal" type="number"    style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboCereal" name="CarboCereal"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaCereal" name="GrasaCereal" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaCereal" name="GrasaCereal"   style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de5" name="de5"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra5',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra5" name="ra5"  type="number"  style="width: 50px;" onkeydown="desplazarse('az5',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az5" name="az5"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp5',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp5" name="rp5"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce5',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce5" name="ce5"  type="number"  style="width: 50px;" onkeydown="desplazarse('de6',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -570,27 +768,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porCarne" name="porCarne" type="number"   style="width: 65px;" onkeydown="CalculoCarne(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porCarne" name="porCarne" type="number"   style="width: 50px;" onkeydown="CalculoCarne(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalCarne" name="KcalCarne" type="number"   style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalCarne" name="KcalCarne"  style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteCarne" name="ProteCarne" type="number"    style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteCarne" name="ProteCarne"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboCarne" name="CarboCarne" type="number"    style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboCarne" name="CarboCarne"  style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaCarne" name="GrasaCarne" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaCarne" name="GrasaCarne"  style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de6" name="de6"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra6',event)"   />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra6" name="ra6"  type="number"  style="width: 50px;" onkeydown="desplazarse('az6',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az6" name="az6"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp6',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp6" name="rp6"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce6',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce6" name="ce6"  type="number"  style="width: 50px;" onkeydown="desplazarse('de7',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -603,27 +832,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porGrasa1" name="porGrasa1" type="number"  style="width: 65px;" onkeydown="CalculoGrasa1(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porGrasa1" name="porGrasa1" type="number"  style="width: 50px;" onkeydown="CalculoGrasa1(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalGrasa1" name="KcalGrasa1" type="number"    style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalGrasa1" name="KcalGrasa1"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteGrasa1" name="ProteGrasa1" type="number"    style="width: 65px;" readonly />                  
+								  		grs<input class="form-control input-sm" id="ProteGrasa1" name="ProteGrasa1"  style="width: 40px;" readonly />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboGrasa1" name="CarboGrasa1" type="number"   style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboGrasa1" name="CarboGrasa1"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaGrasa1" name="GrasaGrasa1" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaGrasa1" name="GrasaGrasa1"  style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de7" name="de7"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra7',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra7" name="ra7"  type="number"  style="width: 50px;" onkeydown="desplazarse('az7',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az7" name="az7"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp7',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp7" name="rp7"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce7',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce7" name="ce7"  type="number"  style="width: 50px;" onkeydown="desplazarse('de8',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -636,27 +896,58 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Porciones<input class="form-control input-sm" id="porAzucar" name="porAzucar" type="number"   style="width: 65px;" onkeydown="CalculoAzucar(event)" />                  
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="porAzucar" name="porAzucar" type="number"   style="width: 50px;" onkeydown="CalculoAzucar(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Kcal<input class="form-control input-sm" id="KcalAzucar" name="KcalAzucar" type="number"   style="width: 65px;" readonly  />                  
+								  		Kcal<input class="form-control input-sm" id="KcalAzucar" name="KcalAzucar"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="ProteAzucar" name="ProteAzucar" type="number"   style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="ProteAzucar" name="ProteAzucar"   style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="CarboAzucar" name="CarboAzucar" type="number"    style="width: 65px;" readonly  />                  
+								  		&nbsp;&nbsp;&nbsp;&nbsp;grs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="CarboAzucar" name="CarboAzucar"    style="width: 40px;" readonly  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		grs<input class="form-control input-sm" id="GrasaAzucar" name="GrasaAzucar" type="number"    style="width: 65px;" readonly  />                  
+								  		grs<input class="form-control input-sm" id="GrasaAzucar" name="GrasaAzucar"    style="width: 40px;" readonly  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="de8" name="de8"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra8',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ra8" name="ra8"  type="number"  style="width: 50px;" onkeydown="desplazarse('az8',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="az8" name="az8"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp8',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="rp8" name="rp8"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce8',event)"  />                  
+								  	</div>
+						</td>
+						<td align="center">
+									<div class="form-group">
+									&nbsp;<br>
+								  		<input class="form-control input-sm" id="ce8" name="ce8"  type="number"  style="width: 50px;"   />                  
 								  	</div>
 						</td>
 					</tr>
@@ -671,22 +962,22 @@
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TKcal" name="TKcal" type="number"   style="width: 65px;" readonly  />                 
+								  		Total<input class="form-control input-sm" id="TKcal" name="TKcal"  style="width: 50px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TProte" name="TProte" type="number"   style="width: 65px;" readonly  />                 
+								  		Total<input class="form-control input-sm" id="TProte" name="TProte"   style="width: 40px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TCarbo" name="TCarbo" type="number"    style="width: 65px;" readonly  />                 
+								  		&nbsp;&nbsp;&nbsp;&nbsp;Total&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="TCarbo" name="TCarbo"    style="width: 40px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		Total<input class="form-control input-sm" id="TGrasa" name="TGrasa" type="number"   style="width: 65px;" readonly  />                
+								  		Total<input class="form-control input-sm" id="TGrasa" name="TGrasa"   style="width: 40px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
@@ -700,17 +991,17 @@
 						
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpProte" name="TpProte" type="number"   style="width: 80px;" readonly  />                 
+								  		%<input class="form-control input-sm" id="TpProte" name="TpProte"   style="width: 45px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpCarbo" name="TpCarbo" type="number"    style="width: 80px;" readonly  />                 
+								  		&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="TpCarbo" name="TpCarbo"    style="width: 45px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa" type="number"    style="width: 80px;" readonly  />                
+								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa"  style="width: 45px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
@@ -730,7 +1021,7 @@
   </br>
           <div class="row" align="center" id="Guard" >
       		<div class="form-group" >			
-							<button class="btn btn-default" onclick="Guardar()" >
+							<button class="btn btn-default" id="gu1" onclick="Guardar()" >
 						     <img src="../imagenes/guardado.png" width="40" height="30" title="Guardar" />Guardar</button>
 							
 			</div>
@@ -916,6 +1207,15 @@
 		        	//idCE=data.idCE;
 		        	SexoVET=data.sexo;
 		        	EdadVET=parseInt(data.edad);
+		        	LlenarDistribucion(data.dist,data.total);
+		        	if(data.dieta!="0"){
+		        		document.getElementById("tdieta").value = data.dieta;
+		        		var action="CargaDieta";
+		        		var cadena = ['ID='+ data.dieta,'a='+action].join('&');
+		        		CargaDietas(cadena,data.distribucion);
+		        	}else{
+		        		document.getElementById("tdieta").value = "0";
+		        	}
 		        	Bloqueo(data.USR7,data.fecha,data.nombre,data.rol);
 	        	}else{
 	        		alert("Error al cargar");
@@ -924,6 +1224,23 @@
 	        }
 		});
 	}
+  	function LlenarDistribucion(data,total){
+  		if(total!=0){
+			for(i=0;i<total;i++){
+				if(data[i].comida=="Almuerzo"){
+					document.getElementById("az"+data[i].Grupo).value = data[i].porcion;
+				}else if(data[i].comida=="Cena"){
+					document.getElementById("ce"+data[i].Grupo).value = data[i].porcion;
+				}else if(data[i].comida=="Desayuno"){
+					document.getElementById("de"+data[i].Grupo).value = data[i].porcion;
+				}else if(data[i].comida=="Refaccion AM"){
+					document.getElementById("ra"+data[i].Grupo).value = data[i].porcion;
+				}else if(data[i].comida=="Refaccion PM"){
+					document.getElementById("rp"+data[i].Grupo).value = data[i].porcion;
+				}
+			}
+		}
+  	}
   	function Bloqueo(ID,fecha,nomb,area){
 		var encabCom="";
 		var marco="<div class=\"table-responsive\"><table class=\"table-bordered\" border=\"1px\" width=\"80%\" >";
@@ -998,6 +1315,11 @@
 	  	    type: 'post',
 	        dataType: 'json',
 	        success: function(data){
+	        	document.getElementById('carnet').value=data.idPACIENTE;
+	        	document.getElementById('nombre').value=data.nombre;
+	        	document.getElementById('edad').value=data.edad;
+	        	document.getElementById('sexo').value=data.sexo;
+	        	document.getElementById('facultad').value=data.facultad;
 	        	talla=parseFloat(data.talla);
 	        	document.getElementById('peso').value  = data.peso;
 	        	pesoL=parseFloat(data.peso)*(0.453592);
@@ -1018,7 +1340,7 @@
 			}
 		}
 		var fin='</select></div>'
-		var exa='<div class="form-group"><label for="TipoExame">Tipo de Examen</label><select class="form-control input-sm" id="TipoExamen" onchange=CambioConsulta()><option value="1">Reconsulta</option><option value="2">Primera consulta</option></select></div>';
+		var exa='<div class="form-group"><label for="TipoExame">Tipo de consulta</label><select class="form-control input-sm" id="TipoExamen" onchange=CambioConsulta()><option value="1">Reconsulta</option><option value="2">Primera consulta</option></select></div>';
 		var componente=marcodiv+opciones+fin+exa;
 		document.getElementById("RegMulti").innerHTML =componente;
 		document.getElementById("peso").focus();
@@ -1094,12 +1416,72 @@
 		var variable19=validar_numerovacio("porGrasa1");
 		var variable20=validar_numerovacio("porAzucar");
 		
+		var variable21=validar_numerovacio("tdieta");
+		
+		
+		var variable22="";
+		if(variable21!=0){
+			variable22=validar_vacio("RSKcal");
+		}
+		var variable30=validar_numerovacio("de1");
+		var variable31=validar_numerovacio("ra1");
+		var variable32=validar_numerovacio("az1");
+		var variable33=validar_numerovacio("rp1");
+		var variable34=validar_numerovacio("ce1");
+		var variable35=validar_numerovacio("de2");
+		var variable36=validar_numerovacio("ra2");
+		var variable37=validar_numerovacio("az2");
+		var variable38=validar_numerovacio("rp2");
+		var variable39=validar_numerovacio("ce2");
+		
+		var variable40=validar_numerovacio("de3");
+		var variable41=validar_numerovacio("ra3");
+		var variable42=validar_numerovacio("az3");
+		var variable43=validar_numerovacio("rp3");
+		var variable44=validar_numerovacio("ce3");
+		var variable45=validar_numerovacio("de4");
+		var variable46=validar_numerovacio("ra4");
+		var variable47=validar_numerovacio("az4");
+		var variable48=validar_numerovacio("rp4");
+		var variable49=validar_numerovacio("ce4");
+		
+		var variable50=validar_numerovacio("de5");
+		var variable51=validar_numerovacio("ra5");
+		var variable52=validar_numerovacio("az5");
+		var variable53=validar_numerovacio("rp5");
+		var variable54=validar_numerovacio("ce5");
+		var variable55=validar_numerovacio("de6");
+		var variable56=validar_numerovacio("ra6");
+		var variable57=validar_numerovacio("az6");
+		var variable58=validar_numerovacio("rp6");
+		var variable59=validar_numerovacio("ce6");
+		
+		var variable60=validar_numerovacio("de7");
+		var variable61=validar_numerovacio("ra7");
+		var variable62=validar_numerovacio("az7");
+		var variable63=validar_numerovacio("rp7");
+		var variable64=validar_numerovacio("ce7");
+		var variable65=validar_numerovacio("de8");
+		var variable66=validar_numerovacio("ra8");
+		var variable67=validar_numerovacio("az8");
+		var variable68=validar_numerovacio("rp8");
+		var variable69=validar_numerovacio("ce8");
+		
 		if((idVET!=undefined)&&(idVET!="")&&(variable2!="0")){
 			var cadena = ['ID='+ idVET,'a='+action
 					      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
 					      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
 					      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
-					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
+					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20
+					      	,"p21="+variable21,"p22="+variable22
+					      	,"p30="+variable30,"p31="+variable31,"p32="+variable32,"p33="+variable33,"p34="+variable34
+					      	,"p35="+variable35,"p36="+variable36,"p37="+variable37,"p38="+variable38,"p39="+variable39
+					      	,"p40="+variable40,"p41="+variable41,"p42="+variable42,"p43="+variable43,"p44="+variable44
+					      	,"p45="+variable45,"p46="+variable46,"p47="+variable47,"p48="+variable48,"p49="+variable49
+					      	,"p50="+variable50,"p51="+variable51,"p52="+variable52,"p53="+variable53,"p54="+variable54
+					      	,"p55="+variable55,"p56="+variable56,"p57="+variable57,"p58="+variable58,"p59="+variable59
+					      	,"p60="+variable60,"p61="+variable61,"p62="+variable62,"p63="+variable63,"p64="+variable64
+					      	,"p65="+variable65,"p66="+variable66,"p67="+variable67,"p68="+variable68,"p69="+variable69].join('&');
 					enviar_datos(cadena);
 		}else{
 			alert("Error al guardar, revise que los campos esten completos");
@@ -1144,13 +1526,72 @@
 		var variable18=validar_numerovacio("porCarne");
 		var variable19=validar_numerovacio("porGrasa1");
 		var variable20=validar_numerovacio("porAzucar");
+		var variable21=validar_numerovacio("tdieta");
+		
+		
+		var variable22="";
+		if(variable21!=0){
+			variable22=validar_vacio("RSKcal");
+		}
+		var variable30=validar_numerovacio("de1");
+		var variable31=validar_numerovacio("ra1");
+		var variable32=validar_numerovacio("az1");
+		var variable33=validar_numerovacio("rp1");
+		var variable34=validar_numerovacio("ce1");
+		var variable35=validar_numerovacio("de2");
+		var variable36=validar_numerovacio("ra2");
+		var variable37=validar_numerovacio("az2");
+		var variable38=validar_numerovacio("rp2");
+		var variable39=validar_numerovacio("ce2");
+		
+		var variable40=validar_numerovacio("de3");
+		var variable41=validar_numerovacio("ra3");
+		var variable42=validar_numerovacio("az3");
+		var variable43=validar_numerovacio("rp3");
+		var variable44=validar_numerovacio("ce3");
+		var variable45=validar_numerovacio("de4");
+		var variable46=validar_numerovacio("ra4");
+		var variable47=validar_numerovacio("az4");
+		var variable48=validar_numerovacio("rp4");
+		var variable49=validar_numerovacio("ce4");
+		
+		var variable50=validar_numerovacio("de5");
+		var variable51=validar_numerovacio("ra5");
+		var variable52=validar_numerovacio("az5");
+		var variable53=validar_numerovacio("rp5");
+		var variable54=validar_numerovacio("ce5");
+		var variable55=validar_numerovacio("de6");
+		var variable56=validar_numerovacio("ra6");
+		var variable57=validar_numerovacio("az6");
+		var variable58=validar_numerovacio("rp6");
+		var variable59=validar_numerovacio("ce6");
+		
+		var variable60=validar_numerovacio("de7");
+		var variable61=validar_numerovacio("ra7");
+		var variable62=validar_numerovacio("az7");
+		var variable63=validar_numerovacio("rp7");
+		var variable64=validar_numerovacio("ce7");
+		var variable65=validar_numerovacio("de8");
+		var variable66=validar_numerovacio("ra8");
+		var variable67=validar_numerovacio("az8");
+		var variable68=validar_numerovacio("rp8");
+		var variable69=validar_numerovacio("ce8");
 		
 		if((idCE!=undefined)&&(idCE!="")&&(variable2!="0")){
 			var cadena = ['ID='+ idCE,'a='+action,'p0='+variable0
 					      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
 					      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
 					      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15
-					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20].join('&');
+					      	,"p16="+variable16,"p17="+variable17,"p18="+variable18,"p19="+variable19,"p20="+variable20
+					      	,"p21="+variable21,"p22="+variable22
+					      	,"p30="+variable30,"p31="+variable31,"p32="+variable32,"p33="+variable33,"p34="+variable34
+					      	,"p35="+variable35,"p36="+variable36,"p37="+variable37,"p38="+variable38,"p39="+variable39
+					      	,"p40="+variable40,"p41="+variable41,"p42="+variable42,"p43="+variable43,"p44="+variable44
+					      	,"p45="+variable45,"p46="+variable46,"p47="+variable47,"p48="+variable48,"p49="+variable49
+					      	,"p50="+variable50,"p51="+variable51,"p52="+variable52,"p53="+variable53,"p54="+variable54
+					      	,"p55="+variable55,"p56="+variable56,"p57="+variable57,"p58="+variable58,"p59="+variable59
+					      	,"p60="+variable60,"p61="+variable61,"p62="+variable62,"p63="+variable63,"p64="+variable64
+					      	,"p65="+variable65,"p66="+variable66,"p67="+variable67,"p68="+variable68,"p69="+variable69].join('&');
 					enviar_datos(cadena);
 		}else{
 			alert("Error al guardar, revise que los campos esten completos");
@@ -1210,10 +1651,29 @@
             return false;
         }
     };
+    document.getElementById('tdieta').onkeydown = function (e) {
+        if (e.which === 13) {
+        	var seleccion=document.getElementById("tdieta").value;
+        	if(seleccion=="0"){
+        		document.getElementById("porCarbo").focus();
+        	}else{
+        		document.getElementById("RSKcal").focus();
+        	}
+            
+            return false;
+        }
+    };
+    document.getElementById('ce8').onkeydown = function (e) {
+        if (e.which === 13) {
+            document.getElementById("gu1").focus();
+            return false;
+        }
+    };
     function CalculoAdecuacion(){
     	var TpProte=(parseFloat( validar_numerovacio('TProte'))/parseFloat( validar_numerovacio('grsProte')))*100;
     	var TpCarbo=(parseFloat( validar_numerovacio('TCarbo'))/parseFloat( validar_numerovacio('grsCarbo')))*100;
     	var TpGrasa=(parseFloat( validar_numerovacio('TGrasa'))/parseFloat( validar_numerovacio('grsGrasa')))*100;
+    	
     	
     	document.getElementById('TpProte').value=TpProte.toFixed(2);
     	document.getElementById('TpCarbo').value=TpCarbo.toFixed(2);
@@ -1238,8 +1698,8 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porAzucar').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*20;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*5;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*40;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*10;
     		ProteLacteoSG=parseFloat(porLacteoSG)*0;
     		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
     	}
@@ -1253,6 +1713,7 @@
         if(char == 13){
         	CalcAz();
         	AutoSumaTotales1();
+        	document.getElementById("de1").focus();
         }
     }
     function CalcGr(){
@@ -1287,10 +1748,10 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porCarne').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*65;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*75;
     		CarboLacteoSG=parseFloat(porLacteoSG)*0;
     		ProteLacteoSG=parseFloat(porLacteoSG)*7;
-    		GrasaLacteoSG=parseFloat(porLacteoSG)*4;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*5;
     	}
     	document.getElementById('KcalCarne').value=KcalLacteoSG;
     	document.getElementById('CarboCarne').value=CarboLacteoSG;
@@ -1312,10 +1773,10 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porCereal').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*75;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*14;
-    		ProteLacteoSG=parseFloat(porLacteoSG)*3;
-    		GrasaLacteoSG=parseFloat(porLacteoSG)*1;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*70;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*15;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*2;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
     	}
     	document.getElementById('KcalCereal').value=KcalLacteoSG;
     	document.getElementById('ProteCereal').value=ProteLacteoSG;
@@ -1337,8 +1798,8 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porFruta').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*80;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*20;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*60;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*15;
     		ProteLacteoSG=parseFloat(porLacteoSG)*0;
     		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
     	}
@@ -1362,9 +1823,9 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porVege').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*35;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*8;
-    		ProteLacteoSG=parseFloat(porLacteoSG)*1;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*25;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*4;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*2;
     		GrasaLacteoSG=parseFloat(porLacteoSG)*0;
     	}
     	document.getElementById('KcalVege').value=KcalLacteoSG;
@@ -1388,7 +1849,7 @@
     	var porLacteoSG = document.getElementById('porLacteoE').value;
     	if(porLacteoSG!=""){
     		KcalLacteoSG = parseFloat(porLacteoSG)*150;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*11;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*12;
     		ProteLacteoSG=parseFloat(porLacteoSG)*9;
     		GrasaLacteoSG=parseFloat(porLacteoSG)*8;
     	}
@@ -1412,10 +1873,10 @@
     	var GrasaLacteoSG=0;
     	var porLacteoSG = document.getElementById('porLacteoSG').value;
     	if(porLacteoSG!=""){
-    		KcalLacteoSG = parseFloat(porLacteoSG)*100;
-    		CarboLacteoSG=parseFloat(porLacteoSG)*11;
-    		ProteLacteoSG=parseFloat(porLacteoSG)*7;
-    		GrasaLacteoSG=parseFloat(porLacteoSG)*3;
+    		KcalLacteoSG = parseFloat(porLacteoSG)*95;
+    		CarboLacteoSG=parseFloat(porLacteoSG)*12;
+    		ProteLacteoSG=parseFloat(porLacteoSG)*9;
+    		GrasaLacteoSG=parseFloat(porLacteoSG)*2;
     	}
     	document.getElementById('KcalLacteoSG').value=KcalLacteoSG;
     	document.getElementById('CarboLacteoSG').value=CarboLacteoSG;
@@ -1474,7 +1935,13 @@
         if(char == 13){ 
         	CalcGrasa();
         	AutoSumaKcalPor();
-        	document.getElementById("porLacteoSG").focus();
+        	var seleccion=document.getElementById("tdieta").value;
+        	if(seleccion=="0"){
+        		document.getElementById("porLacteoSG").focus();
+        	}else{
+        		document.getElementById("RSKcal").focus();
+        	}
+        	
         }
     }
     function CalcProte(){
@@ -1558,7 +2025,7 @@
     	document.getElementById('ReadBP').value  = ReadBP.toFixed(2);
     	document.getElementById('ReadSP').value  = ReadSP.toFixed(2);
     	document.getElementById('ReadOb').value  = ReadOb.toFixed(2);
-    	
+    	document.getElementById("tdieta").focus();
     }
    	function CalcularVETMaxActivFisica(vet){
    		//var OpcionActividad=document.getElementById("ActividadFisica");
@@ -1585,9 +2052,9 @@
         	
         	if(OpcionFormula==1){ //Formula Harris Benedict
         		if(SexoVET=="Masculino"){
-        			VET= 66.47 + (13.75*PesoKG)+ (5*talla)- (6.66*EdadVET);
+        			VET= 66.47 + (13.75*PesoKG)+ (5*talla*100)- (6.66*EdadVET);
         		}else{//Femenino
-        			VET= 655.1 + (9.56*PesoKG)+ (1.85*talla)- (4.68*EdadVET);
+        			VET= 655.1 + (9.56*PesoKG)+ (1.85*talla*100)- (4.68*EdadVET);
         		}
         	}else{ // Formula Scofield
 				if(SexoVET=="Masculino"){
@@ -1595,10 +2062,10 @@
         				VET= (15.057*PesoKG) + 692.2;
 		
         			}else if(EdadVET >30 && EdadVET <61){
-        				VET= (11.472*PesoenKilogramos) + 873.1;
+        				VET= (11.472*PesoKG) + 873.1;
 			
         			}else if(EdadVET >59){
-        				VET= (11.711*PesoenKilogramos) + 587.7;
+        				VET= (11.711*PesoKG) + 587.7;
 
         			}
         		}else{//Femenino
@@ -1606,20 +2073,160 @@
         				VET= (14.818*PesoKG) + 486.6;
 
         			}else if(EdadVET >30 && EdadVET <61){
-        				VET= (8.126*PesoenKilogramos) + 845.6;
+        				VET= (8.126*PesoKG) + 845.6;
 
         			}else if(EdadVET >59){
-        				VET= (9.082*PesoenKilogramos) + 658.5;
+        				VET= (9.082*PesoKG) + 658.5;
         			}
         		}
         	}
         	document.getElementById('vet').value  = VET.toFixed(2);
         	CalcularVETMaxActivFisica(VET);
-        	document.getElementById("porCarbo").focus();
+        	document.getElementById("tdieta").focus();
         	
         }
     	
     }
+    function desplazarse(entrada,e){
+    	if (e.which === 13) {
+    		document.getElementById(entrada).focus();
+    	}
+    	
+    }
+    function CambioTDieta(){
+    	var seleccion=document.getElementById("tdieta").value;
+    	if(seleccion=="0"){
+    		document.getElementById("SelKcal").innerHTML="";
+    		document.getElementById('porCarbo').readOnly= false;
+    		document.getElementById('porProte').readOnly= false;
+    		document.getElementById('porGrasa').readOnly= false;
+    		
+    		document.getElementById("porCarbo").readOnly = false;
+        	document.getElementById("porProte").readOnly = false;
+        	document.getElementById("porGrasa").readOnly = false;
+        	document.getElementById("porLacteoSG").readOnly = false;
+        	document.getElementById("porLacteoE").readOnly = false;
+        	document.getElementById("porVege").readOnly = false;
+        	document.getElementById("porFruta").readOnly = false;
+        	document.getElementById("porCereal").readOnly = false;
+        	document.getElementById("porCarne").readOnly = false;
+        	document.getElementById("porGrasa1").readOnly = false;
+        	document.getElementById("porAzucar").readOnly = false;
+    	}else{
+    		var action="CargaDieta";
+    		var cadena = ['ID='+ seleccion,'a='+action].join('&');
+    		var se="-1";
+    		CargaDietas(cadena,se);
+    	}
+    	
+    }
+    function CargaDietas(datos,sel){
+		var resultado="";
+
+		$.ajax({
+	        url: "../CalculosVET",
+	        data: datos,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	if(data.resultado=='OK'){
+	        		document.getElementById('porCarbo').value  = data.carbo;
+	        		document.getElementById('porProte').value  = data.prote;
+	        		document.getElementById('porGrasa').value  = data.grasa;
+	        		
+	        		CalcCarbo();
+		        	CalcProte();
+		        	CalcGrasa();
+		        	AutoSumaKcalPor();
+		        	GenerarSelKcal(data.total,data.columna);
+					
+		        	document.getElementById('porCarbo').readOnly= true;
+	        		document.getElementById('porProte').readOnly= true;
+	        		document.getElementById('porGrasa').readOnly= true;
+	        		
+	        		document.getElementById("porCarbo").readOnly = true;
+		        	document.getElementById("porProte").readOnly = true;
+		        	document.getElementById("porGrasa").readOnly = true;
+		        	document.getElementById("porLacteoSG").readOnly = true;
+		        	document.getElementById("porLacteoE").readOnly = true;
+		        	document.getElementById("porVege").readOnly = true;
+		        	document.getElementById("porFruta").readOnly = true;
+		        	document.getElementById("porCereal").readOnly = true;
+		        	document.getElementById("porCarne").readOnly = true;
+		        	document.getElementById("porGrasa1").readOnly = true;
+		        	document.getElementById("porAzucar").readOnly = true;
+		        	if(sel!="-1"){
+		        		document.getElementById('RSKcal').value  = sel;
+		        	}
+	        	}
+	        	
+	        	
+	        }
+		});
+	}
+    function GenerarSelKcal(total,data){
+    	document.getElementById("SelKcal").innerHTML="";
+		var marcodiv='<div class="form-group">Distribucion Kcal<select class="form-control input-sm" id="RSKcal" onchange=CambioSelKcal()>';
+		var opciones='<option value=0></option>';
+		if(total!=0){
+			for(i=0;i<total;i++){
+				opciones+='<option value='+data[i].Kcal+'>'+data[i].Kcal+'</option>';
+			}
+		}
+		var fin='</select></div>'
+		var componente=marcodiv+opciones+fin;
+		document.getElementById("SelKcal").innerHTML =componente;
+		//document.getElementById("peso").focus();
+	}
+    
+    function CambioSelKcal(){
+    	var seleccion1=document.getElementById("tdieta").value;
+    	var seleccion2=document.getElementById("RSKcal").value;
+    	
+    	if(seleccion2!="0"){
+    		var action="CambiosKcalDieta";
+    		var cadena = ['ID='+ seleccion1,'Kcal='+seleccion2,'a='+action].join('&');
+    		CargaColumnaDieta(cadena);
+    	}
+    }
+    
+    function CargaColumnaDieta(datos){
+		var resultado="";
+
+		$.ajax({
+	        url: "../CalculosVET",
+	        data: datos,
+	  	    type: 'post',
+	        dataType: 'json',
+	        success: function(data){
+	        	if(data.resultado=='OK'){
+	        		document.getElementById("porLacteoSG").value = data.c1;
+		        	document.getElementById("porLacteoE").value = data.c2;
+		        	document.getElementById("porVege").value = data.c3;
+		        	document.getElementById("porFruta").value = data.c4;
+		        	document.getElementById("porCereal").value = data.c5;
+		        	document.getElementById("porCarne").value = data.c6;
+		        	document.getElementById("porGrasa1").value = data.c7;
+		        	document.getElementById("porAzucar").value = data.c8;
+		        	
+		        	CalcLSG();
+		        	CalcLE();
+		        	CalcVeg();
+		        	CalcFr();
+		        	CalcCer();
+		        	CalcCar();
+		        	CalcGr();
+		        	CalcAz();
+		        	AutoSumaTotales1();
+		        	
+		        	
+	        	}
+	        	
+	        	
+	        }
+		});
+	}
+    
     function VerRegistros(){
     	window.location.replace("/ModuloNutricion/TablasNutricion/RegistrosCalculosVET.jsp");
     }

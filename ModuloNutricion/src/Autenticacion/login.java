@@ -57,10 +57,15 @@ public class login extends HttpServlet {
 			if(mensaje.equalsIgnoreCase("0")){
 				response.sendRedirect("/ModuloNutricion/PortalSalud/InicioNutricion.jsp?e=false");
 			}else{
+				String aux[]=mensaje.split(",");
+				
+				mensaje=aux[0];
+				String NomUsuario=aux[1];
 				if(perfil==1){
 					//Nutricionista
 					misession.setAttribute("NUSUARIO", usuario);
 					misession.setAttribute("NIDSUARIO", mensaje);
+					misession.setAttribute("NomUsuario", NomUsuario);
 					misession.setAttribute("NPERFIL", "nutri");
 					response.sendRedirect("/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp");
 				}
@@ -68,6 +73,7 @@ public class login extends HttpServlet {
 					//Admin
 					misession.setAttribute("NUSUARIO", usuario);
 					misession.setAttribute("NIDSUARIO", mensaje);
+					misession.setAttribute("NomUsuario", NomUsuario);
 					misession.setAttribute("NPERFIL", "admi");
 					response.sendRedirect("/ModuloNutricion/Administracion/Usuario.jsp");
 				}

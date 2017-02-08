@@ -83,6 +83,22 @@
 			    background-color: #112D58;
 			    color:white;
 			}
+			.table-fixed thead {
+				  width: 97%;
+				 
+				}
+				.table-fixed tbody {
+				  height: 60px;
+				  overflow-y: auto;
+				  width: 100%;
+				}
+				.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+				  display: block;
+				}
+				.table-fixed tbody td, .table-fixed thead > tr> th {
+				  float: left;
+				  border-bottom-width: 0;
+				}
 		</style>
 		<style type="text/css">
 		label { display:block; margin:5px 0 5px; font-size:8pt; }
@@ -229,26 +245,20 @@ $(document).ready(function() {
         
         <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
 				
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
         </li>
         </ul>
         </nav>
@@ -262,7 +272,31 @@ $(document).ready(function() {
         <div class="panel-body">
         
  <form action="../ConsultaExterna" method="post" class="form-inline" role="form" onsubmit="return false">
-  
+  <div class="form-group">
+						    
+							
+							<div class="modal fade" id="VentanaNuevaEnfermedad" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Nueva Enfermedad</h4>
+							        </div>
+							        <div class="modal-body" align="center">
+							      		<h5>La enfermedad no esta registrada,<br>¿Desea crearlo?</h5>
+							      		<br>
+							          	
+								    
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="AñadirEnfermedad()" id="Guard6">Guardar</button>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+							
+						</div>
   <ul class="nav nav-tabs" >
     <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
     <li><a data-toggle="tab" href="#menu1">Pagina2</a></li>
@@ -365,21 +399,28 @@ $(document).ready(function() {
 	   
 				<div class="panel panel-primary">
 			      <div class="panel-heading">Antecedentes Medicos</div>
-			      <div class="panel-body" align="center" >
+			      <div class="panel-body"  >
+			      
+			      <div class="col-sm-5" >
+			      	<div id="TablaEnfermedad" class="row">
 			      	
+			      </div>
+			      <div class="row">
+				   <input class="form-control input-sm autocomplete" type="text"  name="enfermedad" id="enfermedad" maxlength="40" placeholder="Ingresar enfermedad" />            
+					</div>  	
+					  
+					</div>
 			      	<div class="row">
+			      	
+					  	&nbsp;
 					  	<div class="form-group">
-					  		<label for="Ltricipital">Enfermedades</label>
-					  		<textarea class="form-control input-sm" name="enfermedad" id="enfermedad" cols="20" rows="2" maxlength="240" ></textarea>
-					                   
-					  	</div>
-					  	<div class="form-group">
-					  		<label for="Lsubescapular">Medicamentos</label>
+					  		<label for="Lsubescapular" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Medicamentos</font></label>
 					  		<textarea class="form-control input-sm" name="medicamento" id="medicamento" cols="20" rows="2" maxlength="240"></textarea>
 					  		     
 					  	</div>
+					  	&nbsp;
 					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Suplementos</label>
+					  		<label for="Lsumapliegues" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Suplementos</font></label>
 					  		<textarea class="form-control input-sm" name="suplemento" id="suplemento" cols="20" rows="2" maxlength="240"></textarea>
 					  		
 					  	</div>
@@ -634,25 +675,27 @@ $(document).ready(function() {
 			
 				<div class="panel panel-primary">
 			      <div class="panel-heading">Otros</div>
-			      <div class="panel-body" align="center">
+			      <div class="panel-body" >
 			      
 			        <div class="row">
 					  	
-					  	
+					  	&nbsp;&nbsp;&nbsp;&nbsp;
 					  	<div class="form-group">
-					  		<label for="Lsubescapular">Alimentos que le hacen daño</label>
-					  		<textarea class="form-control input-sm" name="ald" id="ald" cols="20" rows="2" maxlength="240" ></textarea>
+					  		<label for="Lsubescapular" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Alimentos que le hacen daño</font></label>
+					  		<textarea class="form-control input-sm" name="ald" id="ald" cols="30" rows="2" maxlength="240" ></textarea>
 					            
 					  	</div>
+					  	&nbsp;
 					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Alimentos que no le gustan</label>
-					  		<textarea class="form-control input-sm" name="aln" id="aln" cols="20" rows="2" maxlength="240"></textarea>
+					  		<label for="Lsumapliegues" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Alimentos que no le gustan</font></label>
+					  		<textarea class="form-control input-sm" name="aln" id="aln" cols="30" rows="2" maxlength="240"></textarea>
 					        
 					  		
 					  	</div>
+					  	&nbsp;
 					  	<div class="form-group">
-					  		<label for="Lsumapliegues">Alimentos preferidos</label>
-					  		<textarea class="form-control input-sm" name="alp" id="alp" cols="20" rows="2" maxlength="240"></textarea>
+					  		<label for="Lsumapliegues" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Alimentos preferidos</font></label>
+					  		<textarea class="form-control input-sm" name="alp" id="alp" cols="30" rows="2" maxlength="240"></textarea>
 					        
 					  		
 					  	</div>
@@ -1254,6 +1297,10 @@ $(document).ready(function() {
 			</div>
 			</div>
 			<div class="row" align="center" id="Mod" >
+			<div class="form-group" >
+				<button class="btn btn-default" id="BtnVET1"  onclick="CalculosVET()" >
+				<img src="../imagenes/vet2.jpg" width="40" height="30" title="CalculosVET" />VET</button>	  
+			</div>
             <div class="form-group" >			
 							<button class="btn btn-default" onclick="Modificar()" id="BtnMod">
 						     <img src="../imagenes/guardado.png" width="40" height="30" title="Modificar" />Modificar</button>
@@ -1288,6 +1335,9 @@ $(document).ready(function() {
 		var IdUsuarioSesion = "null";
 		var PerfilSesion ="null";
 		var iniciarCarga=false;
+		
+		var Enfermed=[];
+		var econt=0;
         
 	document.getElementById('carnet').onkeydown = function (e) {
 	        	
@@ -1443,7 +1493,7 @@ $(document).ready(function() {
         	function CargaInicio() {
         		document.getElementById("NRegPacienteEncontrado").style.display = 'none';
         		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
-        		
+        		ActualizarTablaEnfermedad()
         		var MID = getUrlVars()["prodId"];
         		idCE = getUrlVars()["idCE"];
         		if(idCE!=undefined){
@@ -1527,7 +1577,7 @@ $(document).ready(function() {
         	        		document.getElementById("abdomen").value  = data.CinturaAbdominal;
         	        		document.getElementById("plan").value  = data.plan;
         	        		
-        	        		document.getElementById("enfermedad").value  = data.enfermedad_actual;
+        	        		//document.getElementById("enfermedad").value  = data.enfermedad_actual;
         	        		document.getElementById("medicamento").value  = data.medicamento;
         	        		document.getElementById("suplemento").value  = data.suplemento;
         	        		document.getElementById("diarrea").checked = AsignarCheck(data.diarrea);
@@ -1597,6 +1647,14 @@ $(document).ready(function() {
         	             		}
         	        			
         	        		}
+        	        		var aux2= parseInt(data.totalE);
+        	        		if(aux2!=0){
+        	        			for (i = 0; i < aux2; i++) { 
+        	        				Enfermed[i]=data.ListaEnf[i].Enombre;
+        	        				econt++;
+        	        			}
+        	        		}
+        	        		ActualizarTablaEnfermedad();
         	        		//CargaIMC(data.talla,data.peso);
         	        		//CargaPliegues(data.tricipital,data.subescapular);
         	        		//IDMulti=MID;
@@ -1619,6 +1677,7 @@ $(document).ready(function() {
         		        		document.getElementById('RMulti').value  = idCE;
         	    				document.getElementById("BtnRec").disabled = false;
         	        			document.getElementById("BtnVET").disabled = false;
+        	        			document.getElementById("BtnVET1").disabled = false;
         	        			document.getElementById("Guard").style.display = 'none';
         	        			document.getElementById("Mod").style.display = 'block';
         		        		document.getElementById("enfermedad").focus();
@@ -2030,7 +2089,6 @@ $(document).ready(function() {
         		document.getElementById("BtnRec").disabled = true;
     			document.getElementById("BtnVET").disabled = true;
     			
-    			
         	}
         	function CambioRegMulti(){
         		var valor=document.getElementById('RMulti').value;
@@ -2039,6 +2097,7 @@ $(document).ready(function() {
         			idCE=valor;
         			document.getElementById("BtnRec").disabled = false;
         			document.getElementById("BtnVET").disabled = false;
+        			document.getElementById("BtnVET1").disabled = false;
         			document.getElementById("Guard").style.display = 'none';
         			document.getElementById("Mod").style.display = 'block';
         			
@@ -2047,6 +2106,7 @@ $(document).ready(function() {
         		}else{
         			document.getElementById("BtnRec").disabled = true;
         			document.getElementById("BtnVET").disabled = true;
+        			document.getElementById("BtnVET1").disabled = true;
         			//document.getElementById("Examenes").style.display = 'none';
         			document.getElementById("Mod").style.display = 'none';
         			document.getElementById("Guard").style.display = 'block';
@@ -2058,6 +2118,7 @@ $(document).ready(function() {
         		}
         		}
         	function limpiar_datos(){
+        		
         		document.getElementById('enfermedad').value  = "";
     			document.getElementById('medicamento').value  = "";
     			document.getElementById('suplemento').value  = "";
@@ -2154,6 +2215,8 @@ $(document).ready(function() {
     	        ArrKcal=[];
     	        contp=0;
     	        idCE=0;
+    	        Enfermed=[];
+        		econt=0;
     	        habilitado=false;
     	        
     	        document.getElementById("TablaAlimento").innerHTML= "";
@@ -2171,11 +2234,11 @@ $(document).ready(function() {
     			document.getElementById('acidez').readOnly = false;
     			document.getElementById('estreñimiento').readOnly = false;
     			document.getElementById('fuma').readOnly = false;
-    			document.getElementById('ncigarro').readOnly = false;
+    			document.getElementById('ncigarro').readOnly = true;
     			document.getElementById('fumafrec').readOnly = false;
     			
     			document.getElementById('ejercicio').readOnly =false;
-    			document.getElementById('ejerciciotiempo').readOnly =false;
+    			document.getElementById('ejerciciotiempo').readOnly =true;
     			document.getElementById('ejerciciofrec').readOnly = false;
     			document.getElementById('bebidaalc').readOnly = false;
     			document.getElementById('bebidaalcfrec').readOnly = false;
@@ -2248,7 +2311,7 @@ $(document).ready(function() {
     			document.getElementById('alimento').readOnly = false;
     			document.getElementById('BtnATC').disabled = false;
     			
-    			
+    			ActualizarTablaEnfermedad();
     			//document.getElementById("Mod").style.display = 'none';
     			//document.getElementById("Guard").style.display = 'block';
     			//document.getElementById("BtnMod").disabled = false;
@@ -2334,10 +2397,16 @@ $(document).ready(function() {
                     		ERRORSQL=false;
                     		alert(data.mensaje);
             	        	//idCE=data.ID;
-            	        	document.getElementById("Guard").style.display = 'block';
-            	        	document.getElementById("Mod").style.display = 'none';
+            	        	if(data.b=="1"){
+            	        		idCE=data.ID;
+            	        		document.getElementById("Guard").style.display = 'none';
+                	        	document.getElementById("Mod").style.display = 'block';
+            	        	}else{
+            	        		window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp");
+            	        	}
+            	        	
                     		//MostrarMensajeServidor("Informacion almacenada con exito");
-                    		window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp");
+                    		
             	        	//limpiar_datos();
                     	}else{
                     		ERRORSQL=true;
@@ -2449,6 +2518,8 @@ $(document).ready(function() {
             		var variable45=validar_numerovacio("circunferencia");
             		var variable46=TextoSeleccion("constitucion");
             		
+            		var variable20=validad_vacio("diagnostico"); 
+            		
             		var variable47=validar_numerovacio("grasa");
             		var variable48=validar_numerovacio("pagua");
             		var variable49=validar_numerovacio("musculo");
@@ -2492,14 +2563,14 @@ $(document).ready(function() {
                 		variable74=validad_vacio('nombre1');
                 		variable75=validad_vacio('sexo1');
                 		variable76=validad_vacio('fechaNac');
-                		variable77=validad_vacio('Facultad');
+                		variable77=validad_vacio('facultad1');
                 	}
-            		
+            		var variable80= obtenerRegistroEnfermedad();
             		var cadena = [ 	'carnet='+ carnet,'a='+action
             			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
             			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
             			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
-            			         	  ,'p17='+variable17,'p19='+variable19,'p24='+variable24
+            			         	  ,'p17='+variable17,'p19='+variable19,'p20='+variable20,'p24='+variable24
             			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
             			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
             			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
@@ -2511,7 +2582,7 @@ $(document).ready(function() {
             			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
             			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
             			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
-                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100].join('&');
+                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100,'p80='+variable80].join('&');
             		
             	    enviar_datos(cadena);
             			         	
@@ -2583,7 +2654,7 @@ $(document).ready(function() {
             		var variable39=validad_vacio("aln");
             		var variable40=validad_vacio("alp");
 
-            		
+            		var variable20=validad_vacio("diagnostico"); 
             		var variable41=validad_vacio("dbaja");
             		var variable42=validad_vacio("dalta");
             		var variable43=validar_numerovacio("talla");
@@ -2635,12 +2706,12 @@ $(document).ready(function() {
                 		variable76=validad_vacio('fechaNac');
                 		variable77=validad_vacio('Facultad');
                 	}
-            		
+            		var variable80= obtenerRegistroEnfermedad();
             		var cadena = [ 	'ID='+idCE,'carnet='+ carnet,'a='+action
             			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
             			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
             			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
-            			         	  ,'p17='+variable17,'p19='+variable19,'p24='+variable24
+            			         	  ,'p17='+variable17,'p19='+variable19,'p24='+variable24,'p20='+variable20
             			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
             			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
             			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
@@ -2652,7 +2723,7 @@ $(document).ready(function() {
             			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
             			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
             			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
-                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77].join('&');
+                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p80='+variable80].join('&');
             		
             	    enviar_datos(cadena);
             			         	
@@ -2837,15 +2908,9 @@ $(document).ready(function() {
         		        	    type: 'GET',
         		              dataType: 'json',
         		              success: function(data){
-        		              	
-        		             
-        		              		
         		              		document.getElementById('alimento').value  = data.resultado[0].nombre;
         		        	        document.getElementById('calorias').value  = data.resultado[0].calorias;
-        		        	        document.getElementById("cantidada").focus();	 
-        		              		
-        		              	
-        		              	
+        		        	        document.getElementById("cantidada").focus();	              	
         		              }
         		          });
         		         // document.getElementById('alimento').value  = ui.item.value;
@@ -2853,7 +2918,22 @@ $(document).ready(function() {
         		          return false;
         		       }
         	    });
-        	    
+        		jQuery('#enfermedad').autocomplete({
+        			source : function(request, response) {
+        		           $.ajax({
+        		                url : "../Enfermedad",
+        		                type : "GET",
+        		                data : {
+        		                       term : request.term
+        		                },
+        		                dataType : "json",
+        		                success : function(data) {
+        		                      response(data);
+        		                }
+        		         });
+        		      },
+        		     
+        	    });
 
         	});
 
@@ -2928,15 +3008,7 @@ $(document).ready(function() {
         		}
         	   
         	}
-        	document.getElementById('enfermedad').onkeydown = function (e) {
-            	//alert(e.keyCode);
-        		if(e.keyCode == 13){
-        			
-            		document.getElementById("medicamento").focus();
-            		 return false;
-                   
-            	}
-            }
+        	
         	document.getElementById('medicamento').onkeydown = function (e) {
             	//alert(e.keyCode);
         		if(e.keyCode == 13){
@@ -3740,6 +3812,132 @@ $(document).ready(function() {
                 
                 }
             }
+            document.getElementById('enfermedad').onkeydown = function (e) {
+	        	
+	            if (e.which === 13) {
+	            	var enfes=document.getElementById('enfermedad').value;
+	            	if(enfes!=""){
+	            		VerificarEnferemedad(enfes);
+	            	}
+	            	
+	            	
+	                return false;
+	            }
+	        };
+	        function VerificarEnferemedad(Enfes){
+				var action="Existe";
+				var texto=Enfes.toLowerCase();
+	    		var cadena = ['a='+action,'enfs='+Enfes].join('&');
+
+
+	    		$.ajax({
+	    	        url: "../Enfermedad",
+	    	        data: cadena,
+	    	  	    type: 'post',
+	    	        dataType: 'json',
+	    	        success: function(data){
+	    	        	if(data.resultado=='OK'){
+	    	        		if(data.total=="0"){
+	    	        			//El alimento no existe
+	    	        			//document.getElementById('NuevoAl').value  = texto;
+	    	        			VentanaEnfermedad();
+	    	        			
+	    	        		}else{
+	    	        			//alert("existe");
+	    	        			AgregarEnfermedadTabla(texto);
+	    	        			document.getElementById('enfermedad').value  = "";
+	    	        		}	
+	    	        	}else{
+	    	        		alert("Error, al buscar el alimento en el servidor");
+	    	        	}
+	    	        	
+	    	        	
+	    	        	
+	    	        }
+	    		});
+			}
+	        function VentanaEnfermedad(){
+				 jQuery('#VentanaNuevaEnfermedad').modal("show");
+		    }	
+	        function AñadirEnfermedad(){
+        		var enfe=validad_vacio('enfermedad');
+        		if(enfe==""){
+        			alert("Error, faltan valores a ingresar");
+        		}else{
+        			var EnfeAux=enfe.toLowerCase();
+        			enfe=encodeURI(enfe);
+        			var action="agregar";
+            		var cadena = ['a='+action,'ef='+enfe].join('&');
+
+
+            		$.ajax({
+            	        url: "../Enfermedad",
+            	        data: cadena,
+            	  	    type: 'post',
+            	        dataType: 'json',
+            	        success: function(data){
+            	        	if(data.resultado=='OK'){
+            	        		//document.getElementById('enfe').value  = EnfeAux;
+            	        		//alert("registrado");
+            	        		AgregarEnfermedadTabla(EnfeAux);
+            	        		document.getElementById('enfermedad').value  = "";
+            	        	}
+            	        	
+            	        	
+            	        	
+            	        }
+            		});
+        		}
+
+        	}
+	        function AgregarEnfermedadTabla(nombre){
+	        	var enct=true;
+	        	for(j = 0; j <= econt; j++){
+	        		if(Enfermed[j]==nombre){
+	        			enct=false;
+	        		}
+	        	}
+	        	if(enct){
+	        		Enfermed[econt]=nombre;
+		        	econt++;
+		        	ActualizarTablaEnfermedad();
+	        	}
+	        	
+	        }
+	        function ActualizarTablaEnfermedad(){
+	        	document.getElementById("TablaEnfermedad").innerHTML= "";
+	        	var marco="<label style=\"background-color: #337ab7; margin: 0px 0 0px;\"><font color=\"white\">&nbsp;Enfermedad</font></label><div class=\"table-responsive\" style=\"font-size:8pt;\"><table class=\"table table-fixed\" border=\"1px\" width=\"100%\" style=\"border-color: #ccc;\" >";
+        	    var fintabla="</tbody></table></div>";
+        	    var aux="";
+        	    var encabezado="<tbody>";
+        	    for (j = 0; j < Enfermed.length; j++) {
+        	    	if(Enfermed[j]!=""){
+        	    		aux+="<tr>"
+           	    		 +"<td>"
+    					 +"<button class=\"btn btn-default btn-sm\" onclick=\"EliminarEnfe("+j+")\" style=\"font-size: 8px;\">"+Enfermed[j]
+    				     + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /> </button>"
+    				     +"</td></tr>";
+        	    	}
+        	    	
+        	    }
+        	    var resultados=marco+encabezado+aux+fintabla;
+        	    document.getElementById("TablaEnfermedad").innerHTML= resultados;
+	        }
+	        function EliminarEnfe(entrada){
+	        	Enfermed[entrada]="";
+	        	ActualizarTablaEnfermedad();
+	        }
+	        
+	        function obtenerRegistroEnfermedad(){
+        		var encabCom1="";
+        		for (i = 0; i < econt; i++) { 
+        			if(Enfermed[i]!=""){
+        				encabCom1 += "%"+Enfermed[i];
+        			}	
+        		}
+        		return encodeURIComponent(encabCom1);
+        	}
+	        
         	function Reconsulta(){
         		window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
         		//window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);

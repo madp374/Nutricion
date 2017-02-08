@@ -132,28 +132,22 @@
 </header>
         <div class="row col-sm-12">
         
- <nav class="col-sm-3">
+<nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
 				
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="http://10.50.50.54/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
         </li>
         </ul>
         </nav>
@@ -162,7 +156,7 @@
         <div class="panel panel-default">
         
         <div class="panel-heading">
-        <h3 class="panel-title">Examen de Reconsulta</h3>
+        <h3 class="panel-title">Reconsulta</h3>
         </div>
         <div class="panel-body">
         
@@ -170,23 +164,53 @@
    <article>
 <div class="panel panel-primary">
 	<div class="panel-heading">Datos Generales</div>
-		<div class="panel-body" align="center">
-			      	
-			<div class="row">
+		<div class="panel-body" >
+			 <div class="row">  
+      		 	&nbsp;&nbsp;
+      		 	<div class="form-group">
+					<label  for="NCarnet">Carnet/Codigo Personal</label>
+					<input class="form-control input-sm" name="carnet" id="carnet" type="number" style="width: 110px;" readonly/>
+				  </div>
+				 &nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Nombre</label>
+				    <input class="form-control input-sm" type="text"  name="nombre" id="nombre"  readonly />
+				</div>
+				&nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Sexo</label>
+				    <input class="form-control input-sm" type="text"  name="sexo" id="sexo" style="width: 80px;"readonly  />
+				</div>
+				&nbsp;
+				<div class="form-group" >
+				    <label for=LNombre>Edad</label>
+				    <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 70px;" readonly  />
+				</div>
+				</div>
+				<div class="row">
+				&nbsp;&nbsp;
+				<div class="form-group">
+				    <label for=LNombre>Facultad/Dependencia</label>
+				    <input class="form-control input-sm" type="text"  name="facultad" id="facultad" style="width: 110px;"readonly  />
+				</div>
+				 &nbsp;
+				 
 				<div class="form-group">
 				  
 					  <label for="LFecha">Fecha</label>
 					  <input class="form-control input-sm" id="fecha" type="text" style="width:80px" disabled/>
 				  </div>
+				  &nbsp;
+				  
 				  <div class="form-group">
 				  
-					  <label for="TipoExame">Tipo de Examen</label><select class="form-control input-sm" id="TipoExamen" onchange=CambioConsulta()>
+					  <label for="TipoExame">Tipo de consulta</label><select class="form-control input-sm" id="TipoExamen" onchange=CambioConsulta()>
 											<option value="1">Reconsulta</option>
 											<option value="2">Primera consulta</option>
 										</select>
 				  </div>
-				  
-			</div>
+				  </div>
+			
 			<div class="row" align="center">
 				  <div id="TablaEncargado"></div>
 			</div> 
@@ -439,12 +463,11 @@
         	        success: function(data){
         	        	if(data.resultado=='OK'){
         	        		document.getElementById('talla').value  = data.talla;
-        		        	pesoL=parseInt(data.peso);
+        		        	
         		        	document.getElementById('fecha').value  = data.fecha;
-        		        	document.getElementById('pesoL').value  = pesoL;
+        		        	document.getElementById('pesoL').value  = data.peso;
         		        	document.getElementById('imc').value  = data.IMC;
-        		        	document.getElementById('pesoG').value  = data.pesoganado;
-        		        	document.getElementById('pesoP').value  = data.pesoperdido;
+        		        	
         		        	document.getElementById('cintura').value  = data.cintura;
         		        	document.getElementById('pgrasa').value  = data.porcentajegrasa;
         		        	document.getElementById('pagua').value  = data.porcentajeagua;
@@ -456,7 +479,23 @@
         		        	document.getElementById('educacionalimentaria').value  = data.educacion;
         		        	//document.getElementById('TipoExamen').value  = data.TIPO_EXAMEN_idTIPO_EXAMEN;
         		        	idCE=data.CONSULTA_EXTERNA_idCONSULTA_EXTERNA;
+        		        	
+        		        	//pesoL=parseInt(data.peso);
+        		        	
+        		        	var auxPesoTraido=parseInt(data.peso);
+        		        	var auxPegoG=parseInt(data.pesoganado);
+        		        	var auxPesoP=parseInt(data.pesoperdido);
+        		        	
+        		        	if(auxPegoG!=0){
+        		        		pesoL=auxPesoTraido-auxPegoG;
+        		        	}
+        		        	if(auxPesoP!=0){
+        		        		pesoL=auxPesoTraido+auxPesoP;
+        		        	}
+        		        	
         		        	CalcIMC();	
+        		        	document.getElementById('pesoG').value  = data.pesoganado;
+        		        	document.getElementById('pesoP').value  = data.pesoperdido;
         		        	Bloqueo(data.USUARIO_idUSUARIO,data.fecha,data.nombre,data.rol);
         	        	}else{
         	        		alert("Error al cargar");
@@ -553,11 +592,13 @@
         		var variable14=validar_numerovacio("tratamiento");
         		var variable15=validar_numerovacio("educacionalimentaria");
         		
+        		var variable30=validar_vacio("Diag");
+        		
         		if((idRec!=undefined)&&(idRec!="")&&(variable2!="0")&&(variable3!="0")){
         			var cadena = ['ID='+ idRec,'a='+action
         	        		      	,"p1="+variable1,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
         	        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
-        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
+        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15,"p30="+variable30].join('&');
         	        		enviar_datos(cadena);
         		}
         		else{
@@ -597,11 +638,13 @@
         		var variable14=validar_numerovacio("tratamiento");
         		var variable15=validar_numerovacio("educacionalimentaria");
         		
+        		var variable30=validar_vacio("Diag");
+        		
         		if((idCE!=undefined)&&(idCE!="")&&(variable2!="0")&&(variable3!="0")){
         			var cadena = ['ID='+ idCE,'a='+action
         	        		      	,"p0="+variable0,"p2="+variable2,"p3="+variable3,"p4="+variable4,"p5="+variable5
         	        		      	,"p6="+variable6,"p7="+variable7,"p8="+variable8,"p9="+variable9,"p10="+variable10
-        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15].join('&');
+        	        		      	,"p11="+variable11,"p12="+variable12,"p13="+variable13,"p14="+variable14,"p15="+variable15,"p30="+variable30].join('&');
         	        		enviar_datos(cadena);
         		}
         		else{
@@ -640,6 +683,11 @@
     		  	    type: 'post',
     		        dataType: 'json',
     		        success: function(data){
+    		        	document.getElementById('carnet').value=data.idPACIENTE;
+    		        	document.getElementById('nombre').value=data.nombre;
+    		        	document.getElementById('edad').value=data.edad;
+    		        	document.getElementById('sexo').value=data.sexo;
+    		        	document.getElementById('facultad').value=data.facultad;
     		        	document.getElementById('talla').value  = data.talla;
     		        	pesoL=parseInt(data.peso);
     		        	idCE=data.idCE;

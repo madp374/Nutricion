@@ -66,7 +66,8 @@ public class Multifasico extends HttpServlet {
 		
 		String p8 = request.getParameter("p8");// subescapular
 		String p50 = request.getParameter("p10");// abdomen
-		String p9 = "(select idDIAGNOSTICO from DIAGNOSTICO where descripcion='"+request.getParameter("p9")+"')";// Diagnostico
+		String p15=request.getParameter("p9");//Diag
+		String p9 = "(select idDIAGNOSTICO from DIAGNOSTICO where descripcion='"+p15+"')";// Diagnostico
 		String p10 = request.getParameter("busqueda");// busqueda
 		String USRG = request.getParameter("p60");// busqueda
 		if(accion.equalsIgnoreCase("guardar")){
@@ -89,8 +90,8 @@ public class Multifasico extends HttpServlet {
 				
 				con.Insertar(query2);
 			}
-			String query="insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,abdomen,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE,USUARIO_idUSUARIO)"
-					+"values(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p50+","+p1+","+p9+","+carnet+","+USRG+");";
+			String query="insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,abdomen,imc1,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE,USUARIO_idUSUARIO)"
+					+"values(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p50+",'"+p15+"',"+p1+","+p9+","+carnet+","+USRG+");";
 			ResultadoInsertar=con.InsertarRegistro(query);
 			if(ResultadoInsertar.equals("0")){
 				result="{\"resultado\":\"OK\"}";
@@ -116,7 +117,7 @@ public class Multifasico extends HttpServlet {
 			//System.out.println("ID:"+ID);
 			Conexion con =new Conexion();
 			
-			String query3="update MULTIFASICO set talla="+p2+", peso="+p3+",IMC="+p4+",peso_ideal="+p5+",peso_maximo="+p6+",tricipital="+p7+",subescapular="+p8+",abdomen="+p50+",TIPO_EXAMEN_idTIPO_EXAMEN="+p1+",DIAGNOSTICO_idDIAGNOSTICO="+p9+" where idMULTIFASICO="+ID;
+			String query3="update MULTIFASICO set talla="+p2+", peso="+p3+",IMC="+p4+",peso_ideal="+p5+",peso_maximo="+p6+",tricipital="+p7+",subescapular="+p8+",abdomen="+p50+",TIPO_EXAMEN_idTIPO_EXAMEN="+p1+",DIAGNOSTICO_idDIAGNOSTICO="+p9+",imc1='"+p15+"' where idMULTIFASICO="+ID;
 			ResultadoInsertar=con.InsertarRegistro(query3);
 			if(ResultadoInsertar.equals("0")){
 				result="{\"resultado\":\"OK\"}";
@@ -139,6 +140,15 @@ public class Multifasico extends HttpServlet {
 			}else{
 				result=ResultadoInsertar;
 			}
+			out.println(result);
+		}else if(accion.equalsIgnoreCase("cargaexamen")){
+			PrintWriter out = response.getWriter();
+			
+			String result="";
+			Conexion con =new Conexion();
+			
+			result=con.CargarTipoExamen();
+			//System.out.println(result);
 			out.println(result);
 		}else{
 			//HttpSession misession2= (HttpSession) request.getSession();

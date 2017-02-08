@@ -165,6 +165,7 @@
 	        <ul>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a></li>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/Administracion/Reporte1.jsp"> <span class="glyphicon glyphicon-book"></span> Usuario </a></li>
 		    </ul>
          </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
@@ -178,6 +179,9 @@
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
 				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
+        </li>
+        <li> <a href="/ModuloNutricion/Administracion/Reporte3.jsp"> <span class="glyphicon glyphicon-book"></span> Reportes </a>
+   
         </li>
         </ul>
         </nav>
@@ -294,6 +298,11 @@
 
 <script type="text/javascript">
 var idUSUARIO=0;
+var UsuarioSesion = "null";
+var IdUsuarioSesion = "null";
+var PerfilSesion = "null"
+var NomUsuario="null";
+
 $("#flex1").flexigrid
 (
 {
@@ -362,6 +371,7 @@ function VerificarSesion(){
 	UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
 	IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
 	PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
+	NomUsuario = "<%=misession.getAttribute("NomUsuario")%>";
 	
 	if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
 		
@@ -374,6 +384,7 @@ function VerificarSesion(){
 			UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
     		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
     		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
+    		NomUsuario = getCookie(decodeURIComponent("CookieNomUsuario"));
     		
     		if(PerfilSesion=="admi"){
 				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>'
@@ -388,6 +399,7 @@ function VerificarSesion(){
 		document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
 		document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
 		document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
+		document.cookie = "CookieNomUsuario="+encodeURIComponent(NomUsuario);
 		
 		if(PerfilSesion=="admi"){
 			document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>'
@@ -401,20 +413,18 @@ function VerificarSesion(){
 }
 
 function CargaInicio(){
-	
-	
 	VerificarSesion();
-	
-	
 }
 function CerrarSesion(){
 	<%misession.setAttribute("NUSUARIO", "null");%>
     <%misession.setAttribute("NIDSUARIO", "null");%>
     <%misession.setAttribute("NPERFIL", "null");%>
+    <%misession.setAttribute("NomUsuario", "null");%>
         		
      document.cookie = "CookieUsuario=; max-age=0";
      document.cookie = "CookieIDUsuario=; max-age=0";
      document.cookie = "CookiePerfil=; max-age=0";
+     document.cookie = "CookieNomUsuario=; max-age=0";
 	
 	window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
 	

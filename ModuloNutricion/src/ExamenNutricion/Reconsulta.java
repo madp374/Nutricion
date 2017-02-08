@@ -59,7 +59,30 @@ public class Reconsulta extends HttpServlet {
 		//System.out.println("accion:"+accion);
 		if(accion.equalsIgnoreCase("CargarTallaPeso")){
 			Conexion query = new Conexion();
-			result=query.ObtenerTallaPeso(idCE);
+			
+			String consulta1="SELECT P.idPACIENTE,P.nombre,F.nombre,A.talla,A.peso,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo" 
+								+" FROM RECONSULTA A, CONSULTA_EXTERNA E, PACIENTE P, FACULTAD F"
+								+" where A.CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+idCE
+								+" AND A.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA"
+								+" AND E.PACIENTE_idPACIENTE=P.idPACIENTE"
+								+" AND P.FACULTAD_idFACULTAD=F.idFACULTAD"
+								+" ORDER BY A.idRECONSULTA DESC limit 1;";
+			result=query.ObtenerTallaPeso(consulta1,idCE);
+			
+			if(result.equalsIgnoreCase("0")){
+				String consulta2="select P.idPACIENTE,P.nombre,F.nombre,A.talla,A.peso,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo" 
+						+" from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P, FACULTAD F"
+						+" where E.PACIENTE_idPACIENTE=P.idPACIENTE"
+						+" AND E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA"
+						+" AND P.FACULTAD_idFACULTAD=F.idFACULTAD"
+						+" AND idCONSULTA_EXTERNA="+idCE;
+				
+				result=query.ObtenerTallaPeso(consulta2,idCE);
+			}
+			
+			
+			
+			
 			String regs=query.ObtenerRegistrosReconsulta(idCE);
 			result+=regs+"}";
 			misession.setAttribute("idCE1", idCE);
@@ -107,14 +130,14 @@ public class Reconsulta extends HttpServlet {
 			String p13=request.getParameter("p13"); //datos subjetivos
 			String p14=request.getParameter("p14"); //tratamiento
 			String p15=request.getParameter("p15"); //educacion alimentaria
-			
+			String p30=request.getParameter("p30"); //Diagnostico
 			//String cadena=idCE+","+accion+",p1:"+p1+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
 			//		+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 			//		+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
 			//System.out.println(cadena);
 			
 			String query="UPDATE RECONSULTA " 
-					+"SET talla="+p2+",peso="+p3+",IMC="+p4+",pesoganado="+p5+",pesoperdido="+p6+",cintura="+p7+",porcentajegrasa="+p8+",porcentajeagua="+p9+",grasavisceral="+p10+",masaosea="+p11+",vettanita="+p12+",datossubjetivos='"+p13+"',tratamiento='"+p14+"',educacion='"+p15+"' WHERE idRECONSULTA="+idCE;
+					+"SET talla="+p2+",peso="+p3+",IMC="+p4+",pesoganado="+p5+",pesoperdido="+p6+",cintura="+p7+",porcentajegrasa="+p8+",porcentajeagua="+p9+",grasavisceral="+p10+",masaosea="+p11+",vettanita="+p12+",datossubjetivos='"+p13+"',tratamiento='"+p14+"',educacion='"+p15+"',imc1='"+p30+"' WHERE idRECONSULTA="+idCE;
 			
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
@@ -141,14 +164,15 @@ public class Reconsulta extends HttpServlet {
 			String p13=request.getParameter("p13"); //datos subjetivos
 			String p14=request.getParameter("p14"); //tratamiento
 			String p15=request.getParameter("p15"); //educacion alimentaria
+			String p30=request.getParameter("p30"); //Diagnostico
 			
 			String cadena=idCE+","+accion+",p0:"+p0+",p2:"+p2+",p3:"+p3+",p4:"+p4+",p5:"+p5
 					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
-			System.out.println(cadena);
+			//System.out.println(cadena);
 			
-			String query="insert into RECONSULTA(fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, USUARIO_idUSUARIO) " 
-					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"',"+idCE+","+p0+");";
+			String query="insert into RECONSULTA(fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion,imc1, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, USUARIO_idUSUARIO) " 
+					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"','"+p30+"',"+idCE+","+p0+");";
 			
 			Conexion consulta = new Conexion();
 			consulta.Insertar(query);

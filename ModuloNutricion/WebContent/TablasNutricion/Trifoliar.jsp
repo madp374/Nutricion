@@ -38,6 +38,25 @@
 			    padding-bottom: 9px;
 			    margin: 0px 0 0px;
 			}
+			.container {
+			    width: 70%;
+			    padding-top:15px;
+			}
+			.panel-heading {
+			    padding: 6px 15px;
+			    }
+			
+			.input-sm {
+			    height: 26px;
+			    font-size: 11px;
+			}
+			 ul, ul li {
+				 color: black;
+			}
+			.nav > li > a:hover, .nav > li > a:focus {
+			    background-color: #112D58;
+			    color:white;
+			}
 			.btn-default {
 			    color: #333;
 			    background-color: #D8D6D6;
@@ -47,7 +66,7 @@
 		
 		</style>
 		<style type="text/css">
-		label { display:block; margin:5px 0 5px; font-size:10pt; }
+		label { display:block; margin:5px 0 5px; font-size:8pt; }
        	
         
        
@@ -107,60 +126,68 @@
        
         <div class="container">
          <div class="panel2 panel-body">
-        <header class="row col-sm-12">
-        <div class="page-header">
+<header class="row col-sm-12">
+   <div class="page-header">
         
      <form class="form-inline">
+	  <div class="row" align="center">
+	  <div class="form-group">
+	    <div style="float:right;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousac.png" width="200px" height="100px" >
+		</a>
+		</div> 
+	  </div>
   
-  <div class="form-group">
-    <div style="float:right;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousac.png" width="300px"  >
-	</a>
-	</div> 
-  </div>
+	  <div class="form-group">
+	    <p><h4 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
+				Clinica de Nutricion</br>
+				Unidad de Salud. USAC</h4></p>
+	  </div>
   
-  <div class="form-group">
-    <p><h3 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
-			Clinica de Nutricion</br>
-			Unidad de Salud. USAC</h3></p>
-  </div>
-  
-  <div class="form-group">
-    <div style="float:left;">
-		<a href="http://usalud.usac.edu.gt/index.jsp">
-		<img src="../imagenes/logousalud2.gif" width="300px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
-	</a>
-	</div> 
-  </div>
-  
-</form>
+	  <div class="form-group">
+	    <div style="float:left;">
+			<a href="http://usalud.usac.edu.gt/index.jsp">
+			<img src="../imagenes/logousalud2.gif" width="200px" height="100px"  onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
+		</a>
+		</div> 
+	  </div>
+	</div>
+	<div class="row" align="right">
+		<div class="form-group" >
+	  	
+				<p id="UsuarioSesion">Usuario:</p>
+			</div>
+	 </div>
+	</form>
 	
        		 
-        </div>
-        </header>
+  </div>
+</header>
         
         <div class="row col-sm-12">
         
-        <nav class="col-sm-2">
+ <nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
+        
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
-	        <ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Manejo de Trifoliar </a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
+				
+				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
 		    </ul>
          </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li ><a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="http://usalud.usac.edu.gt/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
+				<li><a href="/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
 		    </ul>
         </li>
         </ul>
@@ -189,14 +216,14 @@
 	 <form action="../RegistroAlimento" method="post" class="form-inline" role="form" onsubmit="return false">
 	 <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Codigo</label>
-		<input class="form-control" name="codigo" id="codigo" type="number" readonly/>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Codigo</label>
+		<input class="form-control input-sm" name="codigo" id="codigo" type="number" readonly/>
 	  </div>
 	 </div>
 	<div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Estado</label>
-		<select class="form-control" id="estado">
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Estado</label>
+		<select class="form-control input-sm" id="estado">
 													<option value="1" >Activo</option>
 													<option value="2" >Inactivo</option>
 													</select>
@@ -204,21 +231,21 @@
      </div>
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Titulo</label>
-		<input class="form-control" name="titulo" id="titulo" type="text" required/>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Titulo</label>
+		<input class="form-control input-sm" name="titulo" id="titulo" type="text" required/>
 	  </div>
      </div>
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Descripcion</label>
-		<textarea class="form-control" id="descripcion" cols="50" rows="1" required></textarea>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Descripcion</label>
+		<textarea class="form-control input-sm" id="descripcion" cols="50" rows="1" required></textarea>
 	  </div>
      </div>
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Contenido</label>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Contenido</label>
 		
-		<textarea class="form-control" id="contenido" cols="50" rows="5"></textarea>
+		<textarea class="form-control input-sm" id="contenido" cols="50" rows="5"></textarea>
 		
 	  </div>
      </div>
@@ -227,14 +254,14 @@
 	  <table>
 	  	<tr>
 	  		<td>
-	  			<label class="form-control" for="NCarnet" style="width: 150px;" >Archivo PDF</label>
+	  			<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Archivo PDF</label>
 	  		</td>
 	  		<td>
 	  			&nbsp;
 	  		</td>
 	  		<td>
 	  			<label id="archivo"></label>
-	  			<input class="form-control" id="fileName" type="file" name="fileName" size="30" accept=".pdf" />
+	  			<input class="form-control input-sm" id="fileName" type="file" name="fileName" size="30" accept=".pdf" />
 	  			
 	  		</td>
 	  	</tr>
@@ -246,49 +273,134 @@
      </div>
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Fecha de inicio</label>
-		<input class="form-control" name="fecha_ini" id="fecha_ini" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Fecha de inicio</label>
+		<input class="form-control input-sm" name="fecha_ini" id="fecha_ini" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
+  
      <div class="row">  
 	  <div class="form-group">
-		<label class="form-control" for="NCarnet" style="width: 150px;" >Fecha fin</label>
-		<input class="form-control" name="fecha_fin" id="fecha_fin" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
+		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Fecha fin</label>
+		<input class="form-control input-sm" name="fecha_fin" id="fecha_fin" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
    <label id="mensajes">.</label>
      
      <div class="row" align="center" id="guard" >
       		<div class="form-group" >			
-							<button class="btn btn-default btn-lg" onclick="Guardar()" >
-						     <img src="../imagenes/guardado.png" width="50" height="40" title="Guardar" />Guardar</button>
+							<button class="btn btn-default" onclick="Guardar()" >
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Guardar" />Guardar</button>
 							
 			</div>
 		</div>
      
       <div class="row" align="center" id="Mod" >
       		<div class="form-group" >			
-							<button class="btn btn-default btn-lg" onclick="NuevoRegistro()" >
-						     <img src="../imagenes/nuevo.png" width="50" height="40" title="Nuevo" />Nuevo</button>
+							<button class="btn btn-default" onclick="NuevoRegistro()" >
+						     <img src="../imagenes/nuevo.png" width="40" height="30" title="Nuevo" />Nuevo</button>
 							
 			</div>
             <div class="form-group" >			
-							<button class="btn btn-default btn-lg" onclick="Modificar()" >
-						     <img src="../imagenes/guardado.png" width="50" height="40" title="Modificar" />Modificar</button>
+							<button class="btn btn-default" onclick="Modificar()" >
+						     <img src="../imagenes/guardado.png" width="40" height="30" title="Modificar" />Modificar</button>
 							
 			</div>
 			<div class="form-group" >		
-							<button class="btn btn-default btn-lg" onclick="EliminarRegistro()" >
-						     <img src="../imagenes/eliminar.png" width="50" height="40" title="Eliminar" />Eliminar</button>
+							<button class="btn btn-default" onclick="EliminarRegistro()" >
+						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>
 							
 			</div>
 		</div>
 	 	
 	 </form>
+<script type="text/javascript">
+var UsuarioSesion = "null";
+var IdUsuarioSesion = "null";
+var PerfilSesion ="null";
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function VerificarSesion(){
+	<% HttpSession misession= request.getSession(true); %>
 	
+	UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
+	IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
+	PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
+	alert(UsuarioSesion);
+	if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
+		
+		var x=decodeURIComponent(document.cookie).length;
+		if(x==0){
+			//sale
+			//alert("sale1");
+			//window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+		}
+		else{
+			UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
+    		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
+    		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
+    		
+    		if(PerfilSesion=="nutri"){
+				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+			
+			}else{
+				alert("sale2");
+				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+			}
+		}
+		
+	}
+	else{
+		document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
+		document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
+		document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
+		
+		if(PerfilSesion=="nutri"){
+			document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
+		
+		}else{
+			window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+		}
+	}
+}
+
+function CerrarSesion(){
+	<%misession.setAttribute("NUSUARIO", "null");%>
+	<%misession.setAttribute("NIDSUARIO", "null");%>
+	<%misession.setAttribute("NPERFIL", "null");%>
+	
+	document.cookie = "CookieUsuario=; max-age=0";
+	document.cookie = "CookieIDUsuario=; max-age=0";
+	document.cookie = "CookiePerfil=; max-age=0";
+	
+	window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+	
+}
+
+function CargaInicio(){
+	document.getElementById("Mod").style.display = 'none';
+	document.getElementById("guard").style.display = 'block';
+	VerificarSesion();
+}
+</script>
 
 <script type="text/javascript">
 var idTRIFOLIAR=0;
+
+
 $("#flex1").flexigrid
 (
 {
@@ -335,10 +447,8 @@ function addFormData()
 	$("#flex1").flexOptions({params: dt});
 	return true;
 	}
-function CargaInicio(){
-	document.getElementById("Mod").style.display = 'none';
-	document.getElementById("guard").style.display = 'block';
-}
+	
+
 function EditarRegistro(){
 	if(idTRIFOLIAR=="0"){
 		MensajeServidor(2,"Error, seleccione un registro valido");

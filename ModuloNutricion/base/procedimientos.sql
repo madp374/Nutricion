@@ -126,10 +126,11 @@ CREATE PROCEDURE Registrar_ConsultaExterna(IN paciente integer ,
                                     IN antropometria integer ,
                                     IN registro integer ,
                                     IN usuario integer,
+                                    IN imc varchar(45),
                                    OUT resultado TEXT)
 BEGIN
-insert into CONSULTA_EXTERNA(FECHA,PACIENTE_idPACIENTE, ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO,USUARIO_idUSUARIO)
-values(CURDATE(),paciente,antecedente,estilo,habito,antropometria,registro,usuario);
+insert into CONSULTA_EXTERNA(FECHA,PACIENTE_idPACIENTE, ANTECENDENTES_MEDICOS_idANTECENDENTES_MEDICOS, ESTILO_DE_VIDA_idESTILO_DE_VIDA, HABITO_ALIMENTO_idHABITO_ALIMENTO, ANTROPOMETRIA_idANTROPOMETRIA, REGISTRO_idREGISTRO,USUARIO_idUSUARIO,IMC)
+values(CURDATE(),paciente,antecedente,estilo,habito,antropometria,registro,usuario,imc);
 SET resultado = (select LAST_INSERT_ID());
 END $
 DELIMITER ;
@@ -137,3 +138,25 @@ DELIMITER ;
 
 GRANT EXECUTE ON PROCEDURE NutricionUsalud.Registrar_ConsultaExterna TO 'nutricionprueba'@'localhost';
 GRANT ALL ON NutricionUsalud.Registrar_ConsultaExternaa TO nutricionprueba@'localhost'; 
+
+DELIMITER $
+CREATE PROCEDURE Registrar_enfermedad(IN nombres varchar(45),
+                                   OUT resultado TEXT)
+BEGIN
+
+set @valor=(SELECT nombre FROM ENFERMEDAD where nombre=nombres);
+
+IF @valor = nombres THEN
+    SET resultado = 'ERROR';
+ELSE 
+     insert into ENFERMEDAD(nombre) 
+     values(nombres);
+     SET resultado = (select LAST_INSERT_ID());
+END IF;
+
+END $
+DELIMITER ;
+
+
+GRANT EXECUTE ON PROCEDURE NutricionUsalud.Registrar_enfermedad TO 'nutricionprueba'@'localhost';
+GRANT ALL ON NutricionUsalud.Registrar_enfermedad TO nutricionprueba@'localhost'; 

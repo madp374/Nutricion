@@ -84,14 +84,15 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		    
-		    String consulta="SELECT idUSUARIO FROM USUARIO WHERE usuario='"+usuario+"' AND password='"+pass+"' AND ROL_idROL="+perfil+" AND estado='activo'";
+		    String consulta="SELECT idUSUARIO, nombre FROM USUARIO WHERE usuario='"+usuario+"' AND password='"+pass+"' AND ROL_idROL="+perfil+" AND estado='activo'";
 		
 		    rs = cmd.executeQuery(consulta);
 
 		    while (rs.next()) {
 		        String nombre = rs.getString("idUSUARIO");
-		       
-		        resultado=nombre;
+		        String nom= rs.getString("nombre");
+		        
+		        resultado=nombre+","+nom;
 		    }
 
 		    rs.close();
@@ -479,14 +480,15 @@ public class Conexion extends HttpServlet{
 			String habito,
 			String antropometria,
 			String registro,
-			String idusuario1){
+			String idusuario1,
+			String imc1){
 		String resultado=null;
 		procedimientoAL="&noAccessToProcedureBodies=true";
 		try {
 			BDConnect();
 			//Class.forName("com.mysql.jdbc.Driver");
 		
-			CallableStatement proc = conn.prepareCall(" CALL Registrar_ConsultaExterna(?,?,?,?,?,?,?,?) ");
+			CallableStatement proc = conn.prepareCall(" CALL Registrar_ConsultaExterna(?,?,?,?,?,?,?,?,?) ");
 			
         
             proc.setInt(1, Integer.parseInt(paciente));
@@ -496,12 +498,13 @@ public class Conexion extends HttpServlet{
             proc.setInt(5, Integer.parseInt(antropometria));
             proc.setInt(6, Integer.parseInt(registro));
             proc.setInt(7, Integer.parseInt(idusuario1));
-         
-            proc.registerOutParameter(8, Types.VARCHAR);
+            proc.setString(8, imc1);//Tipo String
+            
+            proc.registerOutParameter(9, Types.VARCHAR);
          
             proc.execute();            
           
-            resultado = proc.getString(8);
+            resultado = proc.getString(9);
             
 			
 		    BDClose();
@@ -540,6 +543,42 @@ public class Conexion extends HttpServlet{
             	resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error el alimento ya existe\"}";
             }else{
             	resultado="{\"resultado\":\"OK\",\"alimento\":\""+nombre+"\",\"caloria\":\""+calorias+"\"}";
+            }
+			
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción1:"+ex);
+			return resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al guardar\"}";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción2:"+ex);
+			return resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al guardar\"}";
+		}
+		
+	}
+	public String RegistrarIDEnfermedad(String nombre){
+		String resultado=null;
+		procedimientoAL="&noAccessToProcedureBodies=true";
+		try {
+			BDConnect();
+			//Class.forName("com.mysql.jdbc.Driver");
+		
+			CallableStatement proc = conn.prepareCall(" CALL Registrar_enfermedad(?,?) ");
+			
+            proc.setString(1, nombre);//Tipo String
+         
+            proc.registerOutParameter(2, Types.VARCHAR);//Tipo String
+            // Se ejecuta el procedimiento almacenado
+         
+            proc.execute();            
+          
+            // devuelve el valor del parametro de salida del procedimiento
+            resultado = proc.getString(2);
+            if(resultado.equalsIgnoreCase("ERROR")){
+            	resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error el alimento ya existe\"}";
+            }else{
+            	resultado="{\"resultado\":\"OK\",\"enfermedad\":\""+nombre+"\"}";
             }
 			
 		    BDClose();
@@ -631,6 +670,44 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
+	public String BuscarEnfermedadExistente(String texto){
+		String resultado="";
+		String temp="";
+		String inicio="{\"resultado\":\"OK\"";
+		
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idENFERMEDAD, nombre FROM ENFERMEDAD WHERE nombre='"+texto+"'");
+		    int i=0;
+		    while (rs.next()) {
+		    	
+		    		temp+=",\"nombre\":\""+rs.getString("nombre")+"\"";
+		    		i++;
+		    	 
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    resultado=inicio+total+temp+"}";
+		    rs.close();
+		    BDClose();
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado="{\"resultado\":\"ERROR\"}";
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			return resultado="{\"resultado\":\"ERROR\"}";
+		}
+		
+	}
 	public ArrayList<String> getAlimento(String texto) {
         ArrayList<String> list = new ArrayList<String>();
       
@@ -645,6 +722,32 @@ public class Conexion extends HttpServlet{
 		    cmd = getconnection().createStatement();
 		   
 		    rs = cmd.executeQuery("select * from ALIMENTO where nombre LIKE '"+texto+"%'");
+		 
+            while (rs.next()) {
+                data = rs.getString("nombre");
+                list.add(data);
+            }
+            rs.close();
+		    BDClose();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+	public ArrayList<String> getEnfermedad(String texto) {
+        ArrayList<String> list = new ArrayList<String>();
+      
+        String data;
+        try {
+        	BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT * FROM ENFERMEDAD where nombre LIKE '"+texto+"%'");
 		 
             while (rs.next()) {
                 data = rs.getString("nombre");
@@ -953,7 +1056,7 @@ public class Conexion extends HttpServlet{
 		    	
 		    	if(archivo.equals("")){}
 		    	else{
-		    		String direccion="http://usalud.usac.edu.gt/ModuloNutricion/uploads/"+archivo;
+		    		String direccion="/ModuloNutricion/uploads/"+archivo;
 		    		marco+="<br><br><b>Archivo</b>:"+"<A href=\""+direccion+"\" style=\"color:black;\">"+archivo+"</A>";
 		    	}
 		    	marco+="</div>"
@@ -1177,6 +1280,115 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
+	public String CargarListaEnfermedad(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT E.nombre"
+									+" FROM REGISTRO_ENFERMEDAD R, ENFERMEDAD E"
+									+" WHERE R.ENFERMEDAD_idENFERMEDAD=E.idENFERMEDAD"
+									+" AND R.CONSULTA_EXTERNA_idCONSULTA_EXTERNA ="+ID);
+		 
+		    String nombre="";
+		    
+		   String marco=",\"ListaEnf\":[";
+		   String fin="]";
+
+		    int i=0;
+		    while (rs.next()) {
+		    	nombre=Codificar(rs.getString("E.nombre"));
+			    
+		    	if(i==0){
+		    		resultado+="{\"Enombre\":\""+nombre+"\"}";
+		    	}else{
+		    		resultado+=",{\"Enombre\":\""+nombre+"\"}";
+		    	}
+			    
+			    		
+			   i++;
+		    	
+		    }
+		    String aux=",\"totalE\":\""+i+"\"";
+		    resultado=aux+marco+resultado+fin;
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	
+	public String CargarTipoExamen(){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT idTIPO_EXAMEN, nombre FROM TIPO_EXAMEN");
+		 
+		    String idTIPO_EXAMEN="";
+		    String nombre="";
+		    
+		   String marco=",\"Lista\":[";
+		   String fin="]";
+
+		    int i=0;
+		    while (rs.next()) {
+		    	idTIPO_EXAMEN=rs.getString("idTIPO_EXAMEN");
+		    	nombre=rs.getString("nombre");
+			    
+		    	if(i==0){
+		    		resultado+="{\"idTIPO_EXAMEN\":\""+idTIPO_EXAMEN+"\",\"nombre\":\""+nombre+"\"}";
+		    	}else{
+		    		resultado+=",{\"idTIPO_EXAMEN\":\""+idTIPO_EXAMEN+"\",\"nombre\":\""+nombre+"\"}";
+		    	}
+			    
+			    		
+			   i++;
+		    	
+		    }
+		    String aux=",\"total\":\""+i+"\"";
+		    resultado="{\"resultado\":\"OK\""+aux+marco+resultado+fin+"}";
+		    rs.close();
+		    BDClose();
+		    
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	
 	public String DatosPacientejso(String ID){
 		String resultado="";
 
@@ -1396,6 +1608,196 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
+	public String CargaDietas(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT * FROM DIETA WHERE idDIETA="+ID);
+		 
+		    String nombre="";
+		    String carbo="";
+		    String prote="";
+		    String grasa="";
+		   
+
+		    while (rs.next()) {
+		    	nombre=rs.getString("nombre");
+		    	carbo=rs.getString("carbohidrato");
+			    prote=rs.getString("proteina");
+			    grasa=rs.getString("grasa");
+			    
+			    resultado+=",\"nombre\":\""+nombre+"\""
+			    		+",\"carbo\":\""+carbo+"\""
+			    		+",\"prote\":\""+prote+"\""
+			    		+",\"grasa\":\""+grasa+"\"";
+		    	
+		    }
+		    
+		    rs.close();
+		    BDClose();
+		    //resultado="{\"resultado\":\"OK\""+resultado+"}";
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String ListaKcalDietas(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("select Kcal from TIPO_DIETA WHERE DIETA_idDIETA="+ID+" GROUP BY Kcal");
+		 
+		    String Kcal="";
+		   
+		    int i=0;
+		    while (rs.next()) {
+		    	Kcal=rs.getString("Kcal");
+			    if(i==0){
+			    	resultado+="{\"Kcal\":\""+Kcal+"\"}";
+			    }else{
+			    	resultado+=",{\"Kcal\":\""+Kcal+"\"}";
+			    }
+			    
+		    	i++;
+		    }
+		    String total=",\"total\":\""+i+"\"";
+		    String marco=total+",\"columna\":["+resultado+"]";
+		    
+		    rs.close();
+		    BDClose();
+		    resultado=marco;
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String PorGrupoAl(String ID, String columna){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("select * from TIPO_DIETA WHERE DIETA_idDIETA="+ID+" and Kcal="+columna);
+		    
+		    String col="";
+		    String Kcal="";
+		   
+		    
+		    while (rs.next()) {
+		    	col=rs.getString("GrupoAlimenticio_idGrupoAlimenticio");
+		    	Kcal=rs.getString("valor");
+			    	
+		    	resultado+=",\"c"+col+"\":\""+Kcal+"\"";
+	
+		    }
+ 
+		    rs.close();
+		    BDClose();
+		    resultado="{\"resultado\":\"OK\""+resultado+"}";
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
+	public String ObtenerDistribucion(String ID){
+		String resultado="";
+
+		try {
+			BDConnect();
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			
+			ResultSet rs = null;
+			Statement cmd = null;
+		    cmd = getconnection().createStatement();
+		   
+		    rs = cmd.executeQuery("SELECT * FROM VET_DIETA WHERE CALCULOS_VET_idCALCULOS_VET="+ID);
+		    
+		    String GrupoAlimenticio="";
+		    String comida="";
+		    String porcion="";
+		   
+		    int i=0; 
+		    while (rs.next()) {
+		    	GrupoAlimenticio=rs.getString("GrupoAlimenticio_idGrupoAlimenticio");
+		    	comida=rs.getString("Comida");
+		    	porcion=rs.getString("porcion");
+			    
+		    	if(i==0){
+		    		resultado+="{\"Grupo\":\""+GrupoAlimenticio+"\"";
+		    	}else{
+		    		resultado+=",{\"Grupo\":\""+GrupoAlimenticio+"\"";
+		    	}
+		    	
+		    	resultado+=",\"comida\":\""+comida+"\"";
+		    	resultado+=",\"porcion\":\""+porcion+"\"}";
+		    	i++;
+		    }
+ 
+		    rs.close();
+		    BDClose();
+		    String total=",\"total\":\""+i+"\"";
+		    String marco=total+",\"dist\":["+resultado+"]}";
+		    resultado=marco;
+		    return resultado;
+		}catch(SQLException ex){
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		catch(Exception ex){ 
+			System.out.println("Se produjo una excepción:"+ex);
+			resultado="{\"resultado\":\"ERROR\",\"descripcion\":\"Error al cargar\"}";
+			return resultado;
+		}
+		
+	}
 	public String FrecOption2(String entrada){
 		String resultado="0";
 		if(entrada.equalsIgnoreCase("Diario")){
@@ -1593,7 +1995,7 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("SELECT A.talla,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo, C.fecha, C.peso, C.imc, C.ActividadFisica, C.FormulaVet, C.VET, C.VETAF, C.RBajoPeso, C.RSobrePeso, C.RObesidad, C.carbohidrato, C.proteina, C.grasa, C.placteosg, C.placteoe, C.pvegetal, C.pfruta, C.pcereal, C.pcarne, C.pgrasa, C.pazucar, C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA, C.USUARIO_idUSUARIO, U.nombre, R.nombre "
+		    rs = cmd.executeQuery("SELECT A.talla,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo, C.fecha, C.peso, C.imc, C.ActividadFisica, C.FormulaVet, C.VET, C.VETAF, C.RBajoPeso, C.RSobrePeso, C.RObesidad, C.carbohidrato, C.proteina, C.grasa, C.placteosg, C.placteoe, C.pvegetal, C.pfruta, C.pcereal, C.pcarne, C.pgrasa, C.pazucar, C.tdieta, C.distribucion, C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA, C.USUARIO_idUSUARIO, U.nombre, R.nombre "
 								+" FROM CONSULTA_EXTERNA E, ANTROPOMETRIA A, CALCULOS_VET C, PACIENTE P, USUARIO U, ROL R"
 								+" WHERE E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA"
 								+" AND C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA"
@@ -1630,6 +2032,8 @@ public class Conexion extends HttpServlet{
 		    String USR7="";
 		    String nombre="";
 		    String rol="";
+		    String tdieta="";
+		    String distribucion="";
 
 		    while (rs.next()) {
 		    	talla=rs.getString("A.talla");
@@ -1660,6 +2064,8 @@ public class Conexion extends HttpServlet{
 		    	USR7=rs.getString("C.USUARIO_idUSUARIO");
 			    nombre=rs.getString("U.nombre");
 			    rol=rs.getString("R.nombre");
+			    tdieta=rs.getString("C.tdieta");
+			    distribucion=rs.getString("C.distribucion");
 
 		    }
 		    resultado="{\"resultado\":\"OK\",\"fecha\":\""+fecha+"\",\"peso\":\""+peso
@@ -1677,7 +2083,9 @@ public class Conexion extends HttpServlet{
 		    		+"\",\"USR7\":\""+USR7
 		    		+"\",\"nombre\":\""+nombre
 		    		+"\",\"rol\":\""+rol
-		    		+"\",\"CONSULTA_EXTERNA_idCONSULTA_EXTERNA\":\""+CONSULTA_EXTERNA_idCONSULTA_EXTERNA+"\"}";
+		    		+"\",\"dieta\":\""+tdieta
+		    		+"\",\"distribucion\":\""+distribucion
+		    		+"\",\"CONSULTA_EXTERNA_idCONSULTA_EXTERNA\":\""+CONSULTA_EXTERNA_idCONSULTA_EXTERNA+"\"";
 		    rs.close();
 		    BDClose();
 		    
@@ -1835,7 +2243,7 @@ public class Conexion extends HttpServlet{
 		}
 		
 	}
-	public String ObtenerTallaPeso(String ID){
+	public String ObtenerTallaPeso(String consulta, String ID){
 		String resultado="";
 
 		try {
@@ -1847,17 +2255,42 @@ public class Conexion extends HttpServlet{
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
 		   
-		    rs = cmd.executeQuery("select talla,peso from ANTROPOMETRIA where idANTROPOMETRIA=(select ANTROPOMETRIA_idANTROPOMETRIA from CONSULTA_EXTERNA where idCONSULTA_EXTERNA="+ID+");");
+		    rs = cmd.executeQuery(consulta);
 		 
 		    String talla="";
 		    String peso="";
-		    String diagnostico="";
+		    
+		    String idPACIENTE="";
+		    String nombre="";
+		    String edad="";
+		    String sexo="";
+		    String facultad="";
+		    
+		    int i=0;
 		    while (rs.next()) {
-		    	talla=rs.getString("talla");
-		    	peso=rs.getString("peso");
-		     
+		    	talla=rs.getString("A.talla");
+		    	peso=rs.getString("A.peso");
+		    	
+		    	idPACIENTE=rs.getString("P.idPACIENTE");
+			    nombre=rs.getString("P.nombre");
+			    edad=rs.getString("EDAD");
+			    sexo=rs.getString("P.sexo");
+			    facultad=rs.getString("F.nombre");
+			    i++;
 		    }
-		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"idCE\":\""+ID+"\"";
+		    if(i==0){
+		    	resultado="0";
+		    }else{
+		    	resultado="{\"resultado\":\"OK\",\"talla\":\""+talla
+			    		+"\",\"idPACIENTE\":\""+idPACIENTE
+			    		+"\",\"nombre\":\""+nombre
+			    		+"\",\"edad\":\""+edad
+			    		+"\",\"sexo\":\""+sexo
+			    		+"\",\"facultad\":\""+facultad
+			    		+"\",\"peso\":\""+peso
+			    		+"\",\"idCE\":\""+ID+"\"";
+		    }
+		    
 		    rs.close();
 		    BDClose();
 		    return resultado;
@@ -1976,24 +2409,39 @@ public class Conexion extends HttpServlet{
 			ResultSet rs = null;
 			Statement cmd = null;
 		    cmd = getconnection().createStatement();
-		    String consulta="select A.talla,A.peso,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P "
+		    String consulta="select P.idPACIENTE,P.nombre,F.nombre,A.talla,A.peso,YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1) AS 'EDAD', P.sexo" 
+							+" from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P, FACULTAD F"
 							+" where E.PACIENTE_idPACIENTE=P.idPACIENTE"
 							+" AND E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA"
+							+" AND P.FACULTAD_idFACULTAD=F.idFACULTAD"
 							+" AND idCONSULTA_EXTERNA="+ID+";";
 		   
 		    rs = cmd.executeQuery(consulta);
-		 
+		    
+		    String idPACIENTE="";
+		    String nombre="";
+		    String facultad="";
 		    String talla="";
 		    String peso="";
 		    String edad="";
 		    String sexo="";
 		    while (rs.next()) {
+		    	idPACIENTE=rs.getString("P.idPACIENTE");
+		    	nombre=rs.getString("P.nombre");
+		    	facultad=rs.getString("F.nombre");
 		    	talla=rs.getString("A.talla");
 		    	peso=rs.getString("A.peso");
 		    	edad=rs.getString("EDAD");
 		    	sexo=rs.getString("P.sexo");
 		    }
-		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla+"\",\"peso\":\""+peso+"\",\"edad\":\""+edad+"\",\"sexo\":\""+sexo+"\",\"idCE\":\""+ID+"\"";
+		    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla
+		    		+"\",\"idPACIENTE\":\""+idPACIENTE
+		    		+"\",\"nombre\":\""+nombre
+		    		+"\",\"facultad\":\""+facultad
+		    		+"\",\"peso\":\""+peso
+		    		+"\",\"edad\":\""+edad
+		    		+"\",\"sexo\":\""+sexo
+		    		+"\",\"idCE\":\""+ID+"\"";
 		    rs.close();
 		    BDClose();
 		    return resultado;
