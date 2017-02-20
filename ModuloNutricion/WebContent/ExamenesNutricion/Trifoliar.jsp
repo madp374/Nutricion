@@ -4,19 +4,23 @@
 <html>
 
         <head>
-        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        
         
          <link rel="stylesheet" href="../cleditor/script/jquery.cleditor.css" />
+         
+         
+		
 		<script src="../cleditor/script/jquery.min.js"></script>
 	   <script src="../cleditor/script/jquery.cleditor.min.js"></script>
 	   
-
+	
 	    
 		
 		
 	    
-	    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	    
 		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
 	    
 	   <link href="../jquery/menuacordeon/css/dcaccordion.css" rel="stylesheet" type="text/css" />
@@ -167,28 +171,30 @@
         
         <div class="row col-sm-12">
         
- <nav class="col-sm-2">
+<nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Inicio.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
-				
-				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>	
+				<li><a href="/ModuloNutricion/ExamenesNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/TablaDieta.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Tablas de dietas </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Citas </a>
         	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Citas.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Nuevo</a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/cal.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Calendario </a></li>
+			</ul>
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
+        </li>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
+        </li>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Reporte.jsp"> <span class="glyphicon glyphicon-book"></span> Reportes </a>
+        	
         </li>
         </ul>
         </nav>
@@ -235,12 +241,7 @@
 		<input class="form-control input-sm" name="titulo" id="titulo" type="text" required/>
 	  </div>
      </div>
-     <div class="row">  
-	  <div class="form-group">
-		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Descripcion</label>
-		<textarea class="form-control input-sm" id="descripcion" cols="50" rows="1" required></textarea>
-	  </div>
-     </div>
+    
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Contenido</label>
@@ -274,18 +275,18 @@
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Fecha de inicio</label>
-		<input class="form-control input-sm" name="fecha_ini" id="fecha_ini" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
+		<input class="form-control input-sm" name="fecha_ini" id="fecha_ini" type="date"  pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
   
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Fecha fin</label>
-		<input class="form-control input-sm" name="fecha_fin" id="fecha_fin" type="date" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
+		<input class="form-control input-sm" name="fecha_fin" id="fecha_fin" type="date"  pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD" required/>
 	  </div>
      </div>
    <label id="mensajes">.</label>
-     
+      
      <div class="row" align="center" id="guard" >
       		<div class="form-group" >			
 							<button class="btn btn-default" onclick="Guardar()" >
@@ -437,7 +438,7 @@ height: 150,
 
 
 
-
+var pesoArchivo=false;
 //This function adds paramaters to the post of flexigrid. You can add a verification as well by return to false if you don't want flexigrid to submit			
 function addFormData()
 	{
@@ -466,7 +467,7 @@ function validar_vacio(entrada){
 function Guardar(){
 	var titulo=document.getElementById('titulo').value;
 	var estado=valorselectInverso(document.getElementById('estado').value);
-	var descripcion=document.getElementById('descripcion').value;
+	//var descripcion=document.getElementById('descripcion').value;
 	var aux=''+document.getElementById('contenido').value+'';
 	
 	var contenido=encodeURI(aux);
@@ -475,24 +476,30 @@ function Guardar(){
     var fecha_ini=validar_vacio(document.getElementById('fecha_ini').value);
 	var fecha_fin=validar_vacio(document.getElementById('fecha_fin').value);
 	
-	if(titulo!=""&&descripcion!=""&&contenido!=""&&fecha_ini!=""&&fecha_fin!=""){
-		AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin);
+	if(pesoArchivo){
+		MensajeServidor(2,"Error, el tamaño del archivo es mayor a 1MB");
+	}else{
+	if(titulo!=""&&contenido!=""&&fecha_ini!=""&&fecha_fin!=""){
+		AñadirRegistro(titulo,estado,contenido,archivo,fecha_ini,fecha_fin);
 	}else{
 		MensajeServidor(2,"Error, faltan campos a ingresar");
+	}
 	}
 }
 document.getElementById('fileName').onchange = function(){
     var filesize = document.getElementById('fileName').files[0].size;
     if(filesize<=1048576){
-    	alert("correcto");
+    	//alert("correcto");
+    	pesoArchivo=false;
     }else{
-    	alert("incorrecto");
+    	//alert("incorrecto");
+    	pesoArchivo=true;
     } 
 }
 function Modificar(){
 	var titulo=document.getElementById('titulo').value;
 	var estado=valorselectInverso(document.getElementById('estado').value);
-	var descripcion=document.getElementById('descripcion').value;
+	
 	var aux=''+document.getElementById('contenido').value+'';
 	
 	var contenido=encodeURI(aux);
@@ -501,15 +508,18 @@ function Modificar(){
     var fecha_ini=validar_vacio(document.getElementById('fecha_ini').value);
 	var fecha_fin=validar_vacio(document.getElementById('fecha_fin').value);
 	
-	if(titulo!=""&&descripcion!=""&&contenido!=""&&fecha_ini!=""&&fecha_fin!=""){
-		ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin);
+	if(pesoArchivo){
+		MensajeServidor(2,"Error, el tamaño del archivo es mayor a 1MB");
+	}else{
+	if(titulo!=""&&contenido!=""&&fecha_ini!=""&&fecha_fin!=""){
+		ModificarRegistro(titulo,estado,contenido,archivo,fecha_ini,fecha_fin);
 	}else{
 		MensajeServidor(2,"Error, faltan campos a ingresar");
 	}
-	
+	}
 	
 }
-function ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin){
+function ModificarRegistro(titulo,estado,contenido,archivo,fecha_ini,fecha_fin){
 	var action="modificar";
 	var codigo=document.getElementById('codigo').value;
 	
@@ -520,7 +530,7 @@ function ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini
 		archivo=document.getElementById('archivo').textContent;
 		
 	}
-	var cadena = ['a='+action,'ID='+codigo,'titulo='+titulo,'estado='+estado,'descripcion='+descripcion
+	var cadena = ['a='+action,'ID='+codigo,'titulo='+titulo,'estado='+estado
 	              ,'contenido='+contenido,'archivo='+archivo,'fecha_ini='+fecha_ini,'fecha_fin='+fecha_fin].join('&');
 
 	$.ajax({
@@ -530,7 +540,7 @@ function ModificarRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini
         dataType: 'json',
         success: function(data){
         	if(data.resultado=='OK'){
-        		
+        		pesoArchivo=false;
         		NuevoRegistro();
         		limpiartabla();
         		MensajeServidor(1,"Registro modificado correctamente");
@@ -551,9 +561,9 @@ function AñadirRegistro2(archivo){
 	request.open("POST", "../trifoliar3");
 	request.send(formData);
 }
-function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fecha_fin){
+function AñadirRegistro(titulo,estado,contenido,archivo,fecha_ini,fecha_fin){
 	var action="agregar";
-	var cadena = ['a='+action,'titulo='+titulo,'estado='+estado,'descripcion='+descripcion
+	var cadena = ['a='+action,'titulo='+titulo,'estado='+estado
 	              ,'contenido='+contenido,'archivo='+archivo,'fecha_ini='+fecha_ini,'fecha_fin='+fecha_fin].join('&');
 	
 	if(archivo!=""){
@@ -569,10 +579,10 @@ function AñadirRegistro(titulo,estado,descripcion,contenido,archivo,fecha_ini,fe
         success: function(data){
         	if(data.resultado=='OK'){
         		idTRIFOLIAR=0;
+        		pesoArchivo=false;
         		document.getElementById('codigo').value = "";
         		document.getElementById('estado').value = 1;
         		document.getElementById('titulo').value = "";
-        		document.getElementById('descripcion').value = "";
         		$('#contenido').val('').blur();
         		
         		document.getElementById('fileName').value = "";
@@ -647,14 +657,15 @@ function EliminarRegistro(){
 	        		 document.getElementById('codigo').value = "";
 	         		 document.getElementById('estado').value = 1;
 	         		 document.getElementById('titulo').value = "";
-	         		 document.getElementById('descripcion').value = "";
 	         		 $('#contenido').val('').blur();
+	         		 pesoArchivo=false;
 	         		 document.getElementById('archivo').innerHTML = "";
 	         		 document.getElementById('fileName').value = "";
 	         		 document.getElementById('fecha_ini').value = "";
 	         		 document.getElementById('fecha_fin').value = "";
 	        		 idTRIFOLIAR=0;
 	        		 limpiartabla();
+	        		 NuevoRegistro();
 	        	}else{
 	        		MensajeServidor(2,"Error, el alimento esta siendo utilizado en otro registro y no puede ser eliminado");
 	        		
@@ -680,26 +691,26 @@ function MensajeServidor(codigo,descripcion){
 		document.getElementById('mensajes').innerHTML = '';
 	}
 }
-function DatosSeleccionados(id,titulo,estado,descripcion){
+function DatosSeleccionados(id,titulo,estado){
 
 	idTRIFOLIAR=id;
 	document.getElementById('codigo').value = id;
 	document.getElementById('titulo').value = titulo;
 	document.getElementById('estado').value = valorselect(estado);
-	document.getElementById('descripcion').value = descripcion;
 	CargaRegistro();
 	//$('#contenido').val(decodeURI(contenido)).blur();
 	//document.getElementById('mensajes').innerHTML = '';
 	document.getElementById("guard").style.display = 'none';
 	document.getElementById("Mod").style.display = 'block';
 	MensajeServidor(3,"");
+	pesoArchivo=0;
 }
 function NuevoRegistro(){
 	idTRIFOLIAR=0;
 	document.getElementById('codigo').value = "";
 	document.getElementById('estado').value = 1;
 	document.getElementById('titulo').value = "";
-	document.getElementById('descripcion').value = "";
+	
 	$('#contenido').val('').blur();
 	
 	document.getElementById('fileName').value = "";

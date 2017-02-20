@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Dieta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 6_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 7_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 8_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 9_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 10">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 10_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 11">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 11_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 11_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 11_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 12">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 12_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 12_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 12_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 13">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 13_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 13_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 13_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 14">
+		<box>
+			<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 14_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 14_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="table 14_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="DataDieta">
+		<parameter name="IDvet" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT CONCAT(G.idGrupoAlimenticio,'. ',G.nombre) as Grupo,
+IFNULL(SUM(V.porcion),0) as Porciones,
+IFNULL(sum(CASE WHEN V.Comida ='Desayuno' THEN V.porcion ELSE 0 END), 0) AS Desayuno,
+IFNULL(sum(CASE WHEN V.Comida ='Refaccion AM' THEN V.porcion ELSE 0 END), 0) AS RefaccionAM,
+IFNULL(sum(CASE WHEN V.Comida ='Almuerzo' THEN V.porcion ELSE 0 END), 0) AS Almuerzo,
+IFNULL(sum(CASE WHEN V.Comida ='Refaccion PM' THEN V.porcion ELSE 0 END), 0) AS RefaccionPM,
+IFNULL(sum(CASE WHEN V.Comida ='Cena' THEN V.porcion ELSE 0 END), 0) AS Cena
+FROM VET_DIETA V, GrupoAlimenticio G
+WHERE V.CALCULOS_VET_idCALCULOS_VET=$P{IDvet}
+AND V.GrupoAlimenticio_idGrupoAlimenticio=G.idGrupoAlimenticio
+group by V.GrupoAlimenticio_idGrupoAlimenticio;]]>
+		</queryString>
+		<field name="Grupo" class="java.lang.String"/>
+		<field name="Porciones" class="java.math.BigDecimal"/>
+		<field name="Desayuno" class="java.math.BigDecimal"/>
+		<field name="RefaccionAM" class="java.math.BigDecimal"/>
+		<field name="Almuerzo" class="java.math.BigDecimal"/>
+		<field name="RefaccionPM" class="java.math.BigDecimal"/>
+		<field name="Cena" class="java.math.BigDecimal"/>
+		<group name="Grupo">
+			<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="DatoPaciente">
+		<parameter name="idvet" class="java.lang.Integer"/>
+		<queryString>
+			<![CDATA[SELECT
+CASE WHEN C.tdieta=1 THEN 'Dieta Estandarizada' ELSE
+    CASE WHEN C.tdieta=2  THEN 'Dieta Estandarizada Hiperproteica' ELSE
+    CASE WHEN C.tdieta=3 THEN 'Dieta Estandarizada Hipograsa' ELSE
+    CASE WHEN C.tdieta=0 THEN 'Personalizado'
+          END
+          END
+        END
+       END TipoDieta,
+P.idPACIENTE as RegistroAcademico,
+C.fecha as Fecha,
+P.nombre as Nombre ,
+IFNULL(C.distribucion,0) as distribucion,
+F.nombre as Facultad
+FROM CONSULTA_EXTERNA E, CALCULOS_VET C, PACIENTE P, Facultad F
+WHERE C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA
+AND C.idCALCULOS_VET=$P{idvet}
+AND F.idFACULTAD=P.FACULTAD_idFACULTAD
+AND E.PACIENTE_idPACIENTE=P.idPACIENTE]]>
+		</queryString>
+		<field name="TipoDieta" class="java.lang.String"/>
+		<field name="RegistroAcademico" class="java.lang.Integer"/>
+		<field name="Fecha" class="java.sql.Date"/>
+		<field name="Nombre" class="java.lang.String"/>
+		<field name="distribucion" class="java.lang.String"/>
+		<field name="Facultad" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="DataFecha">
+		<parameter name="idvet" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+E.fecha as Fecha2,DATE_FORMAT(C.fecha,'%d/%m/%Y') as Fecha
+FROM CONSULTA_EXTERNA E, CALCULOS_VET C
+WHERE C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA
+AND C.idCALCULOS_VET=$P{idvet}]]>
+		</queryString>
+		<field name="Fecha2" class="java.sql.Date"/>
+		<field name="Fecha" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="DataDistribucion">
+		<parameter name="idvet" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+P.idPACIENTE as RegistroAcademico,
+CASE WHEN C.tdieta=1 THEN 'Dieta Estandarizada' ELSE
+    CASE WHEN C.tdieta=2  THEN 'Dieta Estandarizada Hiperproteica' ELSE
+    CASE WHEN C.tdieta=3 THEN 'Dieta Estandarizada Hipograsa' ELSE
+    CASE WHEN C.tdieta=0 THEN 'Personalizado'
+          END
+          END
+        END
+       END TipoDieta,
+C.fecha as Fecha,
+P.nombre as Nombre ,
+IFNULL(C.distribucion,0) as distribucion,
+F.nombre as Facultad
+FROM CONSULTA_EXTERNA E, CALCULOS_VET C, PACIENTE P, Facultad F
+WHERE C.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA
+AND C.idCALCULOS_VET=$P{idvet}
+AND F.idFACULTAD=P.FACULTAD_idFACULTAD
+AND E.PACIENTE_idPACIENTE=P.idPACIENTE]]>
+		</queryString>
+		<field name="RegistroAcademico" class="java.lang.Integer"/>
+		<field name="TipoDieta" class="java.lang.String"/>
+		<field name="Fecha" class="java.sql.Date"/>
+		<field name="Nombre" class="java.lang.String"/>
+		<field name="distribucion" class="java.lang.String"/>
+		<field name="Facultad" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="idvet" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT CONCAT(G.idGrupoAlimenticio,'. ',G.nombre) as Grupo,
+IFNULL(SUM(V.porcion),0) as Porciones,
+IFNULL(sum(CASE WHEN V.Comida ='Desayuno' THEN V.porcion ELSE 0 END), 0) AS Desayuno,
+IFNULL(sum(CASE WHEN V.Comida ='Refaccion AM' THEN V.porcion ELSE 0 END), 0) AS RefaccionAM,
+IFNULL(sum(CASE WHEN V.Comida ='Almuerzo' THEN V.porcion ELSE 0 END), 0) AS Almuerzo,
+IFNULL(sum(CASE WHEN V.Comida ='Refaccion PM' THEN V.porcion ELSE 0 END), 0) AS RefaccionPM,
+IFNULL(sum(CASE WHEN V.Comida ='Cena' THEN V.porcion ELSE 0 END), 0) AS Cena
+FROM VET_DIETA V, GrupoAlimenticio G
+WHERE V.CALCULOS_VET_idCALCULOS_VET=4
+AND V.GrupoAlimenticio_idGrupoAlimenticio=G.idGrupoAlimenticio]]>
+	</queryString>
+	<field name="Grupo" class="java.lang.String"/>
+	<field name="Porciones" class="java.math.BigDecimal"/>
+	<field name="Desayuno" class="java.math.BigDecimal"/>
+	<field name="RefaccionAM" class="java.math.BigDecimal"/>
+	<field name="Almuerzo" class="java.math.BigDecimal"/>
+	<field name="RefaccionPM" class="java.math.BigDecimal"/>
+	<field name="Cena" class="java.math.BigDecimal"/>
+	<group name="Grupo">
+		<groupExpression><![CDATA[$F{Grupo}]]></groupExpression>
+	</group>
+	<title>
+		<band height="72" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área de Medicina Preventiva e Investigación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="34" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa de Nutrición Clínica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="293" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Salud. USAC]]></text>
+			</staticText>
+			<image>
+				<reportElement x="321" y="1" width="144" height="50"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/logo2.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="465" y="1" width="57" height="51"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/u-salud-logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="67" y="0" width="388" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prescripción Dietética]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 11" style="table 11" x="0" y="20" width="360" height="29"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataFecha">
+						<datasetParameter name="idvet">
+							<datasetParameterExpression><![CDATA[$P{idvet}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="35">
+						<jr:detailCell style="table 11_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="34" height="20"/>
+								<textElement>
+									<font size="9" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Fecha:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="197">
+						<jr:detailCell style="table 11_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="163" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="66">
+			<staticText>
+				<reportElement x="0" y="0" width="321" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del paciente]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 13" style="table 13" x="0" y="33" width="522" height="33"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DatoPaciente">
+						<datasetParameter name="idvet">
+							<datasetParameterExpression><![CDATA[$P{idvet}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="104">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="104" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Registro Academico:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="74">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="72" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{RegistroAcademico}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="105">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="105" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nombres y Apellidos:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="138">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="131" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Facultad:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="174">
+						<jr:detailCell style="table 13_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="164" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{Facultad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="42">
+			<componentElement>
+				<reportElement key="table 14" style="table 14" x="0" y="0" width="428" height="36"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataDistribucion">
+						<datasetParameter name="idvet">
+							<datasetParameterExpression><![CDATA[$P{idvet}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="73">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="69" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tipo de Dieta:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="156">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="150" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{TipoDieta}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="2">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="90">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement>
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Valor energetico:]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="53">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="51" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{distribucion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:detailCell style="table 14_TD" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<text><![CDATA[calorias]]></text>
+							</staticText>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="255">
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="30" width="360" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataDieta">
+						<datasetParameter name="IDvet">
+							<datasetParameterExpression><![CDATA[$P{idvet}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="114">
+						<jr:tableHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="102" height="17"/>
+								<textElement>
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ Grupo de]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:columnHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="102" height="16"/>
+								<textElement>
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ alimentos]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="114" height="20"/>
+								<textElement textAlignment="Justified">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Grupo}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="83">
+						<jr:tableHeader height="17" rowSpan="1">
+							<box>
+								<leftPen lineWidth="1.0" lineStyle="Solid"/>
+								<rightPen lineWidth="1.0" lineStyle="Solid"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="17"/>
+								<textElement>
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ No. de porciones]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:columnHeader style="table_TD" height="17" rowSpan="1">
+							<box>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="79" height="16"/>
+								<textElement>
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ diarias]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="81" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Porciones}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="350">
+						<jr:tableHeader height="17" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="350" height="17"/>
+								<textElement textAlignment="Center">
+									<font size="12" isBold="false"/>
+								</textElement>
+								<text><![CDATA[Distribución en tiempos de comida]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="71">
+							<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="69" height="16"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<text><![CDATA[Desayuno]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="69" height="20"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Desayuno}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="76">
+							<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="73" height="16"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<text><![CDATA[RefaccionAM]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="73" height="20"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{RefaccionAM}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="68">
+							<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="64" height="16"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<text><![CDATA[Almuerzo]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="64" height="20"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Almuerzo}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="73">
+							<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="72" height="16"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<text><![CDATA[RefaccionPM]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="72" height="20"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{RefaccionPM}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="62">
+							<jr:columnHeader style="table 1_CH" height="17" rowSpan="1">
+								<staticText>
+									<reportElement x="0" y="0" width="56" height="16"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<text><![CDATA[Cena]]></text>
+								</staticText>
+							</jr:columnHeader>
+							<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="56" height="20"/>
+									<textElement textAlignment="Center">
+										<font size="9"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{Cena}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porciones diarias de alimentos]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

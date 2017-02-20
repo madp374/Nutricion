@@ -84,12 +84,19 @@ public class TablaTrifoliar extends HttpServlet {
 			
 			//System.out.println(result);
 			out.println(result);
+		}else if(action.equalsIgnoreCase("cargaInicio")){
+		
+			PrintWriter out = response.getWriter();
+			Conexion consulta = new Conexion();
+			String result=consulta.CargaPaginaInicio();
+			
+			//System.out.println("carga:"+result);
+			out.println(result);
 		}else if(action.equalsIgnoreCase("agregar")){
 			String result="";
 			PrintWriter out = response.getWriter();
 			String titulo=request.getParameter("titulo");
 			String estado=request.getParameter("estado");
-			String descripcion=request.getParameter("descripcion");
 			String contenido=request.getParameter("contenido");
 			
 			
@@ -100,12 +107,39 @@ public class TablaTrifoliar extends HttpServlet {
 			
 			//System.out.println("path:"+archivo);
 			
-			String sql = "INSERT INTO TRIFOLIAR(estado, titulo, descripcion, contenido, archivo, fecha_inicio, fecha_fin) "+
-					"VALUES('"+estado+"','"+titulo+"','"+descripcion+"','"+contenido+"','"+archivo+"','"+fecha_ini+"','"+fecha_fin+"');";
+			String sql = "INSERT INTO TRIFOLIAR(estado, titulo, contenido, archivo, fecha_inicio, fecha_fin) "+
+					"VALUES('"+estado+"','"+titulo+"','"+contenido+"','"+archivo+"','"+fecha_ini+"','"+fecha_fin+"');";
 			
 			try {
 				Conexion consulta = new Conexion();
 				result=consulta.InsertarRegistro(sql);
+				if(result.equals("0")){
+					result="{\"resultado\":\"OK\",\"descripcion\":\"Registro almacenado correctamente\"}";
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			out.println(result);
+			
+		}else if(action.equalsIgnoreCase("ModificarInicio")){
+			String result="";
+			PrintWriter out = response.getWriter();
+			String contenido=request.getParameter("contenido");
+			
+			
+			String sql = "INSERT INTO PaginaInicio(idPaginaInicio, contenido) "+
+					"VALUES("+1+",'"+contenido+"');";
+			
+			
+			
+			try {
+				Conexion consulta = new Conexion();
+				contenido=consulta.decodificar(contenido);
+				//System.out.println("modifica:"+contenido);
+				String sql2 = "UPDATE PaginaInicio SET contenido='"+contenido+"' WHERE idPaginaInicio=1 ";
+				result=consulta.InsertarRegistro(sql2);
 				if(result.equals("0")){
 					result="{\"resultado\":\"OK\",\"descripcion\":\"Registro almacenado correctamente\"}";
 				}
@@ -122,7 +156,6 @@ public class TablaTrifoliar extends HttpServlet {
 			String ID=request.getParameter("ID");
 			String titulo=request.getParameter("titulo");
 			String estado=request.getParameter("estado");
-			String descripcion=request.getParameter("descripcion");
 			String contenido=request.getParameter("contenido");
 			
 			
@@ -133,7 +166,7 @@ public class TablaTrifoliar extends HttpServlet {
 			
 			//System.out.println("path:"+archivo);
 			
-			String sql = "UPDATE TRIFOLIAR SET estado='"+estado+"', titulo='"+titulo+"', descripcion='"+descripcion+"', contenido='"+contenido+"', archivo='"+archivo+"', fecha_inicio='"+fecha_ini+"', fecha_fin='"+fecha_fin+"' WHERE idTRIFOLIAR="+ID;
+			String sql = "UPDATE TRIFOLIAR SET estado='"+estado+"', titulo='"+titulo+"', contenido='"+contenido+"', archivo='"+archivo+"', fecha_inicio='"+fecha_ini+"', fecha_fin='"+fecha_fin+"' WHERE idTRIFOLIAR="+ID;
 
 			try {
 				Conexion consulta = new Conexion();
@@ -219,13 +252,12 @@ public class TablaTrifoliar extends HttpServlet {
 			String idTRIFOLIAR = rs.getString(1);
 			String titulo = rs.getString(3);
 			String estado = rs.getString(2);
-			String descripcion = rs.getString(4);
-			String contenido = URLEncoder.encode(rs.getString(5), "UTF-8");
-			String fecha_inicio = rs.getString(7);
-			String fecha_fin = rs.getString(8);
+			String contenido = URLEncoder.encode(rs.getString(4), "UTF-8");
+			String fecha_inicio = rs.getString(6);
+			String fecha_fin = rs.getString(7);
 			
 			buffer+="<row id='"+idTRIFOLIAR+"'>";
-			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idTRIFOLIAR+",\""+titulo+"\",\""+estado+"\",\""+descripcion+"\""+")' value='"+idTRIFOLIAR+"' />]]></cell>";
+			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idTRIFOLIAR+",\""+titulo+"\",\""+estado+"\""+")' value='"+idTRIFOLIAR+"' />]]></cell>";
 			buffer+="<cell><![CDATA["+idTRIFOLIAR+"]]></cell>";
 			buffer+="<cell><![CDATA["+titulo+"]]></cell>";
 			buffer+="<cell><![CDATA["+estado+"]]></cell>";

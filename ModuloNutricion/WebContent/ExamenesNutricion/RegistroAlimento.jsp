@@ -4,7 +4,6 @@
 <html>
 
         <head>
-        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
@@ -68,7 +67,11 @@
 		
 			
 			$(document).ready(function($){
-				
+				 $("form").keypress(function(e) {
+				        if (e.which == 13) {
+				            return false;
+				        }
+				    });
 				$('#accordion-3').dcAccordion({
 					eventType: 'click',
 					autoClose: false,
@@ -155,28 +158,30 @@
         
         <div class="row col-sm-12">
         
- <nav class="col-sm-2">
+<nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Inicio.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
-				
-				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>	
+				<li><a href="/ModuloNutricion/ExamenesNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/TablaDieta.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Tablas de dietas </a></li>
 		    </ul>
          </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Citas </a>
         	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li ><a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="/ModuloNutricion/TablasNutricion/MantenimientoConsultaExterna.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Citas.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Nuevo</a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/cal.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Calendario </a></li>
+			</ul>
         </li>
-        <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
-        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Nuevo</a></li>
-				<li><a href="/ModuloNutricion/TablasNutricion/ListadoMultifasico.jsp" style="color:black;"><span class="glyphicon glyphicon-list-alt"></span>Registros</a></li>
-		    </ul>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
+        	
+        </li>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
+        </li>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Reporte.jsp"> <span class="glyphicon glyphicon-book"></span> Reportes </a>
+        	
         </li>
         </ul>
         </nav>
@@ -220,6 +225,25 @@
 		<input class="form-control input-sm" name="calorias" id="calorias" type="number" required/>
 	  </div>
      </div>
+     <div class="row">
+     	<div class="form-group">
+						   <label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Metrica</label>
+						    <select class="form-control input-sm" name="metrica" id="metrica" readonly>
+													<option value="1" >U</option>
+													<option value="2" >taza</option>
+													<option value="3" >cda/taza</option>
+													<option value="4" >rod</option>
+													<option value="5" >vaso</option>
+													<option value="6" >barra</option>
+													<option value="7" >paq</option>
+													<option value="8" >cda</option>
+													<option value="9" >onz</option>
+													<option value="10" >cdta</option>
+													<option value="11" >und</option>
+													<option value="12" >ml</option>
+												</select>
+						  </div>
+     </div>
      <div class="row">  
 	  <div class="form-group">
 		<label class="form-control input-sm" for="NCarnet" style="width: 150px;" >Grupo</label>
@@ -235,7 +259,7 @@
 													</select>
 	  </div>
      </div>
-     <<div class="row" align="center" id="guard" >
+     <div class="row" align="center" id="guard" >
       		<div class="form-group" >			
 							<button class="btn btn-default" onclick="Guardar()" >
 						     <img src="../imagenes/guardado.png" width="40" height="30" title="Guardar" />Guardar</button>
@@ -266,7 +290,7 @@
 var UsuarioSesion = "null";
 var IdUsuarioSesion = "null";
 var PerfilSesion ="null";
-
+var NomUsuario="null";
 function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
@@ -288,7 +312,7 @@ function VerificarSesion(){
 	UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
 	IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
 	PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
-	
+	NomUsuario = "<%=misession.getAttribute("NomUsuario")%>";
 	if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
 		
 		var x=decodeURIComponent(document.cookie).length;
@@ -301,7 +325,7 @@ function VerificarSesion(){
 			UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
     		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
     		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
-    		
+    		NomUsuario = getCookie(decodeURIComponent("CookieNomUsuario"));
     		if(PerfilSesion=="nutri"){
 				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
 			
@@ -316,7 +340,7 @@ function VerificarSesion(){
 		document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
 		document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
 		document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
-		
+		document.cookie = "CookieNomUsuario="+encodeURIComponent(NomUsuario);
 		if(PerfilSesion=="nutri"){
 			document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
 		
@@ -330,11 +354,11 @@ function CerrarSesion(){
 	<%misession.setAttribute("NUSUARIO", "null");%>
 	<%misession.setAttribute("NIDSUARIO", "null");%>
 	<%misession.setAttribute("NPERFIL", "null");%>
-	
+	<%misession.setAttribute("NomUsuario", "null");%>
 	document.cookie = "CookieUsuario=; max-age=0";
 	document.cookie = "CookieIDUsuario=; max-age=0";
 	document.cookie = "CookiePerfil=; max-age=0";
-	
+	document.cookie = "CookieNomUsuario=; max-age=0";
 	window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
 	
 }
@@ -374,7 +398,7 @@ rp: 10,
 showTableToggleBtn: true,
 width: 800,
 onSubmit: addFormData,
-height: 250,
+height: 100,
 }
 );
 
@@ -402,9 +426,10 @@ function Guardar(){
 	var nombre=document.getElementById('nombre').value;
 	var caloria=document.getElementById('calorias').value;
 	var grupo=document.getElementById('Grupo').value;
-	if(nombre!=""&&caloria!=""&&grupo!=""){
+	var metrica=document.getElementById('metrica').value;
+	if(nombre!=""&&caloria!=""&&grupo!=""&&metrica!=""){
 		//alert(nombre+","+caloria+","+grupo);
-		AñadirAlimentoBD(nombre,caloria,grupo);
+		AñadirAlimentoBD(nombre,caloria,grupo,metrica);
 	}else{
 		MensajeServidor(2,"Error, faltan campos a ingresar");
 	}
@@ -414,10 +439,12 @@ function Modificar(){
 	var nombre=document.getElementById('nombre').value;
 	var caloria=document.getElementById('calorias').value;
 	var grupo=document.getElementById('Grupo').value;
+	var metrica=document.getElementById('metrica').value;
 	
-	if(codigo!=""&&nombre!=""&&caloria!=""){
+	if(codigo!=""&&nombre!=""&&caloria!=""&&metrica!=""){
 		var action="modificar";
-		var cadena = ['a='+action,'codigo='+codigo,'alimento='+nombre,'caloria='+caloria,'grupo='+grupo].join('&');
+		alim=encodeURI(nombre);
+		var cadena = ['a='+action,'codigo='+codigo,'alimento='+nombre,'caloria='+caloria,'grupo='+grupo,'metrica='+metrica].join('&');
 
 
 		$.ajax({
@@ -429,6 +456,7 @@ function Modificar(){
 	        	if(data.resultado=='OK'){
 	        		limpiartabla();
 	        		MensajeServidor(1,data.descripcion);
+	        		NuevoRegistro();
 	        	}else{
 	        		MensajeServidor(2,data.descripcion);
 	        	}
@@ -443,9 +471,10 @@ function Modificar(){
 	
 	
 }
-function AñadirAlimentoBD(alim,cal,grupo){
-	var action="agregar";
-	var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
+function AñadirAlimentoBD(alim,cal,grupo,metrica){
+	var action="agregarTA";
+	alim=encodeURI(alim);
+	var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo,'metrica='+metrica].join('&');
 
 
 	$.ajax({
@@ -459,6 +488,7 @@ function AñadirAlimentoBD(alim,cal,grupo){
         		document.getElementById('nombre').value = "";
         		document.getElementById('calorias').value = "";
         		document.getElementById('Grupo').value = "";
+        		document.getElementById('metrica').value = "1";
         		limpiartabla();
         		MensajeServidor(1,"Registro almacenado correctamente");
         	}else{
@@ -496,6 +526,7 @@ function EliminarRegistro(){
 	        		 document.getElementById('Grupo').value = 1;
 	        		 idALIMENTO=0;
 	        		 limpiartabla();
+	        		 NuevoRegistro();
 	        	}else{
 	        		MensajeServidor(2,"Error, el alimento esta siendo utilizado en otro registro y no puede ser eliminado");
 	        		
@@ -519,11 +550,12 @@ function MensajeServidor(codigo,descripcion){
 		document.getElementById('mensajes').style.color = 'red';
 	}
 }
-function DatosSeleccionados(id,nomb,caloria,grup){
+function DatosSeleccionados(id,nomb,caloria,metrica,grup){
 	idALIMENTO=id;
 	document.getElementById('codigo').value = id;
-	document.getElementById('nombre').value = nomb;
+	document.getElementById('nombre').value = decodeURIComponent(nomb);
 	document.getElementById('calorias').value = caloria;
+	document.getElementById('metrica').value = metrica;
 	document.getElementById('Grupo').value = valorselect(grup);
 	document.getElementById('mensajes').innerHTML = '';
 	//document.getElementById("ini").style.display = 'none';
@@ -536,6 +568,7 @@ function NuevoRegistro(){
 	document.getElementById('codigo').value = "";
 	document.getElementById('nombre').value = "";
 	document.getElementById('calorias').value = "";
+	document.getElementById('metrica').value = "";
 	document.getElementById('Grupo').value = 1;
 	document.getElementById("guard").style.display = 'block';
 	document.getElementById("Mod").style.display = 'none';

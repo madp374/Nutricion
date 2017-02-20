@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Diagnosticos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DataEnfermedad">
+		<parameter name="DFIni" class="java.lang.String"/>
+		<parameter name="DFin" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT E.nombre as Enfermedad,
+IFNULL(sum(CASE WHEN P.sexo ='Masculino' THEN 1 ELSE 0 END), 0) AS Masculino,
+IFNULL(sum(CASE WHEN P.sexo ='Femenino' THEN 1 ELSE 0 END), 0) AS Femenino
+FROM REGISTRO_ENFERMEDAD R, ENFERMEDAD E, CONSULTA_EXTERNA C, PACIENTE P
+WHERE R.ENFERMEDAD_idENFERMEDAD=E.idENFERMEDAD
+AND R.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=C.idCONSULTA_EXTERNA
+AND C.PACIENTE_idPACIENTE=P.idPACIENTE
+AND C.fecha BETWEEN $P{DFIni} AND $P{DFin}
+group by E.nombre
+union all
+SELECT 'Total' as Enfermedad,
+IFNULL(sum(CASE WHEN P.sexo ='Masculino' THEN 1 ELSE 0 END), 0) AS Masculino,
+IFNULL(sum(CASE WHEN P.sexo ='Femenino' THEN 1 ELSE 0 END), 0) AS Femenino
+FROM REGISTRO_ENFERMEDAD R, ENFERMEDAD E, CONSULTA_EXTERNA C, PACIENTE P
+WHERE R.ENFERMEDAD_idENFERMEDAD=E.idENFERMEDAD
+AND R.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=C.idCONSULTA_EXTERNA
+AND C.PACIENTE_idPACIENTE=P.idPACIENTE
+AND C.fecha BETWEEN $P{DFIni} AND $P{DFin}]]>
+		</queryString>
+		<field name="Enfermedad" class="java.lang.String"/>
+		<field name="Masculino" class="java.math.BigDecimal"/>
+		<field name="Femenino" class="java.math.BigDecimal"/>
+		<group name="Enfermedad">
+			<groupExpression><![CDATA[$F{Enfermedad}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="FechaTexto" class="java.lang.String"/>
+	<parameter name="Autor" class="java.lang.String"/>
+	<parameter name="DatoFechaIni" class="java.lang.String"/>
+	<parameter name="DatoFechaFin" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT E.nombre as Enfermedad,
+IFNULL(sum(CASE WHEN P.sexo ='Masculino' THEN 1 ELSE 0 END), 0) AS Masculino,
+IFNULL(sum(CASE WHEN P.sexo ='Femenino' THEN 1 ELSE 0 END), 0) AS Femenino
+FROM REGISTRO_ENFERMEDAD R, ENFERMEDAD E, CONSULTA_EXTERNA C, PACIENTE P
+WHERE R.ENFERMEDAD_idENFERMEDAD=E.idENFERMEDAD
+AND R.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=C.idCONSULTA_EXTERNA
+AND C.PACIENTE_idPACIENTE=P.idPACIENTE
+AND C.fecha BETWEEN '2017-01-01' AND '2017-02-28'
+group by E.nombre]]>
+	</queryString>
+	<field name="Enfermedad" class="java.lang.String"/>
+	<field name="Masculino" class="java.math.BigDecimal"/>
+	<field name="Femenino" class="java.math.BigDecimal"/>
+	<group name="Enfermedad">
+		<groupExpression><![CDATA[$F{Enfermedad}]]></groupExpression>
+	</group>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa de Nutrición Clínica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área de Medicina Preventiva e Investigación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="293" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Salud. USAC]]></text>
+			</staticText>
+			<image>
+				<reportElement x="321" y="1" width="144" height="50"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/logo2.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="465" y="0" width="57" height="51"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/u-salud-logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<summary>
+		<band height="243">
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="126" y="54" width="360" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataEnfermedad">
+						<datasetParameter name="DFIni">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaIni}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DFin">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaFin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90">
+						<jr:columnHeader style="table 2_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="19"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Enfermedad]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Enfermedad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 2_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="19"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Masculino]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Masculino}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table 2_CH" height="21" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="19"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Femenino]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Femenino}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<staticText>
+				<reportElement x="89" y="0" width="376" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otros Diagnosticos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="89" y="17" width="376" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaTexto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="126" y="208" width="309" height="18"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Autor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="126" y="194" width="138" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Fuente: Base de datos MEPI]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -85,9 +85,30 @@ public class Multifasico extends HttpServlet {
 				String p12 = request.getParameter("p12");// sexo
 				String p13 = request.getParameter("p13");// fecha nac
 				String p14 = request.getParameter("p14");// facultad
-				String query2="insert into PACIENTE(idPACIENTE,usuario,password,nombre,fecha_nacimiento,sexo,estado,FACULTAD_idFACULTAD) "
-						+"values("+carnet+",'prueba3','prueba5','"+p11+"','"+p13+"','"+p12+"','activo',"+p14+");";
 				
+				String p41 = request.getParameter("p41");// cui
+				String p42 = request.getParameter("p42");// tipo de paciente
+				String p43 = request.getParameter("p43");// correo 
+				String p44 = request.getParameter("p44");// telefono
+				
+				String Sfi[]=p13.split("/");
+	  			
+	  			String fini=Sfi[2]+"-"+Sfi[1]+"-"+Sfi[0];
+	  			
+	  			String aux=",CUI";
+	  			String aux1="";
+	  			
+	  			if(p41.equalsIgnoreCase("")){
+	  				aux1=","+0+"";
+	  			}else{
+	  				
+	  				aux1=","+p41+"";
+	  			}
+	  		
+	  			
+				String query2="insert into PACIENTE(idPACIENTE,nombre,fecha_nacimiento,sexo,FACULTAD_idFACULTAD,correo,telefono,TipoPaciente"+aux+") "
+						+"values("+carnet+",'"+p11+"','"+fini+"','"+p12+"',"+p14+",'"+p43+"',"+p44+",'"+p42+"'"+aux1+");";
+				//System.out.println(query2);
 				con.Insertar(query2);
 			}
 			String query="insert into MULTIFASICO(fecha,talla,peso,IMC,peso_ideal,peso_maximo,tricipital,subescapular,abdomen,imc1,TIPO_EXAMEN_idTIPO_EXAMEN,DIAGNOSTICO_idDIAGNOSTICO,PACIENTE_idPACIENTE,USUARIO_idUSUARIO)"

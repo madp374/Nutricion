@@ -4,16 +4,31 @@
 <html>
 
         <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+       
+       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+       <link rel="shortcut icon" href="http://usalud.usac.edu.gt/favi.ico" type="image/x-icon">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>   
+
+  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+  
+ 
+        
 		<link href="../CSS/estilo.css" rel="stylesheet" type="text/css" media="screen">
 		
-		<link rel="stylesheet" media="all" type="text/css" href="../jquery/carrusel/style/style-demo.css">
+		
 
-	    <script src="../jquery/carrusel/script/jquery-1.11.1.js"></script>
-	    <script src="../jquery/carrusel/script/jquery.easing-1.3.js"></script>
-	    <script src="../jquery/carrusel/script/jquery.mousewheel-3.1.12.js"></script>
-	    <script src="../jquery/carrusel/script/jquery.jcarousellite.js"></script>
+	  	
+	  	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	    
 	   <link href="../jquery/menuacordeon/css/dcaccordion.css" rel="stylesheet" type="text/css" />
 	   <script type='text/javascript' src='../jquery/menuacordeon/js/jquery.cookie.js'></script>
@@ -23,6 +38,9 @@
     	<style type="text/css">
 			#titulos { color: black; word-spacing: -5 px; letter-spacing: 3px;}
 			#header_carousel { float:right; }
+			#MenuPrueba{
+				background-color: #E0E0E0;
+			}
 			.foto-inicio{	width:100%; height:100px; 	}
 			.page-header {
 			    padding-bottom: 9px;
@@ -32,14 +50,19 @@
 			    width: 70%;
 			    padding-top:15px;
 			}
-			.panel-heading {
-			    padding: 6px 15px;
-			    }
-			
 			.input-sm {
 			    height: 26px;
 			    font-size: 11px;
 			}
+			.btn-default {
+			    color: #333;
+			    background-color: #D8D6D6;
+			    border-color: #ccc;
+			    font-weight:bold;
+			}
+			.panel-heading {
+			    padding: 6px 15px;
+			    }
 			 ul, ul li {
 				 color: black;
 			}
@@ -55,15 +78,7 @@
 		
 	
 		<script>	
-			$(function() {
-				$(".menu_header").jCarouselLite({
-					hoverPause:true,
-					visible: 4,
-					auto:500,
-					speed:3000,
-					scroll:1
-					});
-				});	
+			
 			$(document).ready(function($){
 				
 				$('#accordion-3').dcAccordion({
@@ -79,17 +94,39 @@
 				            return false;
 				        }
 				    });
+				 $("#MensajeServidor").on('hide.bs.modal', function () {
+					 AccionPagina();
+			    });
 			});
     	</script>
     	
     	<link href="../jquery/menuacordeon/css/skins/blue.css" rel="stylesheet" type="text/css" />
 		<link href="../jquery/menuacordeon/css/skins/graphite.css" rel="stylesheet" type="text/css" />
 		<link href="../jquery/menuacordeon/css/skins/grey.css" rel="stylesheet" type="text/css" />
-
+		 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
         </head>
 
         <body onload="CargaInicio()">
-        
+        <div class="modal fade" id="MensajeServidor" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+								    	<table>
+							        	<tr><td><img src="../images/ok.jpg" width="50" height="50" /></td><td>&nbsp;<div id="MensajeAux"></div></td></tr>
+							        	
+							        </table>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
         <div class="container">
          <div class="panel2 panel-body">
 <header class="row col-sm-12">
@@ -165,7 +202,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Datos Generales</div>
 		<div class="panel-body" >
-			 <div class="row">  
+			 <div class="row-fluid">  
       		 	&nbsp;&nbsp;
       		 	<div class="form-group">
 					<label  for="NCarnet">Carnet/Codigo Personal</label>
@@ -187,7 +224,7 @@
 				    <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 70px;" readonly  />
 				</div>
 				</div>
-				<div class="row">
+				<div class="row-fluid">
 				&nbsp;&nbsp;
 				<div class="form-group">
 				    <label for=LNombre>Facultad/Dependencia</label>
@@ -225,7 +262,7 @@
 	<div class="panel-heading">Datos objetivos</div>
 		<div class="panel-body" align="center">
 			      	
-		  <div class="row">  
+		  <div class="row-fluid">  
 			<div class="form-group">
 				<label for="Ltalla">Talla (m)<br>&nbsp;</label>
 				<input class="form-control input-sm" id="talla" name="talla" type="number"  min="0" max="5" step="any"  style="width: 70px;" onkeyup="ValidarDecimal()" required/>
@@ -260,9 +297,7 @@
 					 <label for="LDiag">Diagnostico<br>&nbsp;</label>
 					 <input class="form-control input-sm" id="Diag" name="Diag" type="text"  readonly style="width: 85px;" required/>            
 				</div>
-			</div>	
-			
-			<div class="row"> 
+			 
 			<div class="form-group">
 				<label for="LpesoM">Cintura<br>abdominal</label>
 				<input class="form-control input-sm" id="cintura" name="cintura" min="0" type="number" step="any"   style="width: 70px;" required/>               
@@ -301,7 +336,7 @@
 <div class="panel panel-primary">
 	<div class="panel-heading">Plan</div>
 		<div class="panel-body" align="center">
-		  <div class="row">
+		  <div class="row-fluid">
 			<div class="form-group">
 				<label for="Ltricipital">Datos subjetivos</label>
 				<textarea class="form-control input-sm" name="datossubjetivos" id="datossubjetivos" cols="20" rows="2" maxlength="240"></textarea>
@@ -352,7 +387,7 @@
         	var UsuarioSesion = "null";
     		var IdUsuarioSesion = "null";
     		var PerfilSesion ="null";
-    		
+    		var ERRORSQL=false;
     		function getCookie(cname) {
                 var name = cname + "=";
                 var ca = document.cookie.split(';');
@@ -617,6 +652,7 @@
         	}
         	function Guardar(){
         		var action="guardar";
+        		ERRORSQL=false;
         		var x = document.getElementById("TipoExamen").selectedIndex;
         	    var y = document.getElementById("TipoExamen").options;
         	    
@@ -664,8 +700,9 @@
         	        dataType: 'json',
         	        success: function(data){
         	        	if(data.resultado=='OK'){
-        	        		alert(data.mensaje);
-        	        		location.reload();
+        	        		MostrarMensajeServidor(data.mensaje);
+        	        		//alert(data.mensaje);
+        	        		//location.reload();
         	        	}else{
         	        		alert("ERROR al almacenar en el servidor");
         	        	}
@@ -959,6 +996,19 @@
         		 return false;
                
         	}
+        }
+        function MostrarMensajeServidor(texto){
+        	document.getElementById('MensajeAux').innerHTML  = texto;
+        	jQuery('#MensajeServidor').modal("show");
+        	
+           
+        } 
+        function  AccionPagina(){
+        	if(ERRORSQL==false){
+        		location.reload();
+        		
+        	}
+        	
         }
         </script>
             

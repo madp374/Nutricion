@@ -73,11 +73,22 @@ public class Alimento extends HttpServlet {
 		String alimen = request.getParameter("alimento"); //accion
 		String cal = request.getParameter("caloria"); //accion
 		String grupo = request.getParameter("grupo"); //accion
+		String metrica = request.getParameter("metrica"); //accion
 		
 		if(accion.equals("agregar")){
-			PrintWriter out = response.getWriter();
 			Conexion query = new Conexion();
-			String resultado = query.RegistrarIDAlimento(alimen.toLowerCase(),cal,grupo);
+			PrintWriter out = response.getWriter();
+			
+			String resultado = query.RegistrarIDAlimento(alimen.toLowerCase(),cal,grupo,metrica);
+			//System.out.println(resultado);
+
+			out.println(resultado);
+		}else if(accion.equals("agregarTA")){
+			Conexion query = new Conexion();
+			String auxa=query.decodificar(alimen);
+			PrintWriter out = response.getWriter();
+			
+			String resultado = query.RegistrarIDAlimento(auxa.toLowerCase(),cal,grupo,metrica);
 			//System.out.println(resultado);
 
 			out.println(resultado);

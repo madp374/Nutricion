@@ -63,11 +63,11 @@ CREATE PROCEDURE IngresarAntropometria(IN DietaBaja varchar(45),
                                     IN talla FLOAT,
                                    IN peso FLOAT,
                                    IN CircunferenciaMuñeca FLOAT,
-                                   IN ConstitucionOsea varchar(45) ,
+                                   IN EdadMetabolica FLOAT ,
                                    OUT resultado TEXT)
 BEGIN
-insert into ANTROPOMETRIA(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,ConstitucionOsea) 
-values(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,ConstitucionOsea);
+insert into ANTROPOMETRIA(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,EdadMetabolica) 
+values(DietaBaja,DietaAlta,talla,peso,CircunferenciaMuñeca,EdadMetabolica);
 SET resultado = (select LAST_INSERT_ID());
 END $
 DELIMITER ;
@@ -97,7 +97,8 @@ GRANT ALL ON NutricionUsalud.IngresarRegistro TO nutricionprueba@'localhost';
 DELIMITER $
 CREATE PROCEDURE Registrar_fruta(IN nombres varchar(100) ,
 									IN caloria integer,
-                                    IN grupo integer ,
+                                    IN grupo integer,
+                                    IN metrica integer,
                                    OUT resultado TEXT)
 BEGIN
 
@@ -106,8 +107,8 @@ set @valor=(SELECT nombre FROM ALIMENTO where nombre=nombres);
 IF @valor = nombres THEN
     SET resultado = 'ERROR';
 ELSE 
-     insert into ALIMENTO(nombre,caloria,GrupoAlimenticio_idGrupoAlimenticio) 
-     values(nombres,caloria,grupo);
+     insert into ALIMENTO(nombre,caloria,GrupoAlimenticio_idGrupoAlimenticio,PORCION_idPORCION) 
+     values(nombres,caloria,grupo,metrica);
      SET resultado = (select LAST_INSERT_ID());
 END IF;
 
@@ -160,3 +161,47 @@ DELIMITER ;
 
 GRANT EXECUTE ON PROCEDURE NutricionUsalud.Registrar_enfermedad TO 'nutricionprueba'@'localhost';
 GRANT ALL ON NutricionUsalud.Registrar_enfermedad TO nutricionprueba@'localhost'; 
+
+DELIMITER $
+CREATE PROCEDURE Tomar_TallaPeso(IN carnets integer ,
+                                   OUT resultado TEXT)
+BEGIN
+
+set @valorCE=(select E.idCONSULTA_EXTERNA
+                from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P, FACULTAD F
+                where E.PACIENTE_idPACIENTE=P.idPACIENTE
+                AND E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA
+                AND P.FACULTAD_idFACULTAD=F.idFACULTAD
+                AND E.PACIENTE_idPACIENTE=carnets
+                ORDER BY E.idCONSULTA_EXTERNA DESC limit 1);
+
+set @valorRE=(SELECT E.idCONSULTA_EXTERNA
+                FROM RECONSULTA A, CONSULTA_EXTERNA E, PACIENTE P, FACULTAD F
+                where E.PACIENTE_idPACIENTE=carnets 
+                AND A.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA
+                AND E.PACIENTE_idPACIENTE=P.idPACIENTE
+                AND P.FACULTAD_idFACULTAD=F.idFACULTAD
+                ORDER BY A.idRECONSULTA DESC limit 1);
+
+IF @valorCE = @valorRE THEN
+    SET resultado = (SELECT CONCAT(P.idPACIENTE,',',P.nombre,',',F.nombre,',',A.talla,',',A.peso,',',YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1),',',P.sexo,',',P.fecha_nacimiento ) AS DATOS
+                    FROM RECONSULTA A, CONSULTA_EXTERNA E, PACIENTE P, FACULTAD F
+                    where E.PACIENTE_idPACIENTE=carnets
+                    AND A.CONSULTA_EXTERNA_idCONSULTA_EXTERNA=E.idCONSULTA_EXTERNA
+                    AND E.PACIENTE_idPACIENTE=P.idPACIENTE
+                    AND P.FACULTAD_idFACULTAD=F.idFACULTAD
+                    ORDER BY A.idRECONSULTA DESC limit 1);
+ELSE 
+     SET resultado = (select CONCAT(P.idPACIENTE,',',P.nombre,',',F.nombre,',',A.talla,',',A.peso,',',YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1),',',P.sexo,',',P.fecha_nacimiento) AS DATOS 
+                        from CONSULTA_EXTERNA E, ANTROPOMETRIA A, PACIENTE P, FACULTAD F
+                        where E.PACIENTE_idPACIENTE=P.idPACIENTE
+                        AND E.ANTROPOMETRIA_idANTROPOMETRIA=A.idANTROPOMETRIA
+                        AND P.FACULTAD_idFACULTAD=F.idFACULTAD
+                        AND E.PACIENTE_idPACIENTE=carnets
+                        ORDER BY E.idCONSULTA_EXTERNA DESC limit 1);
+END IF;
+
+END $
+DELIMITER ;
+GRANT EXECUTE ON PROCEDURE NutricionUsalud.Tomar_TallaPeso TO 'nutricionprueba'@'localhost';
+GRANT ALL ON NutricionUsalud.Tomar_TallaPeso TO nutricionprueba@'localhost'; 

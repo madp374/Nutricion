@@ -89,6 +89,102 @@ public class Reconsulta extends HttpServlet {
 			//System.out.println(result);
 			out.println(result);
 			
+		}else if(accion.equalsIgnoreCase("CargarDatosGeneralesCarnet")){
+			String carnet = validar_numero(request.getParameter("carnet"));
+			Conexion query = new Conexion();
+			result=query.LlamadaUltimoTallaPeso(carnet);
+			
+			String[] Contenido = result.split(",");
+			int longitud=Contenido.length;
+			String resultado="";
+			String result2="";
+			if(longitud>7){
+				String talla="";
+			    String peso="";
+			    
+			    String idPACIENTE="";
+			    String nombre="";
+			    String edad="";
+			    String sexo="";
+			    String facultad="";
+			    String fechaNac="";
+			    
+			    talla=Contenido[3];
+		    	peso=Contenido[4];
+		    	
+		    	idPACIENTE=Contenido[0];
+			    nombre=Contenido[1];
+			    edad=Contenido[5];
+			    sexo=Contenido[6];
+			    facultad=Contenido[2];
+			    fechaNac=Contenido[7];
+			    
+			    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla
+			    		+"\",\"idPACIENTE\":\""+idPACIENTE
+			    		+"\",\"nombre\":\""+nombre
+			    		+"\",\"edad\":\""+edad
+			    		+"\",\"sexo\":\""+sexo
+			    		+"\",\"facultad\":\""+facultad
+			    		+"\",\"peso\":\""+peso
+			    		+"\",\"fechaNac\":\""+fechaNac+"\"";
+			    
+			    result2+=query.ObtenerRegistrosReconsultaCE(carnet);
+			    result2+=query.ObtenerRegistrosReconsultaCE2(carnet);
+			    result2=resultado+result2+"}";
+			}else{
+				//ERROR de carga
+				result2="{\"resultado\":\"ERROR\",\"mensaje\":\"Registro eliminado\"}";
+			}
+			//System.out.println(result2);
+			
+			out.println(result2);
+		}else if(accion.equalsIgnoreCase("CargaNuevosDatos")){
+			String carnet = validar_numero(request.getParameter("carnet"));
+			Conexion query = new Conexion();
+			result=query.LlamadaUltimoTallaPeso(carnet);
+			
+			String[] Contenido = result.split(",");
+			int longitud=Contenido.length;
+			String resultado="";
+			String result2="";
+			if(longitud>7){
+				String talla="";
+			    String peso="";
+			    
+			    String idPACIENTE="";
+			    String nombre="";
+			    String edad="";
+			    String sexo="";
+			    String facultad="";
+			    String fechaNac="";
+			    
+			    talla=Contenido[3];
+		    	peso=Contenido[4];
+		    	
+		    	idPACIENTE=Contenido[0];
+			    nombre=Contenido[1];
+			    edad=Contenido[5];
+			    sexo=Contenido[6];
+			    facultad=Contenido[2];
+			    fechaNac=Contenido[7];
+			    
+			    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla
+			    		+"\",\"idPACIENTE\":\""+idPACIENTE
+			    		+"\",\"nombre\":\""+nombre
+			    		+"\",\"edad\":\""+edad
+			    		+"\",\"sexo\":\""+sexo
+			    		+"\",\"facultad\":\""+facultad
+			    		+"\",\"peso\":\""+peso
+			    		+"\",\"fechaNac\":\""+fechaNac+"\"";
+			    
+			    result2=resultado+"}";
+			}else{
+				//ERROR de carga
+				result2="{\"resultado\":\"ERROR\",\"mensaje\":\"Registro eliminado\"}";
+			}
+			//System.out.println(result2);
+			
+			out.println(result2);
 		}else if(accion.equalsIgnoreCase("CargarEdicion")){
 			Conexion query = new Conexion();
 			result=query.CargaReconsulta(idCE);
@@ -98,21 +194,14 @@ public class Reconsulta extends HttpServlet {
 			String IdBorrar=request.getParameter("ID");
 			String sql = "delete from RECONSULTA where idRECONSULTA="+IdBorrar+"; ";
 
-			String result2="";
-			
-			try {
-				Conexion consulta = new Conexion();
-				consulta.Eliminar(sql); 
-				result2="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
-				//System.out.println("resultado eliminar:");
-			} catch (Exception e) {
-				e.printStackTrace();
-				result2="{\"resultado\":\"Error\",\"mensaje\":\"Error al eliminiar\"}";
+			Conexion consulta = new Conexion();
+			result=consulta.InsertarRegistro(sql);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\",\"descripcion\":\"Registro eliminado correctamente\"}";
 			}
 			
+			out.println(result);
 			
-			//System.out.println(result);
-			out.println(result2);
 			
 		}else if(accion.equalsIgnoreCase("modificar")){
 			//String p1="(SELECT idTIPO_EXAMEN FROM TIPO_EXAMEN where nombre='"+request.getParameter("p1")+"')"; //tipo examen
@@ -142,7 +231,7 @@ public class Reconsulta extends HttpServlet {
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
+				result="{\"resultado\":\"OK\",\"descripcion\":\"Registro modificado correctamente\"}";
 			}
 			
 			out.println(result);
@@ -170,14 +259,23 @@ public class Reconsulta extends HttpServlet {
 					+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 					+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
 			//System.out.println(cadena);
+			String IDCarnet = validar_numero(request.getParameter("IDCarnet"));
+			String IDCE="(SELECT idCONSULTA_EXTERNA "
+							+" FROM CONSULTA_EXTERNA "
+							+" WHERE PACIENTE_idPACIENTE="+IDCarnet 
+							+" ORDER BY idCONSULTA_EXTERNA DESC LIMIT 1)";
 			
 			String query="insert into RECONSULTA(fecha, talla, peso, IMC, pesoganado, pesoperdido, cintura, porcentajegrasa, porcentajeagua, grasavisceral, masaosea, vettanita, datossubjetivos, tratamiento, educacion,imc1, CONSULTA_EXTERNA_idCONSULTA_EXTERNA, USUARIO_idUSUARIO) " 
-					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"','"+p30+"',"+idCE+","+p0+");";
+					+"VALUES(CURDATE(),"+p2+","+p3+","+p4+","+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+",'"+p13+"','"+p14+"','"+p15+"','"+p30+"',"+IDCE+","+p0+");";
 			
 			Conexion consulta = new Conexion();
-			consulta.Insertar(query);
 			
-			result="{\"resultado\":\"OK\",\"mensaje\":\"Registro almacenado correctamente\"}";
+			
+			result=consulta.InsertarRegistro(query);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\",\"descripcion\":\"Registro almacenado correctamente\"}";
+			}
+			
 			out.println(result);
 			
 		}else{

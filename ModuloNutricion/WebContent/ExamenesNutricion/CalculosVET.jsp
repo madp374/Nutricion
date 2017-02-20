@@ -170,7 +170,7 @@
    <div class="panel panel-primary">
       <div class="panel-heading">Datos Generales</div>
       <div class="panel-body">
-      		 <div class="row">  
+      		 <div class="row-fluid">  
       		 	&nbsp;&nbsp;
       		 	<div class="form-group">
 					<label  for="NCarnet">Carnet/Codigo Personal</label>
@@ -198,11 +198,11 @@
 				</div>
 				 
 				  </div> 
-	      	<div class="row">
+	      	<div class="row-fluid">
 	      		&nbsp;&nbsp;
 				<div class="form-group">
 					  <label for="LFecha">Fecha</label>
-					  <input class="form-control input-sm" id="fecha" type="text" readonly/>
+					  <input class="form-control input-sm" id="fecha" type="text" style="width: 80px;" readonly/>
 				  </div>
 			
 			&nbsp;
@@ -248,35 +248,35 @@
 	
 		<div class="row">
 			<div class="col-sm-4" >
-				<div class="row">
+				<div class="row-fluid">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Lvet">VET<br>&nbsp;</label>
-						<input class="form-control input-sm" id="vet" name="vet" type="number" step="any"  style="width: 80px;" onkeydown="CalculosVET(event)" required/>   
+						<input class="form-control input-sm" id="vet" name="vet" type="number" min="0" step="any"  style="width: 80px;" onkeydown="CalculosVET(event)" required/>   
 					</div>
 					&nbsp;
 					<div class="form-group">
 						<label for="Lveta">VET  + Actividad<br>fisica</label>
-						<input class="form-control input-sm" id="veta" name="veta" type="number" step="any"  style="width: 80px;" />   
+						<input class="form-control input-sm" id="veta" name="veta" type="number" min="0" step="any"  style="width: 80px;" />   
 					</div>
 				</div>
-				<div class="row">
+				<div class="row-fluid">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>bajo peso</label>
-						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number"   style="width: 80px;" />   
+						<input class="form-control input-sm" id="ReadBP" name="ReadBP" type="number" min="0"  style="width: 80px;" />   
 					</div>
 					&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>sobrepeso</label>
-						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"    style="width: 80px;" />   
+						<input class="form-control input-sm" id="ReadSP" name="ReadSP" type="number"  min="0"  style="width: 80px;" />   
 					</div>
 				</div>
-				<div class="row">
+				<div class="row-fluid">
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<label for="Ltalla">Readecuacion<br>obesidad</label>
-						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"   style="width: 80px;" />   
+						<input class="form-control input-sm" id="ReadOb" name="ReadOb" type="number"  min="0" style="width: 80px;" />   
 					</div>
 					&nbsp;
 					<div class="form-group">
@@ -292,10 +292,9 @@
 			</div>
 			
 			<div class="col-sm-7" >
-				<div class="row">
-				<div class="form-group">
+				
 					<div class="table-responsive">
-					<table class="table table-bordered" width="100%" style="font-size:8pt;" >
+					<table class="table table-bordered"  style="font-size:8pt;" >
 						<thead>
 							<tr>
 								<th>Nutrientes</th>
@@ -314,7 +313,7 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		% <input class="form-control input-sm" id="porCarbo" name="porCarbo" type="number"   style="width: 65px;" onkeydown="CalculoCarbo(event)" />                
+								  		% <input class="form-control input-sm" id="porCarbo" name="porCarbo" type="number" min="0"  style="width: 65px;" onkeydown="CalculoCarbo(event)" />                
 								  	</div>
 								</td>
 								<td align="center">
@@ -337,7 +336,7 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		% <input class="form-control input-sm" id="porProte" name="porProte" type="number"   style="width: 65px;" onkeydown="CalculoProte(event)" />                
+								  		% <input class="form-control input-sm" id="porProte" name="porProte" type="number" min="0"  style="width: 65px;" onkeydown="CalculoProte(event)" />                
 								  	</div>
 								</td>
 								<td align="center">
@@ -360,7 +359,7 @@
 								</td>
 								<td align="center">
 									<div class="form-group">
-								  		% <input class="form-control input-sm" id="porGrasa" name="porGrasa" type="number"   style="width: 65px;" onkeydown="CalculoGrasa(event)"/>                
+								  		% <input class="form-control input-sm" id="porGrasa" name="porGrasa" type="number"  min="0" style="width: 65px;" onkeydown="CalculoGrasa(event)"/>                
 								  	</div>
 								</td>
 								<td align="center">
@@ -396,8 +395,7 @@
 						</tbody>
 					</table>
 					</div>
-				</div>
-				</div>
+				
 			</div>
 		</div>
 	
@@ -414,8 +412,7 @@
   <div class="row" align="center">
 				  <div id="SelKcal"></div>
 			</div>     
-  <div class="row">
-  	<div class="form-group">
+
   		<div class="table-responsive">
 			<table class="table table-bordered" width="90%" style="font-size:8pt;">  
 				<thead>
@@ -449,7 +446,7 @@
 						<td align="center">
 									<div class="form-group">
 										&nbsp;<br>
-								  		<input class="form-control input-sm" id="porLacteoSG" name="porLacteoSG" type="number"   style="width: 50px;" onkeydown="CalculoLacteoSinGrasa(event)" />                  
+								  		<input class="form-control input-sm" id="porLacteoSG" name="porLacteoSG" type="number"  min="0" style="width: 50px;" onkeydown="CalculoLacteoSinGrasa(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -475,31 +472,31 @@
 						<td align="center">
 									<div class="form-group">
 										&nbsp;<br>
-								  		<input class="form-control input-sm" id="de1" name="de1"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra1',event)"  />                  
+								  		<input class="form-control input-sm" id="de1" name="de1"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra1',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra1" name="ra1"  type="number"  style="width: 50px;" onkeydown="desplazarse('az1',event)"  />                  
+								  		<input class="form-control input-sm" id="ra1" name="ra1"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az1',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az1" name="az1"  type="number"  style="width: 50px;"  onkeydown="desplazarse('rp1',event)" />                  
+								  		<input class="form-control input-sm" id="az1" name="az1"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp1',event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp1" name="rp1"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce1',event)"  />                  
+								  		<input class="form-control input-sm" id="rp1" name="rp1"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce1',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce1" name="ce1"  type="number"  style="width: 50px;"  onkeydown="desplazarse('de2',event)" />                  
+								  		<input class="form-control input-sm" id="ce1" name="ce1"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de2',event)" />                  
 								  	</div>
 						</td>
 					</tr>
@@ -513,7 +510,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porLacteoE" name="porLacteoE" type="number"   style="width: 50px;" onkeydown="CalculoLacteoEntero(event)" />                  
+								  		<input class="form-control input-sm" id="porLacteoE" name="porLacteoE" type="number"  min="0" style="width: 50px;" onkeydown="CalculoLacteoEntero(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -539,31 +536,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de2" name="de2"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra2',event)"  />                  
+								  		<input class="form-control input-sm" id="de2" name="de2"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra2',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra2" name="ra2"  type="number"  style="width: 50px;" onkeydown="desplazarse('az2',event)"  />                  
+								  		<input class="form-control input-sm" id="ra2" name="ra2"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az2',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az2" name="az2"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp2',event)"   />                  
+								  		<input class="form-control input-sm" id="az2" name="az2"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp2',event)"   />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp2" name="rp2"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce2',event)"  />                  
+								  		<input class="form-control input-sm" id="rp2" name="rp2"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce2',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce2" name="ce2"  type="number"  style="width: 50px;" onkeydown="desplazarse('de3',event)"  />                  
+								  		<input class="form-control input-sm" id="ce2" name="ce2"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de3',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -577,7 +574,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porVege" name="porVege" type="number"   style="width: 50px;" onkeydown="CalculoVegetal(event)" />                  
+								  		<input class="form-control input-sm" id="porVege" name="porVege" type="number"   style="width: 50px;" min="0" onkeydown="CalculoVegetal(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -603,31 +600,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de3" name="de3"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra3',event)"  />                  
+								  		<input class="form-control input-sm" id="de3" name="de3"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra3',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra3" name="ra3"  type="number"  style="width: 50px;" onkeydown="desplazarse('az3',event)"  />                  
+								  		<input class="form-control input-sm" id="ra3" name="ra3"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az3',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az3" name="az3"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp3',event)"  />                  
+								  		<input class="form-control input-sm" id="az3" name="az3"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp3',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp3" name="rp3"  type="number"  style="width: 50px;"  onkeydown="desplazarse('ce3',event)" />                  
+								  		<input class="form-control input-sm" id="rp3" name="rp3"  type="number"  style="width: 50px;" min="0"  onkeydown="desplazarse('ce3',event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce3" name="ce3"  type="number"  style="width: 50px;" onkeydown="desplazarse('de4',event)"  />                  
+								  		<input class="form-control input-sm" id="ce3" name="ce3"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de4',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -641,7 +638,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porFruta" name="porFruta" type="number"   style="width: 50px;" onkeydown="CalculoFruta(event)"/>                  
+								  		<input class="form-control input-sm" id="porFruta" name="porFruta" type="number" min="0"  style="width: 50px;" onkeydown="CalculoFruta(event)"/>                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -667,31 +664,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de4" name="de4"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra4',event)"  />                  
+								  		<input class="form-control input-sm" id="de4" name="de4"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra4',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra4" name="ra4"  type="number"  style="width: 50px;" onkeydown="desplazarse('az4',event)"  />                  
+								  		<input class="form-control input-sm" id="ra4" name="ra4"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az4',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az4" name="az4"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp4',event)"  />                  
+								  		<input class="form-control input-sm" id="az4" name="az4"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp4',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp4" name="rp4"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce4',event)"  />                  
+								  		<input class="form-control input-sm" id="rp4" name="rp4"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce4',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce4" name="ce4"  type="number"  style="width: 50px;" onkeydown="desplazarse('de5',event)"  />                  
+								  		<input class="form-control input-sm" id="ce4" name="ce4"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de5',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -705,7 +702,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porCereal" name="porCereal" type="number"   style="width: 50px;" onkeydown="CalculoCereal(event)" />                  
+								  		<input class="form-control input-sm" id="porCereal" name="porCereal" type="number"  min="0" style="width: 50px;" onkeydown="CalculoCereal(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -731,31 +728,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de5" name="de5"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra5',event)"  />                  
+								  		<input class="form-control input-sm" id="de5" name="de5"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra5',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra5" name="ra5"  type="number"  style="width: 50px;" onkeydown="desplazarse('az5',event)"  />                  
+								  		<input class="form-control input-sm" id="ra5" name="ra5"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az5',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az5" name="az5"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp5',event)"  />                  
+								  		<input class="form-control input-sm" id="az5" name="az5"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp5',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp5" name="rp5"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce5',event)"  />                  
+								  		<input class="form-control input-sm" id="rp5" name="rp5"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce5',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce5" name="ce5"  type="number"  style="width: 50px;" onkeydown="desplazarse('de6',event)"  />                  
+								  		<input class="form-control input-sm" id="ce5" name="ce5"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de6',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -769,7 +766,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porCarne" name="porCarne" type="number"   style="width: 50px;" onkeydown="CalculoCarne(event)" />                  
+								  		<input class="form-control input-sm" id="porCarne" name="porCarne" type="number" min="0"  style="width: 50px;" onkeydown="CalculoCarne(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -795,31 +792,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de6" name="de6"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra6',event)"   />                  
+								  		<input class="form-control input-sm" id="de6" name="de6"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra6',event)"   />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra6" name="ra6"  type="number"  style="width: 50px;" onkeydown="desplazarse('az6',event)"  />                  
+								  		<input class="form-control input-sm" id="ra6" name="ra6"  type="number"  style="width: 50px;"  min="0" onkeydown="desplazarse('az6',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az6" name="az6"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp6',event)"  />                  
+								  		<input class="form-control input-sm" id="az6" name="az6"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('rp6',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp6" name="rp6"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce6',event)"  />                  
+								  		<input class="form-control input-sm" id="rp6" name="rp6"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce6',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce6" name="ce6"  type="number"  style="width: 50px;" onkeydown="desplazarse('de7',event)"  />                  
+								  		<input class="form-control input-sm" id="ce6" name="ce6"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de7',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -833,7 +830,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porGrasa1" name="porGrasa1" type="number"  style="width: 50px;" onkeydown="CalculoGrasa1(event)" />                  
+								  		<input class="form-control input-sm" id="porGrasa1" name="porGrasa1" type="number"  style="width: 50px;" min="0" onkeydown="CalculoGrasa1(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -859,31 +856,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de7" name="de7"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra7',event)"  />                  
+								  		<input class="form-control input-sm" id="de7" name="de7"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ra7',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra7" name="ra7"  type="number"  style="width: 50px;" onkeydown="desplazarse('az7',event)"  />                  
+								  		<input class="form-control input-sm" id="ra7" name="ra7"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('az7',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az7" name="az7"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp7',event)"  />                  
+								  		<input class="form-control input-sm" id="az7" name="az7"  type="number"  style="width: 50px;"  min="0" onkeydown="desplazarse('rp7',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp7" name="rp7"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce7',event)"  />                  
+								  		<input class="form-control input-sm" id="rp7" name="rp7"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('ce7',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce7" name="ce7"  type="number"  style="width: 50px;" onkeydown="desplazarse('de8',event)"  />                  
+								  		<input class="form-control input-sm" id="ce7" name="ce7"  type="number"  style="width: 50px;" min="0" onkeydown="desplazarse('de8',event)"  />                  
 								  	</div>
 						</td>
 					</tr>
@@ -897,7 +894,7 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="porAzucar" name="porAzucar" type="number"   style="width: 50px;" onkeydown="CalculoAzucar(event)" />                  
+								  		<input class="form-control input-sm" id="porAzucar" name="porAzucar" type="number" min="0"  style="width: 50px;" onkeydown="CalculoAzucar(event)" />                  
 								  	</div>
 						</td>
 						<td align="center">
@@ -923,31 +920,31 @@
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="de8" name="de8"  type="number"  style="width: 50px;" onkeydown="desplazarse('ra8',event)"  />                  
+								  		<input class="form-control input-sm" id="de8" name="de8"  type="number" min="0" style="width: 50px;" onkeydown="desplazarse('ra8',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ra8" name="ra8"  type="number"  style="width: 50px;" onkeydown="desplazarse('az8',event)"  />                  
+								  		<input class="form-control input-sm" id="ra8" name="ra8"  type="number" min="0" style="width: 50px;" onkeydown="desplazarse('az8',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="az8" name="az8"  type="number"  style="width: 50px;" onkeydown="desplazarse('rp8',event)"  />                  
+								  		<input class="form-control input-sm" id="az8" name="az8"  type="number" min="0" style="width: 50px;" onkeydown="desplazarse('rp8',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="rp8" name="rp8"  type="number"  style="width: 50px;" onkeydown="desplazarse('ce8',event)"  />                  
+								  		<input class="form-control input-sm" id="rp8" name="rp8"  type="number" min="0" style="width: 50px;" onkeydown="desplazarse('ce8',event)"  />                  
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
 									&nbsp;<br>
-								  		<input class="form-control input-sm" id="ce8" name="ce8"  type="number"  style="width: 50px;"   />                  
+								  		<input class="form-control input-sm" id="ce8" name="ce8"  type="number" min="0" style="width: 50px;"   />                  
 								  	</div>
 						</td>
 					</tr>
@@ -991,26 +988,24 @@
 						
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpProte" name="TpProte"   style="width: 45px;" readonly  />                 
+								  		<label>%</label><input class="form-control input-sm" id="TpProte" name="TpProte"   style="width: 45px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		&nbsp;&nbsp;&nbsp;&nbsp;%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control input-sm" id="TpCarbo" name="TpCarbo"    style="width: 45px;" readonly  />                 
+								  		<label>%</label><input class="form-control input-sm" id="TpCarbo" name="TpCarbo"    style="width: 45px;" readonly  />                 
 								  	</div>
 						</td>
 						<td align="center">
 									<div class="form-group">
-								  		%<input class="form-control input-sm" id="TpGrasa" name="TpGrasa"  style="width: 45px;" readonly  />                
+								  		<label>%</label><input class="form-control input-sm" id="TpGrasa" name="TpGrasa"  style="width: 45px;" readonly  />                
 								  	</div>
 						</td>
 					</tr>
 				</tbody>   
 			</table>
 		</div>
-  	</div>
-  
-  </div>     
+     
       
       </div>
     </div>
@@ -1034,11 +1029,21 @@
 			</div>
 			<div class="form-group" >		
 							<button class="btn btn-default" onclick="Eliminar()" id="BtnEl" >
-						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>
-							
+						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>	
+			</form>
+			<form action="ReporteDieta.jsp"   class="form-inline" role="form" target="_black">
 			</div>
+			
+				<div class="form-group">
+				    <input class="form-control input-sm" type="hidden"  name="fu" id="fu"  />
+				</div>
+				<div class="form-group">
+					<input type="image" src="../imagenes/report.png" class="btn btn-sm" value="Generar" alt="Generar informe" title="Generar informe" style="width: 90px; height:60px;" > 									
+				</div> 
+			</form>
 		</div>
-</form>
+
+
  <script type="text/javascript">
   	var pesoL=0;
   	var talla=0;
@@ -1180,7 +1185,7 @@
 		        	document.getElementById("porCarbo").value = data.carbohidrato;
 		        	document.getElementById("porProte").value = data.proteina;
 		        	document.getElementById("porGrasa").value = data.grasa;
-		        	
+		        	document.getElementById("fu").value = entrada;
 		        	CalcCarbo();
 		        	CalcProte();
 		        	CalcGrasa();
@@ -1611,8 +1616,22 @@
 	        dataType: 'json',
 	        success: function(data){
 	        	if(data.resultado=='OK'){
-	        		alert(data.mensaje);
-	        		location.reload();
+	        		
+	        		if(data.mensaje=="1"){
+	        			alert("Registro almacenado");
+	        			idVET=data.IDV;
+	        			document.getElementById("Guard").style.display = 'none';
+	        			document.getElementById("Mod").style.display = 'block';
+	        			document.getElementById("fu").value = idVET;
+	        		}
+	        		else if(data.mensaje=="2"){
+	        			alert("Registro modificado");
+	        		}
+	        		else if(data.mensaje=="3"){
+	        			alert("Registro eliminado");
+	        			location.reload();
+	        		}
+	        		
 	        	}else{
 	        		alert("ERROR al almacenar en el servidor");
 	        	}

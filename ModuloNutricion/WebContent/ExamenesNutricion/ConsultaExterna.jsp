@@ -4,7 +4,7 @@
 <html>
 
         <head>
-        
+        <link rel="shortcut icon" href="http://usalud.usac.edu.gt/favi.ico" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         
         
@@ -46,7 +46,7 @@
 			    margin: 0px 0 0px;
 			}
 			.container {
-			    width: 75%;
+			    width: 85%;
 			    padding-top:15px;
 			}
 			.input-sm {
@@ -243,21 +243,29 @@ $(document).ready(function() {
 </header>
         <div class="row col-sm-12">
         
-        <nav class="col-sm-2">
+<nav class="col-sm-2">
         <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
-        <li> <a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
-        
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Inicio.jsp"> <span class="glyphicon glyphicon-home"></span> Inicio </a> </li>
         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Mantenimiento </a>
 	        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
-				<li><a href="/ModuloNutricion/TablasNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>
-				
-				<li><a href="/ModuloNutricion/TablasNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Trifoliar.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Manejo de Trifoliar </a></li>	
+				<li><a href="/ModuloNutricion/ExamenesNutricion/RegistroAlimento.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Registro de alimentos </a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/TablaDieta.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Tablas de dietas </a></li>
 		    </ul>
          </li>
+         <li> <a href="#"> <span class="glyphicon glyphicon-book"></span> Citas </a>
+        	<ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3" style="background-color: #E0E0E0;">
+				<li><a href="/ModuloNutricion/ExamenesNutricion/Citas.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Nuevo</a></li>
+				<li><a href="/ModuloNutricion/ExamenesNutricion/cal.jsp" style="color:black;"> <span class="glyphicon glyphicon-book"></span> Calendario </a></li>
+			</ul>
+        </li>
         <li> <a href="/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp"> <span class="glyphicon glyphicon-book"></span> Consulta externa </a> 
         	
         </li>
         <li> <a href="/ModuloNutricion/ExamenesNutricion/ExamenMultifasico.jsp"> <span class="glyphicon glyphicon-book"></span> Multifasico </a>
+        	
+        </li>
+        <li> <a href="/ModuloNutricion/ExamenesNutricion/Reporte.jsp"> <span class="glyphicon glyphicon-book"></span> Reportes </a>
         	
         </li>
         </ul>
@@ -297,6 +305,87 @@ $(document).ready(function() {
 							  </div>
 							
 						</div>
+	 <div class="modal fade" id="MensajeServidor" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+								    	<table>
+							        	<tr><td><img src="../images/ok.jpg" width="50" height="50" /></td><td>&nbsp;<div id="MensajeAux"></div></td></tr>
+							        	
+							        </table>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+	 <div class="modal fade" id="MensajeServidor2" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+								    	<table>
+							        	<tr><td><img src="../images/ok.jpg" width="50" height="50" /></td><td>&nbsp;<div id="MensajeAux2"></div></td></tr>
+							        	
+							        </table>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+	<div class="modal fade" id="ErroresModal" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+							        <table>
+							        	<tr><td rowspan="2"><img src="../images/error.jpg" width="50" height="50" /></td><td>&nbsp;<b>Error:</b></td></tr>
+							        	<tr><td>&nbsp;<div id="Errortxt"></div></td></tr>
+							        </table>
+							      		
+							      		                                                                              
+								    
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+	<div class="modal fade" id="EliminarRegistroModal" role="dialog">
+							    <div class="modal-dialog modal-sm">
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Mensaje</h4>
+							        </div>
+							        <div class="modal-body">
+							      		
+							      		<table>
+							        	<tr><td rowspan="2"><img src="../images/alerta.jpg" width="50" height="50" /></td><td>&nbsp;¿Desea eliminar este registro?</td></tr>
+							        	
+							        </table>
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="EliminarRegistro()">Aceptar</button>
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							        </div>
+							      </div>
+							    </div>
+							  </div>
   <ul class="nav nav-tabs" >
     <li class="active"><a data-toggle="tab" href="#home">Pagina1</a></li>
     <li><a data-toggle="tab" href="#menu1">Pagina2</a></li>
@@ -309,52 +398,141 @@ $(document).ready(function() {
       <div class="panel-heading">Datos Generales</div>
       <div class="panel-body">
       		
-<div class="row">  
-&nbsp;&nbsp;
+<div class="row-fluid" id="M7" tabindex="1">  
+
   <div class="form-group">
    
 	<label for="NCarnet">Carnet/Codigo Personal</label>
 	<input class="form-control input-sm" name="carnet" id="carnet" type="number" required/>
 	
   </div>
-
-  
+	<div class="form-group" align="left">
+   
+	<label for="NCarnet">Fecha</label>
+	<input class="form-control input-sm" name="fecha123" type="text" id="fecha123" style="width: 80px;" readonly/>
+	
+  </div>
+  &nbsp;
+	  <div class="form-group" >
+		  <label for="TipoExame"><p id="LabelEditar"></p></label>
+		  <button class="btn btn-sm" onclick="Editar()" id="BtnEditar">
+			 <img src="../imagenes/guardado.png" width="20" height="20" title="Editar" /></button>
+	  </div>
+  	<div class="form-group" >
+		  <label for="TipoExame"><p id="LabelGuardar"></p></label>
+		  <button class="btn btn-sm" onclick="GuardarEditar()"id="BtnEditarG" >
+			 <img src="../imagenes/guardado.png" width="20" height="20" title="Editar" /></button>
+	  </div>
  	 <div id="mensaje1" >
 	</div>
   </div>
- <div class="row" id="NRegPacienteNoEncontrado"> 
- &nbsp;&nbsp;   
+ <div id="NRegPacienteNoEncontrado"> 
+<div class="row-fluid">
+
 <div class="form-group">
-    <label for=LNombre>Nombre</label>
+    <label for=LNombre>Nombres y Apellidos</label>
     <input class="form-control input-sm" type="text"  name="nombre1" id="nombre1" maxlength="40" />
 </div>
-&nbsp; 
+&nbsp;
 <div class="form-group">
+    <label for=LNombre>CUI</label>
+    <input class="form-control input-sm" type="number" placeholder="digitos sin espacios o guiones"  name="cui1" id="cui1" min="0" />
+</div>
+&nbsp;
+<div class="form-group">
+    <label for=LNombre>Facultad/Dependencia</label>
+    <p id="dep5"></p>
+</div>
+&nbsp;
+<div class="form-group">
+
+    <label for=LNombre>Tipo de paciente</label>
+    <select  class="form-control input-sm"  id="tipopaciente1">
+    	<option value="0"></option>
+        <option value="1">Estudiante</option>
+        <option value="2">Trabajador</option>
+    </select>
+</div>
+
+&nbsp;&nbsp;
+<div class="form-group">
+
     <label for=LNombre>Sexo</label>
     <select  class="form-control input-sm"  id="sexo1">
         <option value="Femenino">Femenino</option>
         <option value="Masculino">Masculino</option>
     </select>
 </div>
-&nbsp; 
+&nbsp;
 <div class="form-group">
-    <label for=LNombre>Fecha de Nacimiento</label>
-    <input class="form-control input-sm" type="text"  name="fechaNac" id="fechaNac" pattern='(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))' placeholder="YYYY-MM-DD"  onkeyup="ValidarFecha()" />
+    <label for=LNombre>Fecha Nac.</label>
+    <input class="form-control input-sm" type="text"  name="fechaNac" id="fechaNac" pattern='(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d' placeholder="DD/MM/YYYY"   style="width: 90px;" maxlength="10" />
 </div>
-&nbsp; 
+ <script>
+  $( function() {
+    $( "#fechaNac" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy',
+    	changeYear: true,
+    	changeMonth: true,
+    	yearRange: "-100:+0",
+    	monthNames: [ "enero","febrero","marzo","abril","mayo","junio",
+    	          	"julio","agosto","septiembre","octubre","noviembre","diciembre" ],
+    	monthNamesShort: [ "enero","febrero","marzo","abril","mayo","junio",
+    	    	          	"julio","agosto","septiembre","octubre","noviembre","diciembre" ],
+    	          	dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
+    	          	dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
+    	          	dayNamesMin: [ "dom","lun","mar","mie","jue","vie","sab" ],
+    	          	
+    	          	onSelect: function() {
+    	          		ValidarFecha();
+    	          	  }
+    	});
+  } );
+  </script>
+&nbsp;
 <div class="form-group">
-    <label for=LNombre>Facultad/Dependencia</label>
-    <p id="dep5"></p>
+    <label for=LNombre>Edad</label>
+    <input class="form-control input-sm" type="text"  name="edad1" id="edad1" style="width: 70px;" readonly/>
 </div>
+&nbsp;
+<div class="form-group">
+    <label for=LNombre>Correo</label>
+    <input class="form-control input-sm" type="email" placeholder="correo@ejemplo.com"  name="correo1" id="correo1" style="width: 120px;" />
+</div>
+&nbsp;
+<div class="form-group">
+    <label for=LNombre>Telefono</label>
+    <input class="form-control input-sm" type="number" name="telefono1" id="telefono1" style="width: 90px;" />
+</div>
+</div>
+
+
+
  
   </div>
- <div class="row" id="NRegPacienteEncontrado"> 
- &nbsp;&nbsp;  
+<div class="row-fluid" id="NRegPacienteEncontrado">  
+ 
 <div class="form-group">
-    <label for=LNombre>Nombre</label>
+    <label for=LNombre>Nombres y Apellidos</label>
     <input class="form-control input-sm" type="text"  name="nombre" id="nombre"  readonly />
 </div>
-&nbsp; 
+&nbsp;
+<div class="form-group">
+    <label for=LNombre>CUI</label>
+    <input class="form-control input-sm"   name="cui" id="cui" min="0" readonly />
+</div>
+&nbsp;
+
+<div class="form-group">
+    <label for=LNombre>Facultad/Dependencia</label>
+    <input class="form-control input-sm" type="text"  name="facultad" id="facultad" readonly  />
+</div>
+&nbsp;
+<div class="form-group" >
+    <label for=LNombre>Tipo de Paciente</label>
+    <input class="form-control input-sm" type="text"  name="tipopaciente" id="tipopaciente" style="width: 80px;" readonly  />
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;
 <div class="form-group">
     <label for=LNombre>Sexo</label>
     <select  class="form-control input-sm"  id="sexo" readonly >
@@ -362,21 +540,45 @@ $(document).ready(function() {
         <option value="Masculino">Masculino</option>
     </select>
 </div>
-&nbsp; 
+&nbsp;
 <div class="form-group" >
     <label for=LNombre>Edad</label>
     <input class="form-control input-sm" type="text"  name="edad" id="edad" style="width: 80px;" readonly  />
 </div>
-&nbsp; 
+&nbsp;
 <div class="form-group">
-    <label for=LNombre>Facultad/Dependencia</label>
-    <input class="form-control input-sm" type="text"  name="facultad" id="facultad" readonly  />
+    <label for=LNombre>Correo</label>
+    <input class="form-control input-sm"   name="correo" id="correo" style="width: 120px;" readonly />
+</div>
+&nbsp;
+<div class="form-group">
+    <label for=LNombre>Telefono</label>
+    <input class="form-control input-sm"  name="telefono" id="telefono" style="width: 90px;" readonly />
+</div>
+<div class="form-group">
+    <input type="hidden" id="fff" value="">
 </div>
  
-  </div> 
+  </div>
   <script>
   $( function() {
-    $( "#fechaNac" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#fechaNac" ).datepicker({ 
+    	dateFormat: 'dd/mm/yy',
+    	changeYear: true,
+    	changeMonth: true,
+    	yearRange: "-100:+0",
+    	monthNames: [ "enero","febrero","marzo","abril","mayo","junio",
+    	          	"julio","agosto","septiembre","octubre","noviembre","diciembre" ],
+    	monthNamesShort: [ "enero","febrero","marzo","abril","mayo","junio",
+    	    	          	"julio","agosto","septiembre","octubre","noviembre","diciembre" ],
+    	          	dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
+    	          	dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
+    	          	dayNamesMin: [ "dom","lun","mar","mie","jue","vie","sab" ],
+    	          	
+    	          	onSelect: function() {
+    	          		ValidarFecha();
+    	          	  }
+    	});
   } );
   </script>
  <div class="row" align="center">
@@ -405,27 +607,32 @@ $(document).ready(function() {
 			      	<div id="TablaEnfermedad" class="row">
 			      	
 			      </div>
-			      <div class="row">
+			      <br><br>
+			      <div class="row-fluid">
 				   <input class="form-control input-sm autocomplete" type="text"  name="enfermedad" id="enfermedad" maxlength="40" placeholder="Ingresar enfermedad" />            
 					</div>  	
 					  
 					</div>
-			      	<div class="row">
+					 <div class="col-sm-7" >
+			      	<div class="row-fluid">
 			      	
-					  	&nbsp;
+					  	&nbsp;&nbsp;&nbsp;&nbsp;
 					  	<div class="form-group">
 					  		<label for="Lsubescapular" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Medicamentos</font></label>
-					  		<textarea class="form-control input-sm" name="medicamento" id="medicamento" cols="20" rows="2" maxlength="240"></textarea>
+					  		<textarea class="form-control input-sm" name="medicamento" id="medicamento" cols="40" rows="3" maxlength="240"></textarea>
 					  		     
 					  	</div>
-					  	&nbsp;
+					  	 </div>
+					  	 <br>
+					  	 <div class="row-fluid">
+					  	&nbsp;&nbsp;&nbsp;&nbsp;
 					  	<div class="form-group">
 					  		<label for="Lsumapliegues" style="background-color: #337ab7; margin: 0px 0 0px;"><font color="white">&nbsp;Suplementos</font></label>
-					  		<textarea class="form-control input-sm" name="suplemento" id="suplemento" cols="20" rows="2" maxlength="240"></textarea>
+					  		<textarea class="form-control input-sm" name="suplemento" id="suplemento" cols="40" rows="2" maxlength="240"></textarea>
 					  		
 					  	</div>
-					  </div>
-			      	
+					 </div>
+			      	</div>
 			      	</div>
 			    </div>
 			
@@ -442,7 +649,7 @@ $(document).ready(function() {
       <div class="panel-heading">Estilo de vida</div>
       <div class="panel-body" align="center">
       
-      	<div class="row">
+      	<div class="row-fluid">
   	<div class="form-group">
   		<label for="Ltricipital" >Fuma<br>&nbsp;</label>
   		<input class="form-control input-sm" id="fuma" type="checkbox" align="center" onclick="checkFuma(this)" />
@@ -457,7 +664,7 @@ $(document).ready(function() {
   	&nbsp;
   	<div class="form-group">
   		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
-  		<select class="form-control input-sm" id="fumafrec" style="width: 80px;">
+  		<select class="form-control input-sm" id="fumafrec" style="width: 80px;" disabled>
   							<option value="0"></option>
 							<option value="1">Ocasionalmente</option>
 							<option value="2">Dos o tres veces por semana</option>
@@ -481,7 +688,7 @@ $(document).ready(function() {
   	&nbsp;
   	<div class="form-group">
   		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
-  		<select class="form-control input-sm" id="ejerciciofrec" style="width: 80px;">
+  		<select class="form-control input-sm" id="ejerciciofrec" style="width: 80px;" disabled>
   							<option value="0"></option>
 							<option value="1">Ocasionalmente</option>
 							<option value="2">Dos o tres veces por semana</option>
@@ -499,7 +706,7 @@ $(document).ready(function() {
   	&nbsp;
   	<div class="form-group">
   		<label for="Lsumapliegues" >Frecuencia<br>&nbsp;</label>
-  		<select class="form-control input-sm" id="bebidaalcfrec" style="width: 80px;">
+  		<select class="form-control input-sm" id="bebidaalcfrec" style="width: 80px;" disabled>
   							<option value="0"></option>
 							<option value="1">Ocasionalmente</option>
 							<option value="2">Dos o tres veces por semana</option>
@@ -529,13 +736,15 @@ $(document).ready(function() {
 					<div class="panel panel-primary">
 				      <div class="panel-heading">Horarios de comida</div>
 				      <div class="panel-body" align="center">
-				      		<div class="row">
-				      			<div class="form-group" align="center" style="font-size:8pt;">
-							  		<div class="table-responsive">
-										  <table class="table">
+				      		
+							  		<div class="table-responsive" style="font-size:8pt;">
+										  <table class="table table-bordered" width="80%">
+										  		<thead>
 												<tr>
 													<th>Tiempo</th><th>Horario</th><th>Tiempo de comida<br>(minutos)</th>
 												</tr>
+												</thead>
+												<tbody>
 												<tr>
 													<td>Desayuno</td>
 													<td><input class="form-control input-sm" name="horadesayuno" id="horadesayuno" style="width:70px;" /></td>
@@ -561,10 +770,10 @@ $(document).ready(function() {
 													<td><input class="form-control input-sm" name="cenhr" id="cenhr" style="width:70px;" /></td>
 													<td><input class="form-control input-sm" name="tccena" id="tccena" type="number" min="0" style="width: 60px;" /></td>
 												</tr>
+												</tbody>
 										  </table>
 										</div>
-							  	</div>
-				      		</div>
+							  
 				      </div>
 				    </div>
 				
@@ -574,7 +783,7 @@ $(document).ready(function() {
 			      <div class="panel-heading">Transtornos Digestivos</div>
 			      <div class="panel-body" align="center">
 			      
-			      	<div class="row">
+			      	<div class="row-fluid">
 			      		<div class="form-group">
 					  		<label for="Ltricipital">Diarrea</label>
 					  		<input class="form-control input-sm" id="diarrea" type="checkbox" align="center"  />
@@ -586,7 +795,7 @@ $(document).ready(function() {
 					  		     
 					  	</div>
 			      	</div>
-			      	<div class="row">
+			      	<div class="row-fluid">
 			      		<div class="form-group">
 					  		<label for="Lsumapliegues">Acidez</label>
 					  		<input class="form-control input-sm" id="acidez" type="checkbox" align="center" />
@@ -605,7 +814,7 @@ $(document).ready(function() {
 							<div class="panel panel-primary">
 							      <div class="panel-heading">Lugar de consumo</div>
 							      <div class="panel-body" align="center">
-							      		<div class="row">
+							      		<div class="row-fluid">
 										  	<div class="form-group">
 										  		<label for="Lcasa">Casa</label>
 										  		<input class="form-control input-sm" id="Lcasa" type="checkbox" align="center" />
@@ -639,7 +848,7 @@ $(document).ready(function() {
 							<div class="panel panel-primary">
 						      <div class="panel-heading">Origen de alimentos</div>
 						      <div class="panel-body" align="center">
-						      		 <div class="row">
+						      		 <div class="row-fluid">
 									  	<div class="form-group">
 									  		<label for="Ltricipital">Casa</label>
 									  		<input class="form-control input-sm" id="Ocasa" type="checkbox" align="center" />
@@ -724,7 +933,7 @@ $(document).ready(function() {
     <div id="menu1" class="tab-pane fade">
     	<article>
     		
-    			 <div class="row">
+    			 <div class="row" >
 				    <div class="col-sm-8" >
 				    
 			<div class="panel panel-primary">
@@ -765,21 +974,31 @@ $(document).ready(function() {
 						</div>
 						<div class="form-group">
 						    <label>Porcion</label>
-						    <input class="form-control input-sm" id="cantidada" name="cantidada" type="number" style="width: 70px;" readonly />
+						    <input class="form-control input-sm" id="cantidada" name="cantidada" type="number" min="0" style="width: 70px;" readonly />
 						</div>
 						<div class="form-group">
-						    <label for="Ntipo">Metrica</label>
-						    <select class="form-control input-sm" name="porcion" id="porcion" readonly>
-													<option value="1" >U</option>
-													<option value="2" >ml</option>
-												</select>
-						  </div>
-						  <div class="form-group">
 						    <label for="BAgregar">Agregar</label>			
 							<button class="btn btn-default" id="BAlAgregar" onclick="AgregarAlimento()" disabled>
 						     <img src="../imagenes/agregar.png" width="20" height="15" title="Agregar" /></button>
 							
 						  </div>
+						<div class="form-group">
+						    <select class="form-control input-sm" name="porcion" id="porcion" style="visibility:hidden" readonly>
+													<option value="1" >U</option>
+													<option value="2" >taza</option>
+													<option value="3" >cda/taza</option>
+													<option value="4" >rod</option>
+													<option value="5" >vaso</option>
+													<option value="6" >barra</option>
+													<option value="7" >paq</option>
+													<option value="8" >cda</option>
+													<option value="9" >onz</option>
+													<option value="10" >cdta</option>
+													<option value="11" >und</option>
+													<option value="12" >ml</option>
+												</select>
+						  </div>
+						  
 						<div class="form-group">
 						    
 							
@@ -815,6 +1034,23 @@ $(document).ready(function() {
 													<option value="8" >Azucares</option>
 												</select>
 												</div>
+												<div class="form-group">
+						   <label>Metrica</label>
+						    <select class="form-control input-sm" name="metrica" id="metrica" >
+													<option value="1" >U</option>
+													<option value="2" >taza</option>
+													<option value="3" >cda/taza</option>
+													<option value="4" >rod</option>
+													<option value="5" >vaso</option>
+													<option value="6" >barra</option>
+													<option value="7" >paq</option>
+													<option value="8" >cda</option>
+													<option value="9" >onz</option>
+													<option value="10" >cdta</option>
+													<option value="11" >und</option>
+													<option value="12" >ml</option>
+												</select>
+						  </div>
 								      	</div>
 								    
 							        </div>
@@ -867,16 +1103,16 @@ $(document).ready(function() {
 						<input class="form-control input-sm" id="pesomax" name="pesomax" type="number"  style="width: 70px;" readonly />
 				</div>
 				<div class="form-group">
+						<label >Peso ideal<br>(Lbs)</label>
+						<input class="form-control input-sm" id="pesoideal" name="pesoideal" type="number" min="0" style="width: 70px;" readonly  />
+				</div>
+				<div class="form-group">
 						<label >Circunferencia <br>de muñeca</label>
 						<input class="form-control input-sm" id="circunferencia" name="circunferencia" type="number" min="0"  style="width: 80px;"/>
 				</div>
 				<div class="form-group">
-						<label >Constitucion <br>osea</label>
-						<select class="form-control input-sm" id="constitucion" style="width: 85px;">
-								<option value="1">Pequeña</option>
-								<option value="2">Mediana</option>
-								<option value="3">Grande</option>
-						</select>
+						<label >Edad<br>Metabolica</label>
+						<input class="form-control input-sm" id="edadmeta" name="edadmeta" type="number" min="0" style="width: 80px;"  />
 				</div>
 			</div>	
       
@@ -965,6 +1201,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Verduras</b>
 					  		<select id="verdura" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 					  			<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -980,6 +1217,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Frutas</b>
 					  		<select id="fruta" class="form-control input-sm" style="width: 90px;" >
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -992,25 +1230,16 @@ $(document).ready(function() {
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table width="90%">
-								<tr>
-									<td><b>Carne(res,cerdo),</b></td><td rowspan="2">
+									<b>Carne,pollo,pescado</b>
 									<select id="pollo" class="form-control input-sm" style="width: 90px;" >
+																<option value="0"></option>
 												            	<option value="1">No consume</option>
 												            	<option value="2">Ocasional</option>
 												                <option value="3">Semanal</option>
 												                <option value="4">Mensual</option>
 												                <option value="5">Diario</option>
 												            </select>
-												          
-														</td>
-														<td> &nbsp;&nbsp;&nbsp;</td>
-													</tr>
-													<tr>
-														<td><b>pollo,pescado</b></td>
-													</tr>
-								</table>    
-								     
+												            &nbsp;&nbsp;
 								  	</div>
 								  </div>
 					  <br>
@@ -1018,6 +1247,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Lacteos</b>
 					  		<select id="lacteo" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1030,45 +1260,35 @@ $(document).ready(function() {
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table>
-							<tr>
-									<td><b>Hamburguesas,pizza,</b></td><td rowspan="2">
+					  		
+							
+									<b>Hamburguesas,pizza,pollo frito</b>
 									<select id="hamburguesa" class="form-control input-sm" style="width: 90px;">
+																<option value="0"></option>
 												            	<option value="1">No consume</option>
 												            	<option value="2">Ocasional</option>
 												                <option value="3">Semanal</option>
 												                <option value="4">Mensual</option>
 												                <option value="5">Diario</option>
-												            </select>   
-									</td>
-									<td> &nbsp;&nbsp;&nbsp;</td>
-								</tr>
-								<tr>
-									<td><b>pollo frito</b></td>
-							</tr>
-							</table>      
+												            </select>    
+												            &nbsp;&nbsp;     
 					  	</div>
 					  </div>
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table>
-							<tr>
-								<td><b>Snacks(papalinas,</b></td><td rowspan="2">
+					  		
+							
+								<b>Snacks(papalinas,tortrix,ricitos,etc)</b>
 								<select id="snack" class="form-control input-sm" style="width: 90px;">
+															<option value="0"></option>
 											            	<option value="1">No consume</option>
 											            	<option value="2">Ocasional</option>
 											                <option value="3">Semanal</option>
 											                <option value="4">Mensual</option>
 											                <option value="5">Diario</option>
 											            </select>  
-								</td>
-								<td> &nbsp;&nbsp;&nbsp;</td>
-							</tr>
-							<tr>
-								<td><b>tortrix,ricitos,etc)</b></td>
-							</tr>
-							</table>       
+								&nbsp;&nbsp;
 					  	</div>
 					  </div>
 					  <br>
@@ -1076,6 +1296,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Refrescos embasados</b>
 					  		<select id="refresco" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1088,45 +1309,33 @@ $(document).ready(function() {
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table>
-							<tr>
-								<td><b>Galletas,pasteles,</b></td><td rowspan="2">
+					  							
+								<b>Galletas,pasteles,pan dulce</b>
 								<select id="galleta" class="form-control input-sm" style="width: 90px;">
+															<option value="0"></option>
 											            	<option value="1">No consume</option>
 											            	<option value="2">Ocasional</option>
 											                <option value="3">Semanal</option>
 											                <option value="4">Mensual</option>
 											                <option value="5">Diario</option>
 											            </select>
-								</td>
-								<td> &nbsp;&nbsp;&nbsp;</td>
-							</tr>
-							<tr>
-								<td><b>pan dulce</b></td>
-							</tr>
-							</table>       
+								&nbsp;&nbsp;   
 					  	</div>
 					  </div>
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table>
-							<tr>
-								<td><b>Dulces,chocolates,</b></td><td rowspan="2">
+					  		
+								<b>Dulces,chocolates,chicles</b>
 								<select id="dulce" class="form-control input-sm" style="width: 90px;">
+															<option value="0"></option>
 											            	<option value="1">No consume</option>
 											            	<option value="2">Ocasional</option>
 											                <option value="3">Semanal</option>
 											                <option value="4">Mensual</option>
 											                <option value="5">Diario</option>
-											            </select> 
-								</td>
-								<td> &nbsp;&nbsp;&nbsp;</td>
-							</tr>
-							<tr>
-								<td><b>chicles</b></td>
-							</tr>
-							</table>      
+											            </select> &nbsp;&nbsp;
+	    
 					  	</div>
 					  </div>
 					  <br>
@@ -1134,6 +1343,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Embutidos</b>
 					  		<select id="embutido" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1148,6 +1358,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Sopas instantaneas</b>
 					  		<select id="sopa" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1160,23 +1371,16 @@ $(document).ready(function() {
 					  <br>
 					  <div class="row">
 					  	<div class="form-group" style="font-size:8pt;">
-					  		<table>
-							<tr>
-								<td><b>Frituras,chicharron,</b></td><td rowspan="2">
+								<b>Frituras,chicharron,carnitas</b>
 								<select id="fritura" class="form-control input-sm" style="width: 90px;" >
+															<option value="0"></option>
 											            	<option value="1">No consume</option>
 											            	<option value="2">Ocasional</option>
 											                <option value="3">Semanal</option>
 											                <option value="4">Mensual</option>
 											                <option value="5">Diario</option>
-											            </select> 
-								</td>
-								<td> &nbsp;&nbsp;&nbsp;</td>
-							</tr>
-							<tr>
-								<td><b>carnitas</b></td>
-							</tr>
-							</table>       
+											            </select>  &nbsp;&nbsp;
+							   
 					  	</div>
 					  </div>
 					  <br>
@@ -1184,6 +1388,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Tortillas</b>
 					  		<select id="tortilla" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1198,6 +1403,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Papas</b>
 					  		<select id="papa" class="form-control input-sm" style="width:90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1212,6 +1418,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Pasta</b>
 					  		<select id="pasta" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1226,6 +1433,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Arroz</b>
 					  		<select id="arroz" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1240,6 +1448,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Frijol</b>
 					  		<select id="frijol" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1254,6 +1463,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Pan</b>
 					  		<select id="pan" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1268,6 +1478,7 @@ $(document).ready(function() {
 					  	<div class="form-group" style="font-size:8pt;">
 					  		<b>Huevo</b>
 					  		<select id="huevo" class="form-control input-sm" style="width: 90px;">
+					  			<option value="0"></option>
 				            	<option value="1">No consume</option>
 				            	<option value="2">Ocasional</option>
 				                <option value="3">Semanal</option>
@@ -1307,7 +1518,7 @@ $(document).ready(function() {
 							
 			</div>
 			<div class="form-group" >		
-							<button class="btn btn-default" onclick="EliminarRegistro()" id="BtnEl" >
+							<button class="btn btn-default" onclick="BorrarReg()" id="BtnEl" >
 						     <img src="../imagenes/eliminar.png" width="40" height="30" title="Eliminar" />Eliminar</button>
 							
 			</div>
@@ -1335,10 +1546,10 @@ $(document).ready(function() {
 		var IdUsuarioSesion = "null";
 		var PerfilSesion ="null";
 		var iniciarCarga=false;
-		
+		var NomUsuario="null";
 		var Enfermed=[];
 		var econt=0;
-        
+		var AccionCarnetCarga=false;
 	document.getElementById('carnet').onkeydown = function (e) {
 	        	
 	            if (e.which === 13) {
@@ -1346,13 +1557,27 @@ $(document).ready(function() {
 	            	limpiarInfoGeneral();
 	            	idCE=0;
 	            	if(carnet!=""){
+	            		AccionCarnetCarga=false;
 	            		limpiar_datos();
 	            		BuscarPaciente(carnet);
 	            	}else{
-	            		alert("Ingrese un numero de carnet valido");
+	            		VentanaError(" Ingrese un numero de carnet/registro valido");
 	            	}
 	            	
 	                return false;
+	            }else{
+	            	if(AccionCarnetCarga){
+	            		limpiarInfoGeneral();
+	            		idCE=0;
+	            		AccionCarnetCarga=false;
+	            		busqueda=false;
+	            		document.getElementById("LabelEditar").innerHTML = "";
+	            		document.getElementById("LabelGuardar").innerHTML = "";
+
+	            		document.getElementById("BtnEditar").style.display = 'none';
+	            		document.getElementById("BtnEditarG").style.display = 'none';
+	            		limpiar_datos();
+	            	}
 	            }
 	        };
 		document.getElementById('alimento').onkeydown = function (e) {
@@ -1398,7 +1623,7 @@ $(document).ready(function() {
             		        document.getElementById("cantidada").focus();
     	        		}	
     	        	}else{
-    	        		alert("Error, al buscar el alimento en el servidor");
+    	        		VentanaError("Error, al buscar el alimento en el servidor");
     	        	}
     	        	
     	        	
@@ -1410,7 +1635,11 @@ $(document).ready(function() {
 			 jQuery('#VentanaNuevoAlimento').modal("show");
 	    }		
 	    function limpiarInfoGeneral(){
-	    	
+	    	document.getElementById("LabelEditar").innerHTML = "";
+	    	document.getElementById("LabelGuardar").innerHTML = "";
+
+	    	document.getElementById("BtnEditar").style.display = 'none';
+	    	document.getElementById("BtnEditarG").style.display = 'none';
 	    	document.getElementById("TablaEncargado").innerHTML = "";
         	document.getElementById("RegMulti").innerHTML ="";
         	document.getElementById("NRegPacienteEncontrado").style.display = 'none';
@@ -1428,9 +1657,20 @@ $(document).ready(function() {
     		document.getElementById('nombre1').value  = "";
     		document.getElementById('sexo1').value  = "Femenino";
     		document.getElementById('fechaNac').value  = "";
+    		
+    		document.getElementById('cui1').value  = "";
+    		document.getElementById('tipopaciente1').value  = "0";
+    		document.getElementById('correo1').value  = "";
+    		document.getElementById('telefono1').value  = "";
+    		
+    		document.getElementById('cui').value  = "";
+    		document.getElementById('tipopaciente').value  = "";
+    		document.getElementById('correo').value  = "";
+    		document.getElementById('telefono').value  = "Femenino";
 	    }
         function MostrarMensajeServidor(texto){
-        	alert(texto);        
+        	document.getElementById('MensajeAux').innerHTML  = texto;
+        	jQuery('#MensajeServidor').modal("show");  
         } 
         
         function getCookie(cname) {
@@ -1454,19 +1694,19 @@ $(document).ready(function() {
     		UsuarioSesion = "<%=misession.getAttribute("NUSUARIO")%>";
     		IdUsuarioSesion = "<%=misession.getAttribute("NIDSUARIO")%>";
     		PerfilSesion = "<%=misession.getAttribute("NPERFIL")%>";
-    		
+    		NomUsuario = "<%=misession.getAttribute("NomUsuario")%>";
     		if(UsuarioSesion=="null"||IdUsuarioSesion=="null"||PerfilSesion=="null"){
     			
     			var x=decodeURIComponent(document.cookie).length;
     			if(x==0){
     				//sale
-    				//window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
+    				window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
     			}
     			else{
     				UsuarioSesion = getCookie(decodeURIComponent("CookieUsuario"));
             		IdUsuarioSesion = getCookie(decodeURIComponent("CookieIDUsuario"));
             		PerfilSesion = getCookie(decodeURIComponent("CookiePerfil"));
-            		
+            		NomUsuario = getCookie(decodeURIComponent("CookieNomUsuario"));
             		if(PerfilSesion=="nutri"){
         				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
         			
@@ -1480,7 +1720,7 @@ $(document).ready(function() {
     			document.cookie = "CookieUsuario="+encodeURIComponent(UsuarioSesion);
     			document.cookie = "CookieIDUsuario="+encodeURIComponent(IdUsuarioSesion);
     			document.cookie = "CookiePerfil="+encodeURIComponent(PerfilSesion);
-    			
+    			document.cookie = "CookieNomUsuario="+encodeURIComponent(NomUsuario);
     			if(PerfilSesion=="nutri"){
     				document.getElementById("UsuarioSesion").innerHTML ='<label>Usuario:'+UsuarioSesion+' | <a id="CerrarSesion1" title="Cerrar sesion" href="#" onclick="CerrarSesion(); return false;"  style="color: blue;">Cerrar sesion</a>&nbsp;&nbsp;&nbsp;&nbsp;</label>';
     			
@@ -1493,7 +1733,9 @@ $(document).ready(function() {
         	function CargaInicio() {
         		document.getElementById("NRegPacienteEncontrado").style.display = 'none';
         		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
-        		ActualizarTablaEnfermedad()
+        		document.getElementById("BtnEditar").style.display = 'none';
+        		document.getElementById("BtnEditarG").style.display = 'none';
+        		ActualizarTablaEnfermedad();
         		var MID = getUrlVars()["prodId"];
         		idCE = getUrlVars()["idCE"];
         		if(idCE!=undefined){
@@ -1509,17 +1751,18 @@ $(document).ready(function() {
             		}
         		}
         		VerificarSesion();
+        		cargar_hora();
         	}
         	
         	function CerrarSesion(){
         		<%misession.setAttribute("NUSUARIO", "null");%>
         		<%misession.setAttribute("NIDSUARIO", "null");%>
         		<%misession.setAttribute("NPERFIL", "null");%>
-        		
+        		<%misession.setAttribute("NomUsuario", "null");%>
         		document.cookie = "CookieUsuario=; max-age=0";
     			document.cookie = "CookieIDUsuario=; max-age=0";
     			document.cookie = "CookiePerfil=; max-age=0";
-        		
+    			document.cookie = "CookieNomUsuario=; max-age=0";
         		window.location.replace("/ModuloNutricion/PortalSalud/InicioNutricion.jsp");
         		
         	}
@@ -1547,15 +1790,24 @@ $(document).ready(function() {
         	        		document.getElementById("talla").value  = data.talla;
         	        		document.getElementById("pesousual").value  = data.peso;
         	        		document.getElementById("circunferencia").value  = data.CircunferenciaMuneca;
-        	        		document.getElementById("constitucion").value  = data.ConstitucionOsea;
+        	        		document.getElementById("edadmeta").value  = data.EdadMetabolica;
 
         	        		document.getElementById("fuma").checked  = AsignarCheck(data.fuma);
+        	        		if(data.fuma=="1"){
+        	        			document.getElementById("fumafrec").disabled = false;
+        	        		}
         	        		document.getElementById("ncigarro").value  = data.numero_cigarros;
         	        		document.getElementById("fumafrec").value  = data.frec_fuma;
         	        		document.getElementById("ejercicio").checked  = AsignarCheck(data.ejercicio);
+        	        		if(data.ejercicio=="1"){
+        	        			document.getElementById("ejerciciofrec").disabled = false;
+        	        		}
         	        		document.getElementById("ejerciciotiempo").value  = data.tiempo_min;
         	        		document.getElementById("ejerciciofrec").value  = data.frec_ejercicio;
         	        		document.getElementById("bebidaalc").checked  = AsignarCheck(data.bebida);
+        	        		if(data.bebida=="1"){
+        	        			document.getElementById("bebidaalcfrec").disabled = false;
+        	        		}
         	        		document.getElementById("bebidaalcfrec").value  = data.frec_bebida;
         	        		
         	        		document.getElementById("tcdesayuno").value  = data.TDesayuno;
@@ -1671,7 +1923,36 @@ $(document).ready(function() {
         			        	document.getElementById('sexo').value  = data.psexo;
         			        	document.getElementById('edad').value  = data.pedad;
         			        	document.getElementById('facultad').value  = data.pfacultad;
+        			        	
+        			        	var auxcui=data.pCUI;
+    			        		if(auxcui=="0"){
+    			        			document.getElementById('cui').value  = "";
+    			        		}else{
+    			        			document.getElementById('cui').value  = data.pCUI;
+    			        		}
+    			        		
+    			        		document.getElementById('correo').value  = data.pcorreo;
+    			        		
+    			        		
+    			        		var auxtel=data.ptelefono;
+    			        		if(auxtel=="0"){
+    			        			document.getElementById('telefono').value  = "";
+    			        		}else{
+    			        			document.getElementById('telefono').value  = data.ptelefono;
+    			        		}
+    			        		
+    			        		if(data.ptipopaciente=="1"){
+    			        			document.getElementById('tipopaciente').value  = "Estudiante";
+    			        		}else if(data.ptipopaciente=="2"){
+    			        			document.getElementById('tipopaciente').value  = "Trabajador";
+    			        		}
+    			        		document.getElementById('fff').value  = data.pfechanac;
+    			        		document.getElementById("LabelEditar").innerHTML = "Editar";
+    		        			document.getElementById("LabelGuardar").innerHTML = "";
+    		        			document.getElementById("BtnEditar").style.display = 'block';
+    		            		document.getElementById("BtnEditarG").style.display = 'none';
         		        		busqueda=true;
+        		        		AccionCarnetCarga=true;
         		        		GenerarRegistrosMultifasico(data.total,data.RConsultaExterna);
         		        		
         		        		document.getElementById('RMulti').value  = idCE;
@@ -1754,7 +2035,7 @@ $(document).ready(function() {
         			document.getElementById('talla').readOnly = false;
         			document.getElementById('pesousual').readOnly = false;
         			document.getElementById('circunferencia').readOnly = false;
-        			document.getElementById('constitucion').readOnly = false;
+        			document.getElementById('edadmeta').readOnly = false;
         			document.getElementById('grasa').readOnly = false;
         			document.getElementById('pagua').readOnly = false;
         			document.getElementById('musculo').readOnly = false;
@@ -1792,7 +2073,10 @@ $(document).ready(function() {
         			document.getElementById('BtnATC').disabled = false;
         			
         		}else{
-        			
+        			document.getElementById("fumafrec").disabled = true;
+        			document.getElementById("ejerciciofrec").disabled = true;
+        			document.getElementById("bebidaalcfrec").disabled = true;
+
         			document.getElementById('enfermedad').readOnly = true;
         			document.getElementById('medicamento').readOnly = true;;
         			document.getElementById('suplemento').readOnly = true;
@@ -1843,7 +2127,7 @@ $(document).ready(function() {
         			document.getElementById('talla').readOnly = true;
         			document.getElementById('pesousual').readOnly = true;
         			document.getElementById('circunferencia').readOnly = true;
-        			document.getElementById('constitucion').readOnly = true;
+        			document.getElementById('edadmeta').readOnly = true;
         			document.getElementById('grasa').readOnly = true;
         			document.getElementById('pagua').readOnly = true;
         			document.getElementById('musculo').readOnly = true;
@@ -1934,7 +2218,7 @@ $(document).ready(function() {
         		 
         		var fecha=today.getDate()+'/' +mes+'/'+today.getFullYear();
 
-        		document.getElementById('fecha').value=fecha;
+        		document.getElementById('fecha123').value=fecha;
         	}
         	function CargaFacultad(){
         		var resultado="";
@@ -1954,11 +2238,12 @@ $(document).ready(function() {
     	        	    document.getElementById("NRegPacienteEncontrado").style.display = 'none';
 		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'block';
     	        	   
-    	    			var marcos="<select class=\"form-control input-sm\" id=\"facultad1\" name=\"facultad1\">";
+    	    			var marcos="<select class=\"form-control input-sm\" id=\"facultad1\" name=\"facultad1\" onkeydown=\"CambioFac(event)\">";
     	    			marcos+=resultado+"</select>";
     	    			
     	    			document.getElementById("dep5").innerHTML = marcos;
     	    			document.getElementById("nombre1").focus();
+    	    			AccionCarnetCarga=true;
         	        	
         	        }
         		});
@@ -2032,7 +2317,7 @@ $(document).ready(function() {
         			carnet=entrada;
         		}
         		carnetaccion=carnet;
-        		var action="PacienteConsultaExterna";
+        		var action="PacienteConsultaExterna2";
     			cadena = [ 	'carnet='   + carnet,'a='+action].join('&');
     			$.ajax({
     		        url: "../Paciente",
@@ -2048,7 +2333,37 @@ $(document).ready(function() {
     			        		document.getElementById('sexo').value  = data.sexo;
     			        		document.getElementById('edad').value  = data.fecha;
     			        		document.getElementById('facultad').value  = data.facultad;
+    			        		
+    			        		
+    			        		var auxcui=data.CUI;
+    			        		if(auxcui=="0"){
+    			        			document.getElementById('cui').value  = "";
+    			        		}else{
+    			        			document.getElementById('cui').value  = data.CUI;
+    			        		}
+    			        		
+    			        		document.getElementById('correo').value  = data.correo;
+    			        		
+    			        		
+    			        		var auxtel=data.telefono;
+    			        		if(auxtel=="0"){
+    			        			document.getElementById('telefono').value  = "";
+    			        		}else{
+    			        			document.getElementById('telefono').value  = data.telefono;
+    			        		}
+    			        		
+    			        		if(data.TipoPaciente=="1"){
+    			        			document.getElementById('tipopaciente').value  = "Estudiante";
+    			        		}else if(data.TipoPaciente=="2"){
+    			        			document.getElementById('tipopaciente').value  = "Trabajador";
+    			        		}
+    			        		document.getElementById('fff').value  = data.fechaNac;
     		        			busqueda=true;
+    		        			AccionCarnetCarga=true;
+    		        			document.getElementById("LabelEditar").innerHTML = "Editar";
+    		        			document.getElementById("LabelGuardar").innerHTML = "";
+    		        			document.getElementById("BtnEditar").style.display = 'block';
+    		            		document.getElementById("BtnEditarG").style.display = 'none';
     		        			GenerarRegistrosMultifasico(data.total,data.RConsultaExterna);
     		        			document.getElementById("enfermedad").focus();
     		        	}else{	  
@@ -2063,7 +2378,92 @@ $(document).ready(function() {
     		    });
         		
         	}	
-        	
+        	function GuardarEditar(){
+        		if(carnetaccion!=""&&AccionCarnetCarga){
+        			var action="modificar";
+        			var carnet=validar_numerovacio('carnet');
+        			var variable11="";
+        			var variable12="";
+        			var variable13="";
+        			var variable14="";
+        			
+        			variable11=validad_vacio('nombre1');
+        			variable12=validad_vacio('sexo1');
+        			variable13=validad_vacio('fechaNac');
+        			variable14=validad_vacio('facultad1');
+        			var variable140=validad_vacio('edad1');
+        			var variable141=validar_numerovacio('cui1');
+        			var variable142=validar_numerovacio('tipopaciente1');
+        			var variable143=validad_vacio('correo1');
+        			var variable144=validar_numerovacio('telefono1');
+        			
+        			var FechaE=false;
+        			 if(variable140!=""){
+        			   FechaE=true;
+        			}else{
+        			   VentanaError("Verifique la edad del paciente");
+        			 }
+        			 if(variable11!=""&&variable12!=""&&variable13!=""&&variable14!=""&&FechaE==true&&variable142!="0"){
+        				 var cadena = ['carnet='+ carnet,'a='+action
+        	               		        ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14
+        	               		     ,'p41='+variable141,'p42='+variable142,'p43='+variable143,'p44='+variable144].join('&');
+        				 $.ajax({
+        	        	        url: "../Paciente",
+        	        	        data: cadena,
+        	        	  	    type: 'post',
+        	        	        dataType: 'json',
+        	        	        success: function(data){
+        	        	        	if(data.resultado=="OK"){
+        	        	        		MostrarMensajeServidor2(data.descripcion);
+        	        	        		document.getElementById("nombre").value=document.getElementById("nombre1").value;
+        	        	    			document.getElementById("sexo").value=document.getElementById("sexo1").value;
+        	        	    			document.getElementById("fff").value=document.getElementById("fechaNac").value;
+        	        	    			document.getElementById("edad").value=document.getElementById("edad1").value;
+        	        	    			
+        	        	    			document.getElementById("cui").value=document.getElementById("cui1").value;
+        	        	    			document.getElementById("correo").value=document.getElementById("correo1").value;
+        	        	    			document.getElementById("telefono").value=document.getElementById("telefono1").value;
+        	        	    			
+        	        	    			var paux=document.getElementById("tipopaciente1").value;
+        	        	    			if(paux=="1"){
+        	        	    				document.getElementById("tipopaciente").value="Estudiante";
+        	        	    			}else if(paux=="2"){
+        	        	    				document.getElementById("tipopaciente").value="Trabajador";
+        	        	    			}
+        	        	    			
+        	        	    			var x = document.getElementById("facultad1").selectedIndex;
+        	        	    			var y = document.getElementById("facultad1").options;
+        	        	    			
+        	        	    			document.getElementById("facultad").value=y[x].text;
+        	        	    			document.getElementById("NRegPacienteEncontrado").style.display = 'block';
+        	    		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'none';
+        	    		        		document.getElementById("LabelEditar").innerHTML = "Editar";
+        	        	    			document.getElementById("LabelGuardar").innerHTML = "";
+
+        	        	    			document.getElementById("BtnEditar").style.display = 'block';
+        	        	        		document.getElementById("BtnEditarG").style.display = 'none';
+        	        	        	}else{
+        	        	        		VentanaError(data.descripcion);
+        	        	        	}	
+        	        	        	   
+        	        	        }
+        	        		});
+        			 }else{
+        				 VentanaError("Complete la informacion del paciente");
+        			 }
+        		}
+        	}
+        	function VentanaError(mensaje){
+        		document.getElementById("Errortxt").innerHTML = "";
+        		document.getElementById("Errortxt").innerHTML = " "+mensaje;
+        		jQuery('#ErroresModal').modal("show");
+        	}
+        	function MostrarMensajeServidor2(texto){
+            	document.getElementById('MensajeAux2').innerHTML  = texto;
+            	jQuery('#MensajeServidor2').modal("show");
+            	
+               
+            }
         	function GenerarRegistrosMultifasico(total,data){
         		var marcodiv='<div class="row"><div class="form-group"><label for="RegM">Registros de consulta<br>externa</label><select class="form-control input-sm" id="RMulti" onchange=CambioRegMulti()>';
         		var opciones='<option value=0>Nuevo</option>';
@@ -2128,13 +2528,13 @@ $(document).ready(function() {
     			document.getElementById('estreñimiento').checked = false;
     			document.getElementById('fuma').checked = false;
     			document.getElementById('ncigarro').value  = "";
-    			document.getElementById('fumafrec').value  = 1;
+    			document.getElementById('fumafrec').value  = 0;
     			
     			document.getElementById('ejercicio').checked = false;
     			document.getElementById('ejerciciotiempo').value  = "";
-    			document.getElementById('ejerciciofrec').value  = 1;
+    			document.getElementById('ejerciciofrec').value  = 0;
     			document.getElementById('bebidaalc').checked = false;
-    			document.getElementById('bebidaalcfrec').value  = 1;
+    			document.getElementById('bebidaalcfrec').value  = 0;
     			//document.getElementById('tdesayuno').checked = false;
     			document.getElementById('horadesayuno').value  = "";
     			//document.getElementById('refam').checked = false;
@@ -2169,7 +2569,7 @@ $(document).ready(function() {
     			document.getElementById('talla').value  = "";
     			document.getElementById('pesousual').value  = "";
     			document.getElementById('circunferencia').value  = "";
-    			document.getElementById('constitucion').value  = 1;
+    			document.getElementById('edadmeta').value  = "";
     			document.getElementById('grasa').value  = "";
     			document.getElementById('pagua').value  = "";
     			document.getElementById('musculo').value  = "";
@@ -2178,30 +2578,31 @@ $(document).ready(function() {
     			document.getElementById('viscera').value  = "";
     			document.getElementById('abdomen').value  = "";
     			document.getElementById('plan').value  = "";
-    			document.getElementById('verdura').value  = 1;
-    			document.getElementById('fruta').value  = 1;
-    			document.getElementById('pollo').value  = 1;
-    			document.getElementById('lacteo').value  = 1;
-    			document.getElementById('hamburguesa').value  = 1;
-    			document.getElementById('snack').value  = 1;
-    			document.getElementById('refresco').value  = 1;
+    			document.getElementById('verdura').value  = 0;
+    			document.getElementById('fruta').value  = 0;
+    			document.getElementById('pollo').value  = 0;
+    			document.getElementById('lacteo').value  = 0;
+    			document.getElementById('hamburguesa').value  = 0;
+    			document.getElementById('snack').value  = 0;
+    			document.getElementById('refresco').value  = 0;
     			
-    			document.getElementById('galleta').value  = 1;
-    			document.getElementById('dulce').value  = 1;
-    			document.getElementById('embutido').value  = 1;
-    			document.getElementById('sopa').value  = 1;
-    			document.getElementById('fritura').value  = 1;
-    			document.getElementById('tortilla').value  = 1;
-    			document.getElementById('papa').value  = 1;
-    			document.getElementById('pasta').value  = 1;
-    			document.getElementById('arroz').value  = 1;
-    			document.getElementById('frijol').value  = 1;
+    			document.getElementById('galleta').value  = 0;
+    			document.getElementById('dulce').value  = 0;
+    			document.getElementById('embutido').value  = 0;
+    			document.getElementById('sopa').value  = 0;
+    			document.getElementById('fritura').value  = 0;
+    			document.getElementById('tortilla').value  = 0;
+    			document.getElementById('papa').value  = 0;
+    			document.getElementById('pasta').value  = 0;
+    			document.getElementById('arroz').value  = 0;
+    			document.getElementById('frijol').value  = 0;
     			
-    			document.getElementById('pan').value  = 1;
-    			document.getElementById('huevo').value  = 1;
+    			document.getElementById('pan').value  = 0;
+    			document.getElementById('huevo').value  = 0;
     			
     			document.getElementById('pesominimo').value  = "";
     			document.getElementById('pesomax').value  = "";
+    			document.getElementById('pesoideal').value  = "";
     			document.getElementById('peso').value  = "";
     			document.getElementById('imc').value  = "";
     			document.getElementById('diagnostico').value  = "";
@@ -2220,10 +2621,10 @@ $(document).ready(function() {
     	        habilitado=false;
     	        
     	        document.getElementById("TablaAlimento").innerHTML= "";
-    	        document.getElementById("alimento").readOnly = false;	
-    	        document.getElementById("cantidada").readOnly = false;	
-    	        document.getElementById("porcion").readOnly = false;	
-    	        document.getElementById("BAlAgregar").disabled = false;
+    	        document.getElementById("alimento").readOnly = true;	
+    	        document.getElementById("cantidada").readOnly = true;	
+    	        document.getElementById("porcion").readOnly = true;	
+    	        document.getElementById("BAlAgregar").disabled = true;
     	        
     			
     			document.getElementById('enfermedad').readOnly = false;
@@ -2276,7 +2677,7 @@ $(document).ready(function() {
     			document.getElementById('talla').readOnly = false;
     			document.getElementById('pesousual').readOnly = false;
     			document.getElementById('circunferencia').readOnly = false;
-    			document.getElementById('constitucion').readOnly = false;
+    			document.getElementById('edadmeta').readOnly = false;
     			document.getElementById('grasa').readOnly = false;
     			document.getElementById('pagua').readOnly = false;
     			document.getElementById('musculo').readOnly = false;
@@ -2308,8 +2709,12 @@ $(document).ready(function() {
     			document.getElementById('huevo').readOnly = false;
     			
     			document.getElementById("BAlAgregar").disabled = false;
-    			document.getElementById('alimento').readOnly = false;
+    			//document.getElementById('alimento').readOnly = false;
     			document.getElementById('BtnATC').disabled = false;
+    			
+    			document.getElementById("fumafrec").disabled = true;
+    			document.getElementById("ejerciciofrec").disabled = true;
+    			document.getElementById("bebidaalcfrec").disabled = true;
     			
     			ActualizarTablaEnfermedad();
     			//document.getElementById("Mod").style.display = 'none';
@@ -2320,13 +2725,14 @@ $(document).ready(function() {
         		var alim=validad_vacio('NuevoAl');
         		var cal=validar_numerovacio("NuevaCal");
         		var grupo=validad_vacio("NuevoGrupo");
+        		var metrica=validad_vacio("metrica");
         		if(alim=="null"||cal==0){
-        			alert("Error, faltan valores a ingresar");
+        			VentanaError("Error, faltan valores a ingresar");
         		}else{
         			var AlimAux=alim.toLowerCase();
         			alim=encodeURI(alim);
         			var action="agregar";
-            		var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo].join('&');
+            		var cadena = ['a='+action,'alimento='+alim,'caloria='+cal,'grupo='+grupo,'metrica='+metrica].join('&');
 
 
             		$.ajax({
@@ -2344,7 +2750,7 @@ $(document).ready(function() {
                 		        
                 		        document.getElementById("cantidada").focus();	
             	        	}else{
-            	        		alert(data.descripcion);
+            	        		VentanaError(data.descripcion);
             	        	}
             	        	
             	        	
@@ -2395,13 +2801,14 @@ $(document).ready(function() {
         	        success: function(data){
         	        	if(data.resultado=='OK'){
                     		ERRORSQL=false;
-                    		alert(data.mensaje);
+                    		MostrarMensajeServidor(data.mensaje);
             	        	//idCE=data.ID;
             	        	if(data.b=="1"){
             	        		idCE=data.ID;
             	        		document.getElementById("Guard").style.display = 'none';
                 	        	document.getElementById("Mod").style.display = 'block';
             	        	}else{
+            	        		MostrarMensajeServidor("Registro eliminado correctamente");
             	        		window.location.replace("/ModuloNutricion/ExamenesNutricion/ConsultaExterna.jsp");
             	        	}
             	        	
@@ -2453,12 +2860,15 @@ $(document).ready(function() {
         	        		enviar_datos(cadena);
         		}
         		else{
-        			alert("Error al eliminar");
+        			VentanaError("Error al eliminar");
         		}
+        	}
+        	function BorrarReg(){
+        		jQuery('#EliminarRegistroModal').modal("show");
         	}
         	function Guardar(){
         		ERRORSQL=false;
-        		if(carnetaccion!=""){
+        		if(carnetaccion!=""&&AccionCarnetCarga){
         			var action="guardar";
             		var carnet=document.getElementById('carnet').value;
             		
@@ -2516,7 +2926,7 @@ $(document).ready(function() {
             		var variable43=validar_numerovacio("talla");
             		var variable44=validar_numerovacio("pesousual");
             		var variable45=validar_numerovacio("circunferencia");
-            		var variable46=TextoSeleccion("constitucion");
+            		var variable46=validar_numerovacio("edadmeta");
             		
             		var variable20=validad_vacio("diagnostico"); 
             		
@@ -2558,42 +2968,101 @@ $(document).ready(function() {
             		var variable75="";
             		var variable76="";
             		var variable77="";
-            		
+            		var variable80= obtenerRegistroEnfermedad();
             		if(busqueda==false){
                 		variable74=validad_vacio('nombre1');
                 		variable75=validad_vacio('sexo1');
                 		variable76=validad_vacio('fechaNac');
                 		variable77=validad_vacio('facultad1');
+                		var variable140=validad_vacio('edad1');
+                		var variable141=validad_vacio('cui1');
+                		var variable142=validar_numerovacio('tipopaciente1');
+                		var variable143=validad_vacio('correo1');
+                		var variable144=validar_numerovacio('telefono1');
+                		
+                		var FechaE=false;
+                		if(variable140!=""){
+                			FechaE=true;
+                		}else{
+                			VentanaError("Verifique la edad del paciente");
+                		}
+                		
+                		if(variable74!=""&&variable75!=""&&variable76!=""&&variable77!=""&&FechaE==true&&variable142!="0"){
+                			var cadena = [ 	'carnet='+ carnet,'a='+action
+                 			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
+                 			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
+                 			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
+                 			         	  ,'p17='+variable17,'p19='+variable19,'p20='+variable20,'p24='+variable24
+                 			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
+                 			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
+                 			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
+                 			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
+                 			         	  ,'p41='+variable41,'p42='+variable42,'p43='+variable43,'p44='+variable44,'p45='+variable45
+                 			         	  ,'p46='+variable46,'p47='+variable47,'p48='+variable48,'p49='+variable49,'p50='+variable50
+                 			         	  ,'p51='+variable51,'p52='+variable52,'p53='+variable53,'p54='+variable54,'p55='+variable55
+                 			         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
+                 			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
+                 			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
+                 			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
+                     		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100,'p80='+variable80
+                     		         	 ,'p141='+variable141,'p142='+variable142,'p143='+variable143,'p144='+variable144].join('&');
+                          var variable400=validar_numerovacio("imc");
+                			if(validar_envio(carnet,variable400)){
+                          		enviar_datos(cadena);
+                          	}else{
+                          		ERRORSQL=true;
+                          		VentanaError("Complete la informacion del IMC");
+                          	}
+                		}else{
+                			ERRORSQL=true;
+                      		
+                      		VentanaError("Complete los datos del paciente");
+                		}
+                		
+                	}else{
+                		var cadena = [ 	'carnet='+ carnet,'a='+action
+              			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
+              			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
+              			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
+              			         	  ,'p17='+variable17,'p19='+variable19,'p20='+variable20,'p24='+variable24
+              			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
+              			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
+              			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
+              			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
+              			         	  ,'p41='+variable41,'p42='+variable42,'p43='+variable43,'p44='+variable44,'p45='+variable45
+              			         	  ,'p46='+variable46,'p47='+variable47,'p48='+variable48,'p49='+variable49,'p50='+variable50
+              			         	  ,'p51='+variable51,'p52='+variable52,'p53='+variable53,'p54='+variable54,'p55='+variable55
+              			         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
+              			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
+              			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
+              			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
+                  		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100,'p80='+variable80].join('&');
+                       var variable400=validar_numerovacio("imc");
+             			if(validar_envio(carnet,variable400)){
+                       		enviar_datos(cadena);
+                       	}else{
+                       		ERRORSQL=true;
+                       		VentanaError("Complete la informacion del IMC");
+                       	}
                 	}
-            		var variable80= obtenerRegistroEnfermedad();
-            		var cadena = [ 	'carnet='+ carnet,'a='+action
-            			         	   ,'p1='+variable1,'p2='+variable2,'p3='+variable3,'p4='+variable4,'p5='+variable5
-            			         	   ,'p6='+variable6,'p7='+variable7,'p8='+variable8,'p9='+variable9,'p10='+variable10
-            			         	  ,'p11='+variable11,'p12='+variable12,'p13='+variable13,'p14='+variable14,'p15='+variable15
-            			         	  ,'p17='+variable17,'p19='+variable19,'p20='+variable20,'p24='+variable24
-            			         	  ,'p21='+variable21,'p23='+variable23,'p25='+variable25
-            			         	  ,'p26='+variable26,'p27='+variable27,'p28='+variable28,'p29='+variable29,'p30='+variable30
-            			         	  ,'p31='+variable31,'p32='+variable32,'p33='+variable33,'p34='+variable34,'p35='+variable35
-            			         	  ,'p36='+variable36,'p37='+variable37,'p38='+variable38,'p39='+variable39,'p40='+variable40
-            			         	  ,'p41='+variable41,'p42='+variable42,'p43='+variable43,'p44='+variable44,'p45='+variable45
-            			         	  ,'p46='+variable46,'p47='+variable47,'p48='+variable48,'p49='+variable49,'p50='+variable50
-            			         	  ,'p51='+variable51,'p52='+variable52,'p53='+variable53,'p54='+variable54,'p55='+variable55
-            			         	  ,'p56='+variable56,'p57='+variable57,'p58='+variable58,'p59='+variable59,'p60='+variable60
-            			         	  ,'p61='+variable61,'p62='+variable62,'p63='+variable63,'p64='+variable64,'p65='+variable65
-            			         	  ,'p66='+variable66,'p67='+variable67,'p68='+variable68,'p69='+variable69,'p70='+variable70
-            			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
-                		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p100='+variable100,'p80='+variable80].join('&');
-            		
-            	    enviar_datos(cadena);
+            	
             			         	
             		
         		}else{
         			ERRORSQL=true;
-        			MostrarMensajeServidor("Error, realice la busqueda del paciente e intentelo nuevamente");
+        			VentanaError("Realice la busqueda de la informacion del paciente e intentelo nuevamente");
         			//alert("falta carnet");
         		}
         		
         	}
+        	function validar_envio(carnet,imc){
+            	var resultado=true;
+            	if(carnet=="0"||imc=="0"){
+            		ERRORSQL=true;
+            		resultado=false;
+            	}
+            	return resultado
+            }
         	function TextoSeleccion(entrada){
         		var resultado="";
         		var e = document.getElementById(entrada);
@@ -2660,7 +3129,7 @@ $(document).ready(function() {
             		var variable43=validar_numerovacio("talla");
             		var variable44=validar_numerovacio("pesousual");
             		var variable45=validar_numerovacio("circunferencia");
-            		var variable46=TextoSeleccion("constitucion");
+            		var variable46=validar_numerovacio("edadmeta");
             		
             		var variable47=validar_numerovacio("grasa");
             		var variable48=validar_numerovacio("pagua");
@@ -2725,12 +3194,19 @@ $(document).ready(function() {
             			         	  ,'p71='+variable71,'p72='+variable72,'p73='+variable73,'busqueda='+busqueda
                 		         	   ,'p74='+variable74,'p75='+variable75,'p76='+variable76,'p77='+variable77,'p80='+variable80].join('&');
             		
-            	    enviar_datos(cadena);
+            		var variable400=validar_numerovacio('imc');
+            		if(carnet!="0"&&variable43!="0"&&variable44!="0"&&variable400!="0"){
+                 		enviar_datos(cadena);
+                 	}else{
+                 		ERRORSQL=true;
+                 		VentanaError("Complete la informacion del IMC");
+                 	}
+            	    
             			         	
             		
         		}else{
         			ERRORSQL=true;
-        			MostrarMensajeServidor("Error, realice la busqueda del paciente e intentelo nuevamente");
+        			VentanaError("Realice la busqueda de la informacion del paciente e intentelo nuevamente");
         			//alert("falta carnet");
         		}
         		
@@ -2781,7 +3257,7 @@ $(document).ready(function() {
         			ActualizarTabla();
         			LimpiarElementos();
         		}else{
-        			alert("Error: Faltan datos a ingresar");
+        			VentanaError("Error: Faltan datos a ingresar");
         		}
         		
         		
@@ -2826,7 +3302,7 @@ $(document).ready(function() {
         		for (i = 0; i < 5; i++) { 
         			if(ArrTiempoCom[i]!=""){
         				encabCom += "<tr><th colspan=\"6\" bgcolor=\"#2D7C06\"><font color=\"white\">"+ArrTiempoCom[i]+"</font></th></tr>";
-        				encabCom+="<tr><th>Alimento</th><th>Cantidad</th><th>Porcion</th><th>Kcal</th><th></th><th></th></tr>";
+        				encabCom+="<tr><th>Alimento</th><th>Porcion</th><th>Metrica</th><th>Kcal</th><th></th><th></th></tr>";
         				
         				for (j = 0; j < ArrpComida.length; j++) { 
         					
@@ -2910,6 +3386,7 @@ $(document).ready(function() {
         		              success: function(data){
         		              		document.getElementById('alimento').value  = data.resultado[0].nombre;
         		        	        document.getElementById('calorias').value  = data.resultado[0].calorias;
+        		        	        document.getElementById('porcion').value  = data.resultado[0].metrica;
         		        	        document.getElementById("cantidada").focus();	              	
         		              }
         		          });
@@ -2964,6 +3441,7 @@ $(document).ready(function() {
     			var imc=0;
     			var pesomax=0;
     			var pesomin=0;
+    			var pesoideal=0;
     			var TempTalla="";
     			var TempPeso="";
     		
@@ -2979,6 +3457,7 @@ $(document).ready(function() {
     			    peso =	parseFloat(TempPeso)*0.453592;
     			    pesomax=(24.9 * (talla^2)) * 2.2;
     				pesomin=(18.5 * (talla^2)) * 2.2;
+    				pesoideal=(21.7 * (talla^2)) * 2.2;
     			    talla=talla*talla;
     			    imc=peso/talla;
     				
@@ -2996,6 +3475,7 @@ $(document).ready(function() {
     			        	document.getElementById('diagnostico').value  = data.diagnostico;
     			        	document.getElementById('pesominimo').value  = ""+ pesomin.toFixed(2);
     			        	document.getElementById('pesomax').value  =""+ pesomax.toFixed(2);
+    			        	document.getElementById('pesoideal').value  =""+ pesoideal.toFixed(2);
     			        	document.getElementById('peso').value  =""+ peso.toFixed(2);
     			        }
     				});
@@ -3003,8 +3483,20 @@ $(document).ready(function() {
         	}
         	function CalcularIMC(event) {
         	    var char = event.which || event.keyCode;
-        	    if(char == 13){       	    
-        	    	CalcIMC(); 
+        	    if(char == 13){     
+        	    	var aTempTalla="";
+        			var aTempPeso="";
+        			
+        			aTempTalla=parseFloat(validar_numerovacio('talla'));
+        			aTempPeso=parseFloat(validar_numerovacio('pesousual'));
+        			
+        			if(aTempTalla>0&&aTempPeso>0){
+        				CalcIMC(); 
+        			}else{
+        				VentanaError("La talla y el peso deben ser mayor a cero");
+        			}
+        			
+        	    	
         		}
         	   
         	}
@@ -3345,8 +3837,17 @@ $(document).ready(function() {
             	}
             }
         	function activaTab(tab){
-        	    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
-        	    document.getElementById("dbaja").focus();
+        	  // $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+        	  //  document.getElementById('M7').contentEditable='true';
+        	  //  document.getElementById('M7').focus();
+        	//  var div = document.getElementById('M7');
+			//	div.scrollTop =0;
+				var obj = $('html').scrollTop() !== 0 ? 'html' : 'body';
+
+			// then proper delegate using on, with following line:
+			$(obj).animate({ scrollTop: 0 }, "slow");
+			$('.nav-tabs a[href="#' + tab + '"]').tab('show');	
+        	   // window.location.hash = '#M7';
         	};
         	function ValidarDecimal(){
         		var texto=document.getElementById('talla').value;
@@ -3385,6 +3886,13 @@ $(document).ready(function() {
                    
             	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
             		        return false;
+            	}else{
+            		document.getElementById('imc').value="";
+            		document.getElementById('pesominimo').value="";
+            		document.getElementById('pesomax').value="";
+            		document.getElementById('peso').value="";
+            		document.getElementById('pesoideal').value="";
+            		document.getElementById('diagnostico').value="";
             	}
             }
         	document.getElementById('pesousual').onkeydown = function (e) {
@@ -3396,20 +3904,27 @@ $(document).ready(function() {
                    
             	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
             		        return false;
+            	}else{
+            		document.getElementById('imc').value="";
+            		document.getElementById('pesominimo').value="";
+            		document.getElementById('pesomax').value="";
+            		document.getElementById('peso').value="";
+            		document.getElementById('pesoideal').value="";
+            		document.getElementById('diagnostico').value="";
             	}
             }
         	document.getElementById('circunferencia').onkeydown = function (e) {
             	//alert(e.keyCode);
         		if(e.keyCode == 13){
         			
-            		document.getElementById("constitucion").focus();
+            		document.getElementById("edadmeta").focus();
             		 return false;
                    
             	}else if(!((e.keyCode > 95 && e.keyCode < 106) || (e.keyCode > 47 && e.keyCode < 58) || e.keyCode == 8|| e.keyCode == 110|| e.keyCode == 9|| (e.keyCode > 36 && e.keyCode < 41))) {
             		        return false;
             	}
             }
-        	document.getElementById('constitucion').onkeydown = function (e) {
+        	document.getElementById('edadmeta').onkeydown = function (e) {
             	//alert(e.keyCode);
         		if(e.keyCode == 13){
         			
@@ -3669,24 +4184,80 @@ $(document).ready(function() {
         	}
         	
         	function ValidarFecha(){
-            	var texto=document.getElementById('fechaNac').value;
-            	var longitud=texto.length;
-            	if(longitud==4){
-            		var ini = texto.substr(0,4);
-            	    //var aux= texto.substr(longitud-1,longitud);
-            	    var palabra=ini+"-";
-            		document.getElementById('fechaNac').value=palabra;
-            	}else if(longitud==7){
-            		var ini = texto.substr(0,7);
-            	    //var aux= texto.substr(longitud-1,longitud);
-            	    var palabra=ini+"-";
-            		document.getElementById('fechaNac').value=palabra;
-            	}else if(longitud>10){
-            		var ini = texto.substr(0,10);
-            		document.getElementById('fechaNac').value=ini;
+        		var texto=document.getElementById('fechaNac').value;
+            	if(texto!=""){
+            		 var res = texto.split("/");
+            		 var longitud=res.length;
+            		 if(longitud==3){
+            			 var dia = res[0];
+            			 var mes = res[1];
+            			 var ano = res[2];
+            			 
+            			 if(dia<32&&mes<13){
+            				 fecha_hoy = new Date();
+                			 ahora_ano = fecha_hoy.getYear();
+                			 ahora_mes = fecha_hoy.getMonth();
+                			 ahora_dia = fecha_hoy.getDate();
+                			 edad = (ahora_ano + 1900) - ano;
+                			     
+                			     if ( ahora_mes < (mes - 1)){
+                			       edad--;
+                			     }
+                			     if (((mes - 1) == ahora_mes) && (ahora_dia < dia)){ 
+                			       edad--;
+                			     }
+                			     if (edad > 1900){
+                			         edad -= 1900;
+                			     }
+                			     if(edad>0){
+                			    	 document.getElementById("edad1").value=edad;
+                			    	 document.getElementById("talla").focus();
+                			     }else{
+                			    	 //Edad invalida
+                			    	 VentanaError(" Edad invalida");
+                			    	 document.getElementById('fechaNac').value="";
+                			     }
+                			     
+            			 }else{
+        					//fecha invalida
+            				 VentanaError(" Fecha de nacimiento invalida");
+            				 document.getElementById('fechaNac').value="";
+            			 }
+            			 
+            		 }else{
+            			 //formato fecha invalido
+            			 VentanaError(" Formato de fecha de nacimiento invalida");
+            			 document.getElementById('fechaNac').value="";
+            		 }
+            		 
             	}
             }
         	document.getElementById('nombre1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("cui1").focus();
+            		 return false;
+                   
+            	}
+            }
+        	document.getElementById('cui1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("facultad1").focus();
+            		 return false;
+                   
+            	}
+            }
+        	function CambioFac(event){
+				if(event.keyCode == 13){
+            		
+            		document.getElementById("tipopaciente1").focus();
+            		 return false;
+                   
+            	}
+        	}
+        	
+        	document.getElementById('tipopaciente1').onkeydown = function (e) {
             	if(e.keyCode == 13){
             		
             		document.getElementById("sexo1").focus();
@@ -3705,12 +4276,29 @@ $(document).ready(function() {
             document.getElementById('fechaNac').onkeydown = function (e) {
             	if(e.keyCode == 13){
             		var validar=document.getElementById('fechaNac').value;
-            		if(existeFecha(validar)==false){
-            			alert("Error: ingrese una fecha valida");
-            			document.getElementById('fechaNac').value="";
-            		}
+            		ValidarFecha();
+            		//if(existeFecha(validar)==false){
+            		//	alert("Error: ingrese una fecha valida");
+            		//	document.getElementById('fechaNac').value="";
+            		//}
             		
-            		document.getElementById("talla").focus();
+            		document.getElementById("correo1").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('correo1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("telefono1").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('telefono1').onkeydown = function (e) {
+            	if(e.keyCode == 13){
+            		
+            		document.getElementById("enfermedad").focus();
             		 return false;
                    
             	}
@@ -3736,6 +4324,15 @@ $(document).ready(function() {
             	}
             }
             document.getElementById('NuevoGrupo').onkeydown = function (e) {
+            	//alert(e.keyCode);
+        		if(e.keyCode == 13){
+        			
+            		document.getElementById("metrica").focus();
+            		 return false;
+                   
+            	}
+            }
+            document.getElementById('metrica').onkeydown = function (e) {
             	//alert(e.keyCode);
         		if(e.keyCode == 13){
         			
@@ -3784,9 +4381,11 @@ $(document).ready(function() {
                 if (checkbox.checked)
                 {
                 	document.getElementById('ncigarro').readOnly = false;
+                	document.getElementById("fumafrec").disabled = false;
                    
                 }else{
                 	document.getElementById('ncigarro').readOnly = true;
+                	document.getElementById("fumafrec").disabled = true;
                 
                 }
             }
@@ -3795,9 +4394,12 @@ $(document).ready(function() {
                 if (checkbox.checked)
                 {
                 	document.getElementById('ejerciciotiempo').readOnly = false;
+                	document.getElementById("ejerciciofrec").disabled = false;
+                	
                    
                 }else{
                 	document.getElementById('ejerciciotiempo').readOnly = true;
+                	document.getElementById("ejerciciofrec").disabled = true;
                 
                 }
             }
@@ -3806,9 +4408,11 @@ $(document).ready(function() {
                 if (checkbox.checked)
                 {
                 	document.getElementById('bebidaalcfrec').readOnly = false;
+                	document.getElementById("bebidaalcfrec").disabled = false;
                    
                 }else{
                 	document.getElementById('bebidaalcfrec').readOnly = true;
+                	document.getElementById("bebidaalcfrec").disabled = true;
                 
                 }
             }
@@ -3848,7 +4452,7 @@ $(document).ready(function() {
 	    	        			document.getElementById('enfermedad').value  = "";
 	    	        		}	
 	    	        	}else{
-	    	        		alert("Error, al buscar el alimento en el servidor");
+	    	        		VentanaError("Error, al buscar el alimento en el servidor");
 	    	        	}
 	    	        	
 	    	        	
@@ -3862,7 +4466,7 @@ $(document).ready(function() {
 	        function AñadirEnfermedad(){
         		var enfe=validad_vacio('enfermedad');
         		if(enfe==""){
-        			alert("Error, faltan valores a ingresar");
+        			VentanaError("Error, faltan valores a ingresar");
         		}else{
         			var EnfeAux=enfe.toLowerCase();
         			enfe=encodeURI(enfe);
@@ -3914,8 +4518,8 @@ $(document).ready(function() {
         	    	if(Enfermed[j]!=""){
         	    		aux+="<tr>"
            	    		 +"<td>"
-    					 +"<button class=\"btn btn-default btn-sm\" onclick=\"EliminarEnfe("+j+")\" style=\"font-size: 8px;\">"+Enfermed[j]
-    				     + "<img src=\"../imagenes/eliminar2.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /> </button>"
+    					 +"<button class=\"btn btn-default btn-sm\" onclick=\"EliminarEnfe("+j+")\" style=\"font-size: 9px;\">"+Enfermed[j]
+    				     + "<img src=\"../imagenes/cerrar.png\" width=\"10\" height=\"8\" title=\"Eliminar\" /> </button>"
     				     +"</td></tr>";
         	    	}
         	    	
@@ -3939,14 +4543,92 @@ $(document).ready(function() {
         	}
 	        
         	function Reconsulta(){
-        		window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
+        		var car=document.getElementById("carnet").value;
+        		if(car!=""){
+        			window.location.replace("/ModuloNutricion/ExamenesNutricion/Reconsulta1.jsp?idc="+car);
+        		}
+        		
         		//window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/Reconsulta.jsp?prodId="+idCE);
         	}
 
         	function CalculosVET(){
-        		window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+idCE);
+        		var car=document.getElementById("carnet").value;
+        		if(car!=""){
+        		window.location.replace("/ModuloNutricion/ExamenesNutricion/CalculosVET1.jsp?idc="+car);
         		//window.location.replace("http://localhost:8080/ModuloNutricion/ExamenesNutricion/CalculosVET.jsp?prodId="+idCE);
-        	} 	
+        		} 	
+        	}
+        	function Editar(){
+        		CargaDatosPacienteEdicion();
+        	}
+        	function CargaDatosPacienteEdicion(){
+        		var resultado="";
+        		var action="buscar";
+        		var carnet="a";
+        		cadena = [ 	'carnet='   + carnet,'a='+action].join('&');
+        		$.ajax({
+        	        url: "../Facultad",
+        	        data: cadena,
+        	  	    type: 'post',
+        	        dataType: 'json',
+        	        success: function(data){
+        	        		var auxf=document.getElementById("facultad").value;
+        	        	    for ( i=0; i < data.resultado.length; i++) {  
+        	        	    	if(auxf==data.resultado[i].nombre){
+        	        	    		resultado+="<option value=\""+data.resultado[i].id+"\" selected>"+data.resultado[i].nombre+"</option>";
+        	        	    	}else{
+        	        	    		resultado+="<option value=\""+data.resultado[i].id+"\">"+data.resultado[i].nombre+"</option>";
+        	        	    	}
+        	        	    	
+        	        	      
+        	        	    }
+        	        	    document.getElementById("NRegPacienteEncontrado").style.display = 'none';
+    		        		document.getElementById("NRegPacienteNoEncontrado").style.display = 'block';
+        	        	   
+        	    			var marcos="<select class=\"form-control input-sm\" id=\"facultad1\" name=\"facultad1\" onkeydown=\"CambioFac(event)\">";
+        	    			marcos+=resultado+"</select>";
+        	    			
+        	    			document.getElementById("dep5").innerHTML = marcos;
+        	    			document.getElementById("nombre1").value=document.getElementById("nombre").value;
+        	    			document.getElementById("sexo1").value=document.getElementById("sexo").value;
+        	    			document.getElementById("fechaNac").value=document.getElementById("fff").value;
+        	    			document.getElementById("edad1").value=document.getElementById("edad").value;
+        	    			
+        	    			var auxcui=document.getElementById("cui").value;
+        	    			if(auxcui=="0"){
+        	    				document.getElementById("cui1").value="";
+        	    			}else{
+        	    				document.getElementById("cui1").value=auxcui;
+        	    			}
+        	    			
+        	    			document.getElementById("correo1").value=document.getElementById("correo").value;
+        	    			
+        	    			var auxtel=document.getElementById("telefono").value;
+        	    			if(auxtel=="0"){
+        	    				document.getElementById("telefono1").value="";
+        	    			}else{
+        	    				document.getElementById("telefono1").value=auxtel;
+        	    			}
+        	    			
+        	    			
+        	    			var paux=document.getElementById("tipopaciente").value;
+        	    			if(paux=="Estudiante"){
+        	    				document.getElementById("tipopaciente1").value=1;
+        	    			}else if(paux=="Trabajador"){
+        	    				document.getElementById("tipopaciente1").value=2;
+        	    			}
+        	    			
+        	    			document.getElementById("nombre1").focus();
+        	    			AccionCarnetCarga=true;
+        	    			document.getElementById("LabelEditar").innerHTML = "";
+        	    			document.getElementById("LabelGuardar").innerHTML = "Guardar";
+
+        	    			document.getElementById("BtnEditar").style.display = 'none';
+        	        		document.getElementById("BtnEditarG").style.display = 'block';
+        	        }
+        		});
+        		
+        	}
         </script>
             
             

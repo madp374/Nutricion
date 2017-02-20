@@ -67,11 +67,14 @@ public class TablaAlimento extends HttpServlet {
 			String alimento=request.getParameter("alimento");
 			String caloria=request.getParameter("caloria");
 			String grupo=request.getParameter("grupo");
+			String metrica=request.getParameter("metrica");
 			
-			String sql = "UPDATE ALIMENTO SET nombre='"+alimento+"', caloria="+caloria+", GrupoAlimenticio_idGrupoAlimenticio="+grupo+" WHERE idALIMENTO="+ID+"; ";
-
+			
 			try {
 				Conexion consulta = new Conexion();
+				String auxa=consulta.decodificar(alimento);
+				String sql = "UPDATE ALIMENTO SET nombre='"+auxa+"', caloria="+caloria+", PORCION_idPORCION="+metrica+", GrupoAlimenticio_idGrupoAlimenticio="+grupo+" WHERE idALIMENTO="+ID+"; ";
+
 				result=consulta.InsertarRegistro(sql);
 				if(result.equals("0")){
 					result="{\"resultado\":\"OK\",\"descripcion\":\"Registro modificado correctamente\"}";
@@ -120,7 +123,7 @@ public class TablaAlimento extends HttpServlet {
 				where = " AND " + qtype + " LIKE '%" + query + "%'";
 			}
 
-			String sql = "SELECT A.idALIMENTO, A.nombre, A.caloria, G.nombre as grupo FROM ALIMENTO A, GrupoAlimenticio G WHERE A.GrupoAlimenticio_idGrupoAlimenticio=G.idGrupoAlimenticio " + where + " " + sort + " " + limit;
+			String sql = "SELECT A.idALIMENTO, A.nombre, A.caloria, A.PORCION_idPORCION, G.nombre as grupo FROM ALIMENTO A, GrupoAlimenticio G WHERE A.GrupoAlimenticio_idGrupoAlimenticio=G.idGrupoAlimenticio " + where + " " + sort + " " + limit;
 
 		
 			ResultSet result = null;
@@ -151,14 +154,17 @@ public class TablaAlimento extends HttpServlet {
 	}
 	private String getJson(ResultSet rs, int total, int page) throws Exception {
 		String buffer = "";
+		Conexion consulta = new Conexion();
 		while (rs.next()) {
 			String idALIMENTO = rs.getString(1);
-			String nombre = rs.getString(2);
+			String nombre = consulta.Codificar(rs.getString(2));
 			String caloria = rs.getString(3);
-			String grupo = rs.getString(4);
+			String metrica = rs.getString(4);
+			String grupo = rs.getString(5);
+			
 			
 			buffer+="<row id='"+idALIMENTO+"'>";
-			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idALIMENTO+",\""+nombre+"\","+caloria+",\""+grupo+"\")' value='"+idALIMENTO+"' />]]></cell>";
+			buffer+="<cell><![CDATA[<input type='radio' class='menu_radio' name='id_radio' onclick='DatosSeleccionados("+idALIMENTO+",\""+nombre+"\","+caloria+","+metrica+",\""+grupo+"\")' value='"+idALIMENTO+"' />]]></cell>";
 			buffer+="<cell><![CDATA["+idALIMENTO+"]]></cell>";
 			buffer+="<cell><![CDATA["+nombre+"]]></cell>";
 			buffer+="<cell><![CDATA["+grupo+"]]></cell>";

@@ -2,6 +2,7 @@ package Autenticacion;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +39,22 @@ public class login extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
+	private static String md5(String clear) throws Exception {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] b = md.digest(clear.getBytes());
+
+		int size = b.length;
+		StringBuffer h = new StringBuffer(size);
+		for (int i = 0; i < size; i++) {
+		int u = b[i] & 255;
+		if (u < 16) {
+		h.append("0" + Integer.toHexString(u));
+		} else {
+		h.append(Integer.toHexString(u));
+		}
+		}
+		return h.toString();
+		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession misession= request.getSession(true);
 		String usuario="";
@@ -49,8 +65,14 @@ public class login extends HttpServlet {
 		pass=request.getParameter("pass");
 		perfil=Integer.parseInt(request.getParameter("perfil"))-1;
 		
-		if(perfil==0){}
+		if(perfil==0){response.sendRedirect("/ModuloNutricion/PortalSalud/InicioNutricion.jsp?e=false");}
 		else{
+			try {
+				pass=md5(pass);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Conexion con =new Conexion();
 			String mensaje="0";
 			mensaje=con.login(usuario,pass,perfil);

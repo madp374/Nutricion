@@ -2,6 +2,7 @@ package Autenticacion;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -38,6 +39,22 @@ public class Usuario extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	private static String md5(String clear) throws Exception {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		byte[] b = md.digest(clear.getBytes());
+
+		int size = b.length;
+		StringBuffer h = new StringBuffer(size);
+		for (int i = 0; i < size; i++) {
+		int u = b[i] & 255;
+		if (u < 16) {
+		h.append("0" + Integer.toHexString(u));
+		} else {
+		h.append(Integer.toHexString(u));
+		}
+		}
+		return h.toString();
+		}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action=ValidarRequest(request.getParameter("a"));
 		//System.out.println("accion"+action);
@@ -71,6 +88,12 @@ public class Usuario extends HttpServlet {
 			String estado=request.getParameter("estado");
 			String area=request.getParameter("area");
 			
+			try {
+				pasw=md5(pasw);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			String sql = "UPDATE USUARIO SET password='"+pasw+"',nombre='"+nombre+"',correo='"+correo+"',estado='"+estado+"',ROL_idROL="+area+" WHERE idUSUARIO="+ID+"; ";
 		
 			try {
@@ -100,7 +123,7 @@ public class Usuario extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+			//System.out.println(result);
 			out.println(result);
 			
 		}else if(action.equalsIgnoreCase("agregar")){
@@ -113,7 +136,12 @@ public class Usuario extends HttpServlet {
 			String correo=request.getParameter("correo");
 			String estado=request.getParameter("estado");
 			String area=request.getParameter("area");
-			
+			try {
+				pasw=md5(pasw);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			String sql = "insert into USUARIO(usuario,password,nombre,correo,estado,ROL_idROL) "
 					+"values('"+usuario+"','"+pasw+"','"+nombre+"','"+correo+"','"+estado+"',"+area+") ";
 			

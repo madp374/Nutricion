@@ -118,17 +118,13 @@
 
 	</div>
 	
-					<div id="titulos">
-						<h5 align="center">&Aacute;rea de Medicina Preventiva e Investigaci&oacute;n</br>
-									Clinica de Nutricion</br>
-									Unidad de Salud. USAC</h5>
-					</div>
+					
 
     </div>
 			<div style="float:left;">
 				<a href="http://usalud.usac.edu.gt/index.jsp">
 				
-					<img src="../imagenes/logousalud2.gif" width="300px" alt="bt_1" onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
+					<img src="../imagenes/logousalud2.gif" height="100px" width="200px" alt="bt_1" onmouseout="this.src=&#39;../imagenes/logousalud2.gif&#39;;" onmouseover="this.src=&#39;../imagenes/logousac.png&#39;;">
 				</a>
 			</div> 
        		 
@@ -137,7 +133,7 @@
         <div class="row col-md-12">
         <div class="row">
         
-        	<div class="col-md-3">
+        	<div class="col-sm-3">
         	<div class="row">
         		<nav class="col-sm-14">
 			        <ul class="nav nav-pills nav-stacked" class="accordion"  id="accordion-3">
@@ -151,10 +147,9 @@
 				  </ul>
 			         </li>
 			        <li> <a href="#">  Investigacion </a> </li>
-			        <li> <a href="#">  Extension </a></li>
 			        <li> <a href="#">  Programas </a></li>
-			        <li> <a href="#">  Calendario </a></li>
-			        <li> <a href="#">  Regresar a Menu </a></li>
+			        <li> <a href="/ModuloNutricion/PortalSalud/Calendario.jsp">  Calendario </a></li>
+			        <li> <a href="/ModuloNutricion/PortalSalud/InicioNutricion.jsp">  Regresar a Menu </a></li>
 			        </ul>
 	   
 	       		 </nav>
@@ -171,7 +166,8 @@
 						  		<div id="mensajes"></div>
 						  </div>
 						 </div>
-		        		<div class="row">  
+		        		<div class="row">
+		        		&nbsp;  
 						  <div class="form-group">
 							Usuario(Carné)
 							<input class="form-control input-sm" name="user" id="user" style="width: 120px; height:25px;" required />
@@ -181,6 +177,7 @@
 						 	<br>
 						 </div>
 						 <div class="row">  
+						 &nbsp;
 						  <div class="form-group">
 							Contraseña&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input class="form-control input-sm" name="pass" id="pass" type="password" style="width: 120px; height:25px;" required />
@@ -189,7 +186,8 @@
 						 <div class="row">
 						 	<br>
 						 </div>
-						 <div class="row">  
+						 <div class="row"> 
+						 &nbsp; 
 						  <div class="form-group">
 							Perfil&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<select class="form-control input-sm" id="perfil" name="perfil">
@@ -235,23 +233,7 @@
 			        <h3 class="panel-title">Nutricion</h3>
 			        </div>
 			        <div class="panel-body">
-			        <h4 align="center">CONSULTA EXTERNA NUTRICIÓNAL</br>
-						ÁREA MEDICINA PREVENTIVA E INVESTIGACIÓN</br>
-						(ESTUDIANTES Y TRABAJADORES DE USAC)</h4>
-						<br>
-						<p>Atención Nutricional en el área de dietética a estudiantes, personal administrativo y de servicio de la USAC y en algunos casos cortesías, aprobados únicamente por el jefe de área medica, Dr. Roderico Guerra. Consulta externa a estudiantes y personal de la USAC de Lunes a Viernes de 10:00 a las 15:30 hrs. Apoyo en el examen multifásico que se lleva a cabo los días lunes, martes y jueves de 8:00 a 10:30 hrs.</p>
-						<br>
-						<p>Apoyo multidiciplinario al area de medicina preventiva.</p>
-						 <br>
-						<p>Horario de atención</br>
-						Lunes a viernes: 10:00 a 15:00 hrs.</p>
-						<br>
-						<p>Servicios</br>
-						· Talleres de Nutrición adecuada y recuperación del bajo peso.</p>
-						<br>
-						<p>Para Consulta externa realizar los siguientes pasos:</br>
-						1) Asistir a la clínica No. 25 de la Unidad de Salud a solicitar su cita.</br>
-						2) Asistir el día y hora programada.</p>
+					<p id="contenido"></p>
 			        </div>
 			        </div>
 			        </section>
@@ -283,6 +265,7 @@
         </div>
        <script type="text/javascript">
        	   function CargaInicio() {
+       		Mensajes();
        		var lg = getUrlVars()["e"];
        		if(lg!=undefined){
        			if(lg=="false"){
@@ -299,6 +282,25 @@
 		   	    });
 		   	    return vars;
 	   	  }
+	       function Mensajes(){
+	    	   var action="cargaInicio";
+	    		cadena = [ 	'idTRIFOLIAR='+1,'a='+action].join('&');
+	    			$.ajax({
+	    		        url: "../TablaTrifoliar",
+	    		        data: cadena,
+	    		  	    type: 'post',
+	    		        dataType: 'json',
+	    		        success: function(data){
+	    		        	
+	    		        	if(data.resultado=='OK'){
+	    		        		document.getElementById('contenido').innerHTML ="";
+	    		        		var textos= decodeURI(data.contenido);
+	    		        		document.getElementById('contenido').innerHTML = textos;
+	    		        		
+	    		        	}
+	    		        }
+	    		    });
+	       }
        </script>
 		  	
         <footer class="row col-sm-12">

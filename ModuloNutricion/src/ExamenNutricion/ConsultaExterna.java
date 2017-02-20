@@ -105,7 +105,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p43 = request.getParameter("p43");// talla
 			String p44 = request.getParameter("p44");// peso usual
 			String p45 = request.getParameter("p45");// circunferencia
-			String p46 = request.getParameter("p46");// constitucion osea
+			String p46 = request.getParameter("p46");// edad metabolica
 			
 			String p47 = request.getParameter("p47");// % grasa
 			String p48 = request.getParameter("p48");// % de agua
@@ -148,9 +148,32 @@ public class ConsultaExterna extends HttpServlet {
 				String p74 = request.getParameter("p74");// nombre
 				String p75 = request.getParameter("p75");// sexo
 				String p76 = request.getParameter("p76");// fecha nac
+				
+				String p141 = request.getParameter("p141");// cui
+				String p142 = request.getParameter("p142");// tipo de paciente
+				String p143 = request.getParameter("p143");// correo 
+				String p144 = request.getParameter("p144");// telefono
+				
+				String Sfi[]=p76.split("/");
+	  			
+	  			String fini=Sfi[2]+"-"+Sfi[1]+"-"+Sfi[0];
+	  			
+	  			String aux=",CUI";
+	  			String aux1="";
+	  			
+	  			if(p141.equalsIgnoreCase("")){
+	  				aux1=","+0+"";
+	  			}else{
+	  				
+	  				aux1=","+p141+"";
+	  			}
+	  			
 				String p77 = request.getParameter("p77");// facultad
-				String query2="insert into PACIENTE(idPACIENTE,usuario,password,nombre,fecha_nacimiento,sexo,estado,FACULTAD_idFACULTAD) "
-						+"values("+carnet+",'prueba3','prueba5','"+p74+"','"+p76+"','"+p75+"','activo',"+p77+");";
+				//String query2="insert into PACIENTE(idPACIENTE,nombre,fecha_nacimiento,sexo,FACULTAD_idFACULTAD) "
+					//	+"values("+carnet+",'"+p74+"','"+fini+"','"+p75+"',"+p77+");";
+				
+				String query2="insert into PACIENTE(idPACIENTE,nombre,fecha_nacimiento,sexo,FACULTAD_idFACULTAD,correo,telefono,TipoPaciente"+aux+") "
+						+"values("+carnet+",'"+p74+"','"+fini+"','"+p75+"',"+p77+",'"+p143+"',"+p144+",'"+p142+"'"+aux1+");";
 				
 				query.Insertar(query2);
 			}
@@ -214,10 +237,10 @@ public class ConsultaExterna extends HttpServlet {
 	    	        			
 	    	        			idTcomida="(SELECT idTIEMPO_COMIDA FROM TIEMPO_COMIDA where comida='"+tcomida+"')";
 	    	        			idAlim="(select idALIMENTO from ALIMENTO where nombre='"+TiempoComidaArray3[1]+"')";
-	    	        			idPorcion="(select idPORCION from PORCION where nombre='"+TiempoComidaArray3[3]+"')";
+	    	        			//idPorcion="(select idPORCION from PORCION where nombre='"+TiempoComidaArray3[3]+"')";
 	    	        			
-	    	        			consulta="insert into RECORDATORIO(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ALIMENTO_idALIMENTO, TIEMPO_COMIDA_idTIEMPO_COMIDA, cantidad, PORCION_idPORCION) "
-	    	        						+"values("+IDConsultaExterna+","+idAlim+","+idTcomida+","+TiempoComidaArray3[2]+","+idPorcion+");";
+	    	        			consulta="insert into RECORDATORIO(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ALIMENTO_idALIMENTO, TIEMPO_COMIDA_idTIEMPO_COMIDA, cantidad) "
+	    	        						+"values("+IDConsultaExterna+","+idAlim+","+idTcomida+","+TiempoComidaArray3[2]+");";
 	    	        			query.Insertar(consulta);
 	    	        		}
 	    	        		
@@ -301,7 +324,7 @@ public class ConsultaExterna extends HttpServlet {
 			String p43 = request.getParameter("p43");// talla
 			String p44 = request.getParameter("p44");// peso usual
 			String p45 = request.getParameter("p45");// circunferencia
-			String p46 = request.getParameter("p46");// constitucion osea
+			String p46 = request.getParameter("p46");// EdadMetabolica
 			
 			String p47 = request.getParameter("p47");// % grasa
 			String p48 = request.getParameter("p48");// % de agua
@@ -370,7 +393,7 @@ public class ConsultaExterna extends HttpServlet {
 				
 		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
-		    query3="UPDATE ANTROPOMETRIA SET DietaBaja='"+p41+"', DietaAlta='"+p42+"', talla="+p43+", peso="+p44+", CircunferenciaMuñeca="+p45+", ConstitucionOsea='"+p46+"'"
+		    query3="UPDATE ANTROPOMETRIA SET DietaBaja='"+p41+"', DietaAlta='"+p42+"', talla="+p43+", peso="+p44+", CircunferenciaMuñeca="+p45+", EdadMetabolica='"+p46+"'"
 					+" WHERE idANTROPOMETRIA=(SELECT ANTROPOMETRIA_idANTROPOMETRIA"
 					+" FROM CONSULTA_EXTERNA"
 					+" WHERE idCONSULTA_EXTERNA="+ID+");";
@@ -444,10 +467,10 @@ public class ConsultaExterna extends HttpServlet {
 	    	        			
 	    	        			idTcomida="(SELECT idTIEMPO_COMIDA FROM TIEMPO_COMIDA where comida='"+tcomida+"')";
 	    	        			idAlim="(select idALIMENTO from ALIMENTO where nombre='"+TiempoComidaArray3[1]+"')";
-	    	        			idPorcion="(select idPORCION from PORCION where nombre='"+TiempoComidaArray3[3]+"')";
+	    	        			//idPorcion="(select idPORCION from PORCION where nombre='"+TiempoComidaArray3[3]+"')";
 	    	        			
-	    	        			query3="insert into RECORDATORIO(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ALIMENTO_idALIMENTO, TIEMPO_COMIDA_idTIEMPO_COMIDA, cantidad, PORCION_idPORCION) "
-	    	        						+"values("+ID+","+idAlim+","+idTcomida+","+TiempoComidaArray3[2]+","+idPorcion+");";
+	    	        			query3="insert into RECORDATORIO(CONSULTA_EXTERNA_idCONSULTA_EXTERNA, ALIMENTO_idALIMENTO, TIEMPO_COMIDA_idTIEMPO_COMIDA, cantidad) "
+	    	        						+"values("+ID+","+idAlim+","+idTcomida+","+TiempoComidaArray3[2]+");";
 	    	        			//query.Insertar(consulta);
 	    	        			ResultadoInsertar=con.InsertarRegistro(query3);
 	    	        		}
@@ -474,7 +497,9 @@ public class ConsultaExterna extends HttpServlet {
 	        }
 			
 			if(ResultadoInsertar.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\",\"b\":\"1\"}";
+				result="{\"resultado\":\"OK\",\"ID\":\""+ID+"\",\"mensaje\":\"Registro modificado correctamente\",\"b\":\"1\"}";
+				//result="{\"resultado\":\"OK\",\"ID\":\""+ID+"\",\"mensaje\":\"Registro almacenado correctamente\",\"b\":\"1\"}";
+				
 			}else{
 				result=ResultadoInsertar;
 			}
@@ -509,6 +534,10 @@ public class ConsultaExterna extends HttpServlet {
 			String query3="DELETE FROM RECONSULTA WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+"; ";
 			
 		    String ResultadoInsertar=con.InsertarRegistro(query3);
+		    
+		    query3="DELETE FROM VET_DIETA WHERE CALCULOS_VET_idCALCULOS_VET IN (SELECT idCALCULOS_VET FROM CALCULOS_VET WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+")";
+			
+		    ResultadoInsertar=con.InsertarRegistro(query3);
 		    
 		    query3="DELETE FROM CALCULOS_VET WHERE CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+ID+"; ";
 			

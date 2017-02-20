@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstadisticasMultifasico" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="21"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DataMasculino">
+		<parameter name="DFIni" class="java.lang.String"/>
+		<parameter name="DFin" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT '< 18' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1))  < 19
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '19 - 21' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 19 and 21
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '22 - 25' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 22 and 25
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '26 - 29' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 26 and 29
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '30 - 40' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 30 and 40
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '> 41' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) >40
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin};]]>
+		</queryString>
+		<field name="Edad" class="java.lang.String"/>
+		<field name="Total" class="java.lang.Long"/>
+		<field name="BajoPeso" class="java.math.BigDecimal"/>
+		<field name="PesoNormal" class="java.math.BigDecimal"/>
+		<field name="Sobrepeso" class="java.math.BigDecimal"/>
+		<field name="ObesidadI" class="java.math.BigDecimal"/>
+		<field name="ObesidadII" class="java.math.BigDecimal"/>
+		<field name="ObesidadIII" class="java.math.BigDecimal"/>
+		<group name="Edad">
+			<groupExpression><![CDATA[$F{Edad}]]></groupExpression>
+		</group>
+	</subDataset>
+	<subDataset name="DataFemenino">
+		<parameter name="DFIni" class="java.lang.String"/>
+		<parameter name="DFin" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT '< 18' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1))  < 19
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '19 - 21' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 19 and 21
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '22 - 25' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 22 and 25
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '26 - 29' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 26 and 29
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '30 - 40' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) between 30 and 40
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}
+union all
+SELECT '> 41' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1)) >40
+AND P.sexo='Femenino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN $P{DFIni} AND $P{DFin}]]>
+		</queryString>
+		<field name="Edad" class="java.lang.String"/>
+		<field name="Total" class="java.lang.Long"/>
+		<field name="BajoPeso" class="java.math.BigDecimal"/>
+		<field name="PesoNormal" class="java.math.BigDecimal"/>
+		<field name="Sobrepeso" class="java.math.BigDecimal"/>
+		<field name="ObesidadI" class="java.math.BigDecimal"/>
+		<field name="ObesidadII" class="java.math.BigDecimal"/>
+		<field name="ObesidadIII" class="java.math.BigDecimal"/>
+		<group name="Edad">
+			<groupExpression><![CDATA[$F{Edad}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="FechaTexto" class="java.lang.String"/>
+	<parameter name="Autor" class="java.lang.String"/>
+	<parameter name="DatoFechaIni" class="java.lang.String"/>
+	<parameter name="DatoFechaFin" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT '< 18' as Edad,
+count(*) as Total,
+IFNULL(sum(CASE WHEN M.imc1 ='Bajo Peso' THEN 1 ELSE 0 END), 0) AS BajoPeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Peso Normal' THEN 1 ELSE 0 END), 0) AS PesoNormal,
+IFNULL(sum(CASE WHEN M.imc1 ='Sobrepeso' THEN 1 ELSE 0 END), 0) AS Sobrepeso,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad I' THEN 1 ELSE 0 END), 0) AS ObesidadI,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad II' THEN 1 ELSE 0 END), 0) AS ObesidadII,
+IFNULL(sum(CASE WHEN M.imc1 ='Obesidad III' THEN 1 ELSE 0 END), 0) AS ObesidadIII
+FROM MULTIFASICO M, PACIENTE P
+where (YEAR(CURDATE())-YEAR(P.fecha_nacimiento) + IF(DATE_FORMAT(CURDATE(),'%m-%d') > DATE_FORMAT(P.fecha_nacimiento,'%m-%d'), 0, -1))  < 19
+AND P.sexo='Masculino'
+AND M.PACIENTE_idPACIENTE=P.idPACIENTE
+AND M.fecha BETWEEN '2017-01-01' AND '2017-02-28']]>
+	</queryString>
+	<field name="Edad" class="java.lang.String"/>
+	<field name="Total" class="java.lang.Long"/>
+	<field name="BajoPeso" class="java.math.BigDecimal"/>
+	<field name="PesoNormal" class="java.math.BigDecimal"/>
+	<field name="Sobrepeso" class="java.math.BigDecimal"/>
+	<field name="ObesidadI" class="java.math.BigDecimal"/>
+	<field name="ObesidadII" class="java.math.BigDecimal"/>
+	<field name="ObesidadIII" class="java.math.BigDecimal"/>
+	<group name="Edad">
+		<groupExpression><![CDATA[$F{Edad}]]></groupExpression>
+	</group>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="34" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Programa de Nutrición Clínica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="321" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Área de Medicina Preventiva e Investigación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="293" height="17"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad de Salud. USAC]]></text>
+			</staticText>
+			<image>
+				<reportElement x="465" y="1" width="57" height="51"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/u-salud-logo.jpg"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="321" y="2" width="144" height="50"/>
+				<imageExpression><![CDATA["http://usalud.usac.edu.gt/ModuloNutricion/imagenes/logo2.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="585" splitType="Stretch">
+			<staticText>
+				<reportElement x="96" y="23" width="376" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Multifasico Género Masculino]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="96" y="40" width="376" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaTexto}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="38" y="60" width="360" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataMasculino">
+						<datasetParameter name="DFIni">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaIni}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DFin">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaFin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="56">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="53" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Edad]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="53" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Edad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="42">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="38" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="38" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="59">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="56" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[BajoPeso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="56" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{BajoPeso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="69" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[PesoNormal]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="69" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PesoNormal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="65">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Sobrepeso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="60" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Sobrepeso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="58" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadI]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="58" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="58">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="55" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadII]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="55" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadII}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62">
+						<jr:columnHeader style="table 1_CH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadIII]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="59" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadIII}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="38" y="214" width="309" height="18"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Autor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="200" width="138" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Fuente: Base de datos MEPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="257" width="376" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Multifasico Género Femenino]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="274" width="376" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FechaTexto}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="38" y="294" width="360" height="140"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DataFemenino">
+						<datasetParameter name="DFIni">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaIni}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DFin">
+							<datasetParameterExpression><![CDATA[$P{DatoFechaFin}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="58">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="54" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Edad]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="54" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Edad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="43">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="41" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="41" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="58" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[BajoPeso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="58" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{BajoPeso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="74">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[PesoNormal]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{PesoNormal}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="58">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="56" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[Sobrepeso]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="56" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{Sobrepeso}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="65" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadI]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="65" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="63">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="59" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadII]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="59" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadII}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="62">
+						<jr:columnHeader style="table 2_CH" height="22" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="62" height="19"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<text><![CDATA[ObesidadIII]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="62" height="20"/>
+								<textElement textAlignment="Center">
+									<font size="9"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ObesidadIII}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="38" y="454" width="309" height="18"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Autor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="38" y="440" width="138" height="14"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Fuente: Base de datos MEPI]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

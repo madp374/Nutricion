@@ -70,6 +70,55 @@ public class CalculosVET extends HttpServlet {
 			result=query.CargaCalculosVET(idCE);
 			result+=query.ObtenerDistribucion(idCE);
 			out.println(result);
+		}else if(accion.equalsIgnoreCase("CargarDatosGeneralesCarnet")){
+			String carnet = validar_numero(request.getParameter("carnet"));
+			Conexion query = new Conexion();
+			result=query.LlamadaUltimoTallaPeso(carnet);
+			
+			String[] Contenido = result.split(",");
+			int longitud=Contenido.length;
+			String resultado="";
+			String result2="";
+			if(longitud>7){
+				String talla="";
+			    String peso="";
+			    
+			    String idPACIENTE="";
+			    String nombre="";
+			    String edad="";
+			    String sexo="";
+			    String facultad="";
+			    String fechaNac="";
+			    
+			    talla=Contenido[3];
+		    	peso=Contenido[4];
+		    	
+		    	idPACIENTE=Contenido[0];
+			    nombre=Contenido[1];
+			    edad=Contenido[5];
+			    sexo=Contenido[6];
+			    facultad=Contenido[2];
+			    fechaNac=Contenido[7];
+			    
+			    resultado="{\"resultado\":\"OK\",\"talla\":\""+talla
+			    		+"\",\"idPACIENTE\":\""+idPACIENTE
+			    		+"\",\"nombre\":\""+nombre
+			    		+"\",\"edad\":\""+edad
+			    		+"\",\"sexo\":\""+sexo
+			    		+"\",\"facultad\":\""+facultad
+			    		+"\",\"peso\":\""+peso
+			    		+"\",\"fechaNac\":\""+fechaNac+"\"";
+			    
+			    result2+=query.ObtenerRegistroscvetCE(carnet);
+			    result2+=query.ObtenerRegistrosReconsultacvetCE2(carnet);
+			    result2=resultado+result2+"}";
+			}else{
+				//ERROR de carga
+				result2="{\"resultado\":\"ERROR\",\"mensaje\":\"Registro eliminado\"}";
+			}
+			//System.out.println(result2);
+			
+			out.println(result2);
 		}else if(accion.equalsIgnoreCase("eliminar")){
 			
 			String IdBorrar=request.getParameter("ID");
@@ -85,7 +134,7 @@ public class CalculosVET extends HttpServlet {
 			String sql = "delete from CALCULOS_VET where idCALCULOS_VET="+IdBorrar;
 			result=consulta.InsertarRegistro(sql);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro eliminado\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"3\"}";
 			}
 			out.println(result);
 			
@@ -190,8 +239,51 @@ public class CalculosVET extends HttpServlet {
 				//System.out.println(query2);
 				result=consulta.InsertarRegistro(query2);
 				if(result.equals("0")){
-					result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
+					result="{\"resultado\":\"OK\",\"mensaje\":\"2\"}";
 				}
+			out.println(result);
+		}else if(accion.equalsIgnoreCase("ModificarDietas")){
+			String p10=request.getParameter("p10"); //% carbohidratos
+			String p11=request.getParameter("p11"); //% proteina
+			String p12=request.getParameter("p12"); //% grasa
+			String p13=request.getParameter("p13"); //lacteo sin grasa
+			String p14=request.getParameter("p14"); //lacteo entero
+			String p15=request.getParameter("p15"); //vegetal
+			String p16=request.getParameter("p16"); //fruta
+			String p17=request.getParameter("p17"); //cereal
+			String p18=request.getParameter("p18"); //carne
+			String p19=request.getParameter("p19"); //grasa
+			String p20=request.getParameter("p20"); //azucar
+			
+			String p21=request.getParameter("p21"); //dieta
+			String p22=request.getParameter("p22"); //kcal
+			String p23=request.getParameter("p23"); //fuente
+			
+			String query="UPDATE DIETA SET carbohidrato="+p10+", proteina="+p11+", grasa="+p12+", fuente='"+p23+"' WHERE idDIETA="+p21;
+			Conexion consulta = new Conexion();
+			result=consulta.InsertarRegistro(query);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
+			}
+			String query2="UPDATE TIPO_DIETA SET valor="+p13+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=1 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p14+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=2 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p15+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=3 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p16+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=4 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p17+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=5 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p18+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=6 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p19+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=7 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			query2="UPDATE TIPO_DIETA SET valor="+p20+" WHERE DIETA_idDIETA="+p21+" AND GrupoAlimenticio_idGrupoAlimenticio=8 AND Kcal="+p22;
+			result=consulta.InsertarRegistro(query2);
+			if(result.equals("0")){
+				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro modificado correctamente\"}";
+			}
 			out.println(result);
 		}
 		else if(accion.equalsIgnoreCase("guardar")){
@@ -274,9 +366,14 @@ public class CalculosVET extends HttpServlet {
 				//	+",p6:"+p6+",p7:"+p7+",p8:"+p8+",p9:"+p9+",p10:"+p10
 					//+",p11:"+p11+",p12:"+p12+",p13:"+p13+",p14:"+p14+",p15:"+p15;
 			//System.out.println(cadena);
+			String IDCarnet = validar_numero(request.getParameter("IDCarnet"));
+			String IDCE="(SELECT idCONSULTA_EXTERNA "
+					+" FROM CONSULTA_EXTERNA "
+					+" WHERE PACIENTE_idPACIENTE="+IDCarnet 
+					+" ORDER BY idCONSULTA_EXTERNA DESC LIMIT 1)";
 			
 			String query="insert into CALCULOS_VET(fecha, peso, imc, ActividadFisica, FormulaVet, VET, VETAF, RBajoPeso, RSobrePeso, RObesidad, carbohidrato, proteina, grasa, placteosg, placteoe, pvegetal, pfruta, pcereal, pcarne, pgrasa, pazucar, tdieta, distribucion, CONSULTA_EXTERNA_idCONSULTA_EXTERNA,USUARIO_idUSUARIO) " 
-					+"VALUES(CURDATE(),"+p1+","+p2+","+p3+",'"+p4+"',"+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+","+p13+","+p14+","+p15+","+p16+","+p17+","+p18+","+p19+","+p20+","+p21+",'"+p22+"',"+idCE+","+p0+");";
+					+"VALUES(CURDATE(),"+p1+","+p2+","+p3+",'"+p4+"',"+p5+","+p6+","+p7+","+p8+","+p9+","+p10+","+p11+","+p12+","+p13+","+p14+","+p15+","+p16+","+p17+","+p18+","+p19+","+p20+","+p21+",'"+p22+"',"+IDCE+","+p0+");";
 			
 			Conexion consulta = new Conexion();
 			result=consulta.InsertarRegistro(query);
@@ -284,7 +381,7 @@ public class CalculosVET extends HttpServlet {
 				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro almacenado correctamente\"}";
 			}
 			String IDVET="(SELECT idCALCULOS_VET"
-					+" FROM CALCULOS_VET where CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+idCE
+					+" FROM CALCULOS_VET where CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+IDCE
 					+" order by idCALCULOS_VET desc limit 1)";
 			
 			String query2="INSERT INTO VET_DIETA(CALCULOS_VET_idCALCULOS_VET,GrupoAlimenticio_idGrupoAlimenticio,Comida,porcion)VALUES "
@@ -298,8 +395,13 @@ public class CalculosVET extends HttpServlet {
 				+"("+IDVET+",8,'Desayuno',"+p65+"),("+IDVET+",8,'Refaccion AM',"+p66+"),("+IDVET+",8,'Almuerzo',"+p67+"),("+IDVET+",8,'Refaccion PM',"+p68+"),("+IDVET+",8,'Cena',"+p69+");";
 			//System.out.println(query2);
 			result=consulta.InsertarRegistro(query2);
+			
+			String IDVET2="SELECT idCALCULOS_VET"
+					+" FROM CALCULOS_VET where CONSULTA_EXTERNA_idCONSULTA_EXTERNA="+IDCE
+					+" order by idCALCULOS_VET desc limit 1";
+			IDVET2=consulta.ObtenerIDCalculosVET(IDVET2);
 			if(result.equals("0")){
-				result="{\"resultado\":\"OK\",\"mensaje\":\"Registro almacenado correctamente\"}";
+				result="{\"resultado\":\"OK\",\"mensaje\":\"1\",\"IDV\":\""+IDVET2+"\"}";
 			}
 			out.println(result);
 			

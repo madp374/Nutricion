@@ -6,6 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.io.PrintWriter;
 import ConexionBD.Conexion;
 
@@ -41,7 +43,24 @@ public class Facultad extends HttpServlet {
 			Conexion consulta = new Conexion();
 			String result="";
 			result=consulta.CargaFacultad();
-			System.out.println(result);
+			//System.out.println(result);
+			out.println(result);
+		}else if(action.equals("agregarTA")){
+			String alimen = request.getParameter("nombre"); //accion
+			Conexion con = new Conexion();
+			String auxa=con.decodificar(alimen);
+			PrintWriter out = response.getWriter();
+			
+			String query2="insert into FACULTAD(nombre) values('"+auxa+"')";
+			String result="";
+			String ResultadoInsertar=con.InsertarRegistro(query2);
+			if(ResultadoInsertar.equals("0")){
+	        	result="{\"resultado\":\"OK\",\"mensaje\":\"Almacenado correctamente\"}";
+			}else{
+				result=ResultadoInsertar;
+			}
+			//System.out.println(resultado);
+
 			out.println(result);
 		}
 	}
